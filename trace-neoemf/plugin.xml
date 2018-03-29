@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated trace-neoemf -->
+      <package
+            uri="http://trace-neoemf"
+            class="traceneoemf.TraceneoemfPackage"
+            genModel="metamodels/trace-neoemf.genmodel"/>
+   </extension>
+
+</plugin>

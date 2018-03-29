@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/trace-neoemf/src" modelPluginID="trace-neoemf"
+    modelName="Trace-neoemf" rootExtendsInterface="fr.inria.atlanmod.neoemf.core.PersistentEObject"
+    rootExtendsClass="fr.inria.atlanmod.neoemf.core.DefaultPersistentEObject" reflectiveDelegation="true"
+    importerID="fr.inria.atlanmod.neoemf.eclipse.ui.migrator.NeoImporter" featureDelegation="Reflective"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>trace-neoemf.ecore</foreignModel>
+  <modelPluginVariables>NEOEMF=fr.inria.atlanmod.neoemf.core</modelPluginVariables>
+  <genPackages prefix="Traceneoemf" disposableProviderFactory="true" ecorePackage="trace-neoemf.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="trace-neoemf.ecore#//LogLevel">
+      <genEnumLiterals ecoreEnumLiteral="trace-neoemf.ecore#//LogLevel/SEVERE"/>
+      <genEnumLiterals ecoreEnumLiteral="trace-neoemf.ecore#//LogLevel/WARNING"/>
+      <genEnumLiterals ecoreEnumLiteral="trace-neoemf.ecore#//LogLevel/INFO"/>
+      <genEnumLiterals ecoreEnumLiteral="trace-neoemf.ecore#//LogLevel/CONFIG"/>
+      <genEnumLiterals ecoreEnumLiteral="trace-neoemf.ecore#//LogLevel/FINE"/>
+      <genEnumLiterals ecoreEnumLiteral="trace-neoemf.ecore#//LogLevel/FINER"/>
+      <genEnumLiterals ecoreEnumLiteral="trace-neoemf.ecore#//LogLevel/FINEST"/>
+    </genEnums>
+    <genClasses ecoreClass="trace-neoemf.ecore#//Trace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference trace-neoemf.ecore#//Trace/logs"/>
+    </genClasses>
+    <genClasses ecoreClass="trace-neoemf.ecore#//Log">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute trace-neoemf.ecore#//Log/message"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute trace-neoemf.ecore#//Log/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute trace-neoemf.ecore#//Log/timestamp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute trace-neoemf.ecore#//Log/level"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference trace-neoemf.ecore#//Log/exceptions"/>
+    </genClasses>
+    <genClasses ecoreClass="trace-neoemf.ecore#//Exception">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute trace-neoemf.ecore#//Exception/message"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
