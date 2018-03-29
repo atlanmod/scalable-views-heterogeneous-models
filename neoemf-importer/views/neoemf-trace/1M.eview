@@ -1,0 +1,3 @@
+viewpoint=chain.eviewpoint
+contributingModels=../../models/petstore-requirements.reqif,../../models/petstore-components.uml,../../models/petstore-java.xmi,../../models/neoemf-trace/1M.graphdb
+weavingModel=weaving-1M.xmi

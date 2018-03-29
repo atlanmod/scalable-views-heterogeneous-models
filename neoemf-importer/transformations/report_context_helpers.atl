@@ -1,0 +1,55 @@
+-- @atlcompiler emftvm
+
+module report_context_helpers;
+create OUT : Table from IN : Viewpoint;
+
+rule Report {
+    from s : Viewpoint!Trace
+    to   t : Table!Table (
+      rows <- s.logs
+    )
+}
+
+rule Row {
+	from s : Viewpoint!Log
+	to   t : Table!Row (
+	    cells <- Bag{c0, c1, c2, c3} 
+	),
+	
+	c0 : Table!Cell (
+	     content <- s.message
+	),
+	
+	c1 : Table!Cell (
+	     content <- s.javaClass.name
+	),
+	
+	c2 : Table!Cell (
+	     content <- if thisModule.getComponent(s.javaClass.package).oclIsUndefined()
+	                then 'No component'
+	                else thisModule.getComponent(s.javaClass.package).name
+	                endif
+	),
+	
+	c3 : Table!Cell (
+	     content <- if thisModule.getComponent(s.javaClass.package).requirements.isEmpty()
+	                then 'No requirements'
+	                else thisModule.getComponent(s.javaClass.package)
+	     	          	   .requirements->collect(r | r.values->first().theValue)->first()
+	     	        endif
+	)
+}
+
+-- Context helpers do not work with views because of duplicated classifiers
+-- in Viewpoint (UML and MoDisco both have a Package class)
+    
+helper context Viewpoint!Package def : getComponent() : OclAny =
+    if self.oclIsUndefined()
+    then self
+    else if self.component.oclIsUndefined()
+         then self.getComponent()
+         else self.component
+         endif
+    endif
+;
+    
