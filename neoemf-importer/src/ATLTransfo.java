@@ -25,6 +25,7 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 
 import trace.TracePackage;
+import traceneoemf.TraceneoemfPackage;
 
 public class ATLTransfo {
 
@@ -105,6 +106,7 @@ public class ATLTransfo {
       UMLPackage.eINSTANCE.eClass();
       JavaPackage.eINSTANCE.eClass();
       TracePackage.eINSTANCE.eClass();
+      TraceneoemfPackage.eINSTANCE.eClass();
       VirtualLinksPackage.eINSTANCE.eClass();
     }
 
@@ -112,21 +114,44 @@ public class ATLTransfo {
     System.out.printf("EMF initialized in %dms\n",
                       ChronoUnit.MILLIS.between(start, end));
 
-    // Load resources
-    System.out.println("Loading resources...");
-    start = Instant.now();
+    // Test with Java Trace model
+    {
+      // Load resources
+      System.out.println("Loading resources...");
+      start = Instant.now();
 
-    ResourceSet rs = new ResourceSetImpl();
-    Resource metamodel = rs.getResource(resourceURI("/views/java-trace/chain.eviewpoint"), true);
-    Resource model = rs.getResource(resourceURI("/views/java-trace/10.eview"), true);
+      ResourceSet rs = new ResourceSetImpl();
+      Resource metamodel = rs.getResource(resourceURI("/views/java-trace/chain.eviewpoint"), true);
+      Resource model = rs.getResource(resourceURI("/views/java-trace/10.eview"), true);
 
-    end = Instant.now();
-    System.out.printf("Resources loaded in %dms\n",
-                      ChronoUnit.MILLIS.between(start, end));
+      end = Instant.now();
+      System.out.printf("Resources loaded in %dms\n",
+                        ChronoUnit.MILLIS.between(start, end));
 
-    // Run the transformation
-    runATL(metamodel, model);
+      // Run the transformation
+      System.out.printf("Output model size: %d\n", runATL(metamodel, model));
 
-    System.out.println("ATL transformation finished\n");
+      System.out.println("(Java) ATL transformation finished\n");
+    }
+
+    // Test with NeoEMF Trace model
+    {
+      // Load resources
+      System.out.println("Loading NeoEMF resources...");
+      start = Instant.now();
+
+      ResourceSet rs = new ResourceSetImpl();
+      Resource metamodel = rs.getResource(resourceURI("/views/neoemf-trace/chain.eviewpoint"), true);
+      Resource model = rs.getResource(resourceURI("/views/neoemf-trace/10.eview"), true);
+
+      end = Instant.now();
+      System.out.printf("Resources loaded in %dms\n",
+                        ChronoUnit.MILLIS.between(start, end));
+
+      // Run the transformation
+      System.out.printf("Output model size: %d\n", runATL(metamodel, model));
+
+      System.out.println("(NeoEMF) ATL transformation finished\n");
+    }
   }
 }
