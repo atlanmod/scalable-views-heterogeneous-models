@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
@@ -114,15 +113,17 @@ public class ATLTransfo {
     System.out.printf("EMF initialized in %dms\n",
                       ChronoUnit.MILLIS.between(start, end));
 
+    final int[] sizes = {10, 100, 1000, 10000, 100000};
+
     // Test with Java Trace model
-    {
+    System.out.println("--- Testing transformations with Java trace metamodel");
+    for (int s : sizes) {
       // Load resources
-      System.out.println("Loading resources...");
       start = Instant.now();
 
       ResourceSet rs = new ResourceSetImpl();
       Resource metamodel = rs.getResource(resourceURI("/views/java-trace/chain.eviewpoint"), true);
-      Resource model = rs.getResource(resourceURI("/views/java-trace/10.eview"), true);
+      Resource model = rs.getResource(resourceURI(String.format("/views/java-trace/%d.eview", s)), true);
 
       end = Instant.now();
       System.out.printf("Resources loaded in %dms\n",
@@ -131,18 +132,18 @@ public class ATLTransfo {
       // Run the transformation
       System.out.printf("Output model size: %d\n", runATL(metamodel, model));
 
-      System.out.println("(Java) ATL transformation finished\n");
+      System.out.printf("(Java) ATL transformation for %s finished\n", model.getURI());
     }
 
     // Test with NeoEMF Trace model
-    {
+    System.out.println("--- Testing transformations with NeoEMF trace metamodel");
+    for (int s : sizes) {
       // Load resources
-      System.out.println("Loading NeoEMF resources...");
       start = Instant.now();
 
       ResourceSet rs = new ResourceSetImpl();
       Resource metamodel = rs.getResource(resourceURI("/views/neoemf-trace/chain.eviewpoint"), true);
-      Resource model = rs.getResource(resourceURI("/views/neoemf-trace/10.eview"), true);
+      Resource model = rs.getResource(resourceURI(String.format("/views/neoemf-trace/%s.eview", s)), true);
 
       end = Instant.now();
       System.out.printf("Resources loaded in %dms\n",
@@ -151,7 +152,7 @@ public class ATLTransfo {
       // Run the transformation
       System.out.printf("Output model size: %d\n", runATL(metamodel, model));
 
-      System.out.println("(NeoEMF) ATL transformation finished\n");
+      System.out.printf("(NeoEMF) ATL transformation for %s finished\n", model.getURI());
     }
   }
 }

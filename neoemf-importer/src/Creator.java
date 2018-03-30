@@ -24,7 +24,6 @@ import fr.inria.atlanmod.neoemf.data.blueprints.option.BlueprintsResourceOptions
 import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
 import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
-import fr.inria.atlanmod.neoemf.util.logging.NeoLogger;
 
 public class Creator {
 
