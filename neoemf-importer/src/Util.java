@@ -31,7 +31,11 @@ public class Util {
     Instant start = Instant.now();
     f.apply();
     Instant end = Instant.now();
-    System.out.printf("%s [%dms]\n", task, ChronoUnit.MILLIS.between(start, end));
+    Runtime runtime = Runtime.getRuntime();
+    long endMemory = runtime.totalMemory() - runtime.freeMemory();
+    System.out.printf("%s [%dms] [%dMB]\n", task,
+                      ChronoUnit.MILLIS.between(start, end),
+                      endMemory / 1000000);
   }
 
   static void bench(String task, Thunk f,

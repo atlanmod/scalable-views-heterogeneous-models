@@ -207,13 +207,13 @@ public class BuildWeavingModel {
       reqResource.getResourceSet().getPackageRegistry().put(ReqIF10Package.eNS_URI, ReqIF10Package.eINSTANCE);
     });
 
-    //final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
-    final int[] sizes = {10};
+    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
 
     // Create weaving models for Java trace metamodel
     System.out.println("--- Weaving models for Java trace metamodel");
     for (int s : sizes) {
-      Util.bench("Weaving model for Java Trace", () -> createJavaWeavingModel(s));
+      Util.bench(String.format("Weaving model for Java Trace with %s elements", s),
+                 () -> createJavaWeavingModel(s));
     }
 
     // Create weaving models for NeoEMF trace metamodel
@@ -231,7 +231,8 @@ public class BuildWeavingModel {
 
     System.out.println("--- Weaving models for NeoEMF trace metamodel");
     for (int s : sizes) {
-      Util.bench("Weaving model for NeoEMF Trace", () -> createNeoEMFWeavingModel(s, options));
+      Util.bench(String.format("Weaving model for NeoEMF Trace with %s elements", s),
+                 () -> createNeoEMFWeavingModel(s, options));
     }
   }
 
