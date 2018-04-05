@@ -1,0 +1,344 @@
+Initialize EMF [914ms] [91MB]
+Load contributing models [885ms] [33MB]
+--- Weaving models for Java trace metamodel
+Benching Weaving model for Java Trace with 10 elements... 5/5
+
+-- Warmup 1
+populate javaClass rule [24ms] [39MB]
+match ECL rules [284ms] [86MB]
+save weaving model [17ms] [86MB]
+-- Warmup 1 [335ms] [86MB]
+
+-- Warmup 2
+populate javaClass rule [10ms] [89MB]
+match ECL rules [79ms] [107MB]
+save weaving model [3ms] [107MB]
+-- Warmup 2 [94ms] [107MB]
+
+-- Warmup 3
+populate javaClass rule [16ms] [107MB]
+match ECL rules [87ms] [125MB]
+save weaving model [3ms] [125MB]
+-- Warmup 3 [107ms] [125MB]
+
+-- Warmup 4
+populate javaClass rule [15ms] [127MB]
+match ECL rules [92ms] [143MB]
+save weaving model [10ms] [143MB]
+-- Warmup 4 [120ms] [143MB]
+
+-- Warmup 5
+populate javaClass rule [13ms] [145MB]
+match ECL rules [118ms] [37MB]
+save weaving model [3ms] [42MB]
+-- Warmup 5 [137ms] [42MB]
+
+-- Measure 1
+populate javaClass rule [12ms] [42MB]
+match ECL rules [69ms] [58MB]
+save weaving model [2ms] [58MB]
+== Measure 1 [86ms] [58MB]
+
+-- Measure 2
+populate javaClass rule [10ms] [58MB]
+match ECL rules [72ms] [78MB]
+save weaving model [2ms] [78MB]
+== Measure 2 [85ms] [78MB]
+
+-- Measure 3
+populate javaClass rule [32ms] [78MB]
+match ECL rules [63ms] [94MB]
+save weaving model [1ms] [94MB]
+== Measure 3 [98ms] [94MB]
+
+-- Measure 4
+populate javaClass rule [9ms] [99MB]
+match ECL rules [53ms] [115MB]
+save weaving model [1ms] [115MB]
+== Measure 4 [65ms] [115MB]
+
+-- Measure 5
+populate javaClass rule [12ms] [115MB]
+match ECL rules [50ms] [130MB]
+save weaving model [4ms] [130MB]
+== Measure 5 [68ms] [130MB]
+Bench finished: Weaving model for Java Trace with 10 elements
+Benching Weaving model for Java Trace with 100 elements... 5/5
+
+-- Warmup 1
+populate javaClass rule [13ms] [135MB]
+match ECL rules [48ms] [151MB]
+save weaving model [3ms] [151MB]
+-- Warmup 1 [76ms] [151MB]
+
+-- Warmup 2
+populate javaClass rule [11ms] [151MB]
+match ECL rules [49ms] [166MB]
+save weaving model [2ms] [166MB]
+-- Warmup 2 [65ms] [166MB]
+
+-- Warmup 3
+populate javaClass rule [10ms] [172MB]
+match ECL rules [50ms] [187MB]
+save weaving model [3ms] [187MB]
+-- Warmup 3 [67ms] [187MB]
+
+-- Warmup 4
+populate javaClass rule [11ms] [187MB]
+match ECL rules [48ms] [203MB]
+save weaving model [3ms] [208MB]
+-- Warmup 4 [64ms] [208MB]
+
+-- Warmup 5
+populate javaClass rule [8ms] [208MB]
+match ECL rules [54ms] [223MB]
+save weaving model [3ms] [223MB]
+-- Warmup 5 [69ms] [223MB]
+
+-- Measure 1
+populate javaClass rule [10ms] [229MB]
+match ECL rules [53ms] [244MB]
+save weaving model [3ms] [244MB]
+== Measure 1 [69ms] [244MB]
+
+-- Measure 2
+populate javaClass rule [11ms] [244MB]
+match ECL rules [55ms] [260MB]
+save weaving model [3ms] [260MB]
+== Measure 2 [73ms] [260MB]
+
+-- Measure 3
+populate javaClass rule [12ms] [265MB]
+match ECL rules [54ms] [280MB]
+save weaving model [3ms] [280MB]
+== Measure 3 [71ms] [280MB]
+
+-- Measure 4
+populate javaClass rule [11ms] [280MB]
+match ECL rules [65ms] [35MB]
+save weaving model [11ms] [35MB]
+== Measure 4 [90ms] [35MB]
+
+-- Measure 5
+populate javaClass rule [12ms] [35MB]
+match ECL rules [45ms] [51MB]
+save weaving model [4ms] [51MB]
+== Measure 5 [64ms] [51MB]
+Bench finished: Weaving model for Java Trace with 100 elements
+Benching Weaving model for Java Trace with 1000 elements... 5/5
+
+-- Warmup 1
+populate javaClass rule [22ms] [58MB]
+match ECL rules [38ms] [73MB]
+save weaving model [18ms] [79MB]
+-- Warmup 1 [92ms] [79MB]
+
+-- Warmup 2
+populate javaClass rule [19ms] [84MB]
+match ECL rules [47ms] [100MB]
+save weaving model [17ms] [100MB]
+-- Warmup 2 [96ms] [100MB]
+
+-- Warmup 3
+populate javaClass rule [18ms] [105MB]
+match ECL rules [38ms] [120MB]
+save weaving model [16ms] [126MB]
+-- Warmup 3 [84ms] [126MB]
+
+-- Warmup 4
+populate javaClass rule [17ms] [126MB]
+match ECL rules [38ms] [147MB]
+save weaving model [14ms] [147MB]
+-- Warmup 4 [81ms] [147MB]
+
+-- Warmup 5
+populate javaClass rule [19ms] [152MB]
+match ECL rules [38ms] [167MB]
+save weaving model [16ms] [167MB]
+-- Warmup 5 [81ms] [167MB]
+
+-- Measure 1
+populate javaClass rule [15ms] [173MB]
+match ECL rules [37ms] [189MB]
+save weaving model [12ms] [195MB]
+== Measure 1 [75ms] [195MB]
+
+-- Measure 2
+populate javaClass rule [14ms] [200MB]
+match ECL rules [27ms] [216MB]
+save weaving model [8ms] [216MB]
+== Measure 2 [58ms] [216MB]
+
+-- Measure 3
+populate javaClass rule [16ms] [221MB]
+match ECL rules [30ms] [236MB]
+save weaving model [8ms] [236MB]
+== Measure 3 [64ms] [236MB]
+
+-- Measure 4
+populate javaClass rule [13ms] [242MB]
+match ECL rules [45ms] [257MB]
+save weaving model [9ms] [262MB]
+== Measure 4 [72ms] [262MB]
+
+-- Measure 5
+populate javaClass rule [12ms] [268MB]
+match ECL rules [39ms] [281MB]
+save weaving model [9ms] [281MB]
+== Measure 5 [67ms] [281MB]
+Bench finished: Weaving model for Java Trace with 1000 elements
+Benching Weaving model for Java Trace with 10000 elements... 5/5
+
+-- Warmup 1
+populate javaClass rule [80ms] [54MB]
+match ECL rules [27ms] [75MB]
+save weaving model [146ms] [107MB]
+-- Warmup 1 [320ms] [107MB]
+
+-- Warmup 2
+populate javaClass rule [59ms] [140MB]
+match ECL rules [37ms] [150MB]
+save weaving model [108ms] [171MB]
+-- Warmup 2 [251ms] [171MB]
+
+-- Warmup 3
+populate javaClass rule [66ms] [202MB]
+match ECL rules [27ms] [213MB]
+save weaving model [135ms] [233MB]
+-- Warmup 3 [260ms] [233MB]
+
+-- Warmup 4
+populate javaClass rule [56ms] [265MB]
+match ECL rules [38ms] [275MB]
+save weaving model [109ms] [296MB]
+-- Warmup 4 [224ms] [296MB]
+
+-- Warmup 5
+populate javaClass rule [77ms] [327MB]
+match ECL rules [47ms] [348MB]
+save weaving model [156ms] [369MB]
+-- Warmup 5 [313ms] [369MB]
+
+-- Measure 1
+populate javaClass rule [80ms] [389MB]
+match ECL rules [48ms] [410MB]
+save weaving model [121ms] [431MB]
+== Measure 1 [285ms] [431MB]
+
+-- Measure 2
+populate javaClass rule [52ms] [452MB]
+match ECL rules [49ms] [473MB]
+save weaving model [98ms] [493MB]
+== Measure 2 [227ms] [493MB]
+
+-- Measure 3
+populate javaClass rule [50ms] [514MB]
+match ECL rules [35ms] [535MB]
+save weaving model [119ms] [51MB]
+== Measure 3 [222ms] [51MB]
+
+-- Measure 4
+populate javaClass rule [41ms] [72MB]
+match ECL rules [31ms] [93MB]
+save weaving model [86ms] [113MB]
+== Measure 4 [174ms] [113MB]
+
+-- Measure 5
+populate javaClass rule [39ms] [145MB]
+match ECL rules [31ms] [156MB]
+save weaving model [86ms] [177MB]
+== Measure 5 [172ms] [177MB]
+Bench finished: Weaving model for Java Trace with 10000 elements
+Benching Weaving model for Java Trace with 100000 elements... 5/5
+
+-- Warmup 1
+populate javaClass rule [1809ms] [469MB]
+match ECL rules [26ms] [490MB]
+save weaving model [3936ms] [398MB]
+-- Warmup 1 [5934ms] [398MB]
+
+-- Warmup 2
+populate javaClass rule [1849ms] [653MB]
+match ECL rules [27ms] [673MB]
+save weaving model [3748ms] [888MB]
+-- Warmup 2 [5814ms] [888MB]
+
+-- Warmup 3
+populate javaClass rule [1894ms] [1143MB]
+match ECL rules [33ms] [1143MB]
+save weaving model [3850ms] [568MB]
+-- Warmup 3 [5951ms] [568MB]
+
+-- Warmup 4
+populate javaClass rule [1833ms] [822MB]
+match ECL rules [25ms] [842MB]
+save weaving model [3669ms] [1058MB]
+-- Warmup 4 [5696ms] [1058MB]
+
+-- Warmup 5
+populate javaClass rule [1805ms] [1289MB]
+match ECL rules [113ms] [346MB]
+save weaving model [3674ms] [622MB]
+-- Warmup 5 [5741ms] [622MB]
+
+-- Measure 1
+populate javaClass rule [1827ms] [858MB]
+match ECL rules [26ms] [897MB]
+save weaving model [3669ms] [1093MB]
+== Measure 1 [5689ms] [1093MB]
+
+-- Measure 2
+populate javaClass rule [1795ms] [1329MB]
+match ECL rules [22ms] [1368MB]
+save weaving model [3801ms] [1564MB]
+== Measure 2 [5783ms] [1564MB]
+
+-- Measure 3
+populate javaClass rule [1918ms] [1800MB]
+match ECL rules [29ms] [1839MB]
+save weaving model [3870ms] [2035MB]
+== Measure 3 [5990ms] [2035MB]
+
+-- Measure 4
+populate javaClass rule [1921ms] [2271MB]
+match ECL rules [27ms] [2293MB]
+save weaving model [4009ms] [583MB]
+== Measure 4 [6122ms] [583MB]
+
+-- Measure 5
+populate javaClass rule [1879ms] [820MB]
+match ECL rules [22ms] [859MB]
+save weaving model [3755ms] [1056MB]
+== Measure 5 [5803ms] [1056MB]
+Bench finished: Weaving model for Java Trace with 100000 elements
+Benching Weaving model for Java Trace with 1000000 elements... 5/5
+
+-- Warmup 1
+populate javaClass rule [159238ms] [2144MB]
+match ECL rules [21ms] [2144MB]
+save weaving model [348037ms] [1998MB]
+-- Warmup 1 [508814ms] [1998MB]
+
+-- Warmup 2
+populate javaClass rule [160212ms] [1115MB]
+match ECL rules [21ms] [1140MB]
+save weaving model [342338ms] [2413MB]
+-- Warmup 2 [504121ms] [2413MB]
+
+-- Warmup 3
+populate javaClass rule [157618ms] [1646MB]
+match ECL rules [23ms] [1670MB]
+save weaving model [344132ms] [2504MB]
+-- Warmup 3 [503694ms] [2504MB]
+
+-- Warmup 4
+populate javaClass rule [159679ms] [1102MB]
+match ECL rules [21ms] [1121MB]
+save weaving model [347811ms] [2175MB]
+-- Warmup 4 [509033ms] [2175MB]
+
+-- Warmup 5
+populate javaClass rule [163705ms] [1502MB]
+match ECL rules [21ms] [1521MB]
+save weaving model [346391ms] [1889MB]
+-- Warmup 5 [512258ms] [1889MB]

@@ -1,0 +1,412 @@
+Initialize EMF [886ms] [92MB]
+--- Testing transformations with Java trace metamodel
+Benching Run transformation on Java trace of size 10... 5/5
+
+-- Warmup 1
+Load resources [920ms] [52MB]
+Initialize ATL [305ms] [80MB]
+Run transformation [1213ms] [189MB]
+Compute size of target model [1ms] [189MB]
+Output model size: 51
+-- Warmup 1 [2441ms] [189MB]
+
+-- Warmup 2
+Load resources [365ms] [231MB]
+Initialize ATL [23ms] [233MB]
+Run transformation [803ms] [418MB]
+Compute size of target model [0ms] [418MB]
+Output model size: 51
+-- Warmup 2 [1192ms] [418MB]
+
+-- Warmup 3
+Load resources [248ms] [460MB]
+Initialize ATL [17ms] [462MB]
+Run transformation [548ms] [629MB]
+Compute size of target model [0ms] [629MB]
+Output model size: 51
+-- Warmup 3 [813ms] [629MB]
+
+-- Warmup 4
+Load resources [191ms] [671MB]
+Initialize ATL [14ms] [672MB]
+Run transformation [692ms] [323MB]
+Compute size of target model [0ms] [323MB]
+Output model size: 51
+-- Warmup 4 [897ms] [323MB]
+
+-- Warmup 5
+Load resources [192ms] [365MB]
+Initialize ATL [16ms] [365MB]
+Run transformation [500ms] [1056MB]
+Compute size of target model [0ms] [1056MB]
+Output model size: 51
+-- Warmup 5 [709ms] [1056MB]
+
+== Measure 1
+Load resources [164ms] [75MB]
+Initialize ATL [12ms] [77MB]
+Run transformation [740ms] [75MB]
+Compute size of target model [0ms] [75MB]
+Output model size: 51
+== Measure 1 [918ms] [75MB]
+
+== Measure 2
+Load resources [164ms] [117MB]
+Initialize ATL [11ms] [119MB]
+Run transformation [528ms] [793MB]
+Compute size of target model [0ms] [793MB]
+Output model size: 51
+== Measure 2 [704ms] [793MB]
+
+== Measure 3
+Load resources [135ms] [835MB]
+Initialize ATL [10ms] [835MB]
+Run transformation [616ms] [1548MB]
+Compute size of target model [0ms] [1548MB]
+Output model size: 51
+== Measure 3 [761ms] [1548MB]
+
+== Measure 4
+Load resources [158ms] [1590MB]
+Initialize ATL [12ms] [1590MB]
+Run transformation [721ms] [153MB]
+Compute size of target model [0ms] [153MB]
+Output model size: 51
+== Measure 4 [892ms] [153MB]
+
+== Measure 5
+Load resources [126ms] [205MB]
+Initialize ATL [10ms] [206MB]
+Run transformation [494ms] [885MB]
+Compute size of target model [0ms] [885MB]
+Output model size: 51
+== Measure 5 [630ms] [885MB]
+Bench finished: Run transformation on Java trace of size 10
+Benching Run transformation on Java trace of size 100... 5/5
+
+-- Warmup 1
+Load resources [130ms] [937MB]
+Initialize ATL [10ms] [937MB]
+Run transformation [575ms] [1719MB]
+Compute size of target model [0ms] [1719MB]
+Output model size: 501
+-- Warmup 1 [715ms] [1719MB]
+
+-- Warmup 2
+Load resources [131ms] [1771MB]
+Initialize ATL [11ms] [1771MB]
+Run transformation [633ms] [2526MB]
+Compute size of target model [0ms] [2526MB]
+Output model size: 501
+-- Warmup 2 [776ms] [2526MB]
+
+-- Warmup 3
+Load resources [140ms] [2578MB]
+Initialize ATL [12ms] [2578MB]
+Run transformation [609ms] [723MB]
+Compute size of target model [0ms] [723MB]
+Output model size: 501
+-- Warmup 3 [763ms] [723MB]
+
+-- Warmup 4
+Load resources [128ms] [779MB]
+Initialize ATL [11ms] [780MB]
+Run transformation [579ms] [1544MB]
+Compute size of target model [0ms] [1544MB]
+Output model size: 501
+-- Warmup 4 [718ms] [1544MB]
+
+-- Warmup 5
+Load resources [118ms] [1598MB]
+Initialize ATL [8ms] [1598MB]
+Run transformation [522ms] [2363MB]
+Compute size of target model [0ms] [2363MB]
+Output model size: 501
+-- Warmup 5 [649ms] [2363MB]
+
+== Measure 1
+Load resources [100ms] [2417MB]
+Initialize ATL [8ms] [2417MB]
+Run transformation [597ms] [426MB]
+Compute size of target model [1ms] [426MB]
+Output model size: 501
+== Measure 1 [707ms] [426MB]
+
+== Measure 2
+Load resources [119ms] [481MB]
+Initialize ATL [7ms] [481MB]
+Run transformation [520ms] [1239MB]
+Compute size of target model [0ms] [1239MB]
+Output model size: 501
+== Measure 2 [647ms] [1239MB]
+
+== Measure 3
+Load resources [104ms] [1293MB]
+Initialize ATL [6ms] [1293MB]
+Run transformation [496ms] [2051MB]
+Compute size of target model [0ms] [2051MB]
+Output model size: 501
+== Measure 3 [606ms] [2051MB]
+
+== Measure 4
+Load resources [99ms] [2105MB]
+Initialize ATL [11ms] [2105MB]
+Run transformation [541ms] [2820MB]
+Compute size of target model [0ms] [2820MB]
+Output model size: 501
+== Measure 4 [652ms] [2820MB]
+
+== Measure 5
+Load resources [162ms] [187MB]
+Initialize ATL [8ms] [187MB]
+Run transformation [522ms] [946MB]
+Compute size of target model [0ms] [946MB]
+Output model size: 501
+== Measure 5 [693ms] [946MB]
+Bench finished: Run transformation on Java trace of size 100
+Benching Run transformation on Java trace of size 1000... 5/5
+
+-- Warmup 1
+Load resources [145ms] [1055MB]
+Initialize ATL [7ms] [1055MB]
+Run transformation [1015ms] [2464MB]
+Compute size of target model [1ms] [2464MB]
+Output model size: 5001
+-- Warmup 1 [1168ms] [2464MB]
+
+-- Warmup 2
+Load resources [139ms] [2518MB]
+Initialize ATL [6ms] [2518MB]
+Run transformation [1073ms] [1288MB]
+Compute size of target model [1ms] [1288MB]
+Output model size: 5001
+-- Warmup 2 [1220ms] [1288MB]
+
+-- Warmup 3
+Load resources [140ms] [1342MB]
+Initialize ATL [8ms] [1343MB]
+Run transformation [1007ms] [2794MB]
+Compute size of target model [1ms] [2794MB]
+Output model size: 5001
+-- Warmup 3 [1156ms] [2794MB]
+
+-- Warmup 4
+Load resources [144ms] [2848MB]
+Initialize ATL [6ms] [2848MB]
+Run transformation [1034ms] [1576MB]
+Compute size of target model [1ms] [1576MB]
+Output model size: 5001
+-- Warmup 4 [1185ms] [1576MB]
+
+-- Warmup 5
+Load resources [140ms] [1684MB]
+Initialize ATL [7ms] [1684MB]
+Run transformation [1010ms] [413MB]
+Compute size of target model [1ms] [413MB]
+Output model size: 5001
+-- Warmup 5 [1158ms] [413MB]
+
+== Measure 1
+Load resources [138ms] [521MB]
+Initialize ATL [9ms] [521MB]
+Run transformation [970ms] [1919MB]
+Compute size of target model [1ms] [1919MB]
+Output model size: 5001
+== Measure 1 [1118ms] [1919MB]
+
+== Measure 2
+Load resources [126ms] [1973MB]
+Initialize ATL [6ms] [1973MB]
+Run transformation [1004ms] [757MB]
+Compute size of target model [0ms] [757MB]
+Output model size: 5001
+== Measure 2 [1137ms] [757MB]
+
+== Measure 3
+Load resources [137ms] [811MB]
+Initialize ATL [6ms] [811MB]
+Run transformation [959ms] [2264MB]
+Compute size of target model [1ms] [2264MB]
+Output model size: 5001
+== Measure 3 [1103ms] [2264MB]
+
+== Measure 4
+Load resources [128ms] [2318MB]
+Initialize ATL [8ms] [2318MB]
+Run transformation [1007ms] [1095MB]
+Compute size of target model [1ms] [1095MB]
+Output model size: 5001
+== Measure 4 [1144ms] [1095MB]
+
+== Measure 5
+Load resources [144ms] [1148MB]
+Initialize ATL [7ms] [1148MB]
+Run transformation [974ms] [2589MB]
+Compute size of target model [2ms] [2589MB]
+Output model size: 5001
+== Measure 5 [1127ms] [2589MB]
+Bench finished: Run transformation on Java trace of size 1000
+Benching Run transformation on Java trace of size 10000... 5/5
+
+-- Warmup 1
+Load resources [508ms] [323MB]
+Initialize ATL [6ms] [323MB]
+Run transformation [6440ms] [295MB]
+Compute size of target model [5ms] [295MB]
+Output model size: 50001
+-- Warmup 1 [6959ms] [295MB]
+
+-- Warmup 2
+Load resources [462ms] [718MB]
+Initialize ATL [8ms] [718MB]
+Run transformation [6222ms] [914MB]
+Compute size of target model [9ms] [914MB]
+Output model size: 50001
+-- Warmup 2 [6701ms] [914MB]
+
+-- Warmup 3
+Load resources [468ms] [1337MB]
+Initialize ATL [6ms] [1337MB]
+Run transformation [6668ms] [1507MB]
+Compute size of target model [5ms] [1507MB]
+Output model size: 50001
+-- Warmup 3 [7148ms] [1507MB]
+
+-- Warmup 4
+Load resources [463ms] [1925MB]
+Initialize ATL [6ms] [1925MB]
+Run transformation [6654ms] [2177MB]
+Compute size of target model [5ms] [2177MB]
+Output model size: 50001
+-- Warmup 4 [7129ms] [2177MB]
+
+-- Warmup 5
+Load resources [467ms] [2589MB]
+Initialize ATL [6ms] [2589MB]
+Run transformation [6699ms] [548MB]
+Compute size of target model [5ms] [548MB]
+Output model size: 50001
+-- Warmup 5 [7177ms] [548MB]
+
+== Measure 1
+Load resources [448ms] [948MB]
+Initialize ATL [6ms] [948MB]
+Run transformation [6778ms] [1689MB]
+Compute size of target model [5ms] [1689MB]
+Output model size: 50001
+== Measure 1 [7237ms] [1689MB]
+
+== Measure 2
+Load resources [449ms] [2079MB]
+Initialize ATL [6ms] [2079MB]
+Run transformation [6744ms] [397MB]
+Compute size of target model [6ms] [397MB]
+Output model size: 50001
+== Measure 2 [7205ms] [397MB]
+
+== Measure 3
+Load resources [457ms] [792MB]
+Initialize ATL [7ms] [792MB]
+Run transformation [6641ms] [1469MB]
+Compute size of target model [8ms] [1469MB]
+Output model size: 50001
+== Measure 3 [7114ms] [1469MB]
+
+== Measure 4
+Load resources [453ms] [1867MB]
+Initialize ATL [7ms] [1867MB]
+Run transformation [6653ms] [2468MB]
+Compute size of target model [9ms] [2468MB]
+Output model size: 50001
+== Measure 4 [7122ms] [2468MB]
+
+== Measure 5
+Load resources [545ms] [404MB]
+Initialize ATL [9ms] [404MB]
+Run transformation [6653ms] [882MB]
+Compute size of target model [5ms] [882MB]
+Output model size: 50001
+== Measure 5 [7214ms] [882MB]
+Bench finished: Run transformation on Java trace of size 10000
+Benching Run transformation on Java trace of size 100000... 5/5
+
+-- Warmup 1
+Load resources [4628ms] [1940MB]
+Initialize ATL [7ms] [1940MB]
+Run transformation [137150ms] [1336MB]
+Compute size of target model [46ms] [1336MB]
+Output model size: 500001
+-- Warmup 1 [141831ms] [1336MB]
+
+-- Warmup 2
+Load resources [3674ms] [2593MB]
+Initialize ATL [7ms] [2593MB]
+Run transformation [136976ms] [1650MB]
+Compute size of target model [45ms] [1650MB]
+Output model size: 500001
+-- Warmup 2 [140702ms] [1650MB]
+
+-- Warmup 3
+Load resources [3657ms] [2744MB]
+Initialize ATL [7ms] [2744MB]
+Run transformation [137459ms] [2998MB]
+Compute size of target model [47ms] [2998MB]
+Output model size: 500001
+-- Warmup 3 [141170ms] [2998MB]
+
+-- Warmup 4
+Load resources [3604ms] [1426MB]
+Initialize ATL [6ms] [1426MB]
+Run transformation [138454ms] [1523MB]
+Compute size of target model [44ms] [1523MB]
+Output model size: 500001
+-- Warmup 4 [142108ms] [1523MB]
+
+-- Warmup 5
+Load resources [3671ms] [2627MB]
+Initialize ATL [6ms] [2627MB]
+Run transformation [137088ms] [2552MB]
+Compute size of target model [50ms] [2552MB]
+Output model size: 500001
+-- Warmup 5 [140815ms] [2552MB]
+
+== Measure 1
+Load resources [3528ms] [3621MB]
+Initialize ATL [5ms] [3621MB]
+Run transformation [137589ms] [1053MB]
+Compute size of target model [46ms] [1053MB]
+Output model size: 500001
+== Measure 1 [141168ms] [1053MB]
+
+== Measure 2
+Load resources [3684ms] [2165MB]
+Initialize ATL [7ms] [2165MB]
+Run transformation [137637ms] [2126MB]
+Compute size of target model [50ms] [2126MB]
+Output model size: 500001
+== Measure 2 [141378ms] [2126MB]
+
+== Measure 3
+Load resources [3508ms] [3149MB]
+Initialize ATL [6ms] [3149MB]
+Run transformation [139485ms] [1288MB]
+Compute size of target model [46ms] [1288MB]
+Output model size: 500001
+== Measure 3 [143046ms] [1288MB]
+
+== Measure 4
+Load resources [3660ms] [2468MB]
+Initialize ATL [6ms] [2468MB]
+Run transformation [137036ms] [1639MB]
+Compute size of target model [48ms] [1639MB]
+Output model size: 500001
+== Measure 4 [140750ms] [1639MB]
+
+== Measure 5
+Load resources [3565ms] [2734MB]
+Initialize ATL [6ms] [2734MB]
+Run transformation [137216ms] [3488MB]
+Compute size of target model [49ms] [3541MB]
+Output model size: 500001
+== Measure 5 [140836ms] [3541MB]
+Bench finished: Run transformation on Java trace of size 100000
