@@ -48,7 +48,7 @@ public class Util {
     }
 
     for (int i=0; i < measures; ++i) {
-      System.out.printf("\n-- Measure %d\n", i+1);
+      System.out.printf("\n== Measure %d\n", i+1);
       time(String.format("== Measure %d", i+1), f);
     }
 
@@ -56,6 +56,6 @@ public class Util {
   }
 
   static void bench(String task, Thunk f) throws Exception {
-    bench(task, f, 5, 5);
+    bench(task, f, 3, 5);
   }
 }

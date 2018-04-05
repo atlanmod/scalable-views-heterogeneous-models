@@ -34,63 +34,63 @@ public class ATLTransfo {
     return URI.createFileURI(here + relativePath);
   }
 
-  static int runATL(Resource sourceMetamodel, Resource sourceModel) {
-    System.out.println("Initialize ATL transformation...");
-    Instant start = Instant.now();
+  static ExecEnv env;
+  static Model targetM;
+  static int targetMsize;
 
-    EmftvmFactory factory = EmftvmFactory.eINSTANCE;
-    ExecEnv env = factory.createExecEnv();
+  static int runATL(Resource sourceMetamodel, Resource sourceModel) throws Exception {
+    Util.time("Initialize ATL", () -> {
 
-    ResourceSet rs = new ResourceSetImpl();
+      EmftvmFactory factory = EmftvmFactory.eINSTANCE;
+      env = factory.createExecEnv();
 
-    Metamodel sourceMM = factory.createMetamodel();
-    sourceMM.setResource(sourceMetamodel);
-    env.registerMetaModel("Viewpoint", sourceMM);
+      ResourceSet rs = new ResourceSetImpl();
 
-    Metamodel targetMM = factory.createMetamodel();
-    targetMM.setResource(rs.getResource(resourceURI("/metamodels/table.ecore"), true));
-    env.registerMetaModel("Table", targetMM);
+      Metamodel sourceMM = factory.createMetamodel();
+      sourceMM.setResource(sourceMetamodel);
+      env.registerMetaModel("Viewpoint", sourceMM);
 
-    // Load models
-    Model sourceM= factory.createModel();
-    sourceM.setResource(sourceModel);
-    env.registerInputModel("IN", sourceM);
+      Metamodel targetMM = factory.createMetamodel();
+      targetMM.setResource(rs.getResource(resourceURI("/metamodels/table.ecore"), true));
+      env.registerMetaModel("Table", targetMM);
 
-    Model targetM = factory.createModel();
-    // We don't save the resource so the path does not matter
-    targetM.setResource(rs.createResource(resourceURI("foo.xmi")));
-    env.registerOutputModel("OUT", targetM);
+      // Load models
+      Model sourceM= factory.createModel();
+      sourceM.setResource(sourceModel);
+      env.registerInputModel("IN", sourceM);
 
-    // Run the transformation
-    DefaultModuleResolver mr =
-        new DefaultModuleResolver(resourceURI("/transformations/").toString(),
-                                  new ResourceSetImpl());
+      targetM = factory.createModel();
+      // We don't save the resource so the path does not matter
+      targetM.setResource(rs.createResource(resourceURI("foo.xmi")));
+      env.registerOutputModel("OUT", targetM);
 
-    env.loadModule(mr, "report");
+      // Run the transformation
+      DefaultModuleResolver mr =
+          new DefaultModuleResolver(resourceURI("/transformations/").toString(),
+                                    new ResourceSetImpl());
 
-    Instant end = Instant.now();
-    System.out.printf("ATL initialized in %dms\n",
-                      ChronoUnit.MILLIS.between(start, end));
+      env.loadModule(mr, "report_with_using");
+    });
 
-    System.out.println("Running ATL transformation...");
-    start = Instant.now();
-    env.run(null);
-    end = Instant.now();
-    System.out.printf("Transformation ran in %dms\n",
-                      ChronoUnit.MILLIS.between(start, end));
+    Util.time("Run transformation", () -> {
+      env.run(null);
+    });
 
     // Return the number of elements, to make sure it did something
-    return Util.resourceSize(targetM.getResource());
+    Util.time("Compute size of target model", () -> {
+      targetMsize = Util.resourceSize(targetM.getResource());
+    });
+
+    return targetMsize;
   }
 
-  public static void main(String args[]) {
+  static Resource metamodel;
+  static Resource model;
 
-    System.out.println("Initializing EMF...");
-
-    Instant start = Instant.now();
+  public static void main(String args[]) throws Exception {
 
     // Initialize EMF
-    {
+    Util.time("Initialize EMF", () -> {
       Map<String, Object> map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
       map.put("eviewpoint", new EmfViewsFactory());
       map.put("eview", new EmfViewsFactory());
@@ -107,52 +107,38 @@ public class ATLTransfo {
       TracePackage.eINSTANCE.eClass();
       TraceneoemfPackage.eINSTANCE.eClass();
       VirtualLinksPackage.eINSTANCE.eClass();
-    }
+    });
 
-    Instant end = Instant.now();
-    System.out.printf("EMF initialized in %dms\n",
-                      ChronoUnit.MILLIS.between(start, end));
-
-    final int[] sizes = {10, 100, 1000, 10000, 100000};
+    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
+    final int warmups = 1;
+    final int measures = 5;
 
     // Test with Java Trace model
     System.out.println("--- Testing transformations with Java trace metamodel");
     for (int s : sizes) {
-      // Load resources
-      start = Instant.now();
+      Util.bench(String.format("Run transformation on Java trace of size %d", s), () -> {
+        Util.time("Load resources", () -> {
+          ResourceSet rs = new ResourceSetImpl();
+          metamodel = rs.getResource(resourceURI("/views/java-trace/chain.eviewpoint"), true);
+          model = rs.getResource(resourceURI(String.format("/views/java-trace/%d.eview", s)), true);
+        });
 
-      ResourceSet rs = new ResourceSetImpl();
-      Resource metamodel = rs.getResource(resourceURI("/views/java-trace/chain.eviewpoint"), true);
-      Resource model = rs.getResource(resourceURI(String.format("/views/java-trace/%d.eview", s)), true);
-
-      end = Instant.now();
-      System.out.printf("Resources loaded in %dms\n",
-                        ChronoUnit.MILLIS.between(start, end));
-
-      // Run the transformation
-      System.out.printf("Output model size: %d\n", runATL(metamodel, model));
-
-      System.out.printf("(Java) ATL transformation for %s finished\n", model.getURI());
+        System.out.printf("Output model size: %d\n", runATL(metamodel, model));
+      }, warmups, measures);
     }
 
     // Test with NeoEMF Trace model
     System.out.println("--- Testing transformations with NeoEMF trace metamodel");
     for (int s : sizes) {
-      // Load resources
-      start = Instant.now();
+      Util.bench(String.format("Run transformation on NeoEMF trace of size %d", s), () -> {
+        Util.time("Load resources", () -> {
+          ResourceSet rs = new ResourceSetImpl();
+          metamodel = rs.getResource(resourceURI("/views/neoemf-trace/chain.eviewpoint"), true);
+          model = rs.getResource(resourceURI(String.format("/views/neoemf-trace/%s.eview", s)), true);
+        });
 
-      ResourceSet rs = new ResourceSetImpl();
-      Resource metamodel = rs.getResource(resourceURI("/views/neoemf-trace/chain.eviewpoint"), true);
-      Resource model = rs.getResource(resourceURI(String.format("/views/neoemf-trace/%s.eview", s)), true);
-
-      end = Instant.now();
-      System.out.printf("Resources loaded in %dms\n",
-                        ChronoUnit.MILLIS.between(start, end));
-
-      // Run the transformation
-      System.out.printf("Output model size: %d\n", runATL(metamodel, model));
-
-      System.out.printf("(NeoEMF) ATL transformation for %s finished\n", model.getURI());
+        System.out.printf("Output model size: %d\n", runATL(metamodel, model));
+      }, warmups, measures);
     }
   }
 }

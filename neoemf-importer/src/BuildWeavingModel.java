@@ -208,12 +208,14 @@ public class BuildWeavingModel {
     });
 
     final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
+    final int warmups = 1;
+    final int measures = 5;
 
     // Create weaving models for Java trace metamodel
     System.out.println("--- Weaving models for Java trace metamodel");
     for (int s : sizes) {
       Util.bench(String.format("Weaving model for Java Trace with %s elements", s),
-                 () -> createJavaWeavingModel(s));
+                 () -> createJavaWeavingModel(s), warmups, measures);
     }
 
     // Create weaving models for NeoEMF trace metamodel
@@ -232,7 +234,7 @@ public class BuildWeavingModel {
     System.out.println("--- Weaving models for NeoEMF trace metamodel");
     for (int s : sizes) {
       Util.bench(String.format("Weaving model for NeoEMF Trace with %s elements", s),
-                 () -> createNeoEMFWeavingModel(s, options));
+                 () -> createNeoEMFWeavingModel(s, options), warmups, measures);
     }
   }
 
