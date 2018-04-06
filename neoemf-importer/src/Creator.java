@@ -255,7 +255,7 @@ public class Creator {
 
     for (int s : sizes) {
       Util.time(String.format("Create Java trace model of size %d", s), () -> {
-        final Resource r = Util.createResource(String.format("models/java-trace/%d.xmi", s));
+        final Resource r = Util.createResource("/models/java-trace/%d.xmi", s);
         createJavaTrace(s, r);
         r.save(null);
       });
@@ -264,7 +264,7 @@ public class Creator {
     Map<String,Object> graphOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().autocommit().asMap();
     for (int s : sizes) {
       Util.time(String.format("Create NeoEMF trace model of size %d", s), () -> {
-        final Resource r = Util.createResource(String.format("models/neoemf-trace/%d.graphdb", s));
+        final Resource r = Util.createResource("/models/neoemf-trace/%d.graphdb", s);
         // Save the resource once to set the options
         r.save(graphOptions);
         createNeoEMFTrace(s, r);

@@ -44,6 +44,10 @@ public class Util {
     }
   }
 
+  static URI resourceURI(String fmt, Object... args) {
+    return resourceURI(String.format(fmt, args));
+  }
+
   static void deleteResource(Resource r) throws IOException {
     // Delete the resource from disk
     Files.deleteIfExists(Paths.get(r.getURI().toFileString()));
@@ -52,13 +56,14 @@ public class Util {
   static Map<String,Object> loadOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().asMap();
   static Map<String,Object> saveOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().autocommit().asMap();
 
-  static void loadResource(URI uri) throws IOException {
+  static Resource loadResource(URI uri) throws IOException {
     Resource r = new ResourceSetImpl().createResource(uri);
     if (r instanceof PersistentResource) {
       r.load(loadOptions);
     } else {
       r.load(null);
     }
+    return r;
   }
 
   static void saveContents(URI uri, EObject root) throws IOException {
@@ -75,13 +80,25 @@ public class Util {
     }
   }
 
+  static void delete(File f) throws IOException {
+    if (f.isDirectory()) {
+      for (File c : f.listFiles())
+        delete(c);
+    }
+    f.delete();
+  }
+
   static Resource createResource(URI uri) throws IOException {
-    Files.deleteIfExists(Paths.get(uri.toFileString()));
+    delete(new File(uri.toFileString()));
     return new ResourceSetImpl().createResource(uri);
   }
 
   static Resource createResource(String path) throws IOException {
     return createResource(resourceURI(path));
+  }
+
+  static Resource createResource(String fmt, Object ...args) throws IOException {
+    return createResource(resourceURI(fmt, args));
   }
 
   public interface Thunk {
