@@ -1,9 +1,20 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
+import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import fr.inria.atlanmod.neoemf.data.blueprints.neo4j.option.BlueprintsNeo4jOptionsBuilder;
+import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
+import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 
 public class Util {
   static Iterable<EObject> asIterable(Resource r) {
@@ -21,6 +32,56 @@ public class Util {
       size++;
     }
     return size;
+  }
+
+  static String here = new File(".").getAbsolutePath();
+
+  static URI resourceURI(String relativePath) {
+    if (relativePath.endsWith(".graphdb")) {
+      return BlueprintsURI.createFileURI(new File(here + relativePath));
+    } else {
+      return URI.createFileURI(here + relativePath);
+    }
+  }
+
+  static void deleteResource(Resource r) throws IOException {
+    // Delete the resource from disk
+    Files.deleteIfExists(Paths.get(r.getURI().toFileString()));
+  }
+
+  static Map<String,Object> loadOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().asMap();
+  static Map<String,Object> saveOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().autocommit().asMap();
+
+  static void loadResource(URI uri) throws IOException {
+    Resource r = new ResourceSetImpl().createResource(uri);
+    if (r instanceof PersistentResource) {
+      r.load(loadOptions);
+    } else {
+      r.load(null);
+    }
+  }
+
+  static void saveContents(URI uri, EObject root) throws IOException {
+    Resource r = createResource(uri);
+
+    if (r instanceof PersistentResource) {
+      // First save to write the options in the database
+      r.save(saveOptions);
+      r.getContents().add(root);
+      r.save(saveOptions);
+      ((PersistentResource) r).close();
+    } else {
+      r.save(null);
+    }
+  }
+
+  static Resource createResource(URI uri) throws IOException {
+    Files.deleteIfExists(Paths.get(uri.toFileString()));
+    return new ResourceSetImpl().createResource(uri);
+  }
+
+  static Resource createResource(String path) throws IOException {
+    return createResource(resourceURI(path));
   }
 
   public interface Thunk {
@@ -58,4 +119,5 @@ public class Util {
   static void bench(String task, Thunk f) throws Exception {
     bench(task, f, 3, 5);
   }
+
 }

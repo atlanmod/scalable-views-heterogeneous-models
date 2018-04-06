@@ -4,21 +4,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.function.Function;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.inria.atlanmod.neoemf.data.PersistenceBackendFactoryRegistry;
 import fr.inria.atlanmod.neoemf.data.blueprints.BlueprintsPersistenceBackendFactory;
-import fr.inria.atlanmod.neoemf.data.blueprints.neo4j.option.BlueprintsNeo4jResourceOptions;
-import fr.inria.atlanmod.neoemf.data.blueprints.option.BlueprintsResourceOptions;
+import fr.inria.atlanmod.neoemf.data.blueprints.neo4j.option.BlueprintsNeo4jOptionsBuilder;
 import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
 import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
@@ -245,37 +240,33 @@ public class Creator {
 
   public static void main(String args[]) throws Exception {
     // Init EMF + NeoEMF
-    ResourceSet rs = new ResourceSetImpl();
-    Util.time("Initialize EMF + NeoEMF", () -> {
+    {
       PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
                                                  BlueprintsPersistenceBackendFactory.getInstance());
-      rs.getResourceFactoryRegistry().getExtensionToFactoryMap()
+      Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
       .put("xmi", new XMIResourceFactoryImpl());
-      rs.getResourceFactoryRegistry()
-      .getProtocolToFactoryMap()
+      Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap()
       .put(BlueprintsURI.SCHEME,
            PersistentResourceFactory.getInstance());
-    });
+    }
 
     // Create trace models
     final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
 
     for (int s : sizes) {
       Util.time(String.format("Create Java trace model of size %d", s), () -> {
-        final Resource r = rs.createResource(URI.createFileURI(String.format("models/java-trace/%d.xmi", s)));
+        final Resource r = Util.createResource(String.format("models/java-trace/%d.xmi", s));
         createJavaTrace(s, r);
         r.save(null);
       });
     }
 
-    Map<Object,Object> graphOptions = new HashMap<>();
-    graphOptions.put(BlueprintsResourceOptions.GRAPH_TYPE,
-                     BlueprintsNeo4jResourceOptions.GRAPH_TYPE_NEO4J);
-    graphOptions.put(BlueprintsNeo4jResourceOptions.CACHE_TYPE,
-                     BlueprintsNeo4jResourceOptions.CacheType.WEAK);
+    Map<String,Object> graphOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().autocommit().asMap();
     for (int s : sizes) {
       Util.time(String.format("Create NeoEMF trace model of size %d", s), () -> {
-        final Resource r = rs.createResource(BlueprintsURI.createFileURI(new File(String.format("models/neoemf-trace/%d.graphdb", s))));
+        final Resource r = Util.createResource(String.format("models/neoemf-trace/%d.graphdb", s));
+        // Save the resource once to set the options
+        r.save(graphOptions);
         createNeoEMFTrace(s, r);
         r.save(graphOptions);
         ((PersistentResource) r).close();
