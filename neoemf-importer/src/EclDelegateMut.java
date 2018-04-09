@@ -42,15 +42,18 @@ import fr.inria.atlanmod.neoemf.data.blueprints.BlueprintsPersistenceBackendFact
 import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
 import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
 
+import org.atlanmod.emfviews.virtuallinks.CommonVirtualLinksFactory;
 import org.atlanmod.emfviews.virtuallinks.ConcreteConcept;
 import org.atlanmod.emfviews.virtuallinks.ContributingModel;
 import org.atlanmod.emfviews.virtuallinks.VirtualAssociation;
-import org.atlanmod.emfviews.virtuallinks.VirtualLinksFactory;
 import org.atlanmod.emfviews.virtuallinks.WeavingModel;
 
 public class EclDelegateMut {
 
-  public WeavingModel createWeavingModel(WeavingModel weavingModel, URI linksDslURI, List<Resource> inputModels) throws Exception {
+  public WeavingModel createWeavingModel(WeavingModel weavingModel, URI linksDslURI, List<Resource> inputModels,
+                                         Map<String, ContributingModel> modelsByURI,
+                                         Map<ContributingModel, Map<String, ConcreteConcept>> conceptsForModel,
+                                         CommonVirtualLinksFactory vLinksFactory) throws Exception {
 
     File f;
 
@@ -128,10 +131,6 @@ public class EclDelegateMut {
     List<Match> matches = mt.getMatches();
 
     // Use the matches to construct a weaving model
-    VirtualLinksFactory vLinksFactory = VirtualLinksFactory.eINSTANCE;
-
-    HashMap<String, ContributingModel> modelsByURI = new HashMap<>();
-
     for (Match match : matches) {
       if (match.isMatching()) {
         EObject left = (EObject) match.getLeft();

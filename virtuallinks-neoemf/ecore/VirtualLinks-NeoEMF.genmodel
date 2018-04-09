@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/virtuallinks-neoemf/src" modelPluginID="virtuallinks-neoemf"
+    modelName="VirtualLinks-NeoEMF" rootExtendsInterface="fr.inria.atlanmod.neoemf.core.PersistentEObject"
+    rootExtendsClass="fr.inria.atlanmod.neoemf.core.DefaultPersistentEObject" reflectiveDelegation="true"
+    importerID="fr.inria.atlanmod.neoemf.eclipse.ui.migrator.NeoImporter" featureDelegation="Reflective"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>VirtualLinks-NeoEMF.ecore</foreignModel>
+  <modelPluginVariables>NEOEMF=fr.inria.atlanmod.neoemf.core</modelPluginVariables>
+  <genPackages prefix="Virtuallinksneoemf" disposableProviderFactory="true" ecorePackage="VirtualLinks-NeoEMF.ecore#/">
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//WeavingModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//WeavingModel/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//WeavingModel/virtualLinks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//WeavingModel/contributingModels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//WeavingModel/whitelist"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//WeavingModel/virtualConcepts"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//WeavingModel/virtualProperties"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//WeavingModel/virtualAssociations"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//WeavingModel/virtualElements"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//WeavingModel/filters"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="VirtualLinks-NeoEMF.ecore#//VirtualLink">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//VirtualLink/name"/>
+    </genClasses>
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//VirtualConcept">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//VirtualConcept/superConcepts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//VirtualConcept/subConcepts"/>
+    </genClasses>
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//VirtualProperty">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//VirtualProperty/parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//VirtualProperty/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//VirtualProperty/optional"/>
+    </genClasses>
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//VirtualAssociation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//VirtualAssociation/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//VirtualAssociation/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//VirtualAssociation/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//VirtualAssociation/upperBound"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//VirtualAssociation/opposite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//VirtualAssociation/composition"/>
+    </genClasses>
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//Filter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//Filter/target"/>
+    </genClasses>
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//ContributingModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//ContributingModel/URI"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//ContributingModel/concreteElements"/>
+    </genClasses>
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//ConcreteElement">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference VirtualLinks-NeoEMF.ecore#//ConcreteElement/model"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VirtualLinks-NeoEMF.ecore#//ConcreteElement/path"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="VirtualLinks-NeoEMF.ecore#//Concept"/>
+    <genClasses image="false" ecoreClass="VirtualLinks-NeoEMF.ecore#//Association"/>
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//ConcreteConcept"/>
+    <genClasses ecoreClass="VirtualLinks-NeoEMF.ecore#//ConcreteAssociation"/>
+    <genClasses image="false" ecoreClass="VirtualLinks-NeoEMF.ecore#//Element"/>
+    <genClasses image="false" ecoreClass="VirtualLinks-NeoEMF.ecore#//VirtualElement"/>
+  </genPackages>
+</genmodel:GenModel>

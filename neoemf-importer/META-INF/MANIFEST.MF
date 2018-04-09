@@ -25,4 +25,5 @@ Require-Bundle: fr.inria.atlanmod.neoemf.core;bundle-version="1.0.3",
  org.eclipse.ocl.ecore;bundle-version="3.6.200",
  org.eclipse.epsilon.ecl.engine;bundle-version="1.4.0",
  org.eclipse.epsilon.eol.engine;bundle-version="1.4.0",
- org.eclipse.epsilon.emc.emf;bundle-version="1.4.0"
+ org.eclipse.epsilon.emc.emf;bundle-version="1.4.0",
+ virtuallinks-neoemf;bundle-version="1.0.0"
