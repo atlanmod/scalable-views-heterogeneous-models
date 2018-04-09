@@ -124,13 +124,13 @@ public class Creator {
     });
   }
 
-  static void createView(int size, File file, Function<Integer, String> modelFile) throws IOException {
+  static void createView(File file, String modelFile, String weavingModelFile) throws IOException {
     Properties p = new Properties();
     p.setProperty("viewpoint", "chain.eviewpoint");
     p.setProperty("contributingModels",
                   String.format("../../models/petstore-requirements.reqif,../../models/petstore-components.uml,../../models/petstore-java.xmi,../../models/%s",
-                                modelFile.apply(size)));
-    p.setProperty("weavingModel", String.format("weaving-%d.xmi", size));
+                                modelFile));
+    p.setProperty("weavingModel", weavingModelFile);
     Writer w = new BufferedWriter(new FileWriter(file));
     p.store(w, null);
     w.close();
@@ -173,8 +173,20 @@ public class Creator {
 
     // Creave view files
     for (int s : sizes) {
-      createView(s, new File(String.format("views/java-trace/%d.eview", s)), (si) -> String.format("java-trace/%d.xmi", si));
-      createView(s, new File(String.format("views/neoemf-trace/%d.eview", s)), (si) -> String.format("neoemf-trace/%d.graphdb", si));
+      // Views backed by an XMI weaving model
+      createView(new File(String.format("views/java-trace/%d.eview", s)),
+                 String.format("java-trace/%d.xmi", s),
+                 String.format("weaving-%d.xmi", s));
+      createView(new File(String.format("views/neoemf-trace/%d.eview", s)),
+                 String.format("neoemf-trace/%d.graphdb", s),
+                 String.format("weaving-%d.xmi", s));
+      // Views backed by a NeoEMF weaving model
+      createView(new File(String.format("views/java-trace/neoemf-weaving-%d.eview", s)),
+                 String.format("java-trace/%d.xmi", s),
+                 String.format("weaving-%d.graphdb", s));
+      createView(new File(String.format("views/neoemf-trace/neoemf-weaving-%d.eview", s)),
+                 String.format("neoemf-trace/%d.graphdb", s),
+                 String.format("weaving-%d.graphdb", s));
     }
   }
 }
