@@ -118,7 +118,7 @@ public class Util {
 
   static void bench(String task, Thunk f,
                     int warmups, int measures) throws Exception {
-    System.out.printf("Benching %s... %d/%d\n", task, warmups, measures);
+    System.out.printf("\nBenching %s... (%d warmups/%d measures)\n", task, warmups, measures);
 
     for (int i=0; i < warmups; ++i) {
       System.out.printf("\n-- Warmup %d\n", i+1);
