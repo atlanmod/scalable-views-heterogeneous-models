@@ -80,32 +80,58 @@ public class BuildWeavingModel {
           vAsso.setLowerBound(0);
           vAsso.setUpperBound(1);
 
-          ConcreteConcept lSource = factory.createConcreteConcept();
-          lSource.setPath(left.getURIFragment(l));
+          // Get left concept
+          {
+            String sourceModelURI = l.eClass().getEPackage().getNsURI();
+            ContributingModel sourceModel =
+                modelsByURI.computeIfAbsent(sourceModelURI,
+                                            (uri) -> {
+                                              ContributingModel m = factory.createContributingModel();
+                                              m.setURI(uri);
+                                              weavingModel.getContributingModels().add(m);
+                                              return m;
+                                            });
 
-          String sourceModelURI = l.eClass().getEPackage().getNsURI();
-          lSource.setModel(modelsByURI.computeIfAbsent(sourceModelURI,
-                                                       (uri) -> {
-                                                         ContributingModel m = factory.createContributingModel();
-                                                         m.setURI(uri);
-                                                         weavingModel.getContributingModels().add(m);
-                                                         return m;
-                                                       }));
-          vAsso.setSource(lSource);
+            Map<String, ConcreteConcept> sourceConcepts =
+                conceptsForModel.computeIfAbsent(sourceModel, (m) -> new HashMap<>() );
 
-          ConcreteConcept lTarget = factory.createConcreteConcept();
-          lTarget.setPath(right.getURIFragment(r));
+            ConcreteConcept lSource =
+                sourceConcepts.computeIfAbsent(left.getURIFragment(l),
+                                               (uri) -> {
+                                                 ConcreteConcept c = factory.createConcreteConcept();
+                                                 c.setModel(sourceModel);
+                                                 c.setPath(uri);
+                                                 return c;
+                                               });
+            vAsso.setSource(lSource);
+          }
 
-          String targetModelURI = r.eClass().getEPackage().getNsURI();
-          lTarget.setModel(modelsByURI.computeIfAbsent(targetModelURI,
-                                                       (uri) -> {
-                                                         ContributingModel m = factory.createContributingModel();
-                                                         m.setURI(uri);
-                                                         weavingModel.getContributingModels().add(m);
-                                                         return m;
-                                                       }));
+          // Get right concept
+          {
+            String targetModelURI = r.eClass().getEPackage().getNsURI();
+            ContributingModel targetModel =
+                modelsByURI.computeIfAbsent(targetModelURI,
+                                            (uri) -> {
+                                              ContributingModel m = factory.createContributingModel();
+                                              m.setURI(uri);
+                                              weavingModel.getContributingModels().add(m);
+                                              return m;
+                                            });
 
-          vAsso.setTarget(lTarget);
+            Map<String, ConcreteConcept> targetConcepts =
+                conceptsForModel.computeIfAbsent(targetModel, (m) -> new HashMap<>() );
+
+            ConcreteConcept lTarget =
+                targetConcepts.computeIfAbsent(right.getURIFragment(r),
+                                               (uri) -> {
+                                                 ConcreteConcept c = factory.createConcreteConcept();
+                                                 c.setModel(targetModel);
+                                                 c.setPath(uri);
+                                                 return c;
+                                               });
+
+            vAsso.setTarget(lTarget);
+          }
 
           links.add(vAsso);
         }

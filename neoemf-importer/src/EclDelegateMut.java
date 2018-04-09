@@ -142,34 +142,58 @@ public class EclDelegateMut {
         vAsso.setLowerBound(0);
         vAsso.setUpperBound(1);
 
-        ConcreteConcept lSource = vLinksFactory.createConcreteConcept();
-        lSource.setPath(left.eResource().getURIFragment(left));
+        // Get left concept
+        {
+          String sourceModelURI = left.eClass().getEPackage().getNsURI();
+          ContributingModel sourceModel =
+              modelsByURI.computeIfAbsent(sourceModelURI,
+                                          (uri) -> {
+                                            ContributingModel m = vLinksFactory.createContributingModel();
+                                            m.setURI(uri);
+                                            weavingModel.getContributingModels().add(m);
+                                            return m;
+                                          });
 
-        String sourceModelURI = left.eClass().getEPackage().getNsURI();
-        if (!modelsByURI.containsKey(sourceModelURI)) {
-          ContributingModel m = vLinksFactory.createContributingModel();
-          m.setURI(sourceModelURI);
-          modelsByURI.put(sourceModelURI, m);
-          weavingModel.getContributingModels().add(m);
+          Map<String, ConcreteConcept> sourceConcepts =
+              conceptsForModel.computeIfAbsent(sourceModel, (m) -> new HashMap<>() );
+
+          ConcreteConcept lSource =
+              sourceConcepts.computeIfAbsent(left.eResource().getURIFragment(left),
+                                             (uri) -> {
+                                               ConcreteConcept c = vLinksFactory.createConcreteConcept();
+                                               c.setModel(sourceModel);
+                                               c.setPath(uri);
+                                               return c;
+                                             });
+          vAsso.setSource(lSource);
         }
-        lSource.setModel(modelsByURI.get(sourceModelURI));
 
-        vAsso.setSource(lSource);
+        // Get right concept
+        {
+          String targetModelURI = right.eClass().getEPackage().getNsURI();
+          ContributingModel targetModel =
+              modelsByURI.computeIfAbsent(targetModelURI,
+                                          (uri) -> {
+                                            ContributingModel m = vLinksFactory.createContributingModel();
+                                            m.setURI(uri);
+                                            weavingModel.getContributingModels().add(m);
+                                            return m;
+                                          });
 
-        ConcreteConcept lTarget = vLinksFactory.createConcreteConcept();
-        lTarget.setPath(right.eResource().getURIFragment(right));
-        // TODO: check the linked elements are concepts
+          Map<String, ConcreteConcept> targetConcepts =
+              conceptsForModel.computeIfAbsent(targetModel, (m) -> new HashMap<>() );
 
-        String targetModelURI = right.eClass().getEPackage().getNsURI();
-        if (!modelsByURI.containsKey(targetModelURI)) {
-          ContributingModel m = vLinksFactory.createContributingModel();
-          m.setURI(targetModelURI);
-          modelsByURI.put(targetModelURI, m);
-          weavingModel.getContributingModels().add(m);
+          ConcreteConcept lTarget =
+              targetConcepts.computeIfAbsent(right.eResource().getURIFragment(right),
+                                             (uri) -> {
+                                               ConcreteConcept c = vLinksFactory.createConcreteConcept();
+                                               c.setModel(targetModel);
+                                               c.setPath(uri);
+                                               return c;
+                                             });
+
+          vAsso.setTarget(lTarget);
         }
-        lTarget.setModel(modelsByURI.get(targetModelURI));
-
-        vAsso.setTarget(lTarget);
 
         weavingModel.getVirtualLinks().add(vAsso);
       }
