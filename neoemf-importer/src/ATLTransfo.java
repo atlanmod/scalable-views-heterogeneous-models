@@ -21,16 +21,15 @@ import org.eclipse.rmf.reqif10.serialization.ReqIF10ResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 
+import fr.inria.atlanmod.neoemf.data.PersistenceBackendFactoryRegistry;
+import fr.inria.atlanmod.neoemf.data.blueprints.BlueprintsPersistenceBackendFactory;
+import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
+import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
 import trace.TracePackage;
 import traceneoemf.TraceneoemfPackage;
+import virtuallinksneoemf.VirtuallinksneoemfPackage;
 
 public class ATLTransfo {
-
-  static String here = new File(".").getAbsolutePath();
-
-  static URI resourceURI(String relativePath) {
-    return URI.createFileURI(here + relativePath);
-  }
 
   static ExecEnv env;
   static Model targetM;
@@ -49,7 +48,7 @@ public class ATLTransfo {
       env.registerMetaModel("Viewpoint", sourceMM);
 
       Metamodel targetMM = factory.createMetamodel();
-      targetMM.setResource(rs.getResource(resourceURI("/metamodels/table.ecore"), true));
+      targetMM.setResource(rs.getResource(Util.resourceURI("/metamodels/table.ecore"), true));
       env.registerMetaModel("Table", targetMM);
 
       // Load models
@@ -59,12 +58,12 @@ public class ATLTransfo {
 
       targetM = factory.createModel();
       // We don't save the resource so the path does not matter
-      targetM.setResource(rs.createResource(resourceURI("foo.xmi")));
+      targetM.setResource(rs.createResource(Util.resourceURI("foo.xmi")));
       env.registerOutputModel("OUT", targetM);
 
       // Run the transformation
       DefaultModuleResolver mr =
-          new DefaultModuleResolver(resourceURI("/transformations/").toString(),
+          new DefaultModuleResolver(Util.resourceURI("/transformations/").toString(),
                                     new ResourceSetImpl());
 
       env.loadModule(mr, "report_with_using");
@@ -105,37 +104,69 @@ public class ATLTransfo {
       TracePackage.eINSTANCE.eClass();
       TraceneoemfPackage.eINSTANCE.eClass();
       VirtualLinksPackage.eINSTANCE.eClass();
+      VirtuallinksneoemfPackage.eINSTANCE.eClass();
+
+      PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
+                                                 BlueprintsPersistenceBackendFactory.getInstance());
+      Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap()
+      .put(BlueprintsURI.SCHEME, PersistentResourceFactory.getInstance());
     });
 
-    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
-    final int warmups = 1;
-    final int measures = 5;
+    final int[] sizes = {10}; //, 100, 1000, 10000, 100000, 1000000};
+    final int warmups = 0;
+    final int measures = 1;
 
     // Test with Java Trace model
-    System.out.println("--- Testing transformations with Java trace metamodel");
+    System.out.println("--- Testing transformations with Java trace model");
     for (int s : sizes) {
       Util.bench(String.format("Run transformation on Java trace of size %d", s), () -> {
         Util.time("Load resources", () -> {
-          ResourceSet rs = new ResourceSetImpl();
-          metamodel = rs.getResource(resourceURI("/views/java-trace/chain.eviewpoint"), true);
-          model = rs.getResource(resourceURI(String.format("/views/java-trace/%d.eview", s)), true);
+          metamodel = Util.loadResource(Util.resourceURI("/views/java-trace/chain.eviewpoint"));
+          model = Util.loadResource(Util.resourceURI("/views/java-trace/%d.eview", s));
         });
 
         System.out.printf("Output model size: %d\n", runATL(metamodel, model));
+
+        Util.time("Unload resources", () -> {
+          metamodel.unload();
+          model.unload();
+        });
       }, warmups, measures);
     }
 
     // Test with NeoEMF Trace model
-    System.out.println("--- Testing transformations with NeoEMF trace metamodel");
+    System.out.println("--- Testing transformations with NeoEMF trace model");
     for (int s : sizes) {
       Util.bench(String.format("Run transformation on NeoEMF trace of size %d", s), () -> {
         Util.time("Load resources", () -> {
-          ResourceSet rs = new ResourceSetImpl();
-          metamodel = rs.getResource(resourceURI("/views/neoemf-trace/chain.eviewpoint"), true);
-          model = rs.getResource(resourceURI(String.format("/views/neoemf-trace/%s.eview", s)), true);
+          metamodel = Util.loadResource(Util.resourceURI("/views/neoemf-trace/chain.eviewpoint"));
+          model = Util.loadResource(Util.resourceURI("/views/neoemf-trace/%s.eview", s));
         });
 
         System.out.printf("Output model size: %d\n", runATL(metamodel, model));
+
+        Util.time("Unload resources", () -> {
+          metamodel.unload();
+          model.unload();
+        });
+      }, warmups, measures);
+    }
+
+    // Test with NeoEMF weaving model and NeoEMF trace model
+    System.out.println("--- Testing transformations with NeoEMF weaving model and NeoEMF trace model");
+    for (int s : sizes) {
+      Util.bench(String.format("Run transformation on NeoEMF trace of size %d", s), () -> {
+        Util.time("Load resources", () -> {
+          metamodel = Util.loadResource(Util.resourceURI("/views/neoemf-trace/chain.eviewpoint"));
+          model = Util.loadResource(Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%s.eview", s));
+        });
+
+        System.out.printf("Output model size: %d\n", runATL(metamodel, model));
+
+        Util.time("Unload resources", () -> {
+          metamodel.unload();
+          model.unload();
+        });
       }, warmups, measures);
     }
   }
