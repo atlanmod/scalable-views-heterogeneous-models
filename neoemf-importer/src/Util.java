@@ -76,6 +76,7 @@ public class Util {
       r.save(saveOptions);
       ((PersistentResource) r).close();
     } else {
+      r.getContents().add(root);
       r.save(null);
     }
   }
