@@ -204,8 +204,6 @@ public class BuildWeavingModel {
       ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
 
-      VirtuallinksneoemfPackage.eINSTANCE.eClass();
-      TraceneoemfPackage.eINSTANCE.eClass();
       PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
                                                  BlueprintsPersistenceBackendFactory.getInstance());
       Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap()
@@ -257,7 +255,7 @@ public class BuildWeavingModel {
         Util.bench(String.format("Weaving model for NeoEMF Trace with %s elements", s),
                    () -> {
                      final URI traceInput = Util.resourceURI("/models/neoemf-trace/%d.graphdb", s);
-                     final URI output = Util.resourceURI("/views/java-trace/weaving-%d.xmi", s);
+                     final URI output = Util.resourceURI("/views/neoemf-trace/weaving-%d.xmi", s);
                      createWeavingModel(traceInput, output, VirtualLinksFactory.eINSTANCE);
                    }, warmups, measures);
       }
