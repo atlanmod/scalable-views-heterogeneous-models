@@ -2,7 +2,7 @@
  */
 package traceneoemf;
 
-import org.eclipse.emf.ecore.EFactory;
+import trace.CommonTraceFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EFactory;
  * @see traceneoemf.TraceneoemfPackage
  * @generated
  */
-public interface TraceneoemfFactory extends EFactory {
+public interface TraceneoemfFactory extends CommonTraceFactory {
   /**
    * The singleton instance of the factory.
    * <!-- begin-user-doc -->
@@ -20,33 +20,6 @@ public interface TraceneoemfFactory extends EFactory {
    * @generated
    */
   TraceneoemfFactory eINSTANCE = traceneoemf.impl.TraceneoemfFactoryImpl.init();
-
-  /**
-   * Returns a new object of class '<em>Trace</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Trace</em>'.
-   * @generated
-   */
-  Trace createTrace();
-
-  /**
-   * Returns a new object of class '<em>Log</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Log</em>'.
-   * @generated
-   */
-  Log createLog();
-
-  /**
-   * Returns a new object of class '<em>Exception</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Exception</em>'.
-   * @generated
-   */
-  Exception createException();
 
   /**
    * Returns the package supported by this factory.

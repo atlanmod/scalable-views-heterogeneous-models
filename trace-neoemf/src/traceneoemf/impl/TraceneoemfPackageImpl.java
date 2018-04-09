@@ -10,9 +10,9 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import traceneoemf.Log;
-import traceneoemf.LogLevel;
-import traceneoemf.Trace;
+import trace.Log;
+import trace.LogLevel;
+import trace.Trace;
 import traceneoemf.TraceneoemfFactory;
 import traceneoemf.TraceneoemfPackage;
 
@@ -79,7 +79,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TraceneoemfPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -106,7 +106,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
     // Mark meta-data to indicate it can't be changed
     theTraceneoemfPackage.freeze();
 
-  
+
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TraceneoemfPackage.eNS_URI, theTraceneoemfPackage);
     return theTraceneoemfPackage;
@@ -117,6 +117,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrace() {
     return traceEClass;
   }
@@ -126,6 +127,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTrace_Logs() {
     return (EReference)traceEClass.getEStructuralFeatures().get(0);
   }
@@ -135,6 +137,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLog() {
     return logEClass;
   }
@@ -144,6 +147,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLog_Message() {
     return (EAttribute)logEClass.getEStructuralFeatures().get(0);
   }
@@ -153,6 +157,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLog_Source() {
     return (EAttribute)logEClass.getEStructuralFeatures().get(1);
   }
@@ -162,6 +167,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLog_Timestamp() {
     return (EAttribute)logEClass.getEStructuralFeatures().get(2);
   }
@@ -171,6 +177,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLog_Level() {
     return (EAttribute)logEClass.getEStructuralFeatures().get(3);
   }
@@ -180,6 +187,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getLog_Exceptions() {
     return (EReference)logEClass.getEStructuralFeatures().get(4);
   }
@@ -189,6 +197,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getException() {
     return exceptionEClass;
   }
@@ -198,6 +207,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getException_Message() {
     return (EAttribute)exceptionEClass.getEStructuralFeatures().get(0);
   }
@@ -207,6 +217,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getLogLevel() {
     return logLevelEEnum;
   }
@@ -216,6 +227,7 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TraceneoemfFactory getTraceneoemfFactory() {
     return (TraceneoemfFactory)getEFactoryInstance();
   }
@@ -296,8 +308,8 @@ public class TraceneoemfPackageImpl extends EPackageImpl implements TraceneoemfP
     initEAttribute(getLog_Level(), this.getLogLevel(), "level", "INFO", 0, 1, Log.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLog_Exceptions(), this.getException(), null, "exceptions", null, 0, -1, Log.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(exceptionEClass, traceneoemf.Exception.class, "Exception", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getException_Message(), ecorePackage.getEString(), "message", null, 0, 1, traceneoemf.Exception.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(exceptionEClass, trace.Exception.class, "Exception", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getException_Message(), ecorePackage.getEString(), "message", null, 0, 1, trace.Exception.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(logLevelEEnum, LogLevel.class, "LogLevel");

@@ -8,8 +8,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import traceneoemf.Log;
-import traceneoemf.Trace;
+import trace.Log;
+import trace.Trace;
 import traceneoemf.TraceneoemfPackage;
 
 /**
@@ -60,6 +60,7 @@ public class TraceImpl extends DefaultPersistentEObject implements Trace {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   @SuppressWarnings("unchecked")
   public EList<Log> getLogs() {
     return (EList<Log>)eGet(TraceneoemfPackage.Literals.TRACE__LOGS, true);

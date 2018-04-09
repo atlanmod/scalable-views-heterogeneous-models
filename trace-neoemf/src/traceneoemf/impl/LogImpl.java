@@ -10,8 +10,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import traceneoemf.Log;
-import traceneoemf.LogLevel;
+import trace.Log;
+import trace.LogLevel;
 import traceneoemf.TraceneoemfPackage;
 
 /**
@@ -66,6 +66,7 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getMessage() {
     return (String)eGet(TraceneoemfPackage.Literals.LOG__MESSAGE, true);
   }
@@ -75,6 +76,7 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMessage(String newMessage) {
     eSet(TraceneoemfPackage.Literals.LOG__MESSAGE, newMessage);
   }
@@ -84,6 +86,7 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getSource() {
     return (String)eGet(TraceneoemfPackage.Literals.LOG__SOURCE, true);
   }
@@ -93,6 +96,7 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSource(String newSource) {
     eSet(TraceneoemfPackage.Literals.LOG__SOURCE, newSource);
   }
@@ -102,6 +106,7 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Date getTimestamp() {
     return (Date)eGet(TraceneoemfPackage.Literals.LOG__TIMESTAMP, true);
   }
@@ -111,6 +116,7 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTimestamp(Date newTimestamp) {
     eSet(TraceneoemfPackage.Literals.LOG__TIMESTAMP, newTimestamp);
   }
@@ -120,6 +126,7 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LogLevel getLevel() {
     return (LogLevel)eGet(TraceneoemfPackage.Literals.LOG__LEVEL, true);
   }
@@ -129,6 +136,7 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLevel(LogLevel newLevel) {
     eSet(TraceneoemfPackage.Literals.LOG__LEVEL, newLevel);
   }
@@ -138,9 +146,10 @@ public class LogImpl extends DefaultPersistentEObject implements Log {
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   @SuppressWarnings("unchecked")
-  public EList<traceneoemf.Exception> getExceptions() {
-    return (EList<traceneoemf.Exception>)eGet(TraceneoemfPackage.Literals.LOG__EXCEPTIONS, true);
+  public EList<trace.Exception> getExceptions() {
+    return (EList<trace.Exception>)eGet(TraceneoemfPackage.Literals.LOG__EXCEPTIONS, true);
   }
 
 } //LogImpl

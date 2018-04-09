@@ -2,8 +2,6 @@
  */
 package trace;
 
-import org.eclipse.emf.ecore.EFactory;
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
@@ -12,7 +10,7 @@ import org.eclipse.emf.ecore.EFactory;
  * @see trace.TracePackage
  * @generated
  */
-public interface TraceFactory extends EFactory {
+public interface TraceFactory extends CommonTraceFactory {
   /**
    * The singleton instance of the factory.
    * <!-- begin-user-doc -->
@@ -20,33 +18,6 @@ public interface TraceFactory extends EFactory {
    * @generated
    */
   TraceFactory eINSTANCE = trace.impl.TraceFactoryImpl.init();
-
-  /**
-   * Returns a new object of class '<em>Trace</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Trace</em>'.
-   * @generated
-   */
-  Trace createTrace();
-
-  /**
-   * Returns a new object of class '<em>Log</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Log</em>'.
-   * @generated
-   */
-  Log createLog();
-
-  /**
-   * Returns a new object of class '<em>Exception</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Exception</em>'.
-   * @generated
-   */
-  Exception createException();
 
   /**
    * Returns the package supported by this factory.

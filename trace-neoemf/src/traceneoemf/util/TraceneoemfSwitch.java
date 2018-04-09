@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import traceneoemf.Log;
-import traceneoemf.Trace;
+import trace.Log;
+import trace.Trace;
 import traceneoemf.TraceneoemfPackage;
 
 /**
@@ -81,7 +81,7 @@ public class TraceneoemfSwitch<T> extends Switch<T> {
         return result;
       }
       case TraceneoemfPackage.EXCEPTION: {
-        traceneoemf.Exception exception = (traceneoemf.Exception)theEObject;
+        trace.Exception exception = (trace.Exception)theEObject;
         T result = caseException(exception);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -131,7 +131,7 @@ public class TraceneoemfSwitch<T> extends Switch<T> {
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseException(traceneoemf.Exception object) {
+  public T caseException(trace.Exception object) {
     return null;
   }
 

@@ -9,8 +9,8 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import traceneoemf.Log;
-import traceneoemf.Trace;
+import trace.Log;
+import trace.Trace;
 import traceneoemf.TraceneoemfPackage;
 
 /**
@@ -78,7 +78,7 @@ public class TraceneoemfAdapterFactory extends AdapterFactoryImpl {
         return createLogAdapter();
       }
       @Override
-      public Adapter caseException(traceneoemf.Exception object) {
+      public Adapter caseException(trace.Exception object) {
         return createExceptionAdapter();
       }
       @Override

@@ -11,9 +11,9 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import traceneoemf.Log;
-import traceneoemf.LogLevel;
-import traceneoemf.Trace;
+import trace.Log;
+import trace.LogLevel;
+import trace.Trace;
 import traceneoemf.TraceneoemfFactory;
 import traceneoemf.TraceneoemfPackage;
 
@@ -61,9 +61,9 @@ public class TraceneoemfFactoryImpl extends EFactoryImpl implements TraceneoemfF
   @Override
   public EObject create(EClass eClass) {
     switch (eClass.getClassifierID()) {
-      case TraceneoemfPackage.TRACE: return (EObject)createTrace();
-      case TraceneoemfPackage.LOG: return (EObject)createLog();
-      case TraceneoemfPackage.EXCEPTION: return (EObject)createException();
+      case TraceneoemfPackage.TRACE: return createTrace();
+      case TraceneoemfPackage.LOG: return createLog();
+      case TraceneoemfPackage.EXCEPTION: return createException();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -104,6 +104,7 @@ public class TraceneoemfFactoryImpl extends EFactoryImpl implements TraceneoemfF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Trace createTrace() {
     TraceImpl trace = new TraceImpl();
     return trace;
@@ -114,6 +115,7 @@ public class TraceneoemfFactoryImpl extends EFactoryImpl implements TraceneoemfF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Log createLog() {
     LogImpl log = new LogImpl();
     return log;
@@ -124,7 +126,8 @@ public class TraceneoemfFactoryImpl extends EFactoryImpl implements TraceneoemfF
    * <!-- end-user-doc -->
    * @generated
    */
-  public traceneoemf.Exception createException() {
+  @Override
+  public trace.Exception createException() {
     ExceptionImpl exception = new ExceptionImpl();
     return exception;
   }
@@ -154,6 +157,7 @@ public class TraceneoemfFactoryImpl extends EFactoryImpl implements TraceneoemfF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TraceneoemfPackage getTraceneoemfPackage() {
     return (TraceneoemfPackage)getEPackage();
   }

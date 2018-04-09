@@ -17,15 +17,16 @@ import fr.inria.atlanmod.neoemf.data.blueprints.neo4j.option.BlueprintsNeo4jOpti
 import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
 import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
+import trace.CommonTraceFactory;
+import trace.TraceFactory;
+import traceneoemf.TraceneoemfFactory;
 
 public class Creator {
 
-  static void createJavaTrace(int size, Resource r) throws Exception {
+  static void createTrace(int size, Resource r, CommonTraceFactory factory) throws Exception {
     final int iterations = size / 10;
 
-    Util.time("Populate Java trace", () -> {
-
-      final trace.TraceFactory factory = trace.TraceFactory.eINSTANCE;
+    Util.time("Populate trace", () -> {
       final trace.Trace t = factory.createTrace();
       for (int i=0; i < iterations; ++i) {
         ArrayList<trace.Log> logs = new ArrayList<>();
@@ -123,109 +124,6 @@ public class Creator {
     });
   }
 
-  static void createNeoEMFTrace(int size, Resource r) throws Exception {
-    final int iterations = size / 10;
-
-    Util.time("Populate NeoEMF trace", () -> {
-
-      final traceneoemf.TraceneoemfFactory factory = traceneoemf.TraceneoemfFactory.eINSTANCE;
-      final traceneoemf.Trace t = factory.createTrace();
-      for (int i=0; i < iterations; ++i) {
-        ArrayList<traceneoemf.Log> logs = new ArrayList<>();
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("CaptchaValidateFilter:doFilter()");
-          log.setSource("CaptchaValidateFilter.doFilter");
-          log.setLevel(traceneoemf.LogLevel.INFO);
-          traceneoemf.Exception e = factory.createException();
-          e.setMessage("ServletException");
-          log.getExceptions().add(e);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("ZOOM - Lat and long  - 2 - 47.21 - 5.27");
-          log.setSource("MapBean.mapItems");
-          log.setLevel(traceneoemf.LogLevel.FINE);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("Setting proxy to 212.0.18.42:8000.  Make sure server.policy is updated to allow setting System Properties");
-          log.setSource("MapBean.lookUpAddress");
-          log.setLevel(traceneoemf.LogLevel.INFO);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("A &quot;proxyHost&quot; and &quot;proxyPort&quot; isn't set as a web.xml context-param.  A proxy server may be necessary to reach the open internet.");
-          log.setSource("MapBean.lookUpAddress");
-          log.setLevel(traceneoemf.LogLevel.INFO);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("No addresses for location - 128.12 42.01");
-          log.setSource("MapBean.lookUpAddress");
-          log.setLevel(traceneoemf.LogLevel.INFO);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("Matched 6 locations, taking the first one");
-          log.setSource("MapBean.lookUpAddress");
-          log.setLevel(traceneoemf.LogLevel.INFO);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("geocoder.lookup.exception");
-          log.setSource("MapBean.lookUpAddress");
-          log.setLevel(traceneoemf.LogLevel.WARNING);
-          traceneoemf.Exception e = factory.createException();
-          e.setMessage("GeocoderLookupException");
-          log.getExceptions().add(e);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("image_does_not_exist lib/petstore/banana.jpg");
-          log.setSource("ImageAction.service");
-          log.setLevel(traceneoemf.LogLevel.SEVERE);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("search.string Brazilian cat");
-          log.setSource("SearchIndex.query");
-          log.setLevel(traceneoemf.LogLevel.INFO);
-          logs.add(log);
-        }
-
-        {
-          traceneoemf.Log log = factory.createLog();
-          log.setMessage("search.results 0");
-          log.setSource("SearchIndex.query");
-          log.setLevel(traceneoemf.LogLevel.INFO);
-          logs.add(log);
-        }
-
-        t.getLogs().addAll(logs);
-      }
-
-      r.getContents().add(t);
-    });
-  }
-
   static void createView(int size, File file, Function<Integer, String> modelFile) throws IOException {
     Properties p = new Properties();
     p.setProperty("viewpoint", "chain.eviewpoint");
@@ -256,7 +154,7 @@ public class Creator {
     for (int s : sizes) {
       Util.time(String.format("Create Java trace model of size %d", s), () -> {
         final Resource r = Util.createResource("/models/java-trace/%d.xmi", s);
-        createJavaTrace(s, r);
+        createTrace(s, r, TraceFactory.eINSTANCE);
         r.save(null);
       });
     }
@@ -267,7 +165,7 @@ public class Creator {
         final Resource r = Util.createResource("/models/neoemf-trace/%d.graphdb", s);
         // Save the resource once to set the options
         r.save(graphOptions);
-        createNeoEMFTrace(s, r);
+        createTrace(s, r, TraceneoemfFactory.eINSTANCE);
         r.save(graphOptions);
         ((PersistentResource) r).close();
       });

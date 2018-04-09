@@ -21,7 +21,7 @@ import traceneoemf.TraceneoemfPackage;
  *
  * @generated
  */
-public class ExceptionImpl extends DefaultPersistentEObject implements traceneoemf.Exception {
+public class ExceptionImpl extends DefaultPersistentEObject implements trace.Exception {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -56,6 +56,7 @@ public class ExceptionImpl extends DefaultPersistentEObject implements traceneoe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getMessage() {
     return (String)eGet(TraceneoemfPackage.Literals.EXCEPTION__MESSAGE, true);
   }
@@ -65,6 +66,7 @@ public class ExceptionImpl extends DefaultPersistentEObject implements traceneoe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMessage(String newMessage) {
     eSet(TraceneoemfPackage.Literals.EXCEPTION__MESSAGE, newMessage);
   }
