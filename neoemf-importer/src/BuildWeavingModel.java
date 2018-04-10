@@ -34,7 +34,6 @@ import trace.Log;
 import trace.TracePackage;
 import traceneoemf.TraceneoemfPackage;
 import virtuallinksneoemf.VirtuallinksneoemfFactory;
-import virtuallinksneoemf.VirtuallinksneoemfPackage;
 
 public class BuildWeavingModel {
 
