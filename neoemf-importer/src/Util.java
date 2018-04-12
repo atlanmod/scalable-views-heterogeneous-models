@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class Util {
     Files.deleteIfExists(Paths.get(r.getURI().toFileString()));
   }
 
-  static Map<String,Object> loadOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().asMap();
+  static Map<String,Object> loadOptions = Collections.EMPTY_MAP;
   static Map<String,Object> saveOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().autocommit().asMap();
 
   static Resource loadResource(URI uri) throws IOException {

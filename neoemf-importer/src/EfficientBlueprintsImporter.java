@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Map;
 
-import org.atlanmod.emfviews.virtuallinks.VirtualLinksPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
@@ -23,7 +22,6 @@ public class EfficientBlueprintsImporter {
   public static void main(String[] args) throws Exception {
     // Init EMF + NeoEMF
     {
-      //VirtualLinksPackage.eINSTANCE.eClass();
       VirtuallinksneoemfPackage.eINSTANCE.eClass();
       PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
                                                  BlueprintsPersistenceBackendFactory.getInstance());
