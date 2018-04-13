@@ -54,7 +54,7 @@ public class Util {
     Files.deleteIfExists(Paths.get(r.getURI().toFileString()));
   }
 
-  static Map<String,Object> loadOptions = Collections.EMPTY_MAP;
+  static Map<String,Object> loadOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().softCache().asMap();
   static Map<String,Object> saveOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().autocommit().asMap();
 
   static Resource loadResource(URI uri) throws IOException {
