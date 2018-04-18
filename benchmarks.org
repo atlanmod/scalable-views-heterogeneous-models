@@ -1,0 +1,426 @@
+# -*- eval: (add-hook (quote org-babel-after-execute-hook) (function org-redisplay-inline-images)); -*-
+#+STARTUP: inlineimages entitiespretty
+
+These are benchmarks made while integrating NeoEMF and EMF Views.  All times are
+in milliseconds, unless otherwise specified.  Sizes are in KB, as reported by
+~ls--block-size=K~ for XMI files, and ~du~ for GraphDB folders.
+
+* Versions and parameters
+** EMF
+Standard EMF available in Eclipse.
+
+EMF version: 2.13.0.v20170609-0928
+
+Default loading and saving options (empty map) unless otherwise specified.
+
+** SOM-NeoEMF
+Basically NeoEMF 1.0.2 with a few patches.
+
+https://github.com/SOM-Research/NeoEMF
+Commit used: 9a876b402fa38983e4d1f95ccf2b0ca44068b5da
+
+Unless otherwise specified, saving options are:
+: BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().autocommit().asMap();
+
+Loading options are:
+: BlueprintsNeo4jOptionsBuilder.newBuilder().asMap();
+
+(actual options will depend on how the resource was serialized)
+
+** atlanmod-NeoEMF
+1100 commits beyond 1.0.2, with large refactorings.
+
+https://github.com/atlanmod/NeoEMF
+Commit used: ed6f37e2ef0bf25e32b12659e8d09285c254cfe4
+
+Unless otherwise specified, saving options are:
+: BlueprintsNeo4jConfig.newConfig().autoSave().toMap();
+
+Loading options are:
+: BlueprintsNeo4jConfig.newConfig().toMap();
+
+* Create trace models
+Create trace models up to size 10^6, serialized as XMI, or in a database.
+
+Legend:
+- Size :: number of Log elements in the resource (10^n)
+- Populate :: time to add all the elements to the provided resource
+- Full :: time to create the resource, populate it, save it and eventually close
+          it (for NeoEMF)
+- XMI :: size of the XMI file on disk
+- GraphDB :: size of the GraphDB folder on disk
+
+** Using EMF
+
+#+name: create-emf
+| size | populate | full |    XMI |
+|------+----------+------+--------|
+|    1 |      229 |  339 |      2 |
+|    2 |        1 |    5 |     12 |
+|    3 |        7 |   28 |    118 |
+|    4 |       36 |   98 |   1178 |
+|    5 |      135 |  332 |  11778 |
+|    6 |      524 | 1485 | 117774 |
+
+** Using SOM-NeoEMF
+
+#+name: create-som-neoemf
+| size | populate |     full | GraphDB (KB) |
+|------+----------+----------+--------------|
+|    1 |      198 |     1584 |          648 |
+|    2 |      178 |      808 |          940 |
+|    3 |      444 |     1151 |         3684 |
+|    4 |     2826 |     4222 |        31152 |
+|    5 |   152875 |   154747 |       356324 |
+|    6 | 14408336 | 14408919 |      3545128 |
+
+** Using atlanmod-NeoEMF
+
+#+name: create-atlanmod-neoemf
+| size |    full | GraphDB (KB) |
+|------+---------+--------------|
+|    1 |    6677 |          648 |
+|    2 |    1497 |          784 |
+|    3 |    2415 |         2200 |
+|    4 |   35925 |        16368 |
+|    5 | 3190291 |       171304 |
+|    6 |         |              |
+
+** Aggregate results and graphs
+*** Time for creating the trace model
+
+#+name: agg-create
+| size |  EMF | SOM-NeoEMF | AtlanMod-NeoEMF |
+|------+------+------------+-----------------|
+|    1 |  339 |       1584 |            6677 |
+|    2 |    5 |        808 |            1497 |
+|    3 |   28 |       1151 |            2415 |
+|    4 |   98 |       4222 |           35925 |
+|    5 |  332 |     154747 |         3190291 |
+|    6 | 1485 |   14408919 |                 |
+#+TBLFM: @2$2..@>$2=remote(create-emf, @@#$3)
+#+TBLFM: @2$3..@>$3=remote(create-som-neoemf,@@#$3)
+#+TBLFM: @2$4..@>$4=remote(create-atlanmod-neoemf,@@#$2)
+
+#+begin_src gnuplot :var data=agg-create :file bench-all-create-trace.png
+set title 'Create trace model (time)'
+set key left
+
+set xlabel 'model size'
+set logscale x
+set ylabel 'time (ms)'
+set logscale y
+
+plot data u (10**$1):2 w lp title 'EMF', \
+     data u (10**$1):3 w lp title 'SOM-NeoEMF', \
+     data u (10**$1):4 w lp title 'Atl-NeoEMF'
+#+end_src
+
+#+RESULTS:
+[[file:bench-all-create-trace.png]]
+
+*** Size of trace model on disk
+#+name: agg-create-size
+| size |    EMF | SOM-NeoEMF | AtlanMod-NeoEMF |
+|------+--------+------------+-----------------|
+|    1 |      2 |        648 |             648 |
+|    2 |     12 |        940 |             784 |
+|    3 |    118 |       3684 |            2200 |
+|    4 |   1178 |      31152 |           16368 |
+|    5 |  11778 |     356324 |          171304 |
+|    6 | 117774 |    3545128 |                 |
+#+TBLFM: @2$2..@>$2=remote(create-emf, @@#$4)
+#+TBLFM: @2$3..@>$3=remote(create-som-neoemf,@@#$4)
+#+TBLFM: @2$4..@>$4=remote(create-atlanmod-neoemf,@@#$3)
+
+#+begin_src gnuplot :var data=agg-create-size :file bench-all-create-trace-size.png
+set title 'Create trace model (size)'
+set key left
+
+set xlabel 'model size (10^n)'
+set logscale x
+set ylabel 'size (KB)'
+set logscale y
+
+plot data u (10**$1):2 w lp title 'EMF (XMI)', \
+     data u (10**$1):3 w lp title 'SOM-NeoEMF (GraphDB)', \
+     data u (10**$1):4 w lp title 'Atl-NeoEMF (GraphDB)'
+#+end_src
+
+#+RESULTS:
+[[file:bench-all-create-trace-size.png]]
+
+* Create weaving models
+Create a weaving model for a view aggregating the four models.  This
+construction by-passes the ECL for the javaClass rule, since the naive ECL
+algorithm is O(n*m).
+
+We serialize the weaving model as XMI and as a database, for later comparisons
+when running transformations and queries on views.
+
+Legend:
+- Size :: same as [[Create trace models]]
+- javaClass rule :: time to match the rule between the Trace and Java metamodels
+- ECL rules :: time to match the remaining 2 rules with ECL (small models)
+- Save :: time to serialize the WeavingModel resource
+- Full :: time to do load the Trace model, match and save
+- XMI :: size of the XMI weaving model on disk
+- GraphDB :: size of the GraphDB folder on disk
+
+** Using EMF trace
+*** XMI weaving model
+Average numbers after 5 warmups / 5 iterations.
+
+#+name: xmi-weaving-emf
+| Size | javaClass | ECL |   save |   full |    XMI |
+|------+-----------+-----+--------+--------+--------|
+|    1 |        15 |  61 |      2 |     80 |     11 |
+|    2 |        11 |  54 |      5 |     73 |     36 |
+|    3 |        14 |  36 |      9 |     67 |    285 |
+|    4 |        52 |  39 |    102 |    216 |   2799 |
+|    5 |      1868 |  25 |   3821 |   5877 |  28112 |
+|    6 |    160090 |  21 | 345742 | 507584 | 282994 |
+
+*** NeoEMF weaving model
+
+#+name: neo-weaving-emf
+| Size | load | javaClass | ECL |  save |   full | GraphDB |
+|------+------+-----------+-----+-------+--------+---------|
+|    1 |    4 |       158 | 324 |  1390 |   1886 |     484 |
+|    2 |   14 |        72 |  82 |   737 |    908 |     976 |
+|    3 |   52 |       195 |  81 |  1136 |   1466 |    6068 |
+|    4 |  138 |      1484 |  72 |  4294 |   5991 |   57520 |
+|    5 |  256 |    217313 | 351 | 28999 | 246919 |  638876 |
+
+** Using SOM-NeoEMF trace
+*** XMI weaving model
+
+#+name: xmi-weaving-som-neoemf
+| Size | load | javaClass | ECL | save |    full |   XMI |
+|------+------+-----------+-----+------+---------+-------|
+|    1 | 1277 |      1119 |  66 |    2 |    2543 |    11 |
+|    2 |   79 |       234 |  71 |    2 |     471 |    37 |
+|    3 |   47 |      1065 |  33 |    6 |    1245 |   297 |
+|    4 |   25 |     20680 |  40 |   74 |   20901 |  2908 |
+|    5 |  205 |   2123328 |  38 | 1905 | 2125560 | 29099 |
+
+*** NeoEMF weaving model
+
+#+name: neo-weaving-som-neoemf
+| Size | load | javaClass | ECL |  save |    full | GraphDB |
+|------+------+-----------+-----+-------+---------+---------|
+|    1 |   62 |        52 |  46 |   569 |     810 |     932 |
+|    2 |   25 |        61 |  61 |   675 |     900 |   12412 |
+|    3 |   33 |       314 |  30 |   887 |    1347 |   16684 |
+|    4 |   47 |     26422 |  47 |  2386 |   28988 |   67780 |
+|    5 |   31 |   3049003 | 113 | 26780 | 3076031 |  649116 |
+
+** Using atlanmod-NeoEMF trace
+*** XMI weaving model
+
+#+name: xmi-weaving-atl-neoemf
+| size | load | populate | save |   full | GraphDB |
+|------+------+----------+------+--------+---------|
+|    1 | 1149 |      166 |   18 |   4658 |     484 |
+|    2 |  151 |      123 |   10 |    481 |     967 |
+|    3 |  124 |      506 |   41 |    866 |    6068 |
+|    4 |   96 |    11181 |  134 |  11593 |   57520 |
+|    5 |  113 |   945415 | 2422 | 948163 |  638884 |
+
+*** NeoEMF weaving model
+
+#+name: neo-weaving-atl-neoemf
+| size | load | populate |    save |     full | GraphDB |
+|------+------+----------+---------+----------+---------|
+|    1 |  101 |      149 |    1082 |     1632 |     536 |
+|    2 |   95 |      228 |    1198 |     1722 |     744 |
+|    3 |  148 |     2106 |    2277 |     4718 |    2920 |
+|    4 |   98 |   102354 |   43393 |   146230 |   24660 |
+|    5 |  179 | 10056899 | 3853064 | 13912304 |  293236 |
+
+** Aggregate results and graphs
+*** Time to create weaving models
+#+name: agg-weaving
+| size | EMF (XMI) | EMF (DB) | SOM-NeoEMF (XMI) | SOM-NeoEMF (DB) | Atl-NeoEMF (XMI) | Atl-NeoEMF (DB) |
+|------+-----------+----------+------------------+-----------------+------------------+-----------------|
+|    1 |        80 |     1886 |             2543 |             810 |             4658 |            1632 |
+|    2 |        73 |      908 |              471 |             900 |              481 |            1722 |
+|    3 |        67 |     1466 |             1245 |            1347 |              866 |            4718 |
+|    4 |       216 |     5991 |            20901 |           28988 |            11593 |          146230 |
+|    5 |      5877 |   246919 |          2125560 |         3076031 |           948163 |        13912304 |
+|    6 |    507584 |          |                  |                 |                  |                 |
+#+TBLFM: @2$2..@>$2=remote(xmi-weaving-emf, @@#$5)
+#+TBLFM: @2$3..@>$3=remote(neo-weaving-emf, @@#$6)
+#+TBLFM: @2$4..@>$4=remote(xmi-weaving-som-neoemf,@@#$6)
+#+TBLFM: @2$5..@>$5=remote(neo-weaving-som-neoemf,@@#$6)
+#+TBLFM: @2$6..@>$6=remote(xmi-weaving-atl-neoemf,@@#$5)
+#+TBLFM: @2$7..@>$7=remote(neo-weaving-atl-neoemf,@@#$5)
+
+#+begin_src gnuplot :var data=agg-weaving :file bench-all-create-weaving-time.png
+set title 'Create weaving models (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set logscale x
+set ylabel 'time (ms)'
+set logscale y
+
+plot data u (10**$1):2 w lp title 'EMF (XMI)', \
+     data u (10**$1):4 w lp title 'SOM-NeoEMF (XMI)', \
+     data u (10**$1):6 w lp title 'Atl-NeoEMF (XMI)', \
+     data u (10**$1):3 w lp title 'EMF (DB)', \
+     data u (10**$1):5 w lp title 'SOM-NeoEMF (DB)', \
+     data u (10**$1):7 w lp title 'Atl-NeoEMF (DB)'
+#+end_src
+
+#+RESULTS:
+[[file:bench-all-create-weaving-time.png]]
+
+*** Size of weaving models on disk
+#+name: agg-weaving-size
+| size | EMF (XMI) | EMF (DB) | SOM-NeoEMF (XMI) | SOM-NeoEMF (DB) | Atl-NeoEMF (XMI) | Atl-NeoEMF (DB) |
+|------+-----------+----------+------------------+-----------------+------------------+-----------------|
+|    1 |        11 |      484 | 11               | 932             | 484              | 536             |
+|    2 |        36 |      976 | 37               | 12412           | 967              | 744             |
+|    3 |       285 |     6068 | 297              | 16684           | 6068             | 2920            |
+|    4 |      2799 |    57520 | 2908             | 67780           | 57520            | 24660           |
+|    5 |     28112 |   638876 | 29099            | 649116          | 638884           | 293236          |
+|    6 |    282994 |          |                  |                 |                  |                 |
+#+TBLFM: @2$2..@>$2=remote(xmi-weaving-emf, @@#$6)
+#+TBLFM: @2$3..@>$3=remote(neo-weaving-emf, @@#$7)
+#+TBLFM: @2$4..@>$4=remote(xmi-weaving-som-neoemf,@@#$7)
+#+TBLFM: @2$5..@>$5=remote(neo-weaving-som-neoemf,@@#$7)
+#+TBLFM: @2$6..@>$6=remote(xmi-weaving-atl-neoemf,@@#$6)
+#+TBLFM: @2$7..@>$7=remote(neo-weaving-atl-neoemf,@@#$6)
+
+#+begin_src gnuplot :var data=agg-weaving-size :file bench-all-create-weaving-size.png
+set title 'Create weaving models (size)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set logscale x
+set ylabel 'size (KB)'
+set logscale y
+
+plot data u (10**$1):2 w lp title 'EMF (XMI)', \
+     data u (10**$1):4 w lp title 'SOM-NeoEMF (XMI)', \
+     data u (10**$1):6 w lp title 'Atl-NeoEMF (XMI)', \
+     data u (10**$1):3 w lp title 'EMF (DB)', \
+     data u (10**$1):5 w lp title 'SOM-NeoEMF (DB)', \
+     data u (10**$1):7 w lp title 'Atl-NeoEMF (DB)'
+#+end_src
+
+#+RESULTS:
+[[file:bench-all-create-weaving-size.png]]
+
+* Run ATL transformation
+Execute an ATL transformation on the view that touches all models (including all
+elements of the trace model).
+
+Legend:
+- Size :: same as [[Create trace models]]
+- Load :: time to load the viewpoint and view resources
+- Transform :: time to run the transformation (execute ~ExecEnv.run~)
+- Full :: time to load the resources, init ATL, and execute the transformation
+
+** Using EMF trace
+Average numbers after 5 warmups / 5 iterations
+
+*** XMI weaving model
+
+#+name: xmi-atl-emf
+| Size | Load | Transform |   Full |
+|------+------+-----------+--------|
+|    1 |  220 |       650 |    885 |
+|    2 |  152 |       655 |    821 |
+|    3 |  161 |      1078 |   1250 |
+|    4 |  494 |      6135 |   6643 |
+|    5 | 3768 |    130397 | 134223 |
+
+*** TODO NeoEMF weaving model
+
+** Using SOM-NeoEMF trace
+*** XMI weaving model
+
+#+name: xmi-atl-som-neoemf
+| size | load | transform |    full |
+|------+------+-----------+---------|
+|    1 |  896 |       917 |    2072 |
+|    2 |  329 |       617 |    1143 |
+|    3 |  533 |      1820 |    2890 |
+|    4 | 1346 |     58789 |   60334 |
+|    5 | 6786 |   5616109 | 5623177 |
+
+*** NeoEMF weaving model
+
+#+name: neo-atl-som-neoemf
+| size |    load | transform |    full |
+|------+---------+-----------+---------|
+|    1 |     228 |       698 |    1148 |
+|    2 |     238 |       963 |    1458 |
+|    3 |     575 |      1468 |    2230 |
+|    4 |   23394 |     65338 |   88937 |
+|    5 | 2157699 |   4944843 | 7102815 |
+
+** Using atlanmod-NeoEMF trace
+*** XMI weaving model
+
+#+name: xmi-atl-atl-neoemf
+| Size | load | transform |    full |
+|------+------+-----------+---------|
+|    1 | 4294 |      1664 |    6727 |
+|    2 |  472 |       795 |    1621 |
+|    3 |  388 |      1998 |    2711 |
+|    4 |  448 |     36373 |   37096 |
+|    5 | 1069 |   3334126 | 3335569 |
+
+*** NeoEMF weaving model
+
+#+name: neo-atl-atl-neoemf
+| Size | load | transform |    full |
+|------+------+-----------+---------|
+|    1 |  522 |       515 |    1296 |
+|    2 |  515 |       468 |    1252 |
+|    3 |  291 |      1551 |    2093 |
+|    4 |  298 |     45316 |   45879 |
+|    5 |  323 |   4069452 | 4070129 |
+
+** Aggregate results and graphs
+
+#+name: agg-atl
+| size | EMF (XMI) | EMF (DB) | SOM-NeoEMF (XMI) | SOM-NeoEMF (DB) | Atl-NeoEMF (XMI) | Atl-NeoEMF (DB) |
+|------+-----------+----------+------------------+-----------------+------------------+-----------------|
+|    1 | 885       |          | 2072             | 1148            | 6727             | 1296            |
+|    2 | 821       |          | 1143             | 1458            | 1621             | 1252            |
+|    3 | 1250      |          | 2890             | 2230            | 2711             | 2093            |
+|    4 | 6643      |          | 60334            | 88937           | 37096            | 45879           |
+|    5 | 134223    |          | 5623177          | 7102815         | 3335569          | 4070129         |
+|    6 |           |          |                  |                 |                  |                 |
+#+TBLFM: @2$2..@>$2=remote(xmi-atl-emf, @@#$4)
+#+TBLFM: @2$3..@>$3=remote(neo-atl-emf, @@#$4)
+#+TBLFM: @2$4..@>$4=remote(xmi-atl-som-neoemf,@@#$4)
+#+TBLFM: @2$5..@>$5=remote(neo-atl-som-neoemf,@@#$4)
+#+TBLFM: @2$6..@>$6=remote(xmi-atl-atl-neoemf,@@#$4)
+#+TBLFM: @2$7..@>$7=remote(neo-atl-atl-neoemf,@@#$4)
+
+#+begin_src gnuplot :var data=agg-atl :file bench-all-run-atl.png
+set title 'Run ATL transformation'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set logscale x
+set ylabel 'time (ms)'
+set logscale y
+
+plot data u (10**$1):2 w lp title 'EMF (XMI)', \
+     data u (10**$1):4 w lp title 'SOM-NeoEMF (XMI)', \
+     data u (10**$1):6 w lp title 'Atl-NeoEMF (XMI)', \
+     data u (10**$1):3 w lp title 'EMF (DB)', \
+     data u (10**$1):5 w lp title 'SOM-NeoEMF (DB)', \
+     data u (10**$1):7 w lp title 'Atl-NeoEMF (DB)'
+#+end_src
+
+#+RESULTS:
+[[file:bench-all-run-atl.png]]
+
+* Load view
