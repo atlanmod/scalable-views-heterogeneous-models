@@ -390,11 +390,11 @@ Average numbers after 5 warmups / 5 iterations
 #+name: agg-atl
 | size | EMF (XMI) | EMF (DB) | SOM-NeoEMF (XMI) | SOM-NeoEMF (DB) | Atl-NeoEMF (XMI) | Atl-NeoEMF (DB) |
 |------+-----------+----------+------------------+-----------------+------------------+-----------------|
-|    1 | 885       |          | 2072             | 1148            | 6727             | 1296            |
-|    2 | 821       |          | 1143             | 1458            | 1621             | 1252            |
-|    3 | 1250      |          | 2890             | 2230            | 2711             | 2093            |
-|    4 | 6643      |          | 60334            | 88937           | 37096            | 45879           |
-|    5 | 134223    |          | 5623177          | 7102815         | 3335569          | 4070129         |
+|    1 |       885 |          |             2072 |            1148 |             6727 |            1296 |
+|    2 |       821 |          |             1143 |            1458 |             1621 |            1252 |
+|    3 |      1250 |          |             2890 |            2230 |             2711 |            2093 |
+|    4 |      6643 |          |            60334 |           88937 |            37096 |           45879 |
+|    5 |    134223 |          |          5623177 |         7102815 |          3335569 |         4070129 |
 |    6 |           |          |                  |                 |                  |                 |
 #+TBLFM: @2$2..@>$2=remote(xmi-atl-emf, @@#$4)
 #+TBLFM: @2$3..@>$3=remote(neo-atl-emf, @@#$4)
@@ -423,4 +423,40 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+RESULTS:
 [[file:bench-all-run-atl.png]]
 
-* Load view
+* TODO Load view
+Do a ~resource.load~ on each view.  Mainly to show that there are no overheads
+to loading a view, even when backed with a DB resource.
+
+Legend:
+- Size :: same sa [[Create trace models]]
+- Load :: time to lead the view resource
+- First :: time get the first element in the view
+- All :: time to enumerate all contents in the view
+- Unload :: time to unload the view
+
+** Using EMF trace
+*** XMI weaving model
+
+| size |  load | first |  all | unload |
+|------+-------+-------+------+--------|
+|    1 |   744 |    19 | 1413 |    394 |
+|    2 |   363 |    10 |  627 |    299 |
+|    3 |   295 |    39 |  641 |    214 |
+|    4 |   406 |   332 |  705 |    244 |
+|    5 |   985 |  2811 |  837 |   4032 |
+|    6 | 11932 | 27128 | 4958 | 334596 |
+
+*** NeoEMF weaving model
+
+** Using SOM-NeoEMF trace
+*** XMI weaving model
+
+*** NeoEMF weaving model
+
+| size | load |   first |     all | unload |
+|------+------+---------+---------+--------|
+|    1 | 1902 |     122 |     828 |    397 |
+|    2 |  991 |     259 |     458 |    342 |
+|    3 |  659 |     674 |     793 |    253 |
+|    4 |  704 |   21694 |   18679 |    202 |
+|    5 | 1541 | 1671000 | 1545219 |    223 |
