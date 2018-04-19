@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: neoemf-importer
-Bundle-SymbolicName: neoemf-importer
+Bundle-SymbolicName: benchmarks
 Bundle-Version: 1.0.0.qualifier
 Export-Package: .
 Require-Bundle: fr.inria.atlanmod.neoemf.core;bundle-version="1.0.3",
