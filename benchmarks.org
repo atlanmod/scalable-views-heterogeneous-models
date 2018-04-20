@@ -159,7 +159,7 @@ We serialize the weaving model as XMI and as a database, for later comparisons
 when running transformations and queries on views.
 
 Legend:
-- Size :: same as [[Create trace models]]
+- Size :: ibidem
 - javaClass rule :: time to match the rule between the Trace and Java metamodels
 - ECL rules :: time to match the remaining 2 rules with ECL (small models)
 - Save :: time to serialize the WeavingModel resource
@@ -318,7 +318,7 @@ Execute an ATL transformation on the view that touches all models (including all
 elements of the trace model).
 
 Legend:
-- Size :: same as [[Create trace models]]
+- Size :: ibidem
 - Load :: time to load the viewpoint and view resources
 - Transform :: time to run the transformation (execute ~ExecEnv.run~)
 - Full :: time to load the resources, init ATL, and execute the transformation
@@ -428,7 +428,7 @@ Do a ~resource.load~ on each view.  Mainly to show that there are no overheads
 to loading a view, even when backed with a DB resource.
 
 Legend:
-- Size :: same sa [[Create trace models]]
+- Size :: ibidem
 - Load :: time to lead the view resource
 - First :: time get the first element in the view
 - All :: time to enumerate all contents in the view
@@ -460,3 +460,26 @@ Legend:
 |    3 |  659 |     674 |     793 |    253 |
 |    4 |  704 |   21694 |   18679 |    202 |
 |    5 | 1541 | 1671000 | 1545219 |    223 |
+
+* Running a simple OCL query
+OCL query: ~Log.allInstances()~
+
+Legend:
+- Size :: ibidem
+- Load :: time to load the trace model or view resource
+- Eval :: time to ~ocl.evaluate(query)~
+- Unload :: time to unload the trace model or view resource
+- Full :: time for all of the above, plus creating the OCL query from a parsed
+          expression
+
+** Using EMF trace
+First, on the plain model XMI, not through a view.
+
+| size | load | eval | unload |   full |
+|------+------+------+--------+--------|
+|    1 |   45 |    7 |      3 |     60 |
+|    2 |   10 |    0 |      5 |     16 |
+|    3 |   42 |    3 |     41 |     86 |
+|    4 |  157 |    7 |    206 |    370 |
+|    5 |  803 |   53 |   2673 |   3529 |
+|    6 | 1975 |  496 | 196198 | 198669 |
