@@ -135,6 +135,16 @@ public class Creator {
     w.close();
   }
 
+  static void createTraceView(File file, String modelFile) throws IOException {
+    Properties p = new Properties();
+    p.setProperty("viewpoint", "trace.eviewpoint");
+    p.setProperty("contributingModels", String.format("../../models/%s", modelFile));
+    p.setProperty("weavingModel", "empty.xmi");
+    Writer w = new BufferedWriter(new FileWriter(file));
+    p.store(w, null);
+    w.close();
+  }
+
   public static void main(String args[]) throws Exception {
     // Init EMF + NeoEMF
     {
@@ -186,6 +196,10 @@ public class Creator {
       createView(new File(String.format("views/neoemf-trace/neoemf-weaving-%d.eview", s)),
                  String.format("neoemf-trace/%d.graphdb", s),
                  String.format("weaving-%d.graphdb", s));
+
+      // Views aggregating only the Neoemf trace resource
+      createTraceView(new File(String.format("views/neoemf-trace/trace-%d.eview", s)),
+                      String.format("neoemf-trace/%d.graphdb", s));
     }
   }
 }
