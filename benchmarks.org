@@ -423,7 +423,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+RESULTS:
 [[file:bench-all-run-atl.png]]
 
-* TODO Load view
+* Load view
 Do a ~resource.load~ on each view.  Mainly to show that there are no overheads
 to loading a view, even when backed with a DB resource.
 
@@ -432,34 +432,33 @@ Legend:
 - Load :: time to lead the view resource
 - First :: time get the first element in the view
 - All :: time to enumerate all contents in the view
-- Unload :: time to unload the view
 
 ** Using EMF trace
 *** XMI weaving model
 
-| size |  load | first |  all | unload |
-|------+-------+-------+------+--------|
-|    1 |   744 |    19 | 1413 |    394 |
-|    2 |   363 |    10 |  627 |    299 |
-|    3 |   295 |    39 |  641 |    214 |
-|    4 |   406 |   332 |  705 |    244 |
-|    5 |   985 |  2811 |  837 |   4032 |
-|    6 | 11932 | 27128 | 4958 | 334596 |
+| size |  load | first |  all |
+|------+-------+-------+------|
+|    1 |   744 |    19 | 1413 |
+|    2 |   363 |    10 |  627 |
+|    3 |   295 |    39 |  641 |
+|    4 |   406 |   332 |  705 |
+|    5 |   985 |  2811 |  837 |
+|    6 | 11932 | 27128 | 4958 |
 
-*** NeoEMF weaving model
+*** TODO NeoEMF weaving model
 
 ** Using SOM-NeoEMF trace
-*** XMI weaving model
+*** TODO XMI weaving model
 
 *** NeoEMF weaving model
 
-| size | load |   first |     all | unload |
-|------+------+---------+---------+--------|
-|    1 | 1902 |     122 |     828 |    397 |
-|    2 |  991 |     259 |     458 |    342 |
-|    3 |  659 |     674 |     793 |    253 |
-|    4 |  704 |   21694 |   18679 |    202 |
-|    5 | 1541 | 1671000 | 1545219 |    223 |
+| size | load |   first |     all |
+|------+------+---------+---------|
+|    1 | 1902 |     122 |     828 |
+|    2 |  991 |     259 |     458 |
+|    3 |  659 |     674 |     793 |
+|    4 |  704 |   21694 |   18679 |
+|    5 | 1541 | 1671000 | 1545219 |
 
 * Running a simple OCL query
 OCL query: ~Log.allInstances()~
@@ -468,18 +467,28 @@ Legend:
 - Size :: ibidem
 - Load :: time to load the trace model or view resource
 - Eval :: time to ~ocl.evaluate(query)~
-- Unload :: time to unload the trace model or view resource
 - Full :: time for all of the above, plus creating the OCL query from a parsed
           expression
 
 ** Using EMF trace
 First, on the plain model XMI, not through a view.
 
-| size | load | eval | unload |   full |
-|------+------+------+--------+--------|
-|    1 |   45 |    7 |      3 |     60 |
-|    2 |   10 |    0 |      5 |     16 |
-|    3 |   42 |    3 |     41 |     86 |
-|    4 |  157 |    7 |    206 |    370 |
-|    5 |  803 |   53 |   2673 |   3529 |
-|    6 | 1975 |  496 | 196198 | 198669 |
+| size | load | eval |   full |
+|------+------+------+--------|
+|    1 |   45 |    7 |     60 |
+|    2 |   10 |    0 |     16 |
+|    3 |   42 |    3 |     86 |
+|    4 |  157 |    7 |    370 |
+|    5 |  803 |   53 |   3529 |
+|    6 | 1975 |  496 | 198669 |
+
+** Using SOM-NeoEMF trace
+
+| size | load |  eval |  full |
+|------+------+-------+-------|
+|    1 |  578 |   200 |  1089 |
+|    2 |   62 |   177 |   349 |
+|    3 |   43 |   608 |   889 |
+|    4 |   22 | 17287 | 30399 |
+|    5 |      |       |       |
+|    6 |      |       |       |
