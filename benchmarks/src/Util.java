@@ -103,6 +103,12 @@ public class Util {
     return createResource(resourceURI(fmt, args));
   }
 
+  static void closeResource(Resource r) {
+    if (r instanceof PersistentResource) {
+      ((PersistentResource) r).close();
+    }
+  }
+
   public interface Thunk {
     void apply() throws Exception;
   }

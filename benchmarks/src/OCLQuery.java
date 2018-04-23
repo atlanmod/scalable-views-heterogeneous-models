@@ -87,7 +87,7 @@ public class OCLQuery {
       Object res = query.evaluate(resource.getContents().get(0));
       System.out.printf("Result size: %s\n", ((HashSet) res).size());
     });
-    Util.time("Unload resource", () -> { resource.unload(); });
+    Util.time("Unload resource", () -> { Util.closeResource(resource); });
   }
 
   public static void main(String[] args) throws Exception {

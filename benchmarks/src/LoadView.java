@@ -46,7 +46,7 @@ public class LoadView {
     });
 
     Util.time("Unload view", () -> {
-      view.unload();
+      Util.closeResource(view);
     });
   }
 

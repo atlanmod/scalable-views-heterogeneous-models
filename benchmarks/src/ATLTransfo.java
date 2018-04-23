@@ -81,6 +81,20 @@ public class ATLTransfo {
     return targetMsize;
   }
 
+  static void benchATL(URI metamodelURI, URI modelURI) throws Exception {
+    Util.time("Load resources", () -> {
+      metamodel = Util.loadResource(metamodelURI);
+      model = Util.loadResource(modelURI);
+    });
+
+    System.out.printf("Output model size: %d\n", runATL(metamodel, model));
+
+    Util.time("Unload resources", () -> {
+      Util.closeResource(metamodel);
+      Util.closeResource(model);
+    });
+  }
+
   static Resource metamodel;
   static Resource model;
 
@@ -116,58 +130,37 @@ public class ATLTransfo {
     final int warmups = 0;
     final int measures = 1;
 
-    // Test with Java Trace model
-    System.out.println("--- Testing transformations with Java trace model");
+    // XMI Trace / XMI weaving model
     for (int s : sizes) {
-      Util.bench(String.format("Run transformation on Java trace of size %d", s), () -> {
-        Util.time("Load resources", () -> {
-          metamodel = Util.loadResource(Util.resourceURI("/views/java-trace/chain.eviewpoint"));
-          model = Util.loadResource(Util.resourceURI("/views/java-trace/%d.eview", s));
-        });
-
-        System.out.printf("Output model size: %d\n", runATL(metamodel, model));
-
-        Util.time("Unload resources", () -> {
-          metamodel.unload();
-          model.unload();
-        });
+      Util.bench(String.format("Run transformation on XMI trace / XMI weaving model of size %d", s), () -> {
+        benchATL(Util.resourceURI("/views/java-trace/chain.eviewpoint"),
+                 Util.resourceURI("/views/java-trace/%d.eview", s));
       }, warmups, measures);
     }
 
-    // Test with NeoEMF Trace model
-    System.out.println("--- Testing transformations with NeoEMF trace model");
+    // XMI Trace / NeoEMF weaving model
     for (int s : sizes) {
-      Util.bench(String.format("Run transformation on NeoEMF trace of size %d", s), () -> {
-        Util.time("Load resources", () -> {
-          metamodel = Util.loadResource(Util.resourceURI("/views/neoemf-trace/chain.eviewpoint"));
-          model = Util.loadResource(Util.resourceURI("/views/neoemf-trace/%s.eview", s));
-        });
-
-        System.out.printf("Output model size: %d\n", runATL(metamodel, model));
-
-        Util.time("Unload resources", () -> {
-          metamodel.unload();
-          model.unload();
-        });
+      Util.bench(String.format("Run transformation on XMI trace / NeoEMF weaving model of size %d", s), () -> {
+        benchATL(Util.resourceURI("/views/java-trace/chain.eviewpoint"),
+                 Util.resourceURI("/views/java-trace/neoemf-weaving-%d.eview", s));
       }, warmups, measures);
     }
 
-    // Test with NeoEMF weaving model and NeoEMF trace model
-    System.out.println("--- Testing transformations with NeoEMF weaving model and NeoEMF trace model");
+    // NeoEMF Trace / XMI weaving model
     for (int s : sizes) {
-      Util.bench(String.format("Run transformation on NeoEMF trace of size %d", s), () -> {
-        Util.time("Load resources", () -> {
-          metamodel = Util.loadResource(Util.resourceURI("/views/neoemf-trace/chain.eviewpoint"));
-          model = Util.loadResource(Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%s.eview", s));
-        });
-
-        System.out.printf("Output model size: %d\n", runATL(metamodel, model));
-
-        Util.time("Unload resources", () -> {
-          metamodel.unload();
-          model.unload();
-        });
+      Util.bench(String.format("Run transformation on NeoEMF trace / XMI weaving model of size %d", s), () -> {
+        benchATL(Util.resourceURI("/views/neoemf-trace/chain.eviewpoint"),
+                 Util.resourceURI("/views/neoemf-trace/%s.eview", s));
       }, warmups, measures);
     }
+
+    // NeoEMF Trace / NeoEMF weaving model
+    for (int s : sizes) {
+      Util.bench(String.format("Run transformation on NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
+        benchATL(Util.resourceURI("/views/neoemf-trace/chain.eviewpoint"),
+                 Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%s.eview", s));
+      }, warmups, measures);
+    }
+
   }
 }
