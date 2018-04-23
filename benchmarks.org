@@ -492,3 +492,14 @@ First, on the plain model XMI, not through a view.
 |    4 |   22 | 17287 | 30399 |
 |    5 |      |       |       |
 |    6 |      |       |       |
+
+** Using a view on SOM-NeoEMF trace
+
+| size | load |  eval |  full |
+|------+------+-------+-------|
+|    1 |  974 |    44 |  1284 |
+|    2 |   61 |   183 |   246 |
+|    3 |   60 |  1088 |  1150 |
+|    4 |  498 | 21159 | 21659 |
+|    5 |      |       |       |
+|    6 |      |       |       |
