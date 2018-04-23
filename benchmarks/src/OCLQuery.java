@@ -1,6 +1,5 @@
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.atlanmod.emfviews.core.EmfViewsFactory;
 import org.atlanmod.emfviews.virtuallinks.VirtualLinksPackage;
@@ -34,11 +33,7 @@ import virtuallinksneoemf.VirtuallinksneoemfPackage;
 
 public class OCLQuery {
 
-  static OCL ocl;
-  static OCLHelper oclHelper;
-  static OCLExpression<EClassifier> expression;
-
-  static void setUp() throws ParserException {
+  static void setUp() {
     // Init EMF
     {
       Map<String, Object> map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
@@ -68,24 +63,29 @@ public class OCLQuery {
 
   }
 
-
   static Resource resource;
+  static Query<EClassifier, EClass, EObject> query;
 
-  static void benchQuery(URI uri, EObject context) throws Exception {
+  static void benchQuery(URI uri) throws Exception {
     // Need to recreate the query since otherwise it does not get re-evaluated for subsequent resources
     // Init OCL query
     OCL ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
     OCLHelper oclHelper = ocl.createOCLHelper();
-    oclHelper.setContext(context);
-    expression = oclHelper.createQuery("Log.allInstances()");
-    Query<EClassifier, EClass, EObject> query = ocl.createQuery(expression);
 
     Util.time("Load resource", () -> {
       resource = Util.loadResource(uri);
     });
+
+    Util.time("Create query", () -> {
+      // Fetch context from loaded resource since we need VirtualEClass instances here
+      // for queries on views to work
+      oclHelper.setContext(resource.getContents().get(0).eClass());
+      query = ocl.createQuery(oclHelper.createQuery("Log.allInstances()"));
+    });
+
     Util.time("Evaluate query", () -> {
       Object res = query.evaluate(resource.getContents().get(0));
-      System.out.printf("Result size: %s\n", ((HashSet) res).size());
+      System.out.printf("Result size: %s\n", ((Set) res).size());
     });
     Util.time("Unload resource", () -> { Util.closeResource(resource); });
   }
@@ -95,16 +95,22 @@ public class OCLQuery {
 
     // Bench
     final int[] sizes = {10, 100, 1000, 10000};
-/*
+
     for (int s : sizes) {
       Util.time(String.format("OCL allInstances query for XMI model of size %d", s), () -> {
         benchQuery(Util.resourceURI("/models/java-trace/%d.xmi", s));
       });
     }
-*/
+
     for (int s : sizes) {
       Util.time(String.format("OCL allInstances query for NeoEMF model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s), TraceneoemfPackage.eINSTANCE.getTrace());
+        benchQuery(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s));
+      });
+    }
+
+    for (int s : sizes) {
+      Util.time(String.format("OCL allInstances query for view on NeoEMF model of size %d", s), () -> {
+        benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s));
       });
     }
   }
