@@ -63,16 +63,22 @@ Legend:
 |    6 |      524 | 1485 | 117774 |
 
 ** Using SOM-NeoEMF
+*** Using DirectWriteLongListSupport
+Using saving options:
+: BlueprintsNeo4jOptionsBuilder.newBuilder()
+        .weakCache().directWriteLongListSupport().autocommit().asMap();
 
 #+name: create-som-neoemf
-| size | populate |     full | GraphDB (KB) |
-|------+----------+----------+--------------|
-|    1 |      198 |     1584 |          648 |
-|    2 |      178 |      808 |          940 |
-|    3 |      444 |     1151 |         3684 |
-|    4 |     2826 |     4222 |        31152 |
-|    5 |   152875 |   154747 |       356324 |
-|    6 | 14408336 | 14408919 |      3545128 |
+| size | populate |    full | GraphDB (KB) |
+|------+----------+---------+--------------|
+|    1 |      376 |    2627 |          348 |
+|    2 |      377 |     985 |          764 |
+|    3 |      842 |    1730 |         5000 |
+|    4 |     8941 |   10594 |        47828 |
+|    5 |    97795 |   99768 |       473992 |
+|    6 |  1122814 | 1123521 |      4755528 |
+
+*** TODO Using DirectWrite
 
 ** Using atlanmod-NeoEMF
 
@@ -92,12 +98,12 @@ Legend:
 #+name: agg-create
 | size |  EMF | SOM-NeoEMF | AtlanMod-NeoEMF |
 |------+------+------------+-----------------|
-|    1 |  339 |       1584 |            6677 |
-|    2 |    5 |        808 |            1497 |
-|    3 |   28 |       1151 |            2415 |
-|    4 |   98 |       4222 |           35925 |
-|    5 |  332 |     154747 |         3190291 |
-|    6 | 1485 |   14408919 |                 |
+|    1 |  339 |       2627 |            6677 |
+|    2 |    5 |        985 |            1497 |
+|    3 |   28 |       1730 |            2415 |
+|    4 |   98 |      10594 |           35925 |
+|    5 |  332 |      99768 |         3190291 |
+|    6 | 1485 |    1123521 |                 |
 #+TBLFM: @2$2..@>$2=remote(create-emf, @@#$3)
 #+TBLFM: @2$3..@>$3=remote(create-som-neoemf,@@#$3)
 #+TBLFM: @2$4..@>$4=remote(create-atlanmod-neoemf,@@#$2)
@@ -123,12 +129,12 @@ plot data u (10**$1):2 w lp title 'EMF', \
 #+name: agg-create-size
 | size |    EMF | SOM-NeoEMF | AtlanMod-NeoEMF |
 |------+--------+------------+-----------------|
-|    1 |      2 |        648 |             648 |
-|    2 |     12 |        940 |             784 |
-|    3 |    118 |       3684 |            2200 |
-|    4 |   1178 |      31152 |           16368 |
-|    5 |  11778 |     356324 |          171304 |
-|    6 | 117774 |    3545128 |                 |
+|    1 |      2 |        348 |             648 |
+|    2 |     12 |        764 |             784 |
+|    3 |    118 |       5000 |            2200 |
+|    4 |   1178 |      47828 |           16368 |
+|    5 |  11778 |     473992 |          171304 |
+|    6 | 117774 |    4755528 |                 |
 #+TBLFM: @2$2..@>$2=remote(create-emf, @@#$4)
 #+TBLFM: @2$3..@>$3=remote(create-som-neoemf,@@#$4)
 #+TBLFM: @2$4..@>$4=remote(create-atlanmod-neoemf,@@#$3)

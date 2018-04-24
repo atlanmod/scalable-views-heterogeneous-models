@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
@@ -17,7 +18,6 @@ import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
 import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
 import trace.CommonTraceFactory;
-import trace.TraceFactory;
 import traceneoemf.TraceneoemfFactory;
 
 public class Creator {
@@ -27,9 +27,10 @@ public class Creator {
 
     Util.time("Populate trace", () -> {
       final trace.Trace t = factory.createTrace();
-      for (int i=0; i < iterations; ++i) {
-        ArrayList<trace.Log> logs = new ArrayList<>();
+      r.getContents().add(t);
+      EList<trace.Log> logs = t.getLogs();
 
+      for (int i=0; i < iterations; ++i) {
         {
           trace.Log log = factory.createLog();
           log.setMessage("CaptchaValidateFilter:doFilter()");
@@ -115,11 +116,7 @@ public class Creator {
           log.setLevel(trace.LogLevel.INFO);
           logs.add(log);
         }
-
-        t.getLogs().addAll(logs);
       }
-
-      r.getContents().add(t);
     });
   }
 
@@ -159,7 +156,7 @@ public class Creator {
 
     // Create trace models
     final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
-
+/*
     for (int s : sizes) {
       Util.time(String.format("Create Java trace model of size %d", s), () -> {
         final Resource r = Util.createResource("/models/java-trace/%d.xmi", s);
@@ -167,8 +164,9 @@ public class Creator {
         r.save(null);
       });
     }
-
-    Map<String,Object> graphOptions = BlueprintsNeo4jOptionsBuilder.newBuilder().weakCache().autocommit().asMap();
+*/
+    Map<String,Object> graphOptions = BlueprintsNeo4jOptionsBuilder.newBuilder()
+        .weakCache().directWriteLongListSupport().autocommit().asMap();
     for (int s : sizes) {
       Util.time(String.format("Create NeoEMF trace model of size %d", s), () -> {
         final Resource r = Util.createResource("/models/neoemf-trace/%d.graphdb", s);
