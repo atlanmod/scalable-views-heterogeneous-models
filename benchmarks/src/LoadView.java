@@ -80,6 +80,13 @@ public class LoadView {
     final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
     final int warmups = 0;
     final int measures = 1;
+
+    for (int s : sizes) {
+      Util.bench(String.format("Load NeoEMF trace of size %d", s), () -> {
+        loadAndCount(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s));
+      }, warmups, measures);
+    }
+
 /*
     // Test with XMI trace / XMI weaving model
     for (int s : sizes) {

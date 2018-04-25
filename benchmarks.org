@@ -27,6 +27,14 @@ Loading options are:
 
 (actual options will depend on how the resource was serialized)
 
+For DirectWriteLongList, saving options are:
+: BlueprintsNeo4jOptionsBuilder.newBuilder()
+:   .weakCache().directWriteLongListSupport().autocommit().asMap();
+
+For loading:
+: BlueprintsNeo4jOptionsBuilder.newBuilder()
+:   .softCache().directWriteLongListSupport().asMap();
+
 ** atlanmod-NeoEMF
 1100 commits beyond 1.0.2, with large refactorings.
 
@@ -66,7 +74,7 @@ Legend:
 *** Using DirectWriteLongListSupport
 Using saving options:
 : BlueprintsNeo4jOptionsBuilder.newBuilder()
-        .weakCache().directWriteLongListSupport().autocommit().asMap();
+:   .weakCache().directWriteLongListSupport().autocommit().asMap();
 
 #+name: create-som-neoemf-long-list
 | size | populate |    full | GraphDB (KB) |
@@ -78,10 +86,10 @@ Using saving options:
 |    5 |    97795 |   99768 |       473992 |
 |    6 |  1122814 | 1123521 |      4755528 |
 
-*** TODO Using DirectWrite
+*** Using DirectWrite
 Saving options:
 : BlueprintsNeo4jOptionsBuilder.newBuilder()
-        .weakCache().autocommit().asMap();
+:   .weakCache().autocommit().asMap();
 
 #+name: create-som-neoemf
 | size | populate |    full | GraphDB (KB) |
@@ -444,7 +452,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+RESULTS:
 [[file:bench-all-run-atl.png]]
 
-* Load view
+* Load view/model
 Do a ~resource.load~ on each view.  Mainly to show that there are no overheads
 to loading a view, even when backed with a DB resource.
 
@@ -466,11 +474,8 @@ Legend:
 |    5 |   985 |  2811 |  837 |
 |    6 | 11932 | 27128 | 4958 |
 
-*** TODO NeoEMF weaving model
 
 ** Using SOM-NeoEMF trace
-*** TODO XMI weaving model
-
 *** NeoEMF weaving model
 
 | size | load |   first |     all |
@@ -480,6 +485,27 @@ Legend:
 |    3 |  659 |     674 |     793 |
 |    4 |  704 |   21694 |   18679 |
 |    5 | 1541 | 1671000 | 1545219 |
+
+*** No weaving model (load the model directly)
+**** DirectWrite
+
+| size | load | first |     all |
+|------+------+-------+---------|
+|    1 |  735 |   169 |      26 |
+|    2 |   54 |     9 |     209 |
+|    3 |   42 |    11 |     705 |
+|    4 |   94 |    35 |   14094 |
+|    5 |   32 |   150 | 1359528 |
+
+**** DirectWriteLongList
+
+| size | load | first |    all |
+|------+------+-------+--------|
+|    1 | 1114 |   125 |     23 |
+|    2 |   31 |     9 |    106 |
+|    3 |   37 |     7 |    629 |
+|    4 |   33 |    24 |   7924 |
+|    5 |   84 |   149 | 744028 |
 
 * Running a simple OCL query
 OCL query: ~Log.allInstances()~
