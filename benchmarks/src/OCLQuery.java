@@ -1,5 +1,4 @@
 import java.util.Map;
-import java.util.Set;
 
 import org.atlanmod.emfviews.core.EmfViewsFactory;
 import org.atlanmod.emfviews.virtuallinks.VirtualLinksPackage;
@@ -77,7 +76,10 @@ public class OCLQuery {
     Util.time("Create query", () -> {
       // Fetch context from loaded resource since we need VirtualEClass instances here
       // for queries on views to work
-      oclHelper.setContext(resource.getContents().get(0).eClass());
+      EObject root = resource.getContents().get(0);
+      EObject context = root.eClass();
+      ocl.setExtentMap(new FastExtentMap(root));
+      oclHelper.setContext(context);
       query = ocl.createQuery(oclHelper.createQuery("Log.allInstances()->size()"));
     });
 
