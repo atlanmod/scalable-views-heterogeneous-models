@@ -491,7 +491,6 @@ Legend:
 |    5 |   985 |  2811 |  837 |
 |    6 | 11932 | 27128 | 4958 |
 
-
 ** Using SOM-NeoEMF trace
 *** NeoEMF weaving model
 
@@ -559,11 +558,22 @@ First, on the plain model XMI, not through a view.
 
 ** Using a view on SOM-NeoEMF trace
 
+*** Using DirectWrite
+
 | size | load |  eval |  full |
 |------+------+-------+-------|
 |    1 |  974 |    44 |  1284 |
 |    2 |   61 |   183 |   246 |
 |    3 |   60 |  1088 |  1150 |
 |    4 |  498 | 21159 | 21659 |
-|    5 |      |       |       |
-|    6 |      |       |       |
+
+*** Using DirectWriteLongList
+
+| size | load |  eval |  full |
+|------+------+-------+-------|
+|    1 | 1533 |    32 |  1804 |
+|    2 |  438 |    40 |   480 |
+|    3 |  408 |   109 |   520 |
+|    4 |  370 |   381 |   754 |
+|    5 |  529 |  1052 |  1584 |
+|    6 | 1277 | 14657 | 15940 |
