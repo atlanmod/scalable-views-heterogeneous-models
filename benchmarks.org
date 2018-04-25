@@ -68,7 +68,7 @@ Using saving options:
 : BlueprintsNeo4jOptionsBuilder.newBuilder()
         .weakCache().directWriteLongListSupport().autocommit().asMap();
 
-#+name: create-som-neoemf
+#+name: create-som-neoemf-long-list
 | size | populate |    full | GraphDB (KB) |
 |------+----------+---------+--------------|
 |    1 |      376 |    2627 |          348 |
@@ -79,6 +79,18 @@ Using saving options:
 |    6 |  1122814 | 1123521 |      4755528 |
 
 *** TODO Using DirectWrite
+Saving options:
+: BlueprintsNeo4jOptionsBuilder.newBuilder()
+        .weakCache().autocommit().asMap();
+
+#+name: create-som-neoemf
+| size | populate |    full | GraphDB (KB) |
+|------+----------+---------+--------------|
+|    1 |      203 |    1827 |          336 |
+|    2 |      251 |     832 |          588 |
+|    3 |     1003 |    1703 |         3276 |
+|    4 |    21434 |   22697 |        30312 |
+|    5 |  2537824 | 2539457 |       346072 |
 
 ** Using atlanmod-NeoEMF
 
@@ -90,23 +102,23 @@ Using saving options:
 |    3 |    2415 |         2200 |
 |    4 |   35925 |        16368 |
 |    5 | 3190291 |       171304 |
-|    6 |         |              |
 
 ** Aggregate results and graphs
 *** Time for creating the trace model
 
 #+name: agg-create
-| size |  EMF | SOM-NeoEMF | AtlanMod-NeoEMF |
-|------+------+------------+-----------------|
-|    1 |  339 |       2627 |            6677 |
-|    2 |    5 |        985 |            1497 |
-|    3 |   28 |       1730 |            2415 |
-|    4 |   98 |      10594 |           35925 |
-|    5 |  332 |      99768 |         3190291 |
-|    6 | 1485 |    1123521 |                 |
+| size |  EMF | SOM-NeoEMF-LL | SOM-NeoEMF | AtlanMod-NeoEMF |
+|------+------+---------------+------------+-----------------|
+|    1 |  339 |          2627 |       1827 |            6677 |
+|    2 |    5 |           985 |        832 |            1497 |
+|    3 |   28 |          1730 |       1703 |            2415 |
+|    4 |   98 |         10594 |      22697 |           35925 |
+|    5 |  332 |         99768 |    2539457 |         3190291 |
+|    6 | 1485 |       1123521 |            |                 |
 #+TBLFM: @2$2..@>$2=remote(create-emf, @@#$3)
-#+TBLFM: @2$3..@>$3=remote(create-som-neoemf,@@#$3)
-#+TBLFM: @2$4..@>$4=remote(create-atlanmod-neoemf,@@#$2)
+#+TBLFM: @2$3..@>$3=remote(create-som-neoemf-long-list,@@#$3)
+#+TBLFM: @2$4..@>$4=remote(create-som-neoemf,@@#$3)
+#+TBLFM: @2$5..@>$5=remote(create-atlanmod-neoemf,@@#$2)
 
 #+begin_src gnuplot :var data=agg-create :file bench-all-create-trace.png
 set title 'Create trace model (time)'
@@ -118,8 +130,9 @@ set ylabel 'time (ms)'
 set logscale y
 
 plot data u (10**$1):2 w lp title 'EMF', \
-     data u (10**$1):3 w lp title 'SOM-NeoEMF', \
-     data u (10**$1):4 w lp title 'Atl-NeoEMF'
+     data u (10**$1):3 w lp title 'SOM-NeoEMF-LL', \
+     data u (10**$1):4 w lp title 'SOM-NeoEMF', \
+     data u (10**$1):5 w lp title 'Atl-NeoEMF'
 #+end_src
 
 #+RESULTS:
@@ -127,17 +140,18 @@ plot data u (10**$1):2 w lp title 'EMF', \
 
 *** Size of trace model on disk
 #+name: agg-create-size
-| size |    EMF | SOM-NeoEMF | AtlanMod-NeoEMF |
-|------+--------+------------+-----------------|
-|    1 |      2 |        348 |             648 |
-|    2 |     12 |        764 |             784 |
-|    3 |    118 |       5000 |            2200 |
-|    4 |   1178 |      47828 |           16368 |
-|    5 |  11778 |     473992 |          171304 |
-|    6 | 117774 |    4755528 |                 |
+| size |    EMF | SOM-NeoEMF-LL | SOM-NeoEMF | AtlanMod-NeoEMF |
+|------+--------+---------------+------------+-----------------|
+|    1 |      2 |           348 |        336 |             648 |
+|    2 |     12 |           764 |        588 |             784 |
+|    3 |    118 |          5000 |       3276 |            2200 |
+|    4 |   1178 |         47828 |      30312 |           16368 |
+|    5 |  11778 |        473992 |     346072 |          171304 |
+|    6 | 117774 |       4755528 |            |                 |
 #+TBLFM: @2$2..@>$2=remote(create-emf, @@#$4)
-#+TBLFM: @2$3..@>$3=remote(create-som-neoemf,@@#$4)
-#+TBLFM: @2$4..@>$4=remote(create-atlanmod-neoemf,@@#$3)
+#+TBLFM: @2$3..@>$3=remote(create-som-neoemf-long-list,@@#$4)
+#+TBLFM: @2$4..@>$4=remote(create-som-neoemf,@@#$4)
+#+TBLFM: @2$5..@>$5=remote(create-atlanmod-neoemf,@@#$3)
 
 #+begin_src gnuplot :var data=agg-create-size :file bench-all-create-trace-size.png
 set title 'Create trace model (size)'
@@ -149,8 +163,9 @@ set ylabel 'size (KB)'
 set logscale y
 
 plot data u (10**$1):2 w lp title 'EMF (XMI)', \
-     data u (10**$1):3 w lp title 'SOM-NeoEMF (GraphDB)', \
-     data u (10**$1):4 w lp title 'Atl-NeoEMF (GraphDB)'
+     data u (10**$1):3 w lp title 'SOM-NeoEMF-LL (GraphDB)', \
+     data u (10**$1):4 w lp title 'SOM-NeoEMF (GraphDB)', \
+     data u (10**$1):5 w lp title 'Atl-NeoEMF (GraphDB)'
 #+end_src
 
 #+RESULTS:
