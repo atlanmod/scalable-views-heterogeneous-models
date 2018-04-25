@@ -68,19 +68,15 @@ public class Util {
     return r;
   }
 
-  static void saveContents(URI uri, EObject root) throws IOException {
+  static Resource saveResource(URI uri) throws IOException {
     Resource r = createResource(uri);
 
     if (r instanceof PersistentResource) {
       // First save to write the options in the database
       r.save(saveOptions);
-      r.getContents().add(root);
-      r.save(saveOptions);
-      ((PersistentResource) r).close();
-    } else {
-      r.getContents().add(root);
-      r.save(null);
     }
+
+    return r;
   }
 
   static void delete(File f) throws IOException {

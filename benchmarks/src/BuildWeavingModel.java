@@ -28,7 +28,6 @@ import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import fr.inria.atlanmod.neoemf.data.PersistenceBackendFactoryRegistry;
 import fr.inria.atlanmod.neoemf.data.blueprints.BlueprintsPersistenceBackendFactory;
 import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
-import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
 import trace.Log;
 import trace.TracePackage;
@@ -138,10 +137,11 @@ public class BuildWeavingModel {
     }
   }
 
-  static WeavingModel populateWeavingModel(Resource traceResource, Resource javaResource,
+  static WeavingModel populateWeavingModel(WeavingModel weavingModel,
+                                           Resource traceResource, Resource javaResource,
                                            Resource umlResource, Resource reqResource,
                                            CommonVirtualLinksFactory factory) throws Exception {
-    WeavingModel weavingModel = factory.createWeavingModel();
+
     Map<String, ContributingModel> modelsByURI = new HashMap<>();
     Map<ContributingModel, Map<String, ConcreteConcept>> conceptsForModel = new HashMap<>();
 
@@ -178,15 +178,18 @@ public class BuildWeavingModel {
       traceResource = Util.loadResource(traceInput);
     });
 
-    WeavingModel wm = populateWeavingModel(traceResource, javaResource, umlResource, reqResource, factory);
+    Resource outResource = Util.saveResource(output);
+    WeavingModel weavingModel = factory.createWeavingModel();
+    outResource.getContents().add(weavingModel);
+
+    populateWeavingModel(weavingModel, traceResource, javaResource, umlResource, reqResource, factory);
 
     Util.time("Save weaving model", () -> {
-      Util.saveContents(output, wm);
+      outResource.save(Util.saveOptions);
+      Util.closeResource(outResource);
     });
 
-    if (traceResource instanceof PersistentResource) {
-      ((PersistentResource) traceResource).close();
-    }
+    Util.closeResource(traceResource);
   }
 
   public static void main(String args[]) throws Exception {
