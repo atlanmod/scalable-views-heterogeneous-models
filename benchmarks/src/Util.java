@@ -6,6 +6,8 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -69,11 +71,15 @@ public class Util {
   }
 
   static Resource saveResource(URI uri) throws IOException {
+    return saveResource(uri, saveOptions);
+  }
+
+  static Resource saveResource(URI uri, Map<String, Object> options) throws IOException {
     Resource r = createResource(uri);
 
     if (r instanceof PersistentResource) {
       // First save to write the options in the database
-      r.save(saveOptions);
+      r.save(options);
     }
 
     return r;
@@ -140,6 +146,15 @@ public class Util {
 
   static void bench(String task, Thunk f) throws Exception {
     bench(task, f, 3, 5);
+  }
+
+  static <E> Stream<E> asStream(Iterator<E> it, boolean parallel) {
+    Iterable<E> iterable = () -> it;
+    return StreamSupport.stream(iterable.spliterator(), parallel);
+  }
+
+  static <E> Stream<E> asStream(Iterator<E> it) {
+    return asStream(it, false);
   }
 
 }

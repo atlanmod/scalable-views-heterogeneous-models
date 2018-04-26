@@ -56,14 +56,12 @@ public class OCLQuery {
       Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap()
       .put(BlueprintsURI.SCHEME, PersistentResourceFactory.getInstance());
     }
-
-
   }
 
   static Resource resource;
   static Query<EClassifier, EClass, EObject> query;
 
-  static void benchQuery(URI uri) throws Exception {
+  static void benchQuery(URI uri, String queryString) throws Exception {
     // Need to recreate the query since otherwise it does not get re-evaluated for subsequent resources
     // Init OCL query
     OCL ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
@@ -80,12 +78,13 @@ public class OCLQuery {
       EObject context = root.eClass();
       ocl.setExtentMap(new FastExtentMap(root));
       oclHelper.setContext(context);
-      query = ocl.createQuery(oclHelper.createQuery("Log.allInstances()->size()"));
+      oclHelper.setValidating(false);
+      query = ocl.createQuery(oclHelper.createQuery(queryString));
     });
 
     Util.time("Evaluate query", () -> {
       Object res = query.evaluate(resource.getContents().get(0));
-      System.out.printf("Result size: %s\n", res);
+      System.out.printf("Result: %s\n", res);
     });
     Util.time("Unload resource", () -> { Util.closeResource(resource); ocl.dispose(); });
   }
@@ -94,8 +93,15 @@ public class OCLQuery {
     setUp();
 
     // Bench
-    final int[] sizes = {10, 100, 1000, 10000};
+    final String allInstances = "Log.allInstances()->size()";
+    final String reqToTraces = "SpecObject.allInstances()->asSequence()->first()"
+        + ".components->collect(c | c.javaPackages)->collect(p | p.ownedElements)"
+        //+ "->select(e | e.oclIsTypeOf(ClassDeclaration))"
+        + "->collect(c | c.traces)";
+    final String traceToReqs = "Log.allInstances()->asSequence()->first()->oclLog()";
 
+    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
+/*
     for (int s : sizes) {
       Util.time(String.format("OCL allInstances query for XMI model of size %d", s), () -> {
         benchQuery(Util.resourceURI("/models/java-trace/%d.xmi", s));
@@ -108,11 +114,26 @@ public class OCLQuery {
       });
     }
 
+
     for (int s : sizes) {
-      Util.time(String.format("OCL allInstances query for view on NeoEMF model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s));
+      Util.time(String.format("OCL query for view on NeoEMF model of size %d", s), () -> {
+        benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s), allInstances);
       });
     }
+*/
+    for (int s : sizes) {
+      Util.time(String.format("OCL query for view on XMI trace/ XMI weaving model of size %d", s), () -> {
+        benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), reqToTraces);
+      });
+    }
+/*
+    for (int s : sizes) {
+      Util.time(String.format("OCL query for view on NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
+        benchQuery(Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%d.eview", s), allInstances);
+      });
+    }
+*/
+
   }
 
 }
