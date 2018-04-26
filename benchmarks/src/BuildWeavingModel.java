@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.atlanmod.emfviews.virtuallinks.CommonVirtualLinksFactory;
 import org.atlanmod.emfviews.virtuallinks.ConcreteConcept;
@@ -27,7 +28,9 @@ import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 
 import fr.inria.atlanmod.neoemf.data.PersistenceBackendFactoryRegistry;
 import fr.inria.atlanmod.neoemf.data.blueprints.BlueprintsPersistenceBackendFactory;
+import fr.inria.atlanmod.neoemf.data.blueprints.neo4j.option.BlueprintsNeo4jOptionsBuilder;
 import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
+import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
 import trace.Log;
 import trace.TracePackage;
@@ -38,7 +41,7 @@ public class BuildWeavingModel {
 
   static void matchRule(WeavingModel weavingModel, String ruleName,
                         Resource left,
-                        Function<EObject, Boolean> leftGuard,
+                        Predicate<EObject> leftGuard,
                         Function<EObject, String> leftKey,
                         Resource right,
                         Function<EObject, Boolean> rightGuard,
@@ -63,76 +66,82 @@ public class BuildWeavingModel {
     // Build the weaving model
     List<VirtualLink> links = weavingModel.getVirtualLinks();
 
-    Iterator<EObject> it = left.getAllContents();
+    // If the resource is in NeoEMF, we can use getAllInstances for much
+    // faster lookup
+    Iterator<EObject> it;
+    if (left instanceof PersistentResource) {
+      it = ((PersistentResource) left).getAllInstances(TraceneoemfPackage.Literals.LOG).iterator();
+    } else {
+      it = Util.asStream(left.getAllContents()).filter(leftGuard).iterator();
+    }
+
     while (it.hasNext()) {
       EObject l = it.next();
-      if (leftGuard.apply(l)) {
-        String key = leftKey.apply(l);
-        List<EObject> matches = map.get(key);
-        if (matches == null) {
-          continue;
+      String key = leftKey.apply(l);
+      List<EObject> matches = map.get(key);
+      if (matches == null) {
+        continue;
+      }
+      for (EObject r : matches) {
+        VirtualAssociation vAsso = factory.createVirtualAssociation();
+        vAsso.setName(ruleName);
+        vAsso.setLowerBound(0);
+        vAsso.setUpperBound(1);
+
+        // Get left concept
+        {
+          String sourceModelURI = l.eClass().getEPackage().getNsURI();
+          ContributingModel sourceModel =
+              modelsByURI.computeIfAbsent(sourceModelURI,
+                                          (uri) -> {
+                                            ContributingModel m = factory.createContributingModel();
+                                            m.setURI(uri);
+                                            weavingModel.getContributingModels().add(m);
+                                            return m;
+                                          });
+
+          Map<String, ConcreteConcept> sourceConcepts =
+              conceptsForModel.computeIfAbsent(sourceModel, (m) -> new HashMap<>() );
+
+          ConcreteConcept lSource =
+              sourceConcepts.computeIfAbsent(left.getURIFragment(l),
+                                             (uri) -> {
+                                               ConcreteConcept c = factory.createConcreteConcept();
+                                               c.setModel(sourceModel);
+                                               c.setPath(uri);
+                                               return c;
+                                             });
+          vAsso.setSource(lSource);
         }
-        for (EObject r : matches) {
-          VirtualAssociation vAsso = factory.createVirtualAssociation();
-          vAsso.setName(ruleName);
-          vAsso.setLowerBound(0);
-          vAsso.setUpperBound(1);
 
-          // Get left concept
-          {
-            String sourceModelURI = l.eClass().getEPackage().getNsURI();
-            ContributingModel sourceModel =
-                modelsByURI.computeIfAbsent(sourceModelURI,
-                                            (uri) -> {
-                                              ContributingModel m = factory.createContributingModel();
-                                              m.setURI(uri);
-                                              weavingModel.getContributingModels().add(m);
-                                              return m;
-                                            });
+        // Get right concept
+        {
+          String targetModelURI = r.eClass().getEPackage().getNsURI();
+          ContributingModel targetModel =
+              modelsByURI.computeIfAbsent(targetModelURI,
+                                          (uri) -> {
+                                            ContributingModel m = factory.createContributingModel();
+                                            m.setURI(uri);
+                                            weavingModel.getContributingModels().add(m);
+                                            return m;
+                                          });
 
-            Map<String, ConcreteConcept> sourceConcepts =
-                conceptsForModel.computeIfAbsent(sourceModel, (m) -> new HashMap<>() );
+          Map<String, ConcreteConcept> targetConcepts =
+              conceptsForModel.computeIfAbsent(targetModel, (m) -> new HashMap<>() );
 
-            ConcreteConcept lSource =
-                sourceConcepts.computeIfAbsent(left.getURIFragment(l),
-                                               (uri) -> {
-                                                 ConcreteConcept c = factory.createConcreteConcept();
-                                                 c.setModel(sourceModel);
-                                                 c.setPath(uri);
-                                                 return c;
-                                               });
-            vAsso.setSource(lSource);
-          }
+          ConcreteConcept lTarget =
+              targetConcepts.computeIfAbsent(right.getURIFragment(r),
+                                             (uri) -> {
+                                               ConcreteConcept c = factory.createConcreteConcept();
+                                               c.setModel(targetModel);
+                                               c.setPath(uri);
+                                               return c;
+                                             });
 
-          // Get right concept
-          {
-            String targetModelURI = r.eClass().getEPackage().getNsURI();
-            ContributingModel targetModel =
-                modelsByURI.computeIfAbsent(targetModelURI,
-                                            (uri) -> {
-                                              ContributingModel m = factory.createContributingModel();
-                                              m.setURI(uri);
-                                              weavingModel.getContributingModels().add(m);
-                                              return m;
-                                            });
-
-            Map<String, ConcreteConcept> targetConcepts =
-                conceptsForModel.computeIfAbsent(targetModel, (m) -> new HashMap<>() );
-
-            ConcreteConcept lTarget =
-                targetConcepts.computeIfAbsent(right.getURIFragment(r),
-                                               (uri) -> {
-                                                 ConcreteConcept c = factory.createConcreteConcept();
-                                                 c.setModel(targetModel);
-                                                 c.setPath(uri);
-                                                 return c;
-                                               });
-
-            vAsso.setTarget(lTarget);
-          }
-
-          links.add(vAsso);
+          vAsso.setTarget(lTarget);
         }
+
+        links.add(vAsso);
       }
     }
   }
@@ -178,7 +187,8 @@ public class BuildWeavingModel {
       traceResource = Util.loadResource(traceInput);
     });
 
-    Resource outResource = Util.saveResource(output);
+    Resource outResource = Util.saveResource(output, BlueprintsNeo4jOptionsBuilder.newBuilder()
+                                             .weakCache().directWriteLongListSupport().autocommit(50000).asMap());
     WeavingModel weavingModel = factory.createWeavingModel();
     outResource.getContents().add(weavingModel);
 
