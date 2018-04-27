@@ -94,11 +94,15 @@ public class OCLQuery {
 
     // Bench
     final String allInstances = "Log.allInstances()->size()";
-    final String reqToTraces = "SpecObject.allInstances()->asSequence()->first()"
+    final String reqToTraces = "reqif10::SpecObject.allInstances()"
+        + "->any(r | r.values->selectByType(reqif10::AttributeValueString)->exists(v | v.theValue.startsWith('Controller')))"
         + ".components->collect(c | c.javaPackages)->collect(p | p.ownedElements)"
-        //+ "->select(e | e.oclIsTypeOf(ClassDeclaration))"
-        + "->collect(c | c.traces)";
-    final String traceToReqs = "Log.allInstances()->asSequence()->first()->oclLog()";
+        + "->selectByType(java::ClassDeclaration)"
+        + "->collect(c | c.traces)"
+        + "->size()";
+    final String traceToReqs = "trace::Log.allInstances()"
+        + "->any(l | l.message.startsWith('CaptchaValidateFilter'))"
+        + ".javaClass._'package'.component.requirements->size()";
 
     final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
 /*
@@ -120,19 +124,19 @@ public class OCLQuery {
         benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s), allInstances);
       });
     }
-*/
+
     for (int s : sizes) {
       Util.time(String.format("OCL query for view on XMI trace/ XMI weaving model of size %d", s), () -> {
         benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), reqToTraces);
       });
     }
-/*
+*/
     for (int s : sizes) {
       Util.time(String.format("OCL query for view on NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%d.eview", s), allInstances);
+        benchQuery(Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%d.eview", s), reqToTraces);
       });
     }
-*/
+
 
   }
 
