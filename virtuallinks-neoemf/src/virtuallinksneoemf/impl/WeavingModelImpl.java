@@ -3,6 +3,7 @@
 package virtuallinksneoemf.impl;
 
 import fr.inria.atlanmod.neoemf.core.DefaultPersistentEObject;
+import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 
 import org.atlanmod.emfviews.virtuallinks.ContributingModel;
 import org.atlanmod.emfviews.virtuallinks.Filter;
@@ -156,12 +157,13 @@ public class WeavingModelImpl extends DefaultPersistentEObject implements Weavin
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
+   * @generated NOT
    */
   @Override
   @SuppressWarnings("unchecked")
   public EList<VirtualAssociation> getVirtualAssociations() {
-    return (EList<VirtualAssociation>)eGet(VirtuallinksneoemfPackage.Literals.WEAVING_MODEL__VIRTUAL_ASSOCIATIONS, true);
+    return (EList<VirtualAssociation>)(EList<?>) ((PersistentResource) eResource())
+        .getAllInstances(VirtuallinksneoemfPackage.Literals.VIRTUAL_ASSOCIATION);
   }
 
   /**
