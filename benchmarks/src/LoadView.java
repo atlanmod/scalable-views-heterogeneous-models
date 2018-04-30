@@ -81,20 +81,28 @@ public class LoadView {
     final int warmups = 0;
     final int measures = 1;
 
+
+    // Test on XMI trace
     for (int s : sizes) {
-      Util.bench(String.format("Load NeoEMF trace of size %d", s), () -> {
-        loadAndCount(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s));
+      Util.bench(String.format("Load XMI trace of size %d", s), () -> {
+        loadAndCount(Util.resourceURI("/models/java-trace/%d.xmi", s));
       }, warmups, measures);
     }
 
-/*
     // Test with XMI trace / XMI weaving model
     for (int s : sizes) {
       Util.bench(String.format("Load view with XMI trace / XMI weaving model of size %d", s), () -> {
         loadAndCount(Util.resourceURI("/views/java-trace/%d.eview", s));
       }, warmups, measures);
     }
-*/
+
+    // Test on NeoEMF trace
+    for (int s : sizes) {
+      Util.bench(String.format("Load NeoEMF trace of size %d", s), () -> {
+        loadAndCount(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s));
+      }, warmups, measures);
+    }
+
     // Test with NeoEMF trace / NeoEMF weaving model
     for (int s : sizes) {
       Util.bench(String.format("Load view with NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
@@ -102,6 +110,7 @@ public class LoadView {
       }, warmups, measures);
     }
 
+/*
     // Test with XMI trace / NeoEMF weaving model
     for (int s : sizes) {
       Util.bench(String.format("Load view with XMI trace / NeoEMF weaving model of size %d", s), () -> {
@@ -115,6 +124,6 @@ public class LoadView {
         loadAndCount(Util.resourceURI("/views/neoemf-trace/%d.eview", s));
       }, warmups, measures);
     }
-
+*/
   }
 }
