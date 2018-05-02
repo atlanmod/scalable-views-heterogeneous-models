@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 
@@ -18,6 +17,7 @@ import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
 import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 import fr.inria.atlanmod.neoemf.resource.PersistentResourceFactory;
 import trace.CommonTraceFactory;
+import trace.TraceFactory;
 import traceneoemf.TraceneoemfFactory;
 
 public class Creator {
@@ -120,12 +120,12 @@ public class Creator {
     });
   }
 
-  static void createView(File file, String modelFile, String weavingModelFile) throws IOException {
+  static void createView(File file, String modelFile, String javaFile, String weavingModelFile) throws IOException {
     Properties p = new Properties();
     p.setProperty("viewpoint", "chain.eviewpoint");
     p.setProperty("contributingModels",
-                  String.format("../../models/petstore-requirements.reqif,../../models/petstore-components.uml,../../models/petstore-java.xmi,../../models/%s",
-                                modelFile));
+                  String.format("../../models/petstore-requirements.reqif,../../models/petstore-components.uml,../../models/%s,../../models/%s",
+                                javaFile, modelFile));
     p.setProperty("weavingModel", weavingModelFile);
     Writer w = new BufferedWriter(new FileWriter(file));
     p.store(w, null);
@@ -156,7 +156,7 @@ public class Creator {
 
     // Create trace models
     final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
-/*
+
     for (int s : sizes) {
       Util.time(String.format("Create Java trace model of size %d", s), () -> {
         final Resource r = Util.createResource("/models/java-trace/%d.xmi", s);
@@ -164,7 +164,7 @@ public class Creator {
         r.save(null);
       });
     }
-*/
+
     Map<String,Object> graphOptions = BlueprintsNeo4jOptionsBuilder.newBuilder()
         .weakCache().directWriteLongListSupport().autocommit().asMap();
     for (int s : sizes) {
@@ -183,16 +183,12 @@ public class Creator {
       // Views backed by an XMI weaving model
       createView(new File(String.format("views/java-trace/%d.eview", s)),
                  String.format("java-trace/%d.xmi", s),
-                 String.format("weaving-%d.xmi", s));
-      createView(new File(String.format("views/neoemf-trace/%d.eview", s)),
-                 String.format("neoemf-trace/%d.graphdb", s),
+                 "petstore-java.xmi",
                  String.format("weaving-%d.xmi", s));
       // Views backed by a NeoEMF weaving model
-      createView(new File(String.format("views/java-trace/neoemf-weaving-%d.eview", s)),
-                 String.format("java-trace/%d.xmi", s),
-                 String.format("weaving-%d.graphdb", s));
-      createView(new File(String.format("views/neoemf-trace/neoemf-weaving-%d.eview", s)),
+      createView(new File(String.format("views/neoemf-trace/%d.eview", s)),
                  String.format("neoemf-trace/%d.graphdb", s),
+                 "petstore-java.cdo",
                  String.format("weaving-%d.graphdb", s));
 
       // Views aggregating only the Neoemf trace resource

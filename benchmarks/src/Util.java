@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -14,7 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
+import cdobackend.CDOBackend;
 import fr.inria.atlanmod.neoemf.data.blueprints.neo4j.option.BlueprintsNeo4jOptionsBuilder;
 import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
 import fr.inria.atlanmod.neoemf.resource.PersistentResource;
@@ -61,7 +62,15 @@ public class Util {
   static Map<String,Object> saveOptions = BlueprintsNeo4jOptionsBuilder.newBuilder()
       .weakCache().directWriteLongListSupport().autocommit().asMap();
 
-  static Resource loadResource(URI uri) throws IOException {
+  static CDOBackend cdoBackend = new CDOBackend();
+
+  static Resource loadResource(URI uri) throws Exception {
+    if (uri.fileExtension().equals("cdo")) {
+      Resource cdoResource = cdoBackend.getResource(new File(uri.toFileString()), "res1");
+      cdoResource.load(Collections.EMPTY_MAP);
+      return cdoResource;
+    }
+
     Resource r = new ResourceSetImpl().createResource(uri);
     if (r instanceof PersistentResource) {
       r.load(loadOptions);
@@ -69,6 +78,10 @@ public class Util {
       r.load(null);
     }
     return r;
+  }
+
+  static void closeCDOBackend() {
+    cdoBackend.close();
   }
 
   static Resource saveResource(URI uri) throws IOException {

@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.Map;
 
 import org.atlanmod.emfviews.core.EmfViewsFactory;
@@ -9,7 +8,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.gmt.modisco.java.emf.JavaPackage;
 import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
 import org.eclipse.m2m.atl.emftvm.ExecEnv;
 import org.eclipse.m2m.atl.emftvm.Metamodel;
@@ -114,7 +112,8 @@ public class ATLTransfo {
       // Load metamodels
       ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
-      JavaPackage.eINSTANCE.eClass();
+      org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
+      org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
       TracePackage.eINSTANCE.eClass();
       TraceneoemfPackage.eINSTANCE.eClass();
       VirtualLinksPackage.eINSTANCE.eClass();
@@ -126,7 +125,7 @@ public class ATLTransfo {
       .put(BlueprintsURI.SCHEME, PersistentResourceFactory.getInstance());
     });
 
-    final int[] sizes = {10}; //, 100, 1000, 10000, 100000, 1000000};
+    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
     final int warmups = 0;
     final int measures = 1;
 
@@ -138,27 +137,11 @@ public class ATLTransfo {
       }, warmups, measures);
     }
 
-    // XMI Trace / NeoEMF weaving model
-    for (int s : sizes) {
-      Util.bench(String.format("Run transformation on XMI trace / NeoEMF weaving model of size %d", s), () -> {
-        benchATL(Util.resourceURI("/views/java-trace/chain.eviewpoint"),
-                 Util.resourceURI("/views/java-trace/neoemf-weaving-%d.eview", s));
-      }, warmups, measures);
-    }
-
-    // NeoEMF Trace / XMI weaving model
-    for (int s : sizes) {
-      Util.bench(String.format("Run transformation on NeoEMF trace / XMI weaving model of size %d", s), () -> {
-        benchATL(Util.resourceURI("/views/neoemf-trace/chain.eviewpoint"),
-                 Util.resourceURI("/views/neoemf-trace/%s.eview", s));
-      }, warmups, measures);
-    }
-
     // NeoEMF Trace / NeoEMF weaving model
     for (int s : sizes) {
       Util.bench(String.format("Run transformation on NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
         benchATL(Util.resourceURI("/views/neoemf-trace/chain.eviewpoint"),
-                 Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%s.eview", s));
+                 Util.resourceURI("/views/neoemf-trace/%d.eview", s));
       }, warmups, measures);
     }
 

@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.gmt.modisco.java.emf.JavaPackage;
 import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
 import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.Query;
@@ -45,7 +44,8 @@ public class OCLQuery {
       // Load metamodels
       ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
-      JavaPackage.eINSTANCE.eClass();
+      org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
+      org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
       TracePackage.eINSTANCE.eClass();
       TraceneoemfPackage.eINSTANCE.eClass();
       VirtualLinksPackage.eINSTANCE.eClass();
@@ -146,7 +146,7 @@ public class OCLQuery {
 
     for (int s : sizes) {
       Util.bench(String.format("OCL query for full view on NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%d.eview", s), replaceTrace(query));
+        benchQuery(Util.resourceURI("/views/neoemf-trace/%d.eview", s), replaceTrace(query));
       }, warmups, measures);
     }
 

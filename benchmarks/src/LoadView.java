@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.gmt.modisco.java.emf.JavaPackage;
 import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
 import org.eclipse.rmf.reqif10.ReqIF10Package;
 import org.eclipse.rmf.reqif10.serialization.ReqIF10ResourceFactoryImpl;
@@ -65,7 +64,8 @@ public class LoadView {
       // Load metamodels
       ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
-      JavaPackage.eINSTANCE.eClass();
+      org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
+      org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
       TracePackage.eINSTANCE.eClass();
       TraceneoemfPackage.eINSTANCE.eClass();
       VirtualLinksPackage.eINSTANCE.eClass();
@@ -106,24 +106,9 @@ public class LoadView {
     // Test with NeoEMF trace / NeoEMF weaving model
     for (int s : sizes) {
       Util.bench(String.format("Load view with NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
-        loadAndCount(Util.resourceURI("/views/neoemf-trace/neoemf-weaving-%d.eview", s));
-      }, warmups, measures);
-    }
-
-/*
-    // Test with XMI trace / NeoEMF weaving model
-    for (int s : sizes) {
-      Util.bench(String.format("Load view with XMI trace / NeoEMF weaving model of size %d", s), () -> {
-        loadAndCount(Util.resourceURI("/views/java-trace/neoemf-weaving-%d.eview", s));
-      }, warmups, measures);
-    }
-
-    // Test with NeoEMF trace / XMI weaving model
-    for (int s : sizes) {
-      Util.bench(String.format("Load view with NeoEMF trace / XMI weaving model of size %d", s), () -> {
         loadAndCount(Util.resourceURI("/views/neoemf-trace/%d.eview", s));
       }, warmups, measures);
     }
-*/
+
   }
 }

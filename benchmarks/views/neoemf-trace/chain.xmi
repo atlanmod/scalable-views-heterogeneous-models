@@ -66,7 +66,7 @@
         path="Component"/>
   </contributingModels>
   <contributingModels
-      URI="http://www.eclipse.org/MoDisco/Java/0.2.incubation/java">
+      URI="http://www.eclipse.org/MoDisco/Java/0.2.incubation/java-CDO">
     <concreteElements
         xsi:type="virtualLinks:ConcreteConcept"
         path="Package"/>

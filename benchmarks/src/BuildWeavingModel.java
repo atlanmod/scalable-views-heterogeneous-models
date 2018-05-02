@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.gmt.modisco.java.ClassDeclaration;
-import org.eclipse.gmt.modisco.java.emf.JavaPackage;
+import org.eclipse.gmt.modisco.java.cdo.java.JavaPackage;
 import org.eclipse.rmf.reqif10.ReqIF10Package;
 import org.eclipse.rmf.reqif10.serialization.ReqIF10ResourceFactoryImpl;
+import org.eclipse.uml2.uml.Component;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 
@@ -44,7 +44,7 @@ public class BuildWeavingModel {
                         Predicate<EObject> leftGuard,
                         Function<EObject, String> leftKey,
                         Resource right,
-                        Function<EObject, Boolean> rightGuard,
+                        Predicate<EObject> rightGuard,
                         Function<EObject, String> rightKey,
                         Map<String, ContributingModel> modelsByURI,
                         Map<ContributingModel, Map<String, ConcreteConcept>> conceptsForModel,
@@ -57,7 +57,7 @@ public class BuildWeavingModel {
       Iterator<EObject> it = right.getAllContents();
       while (it.hasNext()) {
         EObject e = it.next();
-        if (rightGuard.apply(e)) {
+        if (rightGuard.test(e)) {
           map.computeIfAbsent(rightKey.apply(e), (s) -> new ArrayList<>()).add(e);
         }
       }
@@ -148,6 +148,10 @@ public class BuildWeavingModel {
 
   static WeavingModel populateWeavingModel(WeavingModel weavingModel,
                                            Resource traceResource, Resource javaResource,
+                                           Predicate<EObject> classDeclGuard,
+                                           Function<EObject, String> classDeclKey,
+                                           Predicate<EObject> packageGuard,
+                                           Function<EObject, String> packageKey,
                                            Resource umlResource, Resource reqResource,
                                            CommonVirtualLinksFactory factory) throws Exception {
 
@@ -160,8 +164,21 @@ public class BuildWeavingModel {
                 Log.class::isInstance,
                 (l) -> ((Log) l).getSource().split("\\.")[0],
                 javaResource,
-                ClassDeclaration.class::isInstance,
-                (c) -> ((ClassDeclaration) c).getName(),
+                classDeclGuard,
+                classDeclKey,
+                modelsByURI, conceptsForModel,
+                factory);
+    });
+
+    // Match Java and UML using the fast method because ECL has
+    // troubles loading CDO models
+    Util.time("populate components rule", () -> {
+      matchRule(weavingModel, "components", javaResource,
+                packageGuard,
+                packageKey,
+                umlResource,
+                Component.class::isInstance,
+                (c) -> ((Component) c).getName().toLowerCase(),
                 modelsByURI, conceptsForModel,
                 factory);
     });
@@ -170,19 +187,25 @@ public class BuildWeavingModel {
     Util.time("match ECL rules", () -> {
       new EclDelegateMut().createWeavingModel(weavingModel,
                                               Util.resourceURI("/views/java-trace/chain.ecl"),
-                                              Arrays.asList(javaResource, umlResource, reqResource),
+                                              Arrays.asList(umlResource, reqResource),
                                               modelsByURI, conceptsForModel, factory);
     });
 
    return weavingModel;
   }
 
-  static Resource javaResource;
+  static Resource javaXMIResource;
+  static Resource javaCDOResource;
   static Resource umlResource;
   static Resource reqResource;
   static Resource traceResource;
 
-  static void createWeavingModel(URI traceInput, URI output, CommonVirtualLinksFactory factory) throws Exception {
+  static void createWeavingModel(URI traceInput, Resource javaResource,
+                                 Predicate<EObject> classDeclGuard,
+                                 Function<EObject, String> classDeclKey,
+                                 Predicate<EObject> packageGuard,
+                                 Function<EObject, String> packageKey,
+                                 URI output, CommonVirtualLinksFactory factory) throws Exception {
     Util.time("Load trace resource", () -> {
       traceResource = Util.loadResource(traceInput);
     });
@@ -192,7 +215,10 @@ public class BuildWeavingModel {
     WeavingModel weavingModel = factory.createWeavingModel();
     outResource.getContents().add(weavingModel);
 
-    populateWeavingModel(weavingModel, traceResource, javaResource, umlResource, reqResource, factory);
+    populateWeavingModel(weavingModel, traceResource, javaResource,
+                         classDeclGuard, classDeclKey,
+                         packageGuard, packageKey,
+                         umlResource, reqResource, factory);
 
     Util.time("Save weaving model", () -> {
       outResource.save(Util.saveOptions);
@@ -211,7 +237,9 @@ public class BuildWeavingModel {
       map.put("xmi", new XMIResourceFactoryImpl());
       map.put("uml", new UMLResourceFactoryImpl());
       map.put("reqif", new ReqIF10ResourceFactoryImpl());
-      JavaPackage.eINSTANCE.eClass();
+
+      org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
+      org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
       TracePackage.eINSTANCE.eClass();
       ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
@@ -225,7 +253,8 @@ public class BuildWeavingModel {
 
     // Load models
     Util.time("Load contributing models", () -> {
-      final URI javaInput = Util.resourceURI("/models/petstore-java.xmi");
+      final URI javaXMIInput = Util.resourceURI("/models/petstore-java.xmi");
+      final URI javaCDOInput = Util.resourceURI("/models/petstore-java.cdo");
       final URI umlInput = Util.resourceURI("/models/petstore-components.uml");
       final URI reqInput = Util.resourceURI("/models/petstore-requirements.reqif");
 
@@ -233,8 +262,11 @@ public class BuildWeavingModel {
       // and ECL cannot find the packages above.  Have to force it by copying them to
       // the registry of the resource set instead.  We have to match the resource set
       // with the resource, otherwise ECL will be very confused.
-      javaResource = Util.loadResource(javaInput);
-      javaResource.getResourceSet().getPackageRegistry().put(JavaPackage.eNS_URI, JavaPackage.eINSTANCE);
+      javaXMIResource = Util.loadResource(javaXMIInput);
+      javaXMIResource.getResourceSet().getPackageRegistry().put(JavaPackage.eNS_URI, JavaPackage.eINSTANCE);
+
+      javaCDOResource = Util.loadResource(javaCDOInput);
+      // No need to pass the CDO resource since ECL does not use it
 
       umlResource = new ResourceSetImpl().getResource(umlInput, true);
       umlResource.getResourceSet().getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
@@ -243,57 +275,40 @@ public class BuildWeavingModel {
       reqResource.getResourceSet().getPackageRegistry().put(ReqIF10Package.eNS_URI, ReqIF10Package.eINSTANCE);
     });
 
-    final int[] sizes = {10 , 100, 1000, 10000, 100000, 1000000};
+    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
     final int warmups = 0;
     final int measures = 1;
-    final boolean wmJavaTrace = true;
-    final boolean wmNeoEMFTrace = true;
-    final boolean NeoEMFwmJavaTrace = true;
-    final boolean NeoEMFwmNeoEMFTrace = true;
 
-    if (wmJavaTrace) {
-      for (int s : sizes) {
-        Util.bench(String.format("Weaving model for Java Trace with %s elements", s),
-                   () -> {
-                     final URI traceInput = Util.resourceURI("/models/java-trace/%d.xmi", s);
-                     final URI output = Util.resourceURI("/views/java-trace/weaving-%d.xmi", s);
-                     createWeavingModel(traceInput, output, VirtualLinksFactory.eINSTANCE);
-                   }, warmups, measures);
-      }
+    for (int s : sizes) {
+      Util.bench(String.format("Weaving model for Java Trace with %s elements", s),
+                 () -> {
+                   final URI traceInput = Util.resourceURI("/models/java-trace/%d.xmi", s);
+                   final URI output = Util.resourceURI("/views/java-trace/weaving-%d.xmi", s);
+                   createWeavingModel(traceInput, javaXMIResource,
+                                      org.eclipse.gmt.modisco.java.ClassDeclaration.class::isInstance,
+                                      (c) -> ((org.eclipse.gmt.modisco.java.ClassDeclaration) c).getName(),
+                                      org.eclipse.gmt.modisco.java.Package.class::isInstance,
+                                      (p) -> ((org.eclipse.gmt.modisco.java.Package) p).getName(),
+                                      output, VirtualLinksFactory.eINSTANCE);
+                 }, warmups, measures);
     }
 
-    if (wmNeoEMFTrace) {
-      for (int s : sizes) {
-        Util.bench(String.format("Weaving model for NeoEMF Trace with %s elements", s),
-                   () -> {
-                     final URI traceInput = Util.resourceURI("/models/neoemf-trace/%d.graphdb", s);
-                     final URI output = Util.resourceURI("/views/neoemf-trace/weaving-%d.xmi", s);
-                     createWeavingModel(traceInput, output, VirtualLinksFactory.eINSTANCE);
-                   }, warmups, measures);
-      }
+
+    for (int s : sizes) {
+      Util.bench(String.format("NeoEMF Weaving model for NeoEMF Trace with %s elements", s),
+                 () -> {
+                   final URI traceInput = Util.resourceURI("/models/neoemf-trace/%d.graphdb", s);
+                   final URI output = Util.resourceURI("/views/neoemf-trace/weaving-%d.graphdb", s);
+                   createWeavingModel(traceInput, javaCDOResource,
+                                      org.eclipse.gmt.modisco.java.cdo.java.ClassDeclaration.class::isInstance,
+                                      (c) -> ((org.eclipse.gmt.modisco.java.cdo.java.ClassDeclaration) c).getName(),
+                                      org.eclipse.gmt.modisco.java.cdo.java.Package.class::isInstance,
+                                      (p) -> ((org.eclipse.gmt.modisco.java.cdo.java.Package) p).getName(),
+                                      output, VirtuallinksneoemfFactory.eINSTANCE);
+                 }, warmups, measures);
     }
 
-    if (NeoEMFwmJavaTrace) {
-      for (int s : sizes) {
-        Util.bench(String.format("NeoEMF Weaving model for Java Trace with %s elements", s),
-                   () -> {
-                     final URI traceInput = Util.resourceURI("/models/java-trace/%d.xmi", s);
-                     final URI output = Util.resourceURI("/views/java-trace/weaving-%d.graphdb", s);
-                     createWeavingModel(traceInput, output, VirtuallinksneoemfFactory.eINSTANCE);
-                   }, warmups, measures);
-      }
-    }
-
-    if (NeoEMFwmNeoEMFTrace) {
-      for (int s : sizes) {
-        Util.bench(String.format("NeoEMF Weaving model for NeoEMF Trace with %s elements", s),
-                   () -> {
-                     final URI traceInput = Util.resourceURI("/models/neoemf-trace/%d.graphdb", s);
-                     final URI output = Util.resourceURI("/views/neoemf-trace/weaving-%d.graphdb", s);
-                     createWeavingModel(traceInput, output, VirtuallinksneoemfFactory.eINSTANCE);
-                   }, warmups, measures);
-      }
-    }
+    Util.closeCDOBackend();
   }
 
 }
