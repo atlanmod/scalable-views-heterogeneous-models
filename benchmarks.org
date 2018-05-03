@@ -590,6 +590,17 @@ Legend:
 
 ** Using EMF trace
 *** No weaving model
+**** Default extent map
+| size | load | eval | full |
+|------+------+------+------|
+|    1 |   11 |   11 |  337 |
+|    2 |    4 |    0 |    7 |
+|    3 |   18 |    2 |   23 |
+|    4 |  103 |   10 |  116 |
+|    5 |  400 |   82 |  485 |
+|    6 | 2287 |  574 | 2863 |
+
+**** Fast extent map
 #+name: ocl-xmi
 | size | load | eval | full |
 |------+------+------+------|
@@ -601,6 +612,17 @@ Legend:
 |    6 | 2523 |  582 | 3107 |
 
 *** XMI weaving model
+**** Default extent map
+| size |  load | eval |  full |
+|------+-------+------+-------|
+|    1 |   723 |  918 |  1644 |
+|    2 |   261 |  572 |   835 |
+|    3 |   202 |  619 |   824 |
+|    4 |   336 |  645 |   984 |
+|    5 |  1127 | 1069 |  2197 |
+|    6 | 10935 | 5963 | 16900 |
+
+**** Fast extent map
 #+name: ocl-xmi-full-view
 | size |  load | eval |  full |
 |------+-------+------+-------|
@@ -613,6 +635,17 @@ Legend:
 
 ** Using SOM-NeoEMF trace
 *** No weaving model
+**** Default extent map
+| size | load |  eval |  full |
+|------+------+-------+-------|
+|    1 |  624 |    49 |  1107 |
+|    2 |   71 |   215 |   452 |
+|    3 |   48 |   481 |   780 |
+|    4 |   24 |  1596 |  2101 |
+|    5 |   70 |  9180 | 11699 |
+|    6 |  358 | 66744 | 96720 |
+
+**** Fast extent map
 #+name: ocl-neoemf
 | size | load |  eval |  full |
 |------+------+-------+-------|
@@ -624,6 +657,17 @@ Legend:
 |    6 |  312 | 12742 | 14134 |
 
 *** View on trace model
+**** Default extent map
+| size | load |  eval |   full |
+|------+------+-------+--------|
+|    1 |   39 |     6 |    183 |
+|    2 |   32 |    28 |    199 |
+|    3 |   37 |   134 |    319 |
+|    4 |   42 |   784 |   1056 |
+|    5 |  173 |  6597 |   8068 |
+|    6 | 1190 | 72863 | 106762 |
+
+**** Fast extent map
 #+name: ocl-neoemf-simple-view
 | size | load |  eval |  full |
 |------+------+-------+-------|
@@ -635,6 +679,17 @@ Legend:
 |    6 |  863 | 12570 | 13646 |
 
 *** View on four models
+**** Default extent map
+| size | load |  eval |   full |
+|------+------+-------+--------|
+|    1 | 2165 |  5375 |   7822 |
+|    2 |  839 |  2956 |   4044 |
+|    3 |  888 |  2173 |   3337 |
+|    4 |  899 |  3080 |   4325 |
+|    5 | 1056 |  8070 |  10581 |
+|    6 | 3366 | 71819 | 110397 |
+
+**** Fast extent map
 #+name: ocl-neoemf-full-view
 | size | load |  eval |  full |
 |------+------+-------+-------|
