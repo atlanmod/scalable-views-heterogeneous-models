@@ -388,8 +388,6 @@ Average numbers after 5 warmups / 5 iterations
 |    5 | 3768 |    130397 | 134223 |
 |    6 |    n |         n |      n |
 
-*** TODO NeoEMF weaving model
-
 ** Using SOM-NeoEMF trace
 *** XMI weaving model
 
@@ -488,25 +486,25 @@ Legend:
 ** Using EMF trace
 *** No weaving model
 #+name: xmi-load
-| size | load | first | all |
-|------+------+-------+-----|
-|    1 |   12 |     0 |   1 |
-|    2 |    7 |     0 |   2 |
-|    3 |   55 |     0 |   8 |
-|    4 |  257 |     0 |   4 |
-|    5 |  897 |     0 |  35 |
-|    6 | 2133 |     0 | 175 |
+| size | load | first |  all |
+|------+------+-------+------|
+|    1 |    8 |     0 |   14 |
+|    2 |    3 |     0 |    4 |
+|    3 |   26 |     0 |   28 |
+|    4 |  103 |     0 |  111 |
+|    5 |  614 |     0 |  649 |
+|    6 | 2154 |     0 | 2341 |
 
 *** View with XMI weaving model
 #+name: xmi-view-load
-| size |  load | first |  all |
-|------+-------+-------+------|
-|    1 |   815 |    19 | 1639 |
-|    2 |   205 |    52 |  638 |
-|    3 |   240 |    39 |  450 |
-|    4 |   256 |   326 |  460 |
-|    5 |   902 |  2762 | 1352 |
-|    6 | 10863 | 26999 | 6012 |
+| size |  load | first |   all |
+|------+-------+-------+-------|
+|    1 |   788 |     1 |  2259 |
+|    2 |   257 |     0 |   754 |
+|    3 |   245 |     0 |   714 |
+|    4 |   389 |     0 |  1012 |
+|    5 |   921 |     0 |  1869 |
+|    6 | 12214 |     0 | 19361 |
 
 ** Using SOM-NeoEMF trace
 *** No weaving model
@@ -523,41 +521,41 @@ Legend:
 
 **** DirectWriteLongList
 #+name: neoemf-load-long-list
-| size | load | first |   all |
-|------+------+-------+-------|
-|    1 | 3491 |   138 |    26 |
-|    2 |  723 |     8 |   112 |
-|    3 |  437 |    13 |   374 |
-|    4 |  314 |    24 |  1077 |
-|    5 |  385 |   169 |  4432 |
-|    6 |  195 |   979 | 59062 |
+| size | load | first |    all |
+|------+------+-------+--------|
+|    1 |  657 |  1237 |   2104 |
+|    2 |   64 |    19 |    459 |
+|    3 |   51 |    13 |   1001 |
+|    4 |   38 |    39 |   2207 |
+|    5 |   35 |   185 |   9472 |
+|    6 |   43 |  1046 | 130754 |
 
 *** View with NeoEMF weaving model
 #+name: neoemf-view-load-long-list
-| size | load |  first |    all |
-|------+------+--------+--------|
-|    1 |  327 |     45 |    526 |
-|    2 |  195 |     66 |   1355 |
-|    3 |  242 |    319 |    541 |
-|    4 |  185 |   1903 |   1012 |
-|    5 |  660 |  15628 |   4977 |
-|    6 | 2367 | 293787 | 164133 |
+| size | load | first |    all |
+|------+------+-------+--------|
+|    1 | 2265 |     1 |   7557 |
+|    2 |  870 |     0 |   4173 |
+|    3 |  750 |     0 |   3245 |
+|    4 |  811 |     0 |   3963 |
+|    5 | 2482 |     0 |  11287 |
+|    6 | 3006 |     0 | 140639 |
 
 ** Aggregate results and graphs
 #+name: agg-load
-| size | XMI | XMI View |  NeoEMF | NeoEMF (LL) | NeoEMF View (LL) |
-|------+-----+----------+---------+-------------+------------------|
-|    1 |   1 |     1658 |      26 |         164 |              571 |
-|    2 |   2 |      690 |     209 |         120 |             1421 |
-|    3 |   8 |      489 |     705 |         387 |              860 |
-|    4 |   4 |      786 |   14094 |        1101 |             2915 |
-|    5 |  35 |     4114 | 1359528 |        4601 |            20605 |
-|    6 | 175 |    33011 |       n |       60041 |           457920 |
-#+TBLFM: @2$2..@>$2=remote(xmi-load, @@#$3)+remote(xmi-load, @@#$4)
-#+TBLFM: @2$3..@>$3=remote(xmi-view-load, @@#$3)+remote(xmi-view-load, @@#$4)
+| size |  XMI | XMI View |  NeoEMF | NeoEMF (LL) | NeoEMF View (LL) |
+|------+------+----------+---------+-------------+------------------|
+|    1 |   14 |     2259 |      26 |        2104 |             7557 |
+|    2 |    4 |      754 |     209 |         459 |             4173 |
+|    3 |   28 |      714 |     705 |        1001 |             3245 |
+|    4 |  111 |     1012 |   14094 |        2207 |             3963 |
+|    5 |  649 |     1869 | 1359528 |        9472 |            11287 |
+|    6 | 2341 |    19361 |       n |      130754 |           140639 |
+#+TBLFM: @2$2..@>$2=remote(xmi-load, @@#$4)
+#+TBLFM: @2$3..@>$3=remote(xmi-view-load, @@#$4)
 #+TBLFM: @2$4..@>$4=remote(neoemf-load-direct-write,@@#$4)
-#+TBLFM: @2$5..@>$5=remote(neoemf-load-long-list,@@#$3)+remote(neoemf-load-long-list,@@#$4)
-#+TBLFM: @2$6..@>$6=remote(neoemf-view-load-long-list,@@#$3)+remote(neoemf-view-load-long-list,@@#$4)
+#+TBLFM: @2$5..@>$5=remote(neoemf-load-long-list,@@#$4)
+#+TBLFM: @2$6..@>$6=remote(neoemf-view-load-long-list,@@#$4)
 
 #+begin_src gnuplot :var data=agg-load :file bench-all-load-view.png
 set title 'Load view (time)'
