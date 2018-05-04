@@ -733,3 +733,66 @@ plot data u (10**$1):2 w lp title 'XMI', \
 
 #+RESULTS:
 [[file:bench-all-ocl-all-instances.png]]
+
+* Running other queries
+Query ~traceToReqs~:
+#+BEGIN_SRC
+trace::Log.allInstances()
+  ->any(l | l.message.startsWith('CaptchaValidateFilter'))
+  .javaClass._'package'.component.requirements->size()
+#+END_SRC
+
+Query ~reqToTraces~:
+#+BEGIN_SRC
+reqif10::SpecObject.allInstances()
+  ->any(r | r.values->selectByType(reqif10::AttributeValueString)->exists(v | v.theValue.startsWith('Controller')))
+  .components->collect(c | c.javaPackages)->collect(p | p.ownedElements)
+  ->selectByType(java::ClassDeclaration)
+  ->collect(c | c.traces)
+  ->size()
+#+END_SRC
+
+These queries can only be applied to views, so there are only two benches.
+
+** XMI view
+*** Fast extents map
+**** Query traceToReq
+| size |  load | eval |  full |
+|------+-------+------+-------|
+|    1 |   807 |  128 |  1214 |
+|    2 |   507 |   45 |   559 |
+|    3 |   312 |   30 |   347 |
+|    4 |   460 |   45 |   510 |
+|    5 |  1584 |  290 |  1881 |
+|    6 | 11998 | 2157 | 14162 |
+
+**** Query reqToTraces
+| size |  load | eval |  full |
+|------+-------+------+-------|
+|    1 |   875 |  101 |  1213 |
+|    2 |   545 |   22 |   580 |
+|    3 |   381 |   51 |   456 |
+|    4 |   510 |  244 |   765 |
+|    5 |  1101 |  880 |  1987 |
+|    6 | 10722 | 7669 | 18396 |
+
+** NeoEMF view
+**** Query traceToReq
+| size | load |   eval |   full |
+|------+------+--------+--------|
+|    1 | 4951 |   4234 |   9398 |
+|    2 |  937 |   2495 |   3648 |
+|    3 |  941 |   1926 |   3051 |
+|    4 |  959 |   4427 |   5631 |
+|    5 | 2829 |  12225 |  15353 |
+|    6 | 2892 | 841107 | 844677 |
+
+**** Query reqToTraces
+| size | load |   eval |   full |
+|------+------+--------+--------|
+|    1 | 3976 |   4234 |   8492 |
+|    2 |  924 |   2346 |   3502 |
+|    3 |  818 |   2083 |   3087 |
+|    4 |  803 |   3974 |   4977 |
+|    5 | 1066 |  13371 |  14747 |
+|    6 | 2713 | 151544 | 155109 |
