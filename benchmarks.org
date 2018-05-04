@@ -590,130 +590,136 @@ Legend:
 ** Using EMF trace
 *** No weaving model
 **** Default extent map
-| size | load | eval | full |
-|------+------+------+------|
-|    1 |   11 |   11 |  337 |
-|    2 |    4 |    0 |    7 |
-|    3 |   18 |    2 |   23 |
-|    4 |  103 |   10 |  116 |
-|    5 |  400 |   82 |  485 |
-|    6 | 2287 |  574 | 2863 |
-
-**** Fast extent map
 #+name: ocl-xmi
 | size | load | eval | full |
 |------+------+------+------|
-|    1 |   11 |   13 |  316 |
-|    2 |    4 |    1 |    7 |
-|    3 |   24 |    2 |   29 |
-|    4 |  102 |   11 |  116 |
-|    5 |  502 |   95 |  603 |
-|    6 | 2604 |  543 | 3149 |
+|    1 |   11 |   11 |  300 |
+|    2 |    4 |    1 |    8 |
+|    3 |   23 |    2 |   28 |
+|    4 |  128 |   11 |  142 |
+|    5 |  944 |  115 | 1067 |
+|    6 | 3227 |  549 | 3778 |
+
+**** Fast extent map
+#+name: ocl-xmi-opt
+| size | load | eval | full |
+|------+------+------+------|
+|    1 |   16 | 13   | 310  |
+|    2 |    7 | 1    | 14   |
+|    3 |   24 | 3    | 30   |
+|    4 |  122 | 10   | 135  |
+|    5 |  526 | 113  | 646  |
+|    6 | 2104 | 1375 | 3481 |
 
 *** XMI weaving model
 **** Default extent map
-| size |  load | eval |  full |
-|------+-------+------+-------|
-|    1 |   723 |  918 |  1644 |
-|    2 |   261 |  572 |   835 |
-|    3 |   202 |  619 |   824 |
-|    4 |   336 |  645 |   984 |
-|    5 |  1127 | 1069 |  2197 |
-|    6 | 10935 | 5963 | 16900 |
+#+name: ocl-xmi-full-view
+| size | load | eval |  full |
+|------+------+------+-------|
+|    1 |  849 | 1083 |  1934 |
+|    2 |  319 |  683 |  1004 |
+|    3 |  336 |  477 |   814 |
+|    4 |  314 |  433 |   749 |
+|    5 |  975 |  872 |  1848 |
+|    6 | 9141 | 5485 | 14627 |
 
 **** Fast extent map
-#+name: ocl-xmi-full-view
+#+name: ocl-xmi-full-view-opt
 | size |  load | eval |  full |
 |------+-------+------+-------|
-|    1 |   713 |   36 |   752 |
-|    2 |   329 |   27 |   357 |
-|    3 |   348 |   26 |   377 |
-|    4 |   587 |   32 |   622 |
-|    5 |  1993 |   89 |  2084 |
-|    6 | 11458 | 1145 | 12605 |
+|    1 |  1138 |   49 |  1190 |
+|    2 |   349 |   25 |   376 |
+|    3 |   386 |   19 |   407 |
+|    4 |   529 |   22 |   553 |
+|    5 |  1315 |  576 |  1892 |
+|    6 | 10049 |  752 | 10802 |
 
 ** Using SOM-NeoEMF trace
 *** No weaving model
 **** Default extent map
-| size | load |  eval |  full |
-|------+------+-------+-------|
-|    1 |  624 |    49 |  1107 |
-|    2 |   71 |   215 |   452 |
-|    3 |   48 |   481 |   780 |
-|    4 |   24 |  1596 |  2101 |
-|    5 |   70 |  9180 | 11699 |
-|    6 |  358 | 66744 | 96720 |
+#+name: ocl-neoemf
+| size | load |  eval |   full |
+|------+------+-------+--------|
+|    1 |  575 |   156 |   1847 |
+|    2 |   41 |   144 |    343 |
+|    3 |   40 |   477 |    752 |
+|    4 |   28 |  1625 |   2118 |
+|    5 |   27 |  6485 |   9025 |
+|    6 |   75 | 72481 | 114903 |
 
 **** Fast extent map
-#+name: ocl-neoemf
+#+name: ocl-neoemf-opt
 | size | load |  eval |  full |
 |------+------+-------+-------|
-|    1 |  625 |    17 |  1971 |
-|    2 |   55 |    47 |   189 |
-|    3 |   31 |   234 |   362 |
-|    4 |   25 |   360 |   509 |
-|    5 |   27 |  1182 |  1481 |
-|    6 |   93 | 14834 | 16109 |
+|    1 |  646 |    16 |  1464 |
+|    2 |   48 |    40 |   170 |
+|    3 |   39 |   198 |   328 |
+|    4 |   26 |   373 |   522 |
+|    5 |   35 |  1568 |  1867 |
+|    6 |   41 | 16182 | 17584 |
 
 *** View on trace model
 **** Default extent map
+#+name: ocl-neoemf-simple-view
 | size | load |  eval |   full |
 |------+------+-------+--------|
-|    1 |   39 |     6 |    183 |
-|    2 |   32 |    28 |    199 |
-|    3 |   37 |   134 |    319 |
-|    4 |   42 |   784 |   1056 |
-|    5 |  173 |  6597 |   8068 |
-|    6 | 1190 | 72863 | 106762 |
+|    1 |   60 |     6 |    208 |
+|    2 |   37 |    27 |    195 |
+|    3 |   32 |   130 |    306 |
+|    4 |  111 |  1150 |   1458 |
+|    5 |  148 |  5603 |   6984 |
+|    6 |  907 | 86565 | 136376 |
 
 **** Fast extent map
-#+name: ocl-neoemf-simple-view
+#+name: ocl-neoemf-simple-view-opt
 | size | load |  eval |  full |
 |------+------+-------+-------|
-|    1 |   42 |    13 |   139 |
-|    2 |   93 |    16 |   190 |
-|    3 |   24 |    25 |   128 |
-|    4 |   38 |   201 |   317 |
-|    5 |  123 |  1046 |  1280 |
-|    6 |  883 | 14821 | 15959 |
+|    1 |   46 |    20 |   148 |
+|    2 |   51 |     6 |   132 |
+|    3 |   32 |    22 |   129 |
+|    4 |  111 |   177 |   390 |
+|    5 |  156 |  1240 |  1506 |
+|    6 | 1094 | 15981 | 17331 |
 
 *** View on four models
 **** Default extent map
+#+name: ocl-neoemf-full-view
 | size | load |  eval |   full |
 |------+------+-------+--------|
-|    1 | 2165 |  5375 |   7822 |
-|    2 |  839 |  2956 |   4044 |
-|    3 |  888 |  2173 |   3337 |
-|    4 |  899 |  3080 |   4325 |
-|    5 | 1056 |  8070 |  10581 |
-|    6 | 3366 | 71819 | 110397 |
+|    1 | 2651 |  5655 |   8550 |
+|    2 |  920 |  2694 |   3878 |
+|    3 |  858 |  2087 |   3224 |
+|    4 |  783 |  2707 |   3816 |
+|    5 |  906 |  7777 |  10025 |
+|    6 | 3118 | 85030 | 128345 |
 
 **** Fast extent map
-#+name: ocl-neoemf-full-view
+#+name: ocl-neoemf-full-view-opt
 | size | load |  eval |  full |
 |------+------+-------+-------|
-|    1 | 2060 |  4354 |  6595 |
-|    2 |  818 |  2249 |  3249 |
-|    3 |  768 |  1760 |  2727 |
-|    4 |  694 |  1624 |  2532 |
-|    5 |  970 |  2168 |  3377 |
-|    6 | 2525 | 20566 | 23531 |
+|    1 | 2226 |  4722 |  7137 |
+|    2 | 4106 |  3000 |  7297 |
+|    3 |  761 |  1744 |  2681 |
+|    4 |  812 |  1905 |  2941 |
+|    5 |  824 |  2309 |  3382 |
+|    6 | 2681 | 14544 | 17699 |
 
 ** Aggregate results and graphs
+*** Default extents map
 #+name: agg-ocl
-| size |  XMI | XMI View | NeoEMF | NeoEMF View (Simple) | NeoEMF View (Full) |
-|------+------+----------+--------+----------------------+--------------------|
-|    1 |  316 |      752 |   1971 |                  139 |               6595 |
-|    2 |    7 |      357 |    189 |                  190 |               3249 |
-|    3 |   29 |      377 |    362 |                  128 |               2727 |
-|    4 |  116 |      622 |    509 |                  317 |               2532 |
-|    5 |  603 |     2084 |   1481 |                 1280 |               3377 |
-|    6 | 3149 |    12605 |  16109 |                15959 |              23531 |
-#+TBLFM: @2$2..@>$2=remote(ocl-xmi, @@#$4)
-#+TBLFM: @2$3..@>$3=remote(ocl-xmi-full-view, @@#$4)
-#+TBLFM: @2$4..@>$4=remote(ocl-neoemf,@@#$4)
-#+TBLFM: @2$5..@>$5=remote(ocl-neoemf-simple-view,@@#$4)
-#+TBLFM: @2$6..@>$6=remote(ocl-neoemf-full-view,@@#$4)
+| size | XMI | XMI View | NeoEMF | NeoEMF View (Simple) | NeoEMF View (Full) |
+|------+-----+----------+--------+----------------------+--------------------|
+|    1 |  11 |     1083 |    156 |                    6 |               5655 |
+|    2 |   1 |      683 |    144 |                   27 |               2694 |
+|    3 |   2 |      477 |    477 |                  130 |               2087 |
+|    4 |  11 |      433 |   1625 |                 1150 |               2707 |
+|    5 | 115 |      872 |   6485 |                 5603 |               7777 |
+|    6 | 549 |     5485 |  72481 |                86565 |              85030 |
+#+TBLFM: @2$2..@>$2=remote(ocl-xmi, @@#$3)
+#+TBLFM: @2$3..@>$3=remote(ocl-xmi-full-view, @@#$3)
+#+TBLFM: @2$4..@>$4=remote(ocl-neoemf,@@#$3)
+#+TBLFM: @2$5..@>$5=remote(ocl-neoemf-simple-view,@@#$3)
+#+TBLFM: @2$6..@>$6=remote(ocl-neoemf-full-view,@@#$3)
 
 #+begin_src gnuplot :var data=agg-ocl :file bench-all-ocl-all-instances.png
 set title 'OCL query (Log.allInstances()->size())'
@@ -733,6 +739,55 @@ plot data u (10**$1):2 w lp title 'XMI', \
 
 #+RESULTS:
 [[file:bench-all-ocl-all-instances.png]]
+
+*** Fast extents map
+#+name: agg-ocl-opt
+| size |  XMI | XMI View | NeoEMF | NeoEMF View (Simple) | NeoEMF View (Full) |
+|------+------+----------+--------+----------------------+--------------------|
+|    1 |   13 |       49 |     16 |                   20 |               4722 |
+|    2 |    1 |       25 |     40 |                    6 |               3000 |
+|    3 |    3 |       19 |    198 |                   22 |               1744 |
+|    4 |   10 |       22 |    373 |                  177 |               1905 |
+|    5 |  113 |      576 |   1568 |                 1240 |               2309 |
+|    6 | 1375 |      752 |  16182 |                15981 |              14544 |
+#+TBLFM: @2$2..@>$2=remote(ocl-xmi-opt, @@#$3)
+#+TBLFM: @2$3..@>$3=remote(ocl-xmi-full-view-opt, @@#$3)
+#+TBLFM: @2$4..@>$4=remote(ocl-neoemf-opt,@@#$3)
+#+TBLFM: @2$5..@>$5=remote(ocl-neoemf-simple-view-opt,@@#$3)
+#+TBLFM: @2$6..@>$6=remote(ocl-neoemf-full-view-opt,@@#$3)
+
+#+begin_src gnuplot :var data=agg-ocl-opt :file bench-all-ocl-all-instances-opt.png
+set title 'OCL query (Log.allInstances()->size()) (Fast extents map)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set logscale x
+set ylabel 'time (ms)'
+set logscale y
+
+plot data u (10**$1):2 w lp title 'XMI', \
+     data u (10**$1):3 w lp title 'XMI View', \
+     data u (10**$1):4 w lp title 'NeoEMF', \
+     data u (10**$1):5 w lp title 'NeoEMF View (Simple)', \
+     data u (10**$1):6 w lp title 'NeoEMF View (Full)'
+#+end_src
+
+#+RESULTS:
+[[file:bench-all-ocl-all-instances-opt.png]]
+
+** Comparing extents maps on views
+| size |  XMI | XMI (Opt.) | NeoEMF | NeoEMF (Opt.) |
+|------+------+------------+--------+---------------|
+|    1 | 1083 |         49 |   5655 |          4722 |
+|    2 |  683 |         25 |   2694 |          3000 |
+|    3 |  477 |         19 |   2087 |          1744 |
+|    4 |  433 |         22 |   2707 |          1905 |
+|    5 |  872 |        576 |   7777 |          2309 |
+|    6 | 5485 |        752 |  85030 |         14544 |
+#+TBLFM: @2$2..@>$2=remote(ocl-xmi-full-view, @@#$3)
+#+TBLFM: @2$3..@>$3=remote(ocl-xmi-full-view-opt, @@#$3)
+#+TBLFM: @2$4..@>$4=remote(ocl-neoemf-full-view,@@#$3)
+#+TBLFM: @2$5..@>$5=remote(ocl-neoemf-full-view-opt,@@#$3)
 
 * Running other OCL queries
 Query ~traceToReqs~:
