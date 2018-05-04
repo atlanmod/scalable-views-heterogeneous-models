@@ -173,7 +173,7 @@ public class BuildWeavingModel {
     // Match Java and UML using the fast method because ECL has
     // troubles loading CDO models
     Util.time("populate components rule", () -> {
-      matchRule(weavingModel, "components", javaResource,
+      matchRule(weavingModel, "component", javaResource,
                 packageGuard,
                 packageKey,
                 umlResource,
