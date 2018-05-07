@@ -130,7 +130,7 @@ Saving options:
 #+TBLFM: @2$4..@>$4=remote(create-som-neoemf,@@#$3)
 #+TBLFM: @2$5..@>$5=remote(create-atlanmod-neoemf,@@#$2)
 
-#+begin_src gnuplot :var data=agg-create :file bench-all-create-trace.png
+#+begin_src gnuplot :var data=agg-create :file images/bench-all-create-trace.png
 set title 'Create trace model (time)'
 set key left
 
@@ -146,7 +146,7 @@ plot data u (10**$1):2 w lp title 'EMF', \
 #+end_src
 
 #+RESULTS:
-[[file:bench-all-create-trace.png]]
+[[file:images/bench-all-create-trace.png]]
 
 *** Size of trace model on disk
 #+name: agg-create-size
@@ -163,7 +163,7 @@ plot data u (10**$1):2 w lp title 'EMF', \
 #+TBLFM: @2$4..@>$4=remote(create-som-neoemf,@@#$4)
 #+TBLFM: @2$5..@>$5=remote(create-atlanmod-neoemf,@@#$3)
 
-#+begin_src gnuplot :var data=agg-create-size :file bench-all-create-trace-size.png
+#+begin_src gnuplot :var data=agg-create-size :file images/bench-all-create-trace-size.png
 set title 'Create trace model (size)'
 set key left
 
@@ -179,7 +179,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+end_src
 
 #+RESULTS:
-[[file:bench-all-create-trace-size.png]]
+[[file:images/bench-all-create-trace-size.png]]
 
 * Create weaving models
 Create a weaving model for a view aggregating the four models.  This
@@ -306,7 +306,7 @@ Average numbers after 5 warmups / 5 iterations.
 #+TBLFM: @2$7..@>$7=remote(xmi-weaving-atl-neoemf,@@#$5)
 #+TBLFM: @2$8..@>$8=remote(neo-weaving-atl-neoemf,@@#$5)
 
-#+begin_src gnuplot :var data=agg-weaving :file bench-all-create-weaving-time.png
+#+begin_src gnuplot :var data=agg-weaving :file images/bench-all-create-weaving-time.png
 set title 'Create weaving models (time)'
 set key left font ",9"
 
@@ -322,7 +322,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+end_src
 
 #+RESULTS:
-[[file:bench-all-create-weaving-time.png]]
+[[file:images/bench-all-create-weaving-time.png]]
 
 *** Size of weaving models on disk
 #+name: agg-weaving-size
@@ -342,7 +342,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+TBLFM: @2$7..@>$7=remote(xmi-weaving-atl-neoemf,@@#$6)
 #+TBLFM: @2$8..@>$8=remote(neo-weaving-atl-neoemf,@@#$6)
 
-#+begin_src gnuplot :var data=agg-weaving-size :file bench-all-create-weaving-size.png
+#+begin_src gnuplot :var data=agg-weaving-size :file images/bench-all-create-weaving-size.png
 set title 'Create weaving models (size)'
 set key left font ",9"
 
@@ -361,7 +361,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+end_src
 
 #+RESULTS:
-[[file:bench-all-create-weaving-size.png]]
+[[file:images/bench-all-create-weaving-size.png]]
 
 * Run ATL transformation
 Execute an ATL transformation on the view that touches all models (including all
@@ -456,7 +456,7 @@ Average numbers after 5 warmups / 5 iterations
 #+TBLFM: @2$6..@>$6=remote(xmi-atl-atl-neoemf,@@#$4)
 #+TBLFM: @2$7..@>$7=remote(neo-atl-atl-neoemf,@@#$4)
 
-#+begin_src gnuplot :var data=agg-atl :file bench-all-run-atl.png
+#+begin_src gnuplot :var data=agg-atl :file images/bench-all-run-atl.png
 set title 'Run ATL transformation'
 set key left font ",9"
 
@@ -471,7 +471,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+end_src
 
 #+RESULTS:
-[[file:bench-all-run-atl.png]]
+[[file:images/bench-all-run-atl.png]]
 
 * Load view/model
 Do a ~resource.load~ on each view.  Mainly to show that there are no overheads
@@ -558,7 +558,7 @@ Legend:
 #+TBLFM: @2$5..@>$5=remote(neoemf-load-long-list,@@#$4)
 #+TBLFM: @2$6..@>$6=remote(neoemf-view-load-long-list,@@#$4)
 
-#+begin_src gnuplot :var data=agg-load :file bench-all-load-view.png
+#+begin_src gnuplot :var data=agg-load :file images/bench-all-load-view.png
 set title 'Load view (time)'
 set key left font ",9"
 
@@ -575,7 +575,7 @@ plot data u (10**$1):2 w lp title 'XMI', \
 #+end_src
 
 #+RESULTS:
-[[file:bench-all-load-view.png]]
+[[file:images/bench-all-load-view.png]]
 
 * Running a simple OCL query
 OCL query: ~Log.allInstances()->size()~
@@ -721,7 +721,7 @@ Legend:
 #+TBLFM: @2$5..@>$5=remote(ocl-neoemf-simple-view,@@#$3)
 #+TBLFM: @2$6..@>$6=remote(ocl-neoemf-full-view,@@#$3)
 
-#+begin_src gnuplot :var data=agg-ocl :file bench-all-ocl-all-instances.png
+#+begin_src gnuplot :var data=agg-ocl :file images/bench-all-ocl-all-instances.png
 set title 'OCL query (Log.allInstances()->size())'
 set key left font ",9"
 
@@ -738,7 +738,7 @@ plot data u (10**$1):2 w lp title 'XMI', \
 #+end_src
 
 #+RESULTS:
-[[file:bench-all-ocl-all-instances.png]]
+x[[file:images/bench-all-ocl-all-instances.png]]g
 
 *** Fast extents map
 #+name: agg-ocl-opt
@@ -756,7 +756,7 @@ plot data u (10**$1):2 w lp title 'XMI', \
 #+TBLFM: @2$5..@>$5=remote(ocl-neoemf-simple-view-opt,@@#$3)
 #+TBLFM: @2$6..@>$6=remote(ocl-neoemf-full-view-opt,@@#$3)
 
-#+begin_src gnuplot :var data=agg-ocl-opt :file bench-all-ocl-all-instances-opt.png
+#+begin_src gnuplot :var data=agg-ocl-opt :file images/bench-all-ocl-all-instances-opt.png
 set title 'OCL query (Log.allInstances()->size()) (Fast extents map)'
 set key left font ",9"
 
@@ -773,7 +773,7 @@ plot data u (10**$1):2 w lp title 'XMI', \
 #+end_src
 
 #+RESULTS:
-[[file:bench-all-ocl-all-instances-opt.png]]
+[[file:images/bench-all-ocl-all-instances-opt.png]]
 
 ** Comparing extents maps on views
 | size |  XMI | XMI (Opt.) | NeoEMF | NeoEMF (Opt.) |
