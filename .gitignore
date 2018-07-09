@@ -1,0 +1,16 @@
+# Generated models and views
+/benchmarks/models/java-trace/*.xmi
+/benchmarks/models/neoemf-trace/*.xmi
+/benchmarks/models/petstore-java.cdo/
+/benchmarks/views/java-trace/*.eview
+/benchmarks/views/java-trace/weaving-*.xmi
+/benchmarks/views/neoemf-trace/*.eview
+
+*.graphdb
+
+# Eclipse builds
+bin/
+
+# ATL output
+*.asm
+*.emftvm
