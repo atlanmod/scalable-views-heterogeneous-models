@@ -50,6 +50,11 @@ public class LoadView {
   }
 
   public static void main(String[] args) throws Exception {
+    if (args.length != 3) {
+      System.err.println("Usage: LoadView SIZES WARMUPS MEASURES");
+      System.exit(1);
+    }
+
     // Initialize EMF
     Util.time("Initialize EMF", () -> {
       Map<String, Object> map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
@@ -77,10 +82,9 @@ public class LoadView {
       .put(BlueprintsURI.SCHEME, PersistentResourceFactory.getInstance());
     });
 
-    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
-    final int warmups = 0;
-    final int measures = 1;
-
+    final int[] sizes = Util.parseIntArray(args[0]);
+    final int warmups = Integer.parseInt(args[1]);
+    final int measures = Integer.parseInt(args[2]);
 
     // Test on XMI trace
     for (int s : sizes) {

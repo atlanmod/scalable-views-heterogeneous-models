@@ -143,6 +143,11 @@ public class Creator {
   }
 
   public static void main(String args[]) throws Exception {
+    if (args.length != 1) {
+      System.err.println("Usage: Creator SIZES");
+      System.exit(1);
+    }
+
     // Init EMF + NeoEMF
     {
       PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
@@ -155,7 +160,7 @@ public class Creator {
     }
 
     // Create trace models
-    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
+    final int[] sizes = Util.parseIntArray(args[0]);
 
     for (int s : sizes) {
       Util.time(String.format("Create Java trace model of size %d", s), () -> {

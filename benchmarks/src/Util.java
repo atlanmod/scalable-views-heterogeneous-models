@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
@@ -171,6 +172,11 @@ public class Util {
 
   static <E> Stream<E> asStream(Iterator<E> it) {
     return asStream(it, false);
+  }
+
+  static int[] parseIntArray(String str) {
+    return Arrays.stream(str.substring(1, str.length()-1).split(","))
+        .map(String::trim).mapToInt(Integer::parseInt).toArray();
   }
 
 }

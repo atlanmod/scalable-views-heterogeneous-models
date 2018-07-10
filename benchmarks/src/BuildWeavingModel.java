@@ -229,6 +229,11 @@ public class BuildWeavingModel {
   }
 
   public static void main(String args[]) throws Exception {
+    if (args.length != 1) {
+      System.err.println("Usage: BuildWeavingModel SIZES");
+      System.exit(1);
+    }
+
     // Create a weaving model by comparing input models
 
     // Init EMF + NeoEMF
@@ -275,7 +280,7 @@ public class BuildWeavingModel {
       reqResource.getResourceSet().getPackageRegistry().put(ReqIF10Package.eNS_URI, ReqIF10Package.eINSTANCE);
     });
 
-    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
+    final int[] sizes = Util.parseIntArray(args[0]);
     final int warmups = 0;
     final int measures = 1;
 

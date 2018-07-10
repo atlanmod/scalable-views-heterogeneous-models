@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Map;
 
 import org.atlanmod.emfviews.core.EmfViewsFactory;
@@ -101,6 +102,11 @@ public class OCLQuery {
   }
 
   public static void main(String[] args) throws Exception {
+    if (args.length != 4) {
+      System.err.println("Usage: OCLQuery SIZES WARMUPS MEASURES QUERY");
+      System.exit(1);
+    }
+
     setUp();
 
     // Bench
@@ -115,27 +121,43 @@ public class OCLQuery {
         + "->any(l | l.message.startsWith('CaptchaValidateFilter'))"
         + ".javaClass._'package'.component.requirements->size()";
 
-    final int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
-    final int warmups = 0;
-    final int measures = 1;
-    final String query = allInstances;
-
-    for (int s : sizes) {
-      Util.bench(String.format("OCL allInstances query for XMI model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/models/java-trace/%d.xmi", s), query);
-      }, warmups, measures);
+    final int[] sizes = Util.parseIntArray(args[0]);
+    final int warmups = Integer.parseInt(args[1]);
+    final int measures = Integer.parseInt(args[2]);
+    String query;
+    switch (args[3]) {
+    case "allInstances":
+      query = allInstances;
+      break;
+    case "reqToTraces":
+      query = reqToTraces;
+      break;
+    case "traceToReqs":
+      query = traceToReqs;
+      break;
+    default:
+        query = allInstances;
     }
 
-    for (int s : sizes) {
-      Util.bench(String.format("OCL allInstances query for NeoEMF model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s), replaceTrace(query));
-      }, warmups, measures);
-    }
+    // The other two queries can only run on views.
+    if (query == allInstances) {
+      for (int s : sizes) {
+        Util.bench(String.format("OCL allInstances query for XMI model of size %d", s), () -> {
+          benchQuery(Util.resourceURI("/models/java-trace/%d.xmi", s), query);
+        }, warmups, measures);
+      }
 
-    for (int s : sizes) {
-      Util.bench(String.format("OCL query for simple view on NeoEMF model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s), replaceTrace(query));
-      }, warmups, measures);
+      for (int s : sizes) {
+        Util.bench(String.format("OCL allInstances query for NeoEMF model of size %d", s), () -> {
+          benchQuery(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s), replaceTrace(query));
+        }, warmups, measures);
+      }
+
+      for (int s : sizes) {
+        Util.bench(String.format("OCL query for simple view on NeoEMF model of size %d", s), () -> {
+          benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s), replaceTrace(query));
+        }, warmups, measures);
+      }
     }
 
     for (int s : sizes) {
