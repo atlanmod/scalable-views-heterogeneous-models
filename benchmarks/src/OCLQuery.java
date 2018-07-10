@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Map;
 
 import org.atlanmod.emfviews.core.EmfViewsFactory;
@@ -136,7 +135,7 @@ public class OCLQuery {
       query = traceToReqs;
       break;
     default:
-        query = allInstances;
+      query = allInstances;
     }
 
     // The other two queries can only run on views.
