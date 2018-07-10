@@ -12,8 +12,8 @@ EMF Views or NeoEMF, then you'll need to follow the manual instructions.
 
 ## Running the benchmarks with the Docker image
 With Docker installed, you only have to fetch the pre-built image.  In order to
-run the benchmarks, you first need to create the models.  **Note**: if you use
-the defaults settings, you will need around 21GB of free space on disk in order
+run the benchmarks, you first need to create the models.  Note: if you use the
+defaults settings, you will need around **21GB of free space** on disk in order
 to generate the models.
 
 0. First, create an empty directory that will hold the models and views:
