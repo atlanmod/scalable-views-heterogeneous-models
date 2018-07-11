@@ -4,8 +4,8 @@ Benchmarks for combining EMF Views, NeoEMF and CDO on a MegaM@Rt2 use case.
 
 ## Running the benchmarks
 
-The easiest option is to use our pre-built Docker image which contains
-everything you need to run the benchmarks.
+The easiest option is to use our pre-built [Docker image](docker-image) which
+contains everything you need to run the benchmarks.
 
 If you want to change the code of the benchmarks, or are using other versions of
 EMF Views or NeoEMF, then you'll need to follow the manual instructions.
@@ -24,29 +24,30 @@ to generate the models.
 
 1. To create the models, simply run:
    ```
-     docker run -v `pwd`:/root/workspace atlanmod/scalable-views-benchmarks create-models
+   docker run -v `pwd`:/root/workspace atlanmod/scalable-views create-models
    ```
    This will mount the current directory as a volume where the container expects
-   to write files.
+   to write its files.
 
-   This can take up to 20 minutes.
+   Creating the models can take up to 20 minutes with the default settings (see
+   the [Sizes](#sizes) parameter).
 
 2. Then, to create the weaving models used by the views:
    ```
-     docker run -v `pwd`:/root/workspace atlanmod/scalable-views-benchmarks create-weaving-models
+   docker run -v `pwd`:/root/workspace atlanmod/scalable-views create-weaving-models
    ```
-   This can take around 30 minutes.
+   This can take around 30 minutes with default sizes.
 
 After that, you can run the benchmarks:
 
 3. The load-view benchmark:
    ```
-   docker run  -v `pwd`:/root/workspace atlanmod/scalable-views-benchmarks load-view
+   docker run  -v `pwd`:/root/workspace atlanmod/scalable-views load-view
    ```
 
-4. The ocl-query benchmark can run 3 different queries (see options below):
+4. The ocl-query benchmark can run 3 different queries (see [Queries](#queries)):
    ```
-   docker run  -v `pwd`:/root/workspace atlanmod/scalable-views-benchmarks ocl-query
+   docker run  -v `pwd`:/root/workspace atlanmod/scalable-views ocl-query
    ```
 
 ### Benchmark parameters
@@ -125,3 +126,5 @@ of the GNU General Public License as by the Free Software Foundation, either
 version 3 of the License, or (at your option) any later version.
 
 See [LICENSE](LICENSE).
+
+[docker-image]: https://hub.docker.com/r/atlanmod/scalable-views/
