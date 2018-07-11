@@ -4,7 +4,7 @@ Benchmarks for combining EMF Views, NeoEMF and CDO on a MegaM@Rt2 use case.
 
 ## Running the benchmarks
 
-The easiest option is to use our pre-built [Docker image](docker-image) which
+The easiest option is to use our pre-built [Docker image][docker-image] which
 contains everything you need to run the benchmarks.
 
 If you want to change the code of the benchmarks, or are using other versions of
