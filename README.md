@@ -56,6 +56,10 @@ Usage: [-s SIZES] create-models
        [-s SIZES] create-weaving-models
        [-s SIZES -w WARMUPS -m MEASURES] load-view
        [-s SIZES -w WARMUPS -m MEASURES -q QUERY] ocl-query
+
+Additional options:
+  -j ARGS    Additional arguments to pass to the JVM
+
 ```
 
 #### Sizes
@@ -101,6 +105,16 @@ with the `-q` option.
    model (the largest model in the view).
 2. `-q reqToTraces` and `-q traceToReqs` are two queries that navigate the whole
    views (and hence all contributing models).
+
+#### JVM Arguments
+You can tweak the arguments passed to the JVM.  By default, the concurrent mark
+and sweep garbage collector is used (`-XX:+UseConcMarkSweepGC`) and the max heap
+size is increased to 8G.  If you are running into out of memory exceptions, you
+want want to increase that further:
+
+```
+docker run ... -j "-XX:+UseConcMarkSweepGC -Xmx16g" load-view
+```
 
 ## Manual instructions
 The benchmarks are Eclipse projects.  You'll need the following dependencies:
