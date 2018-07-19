@@ -16,6 +16,11 @@ run the benchmarks, you first need to create the models.  Note: if you use the
 defaults settings, you will need around **21GB of free space** on disk in order
 to generate the models.
 
+**Note to Windows users**: the Docker image is at the moment not compatible with
+Windows due to filepath issues.  The image works fine on Linux.  On Windows, you
+still have the option of running the image inside a VM, but expect a degraded
+performance.
+
 0. First, create an empty directory that will hold the models and views:
    ```
    mkdir workspace
