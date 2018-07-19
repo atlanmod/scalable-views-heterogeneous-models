@@ -62,7 +62,7 @@ public class OCLQuery {
   static Query<EClassifier, EClass, EObject> query;
   static EObject root;
 
-  static void benchQuery(URI uri, String queryString) throws Exception {
+  static void benchQuery(URI uri, String queryString, boolean fastExtentsMap) throws Exception {
     // Need to recreate the query since otherwise it does not get re-evaluated for subsequent resources
     // Init OCL query
     OCL ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
@@ -80,7 +80,9 @@ public class OCLQuery {
       // Fetch context from loaded resource since we need VirtualEClass instances here
       // for queries on views to work
       EObject context = root.eClass();
-      ocl.setExtentMap(new FastExtentMap(root));
+      if (fastExtentsMap) {
+        ocl.setExtentMap(new FastExtentMap(root));
+      }
       oclHelper.setContext(context);
       query = ocl.createQuery(oclHelper.createQuery(queryString));
     });
@@ -101,8 +103,8 @@ public class OCLQuery {
   }
 
   public static void main(String[] args) throws Exception {
-    if (args.length != 4) {
-      System.err.println("Usage: OCLQuery SIZES WARMUPS MEASURES QUERY");
+    if (args.length != 5) {
+      System.err.println("Usage: OCLQuery SIZES WARMUPS MEASURES QUERY FAST_EXTENTS_MAP");
       System.exit(1);
     }
 
@@ -137,37 +139,38 @@ public class OCLQuery {
     default:
       query = allInstances;
     }
+    final boolean fastExtentsMap = Boolean.parseBoolean(args[3]);
 
     // The other two queries can only run on views.
     if (query == allInstances) {
       for (int s : sizes) {
         Util.bench(String.format("OCL allInstances query for XMI model of size %d", s), () -> {
-          benchQuery(Util.resourceURI("/models/java-trace/%d.xmi", s), query);
+          benchQuery(Util.resourceURI("/models/java-trace/%d.xmi", s), query, fastExtentsMap);
         }, warmups, measures);
       }
 
       for (int s : sizes) {
         Util.bench(String.format("OCL allInstances query for NeoEMF model of size %d", s), () -> {
-          benchQuery(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s), replaceTrace(query));
+          benchQuery(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s), replaceTrace(query), fastExtentsMap);
         }, warmups, measures);
       }
 
       for (int s : sizes) {
         Util.bench(String.format("OCL query for simple view on NeoEMF model of size %d", s), () -> {
-          benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s), replaceTrace(query));
+          benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s), replaceTrace(query), fastExtentsMap);
         }, warmups, measures);
       }
     }
 
     for (int s : sizes) {
       Util.bench(String.format("OCL query for full view on XMI trace/ XMI weaving model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), query);
+        benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), query, fastExtentsMap);
       }, warmups, measures);
     }
 
     for (int s : sizes) {
       Util.bench(String.format("OCL query for full view on NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
-        benchQuery(Util.resourceURI("/views/neoemf-trace/%d.eview", s), replaceTrace(query));
+        benchQuery(Util.resourceURI("/views/neoemf-trace/%d.eview", s), replaceTrace(query), fastExtentsMap);
       }, warmups, measures);
     }
 

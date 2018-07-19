@@ -6,14 +6,14 @@ cp -r /root/models . && cp -r /root/views .
 OPTIND=1 # Reset getopts (see https://stackoverflow.com/a/14203146 )
 
 # Parse arguments
-CLASS=
 SIZES='[10, 100, 1000, 10000, 100000, 1000000]'
 WARMUPS=0
 MEASURES=1
 QUERY=allInstances
 JVM_ARGS="-XX:+UseConcMarkSweepGC -Xmx8g"
+FAST_EXTENTS_MAP=true
 
-while getopts "s:w:m:q:j:" opt; do
+while getopts "s:w:m:q:j:f:" opt; do
     case "$opt" in
         s) SIZES=$OPTARG
            ;;
@@ -24,6 +24,8 @@ while getopts "s:w:m:q:j:" opt; do
         q) QUERY=$OPTARG
            ;;
         j) JVM_ARGS=$OPTARG
+           ;;
+        f) FAST_EXTENTS_MAP=$OPTARG
            ;;
     esac
 done
@@ -46,13 +48,13 @@ case $1 in
         ;;
     ocl-query)
         PROG=OCLQuery
-        ARGS="$WARMUPS $MEASURES $QUERY"
+        ARGS="$WARMUPS $MEASURES $QUERY $FAST_EXTENTS_MAP"
         ;;
     *)
         echo 'Usage: ./run.sh [-s SIZES] create-models'
         echo '       ./run.sh [-s SIZES] create-weaving-models'
         echo '       ./run.sh [-s SIZES -w WARMUPS -m MEASURES] load-view'
-        echo '       ./run.sh [-s SIZES -w WARMUPS -m MEASURES -q QUERY] ocl-query'
+        echo '       ./run.sh [-s SIZES -w WARMUPS -m MEASURES -q QUERY -f FAST_EXTENTS_MAP] ocl-query'
         echo ''
         echo 'Additional options:'
         echo '  -j ARGS    Additional arguments to pass to the JVM'

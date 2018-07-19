@@ -55,7 +55,7 @@ After that, you can run the benchmarks:
 Usage: [-s SIZES] create-models
        [-s SIZES] create-weaving-models
        [-s SIZES -w WARMUPS -m MEASURES] load-view
-       [-s SIZES -w WARMUPS -m MEASURES -q QUERY] ocl-query
+       [-s SIZES -w WARMUPS -m MEASURES -q QUERY -f FAST_EXTENTS_MAP] ocl-query
 
 Additional options:
   -j ARGS    Additional arguments to pass to the JVM
@@ -97,7 +97,7 @@ to do some warmup rounds using the `-w` option (an integer).  Warmup rounds will
 execute the exact same benchmark, but you would usually discard their times when
 preparing the results.
 
-#### Queries
+#### Queries and extents map
 There are 3 predefined OCL queries you can use for benchmarking.  Choose one
 with the `-q` option.
 
@@ -105,6 +105,13 @@ with the `-q` option.
    model (the largest model in the view).
 2. `-q reqToTraces` and `-q traceToReqs` are two queries that navigate the whole
    views (and hence all contributing models).
+
+For the `ocl-query` benchmark, you can also choose between the fast extents map
+(`true`), or the default one (`false`):
+
+```
+docker run ... -f true -q allInstances ocl-query
+```
 
 #### JVM Arguments
 You can tweak the arguments passed to the JVM.  By default, the concurrent mark
