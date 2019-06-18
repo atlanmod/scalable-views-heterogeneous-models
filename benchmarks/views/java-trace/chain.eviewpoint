@@ -1,2 +1,5 @@
-contributingMetamodels=http://www.omg.org/spec/ReqIF/20110401/reqif.xsd,http://www.eclipse.org/uml2/5.0.0/UML,http://www.eclipse.org/MoDisco/Java/0.2.incubation/java,http://trace
+contributingMetamodels=req::../../metamodels/CSV.ecore,\
+                       uml::http://www.eclipse.org/uml2/5.0.0/UML,\
+                       java::http://www.eclipse.org/MoDisco/Java/0.2.incubation/java,\
+                       trace::http://trace
 weavingModel=chain.xmi

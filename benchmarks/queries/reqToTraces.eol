@@ -1,0 +1,4 @@
+Row.all.select(r | r.desc.startsWith('Controller')).first()
+   .components.javaPackages.flatten().ownedElements.flatten()
+   .select(c | c.eClass.name.equals('ClassDeclaration'))
+   .traces.size().println();

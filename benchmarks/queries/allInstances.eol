@@ -1,0 +1,1 @@
+Log.all.size().println();

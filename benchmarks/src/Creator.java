@@ -120,13 +120,14 @@ public class Creator {
     });
   }
 
-  static void createView(File file, String modelFile, String javaFile, String weavingModelFile) throws IOException {
+  static void createView(File file, String modelFile, String javaFile) throws IOException {
     Properties p = new Properties();
     p.setProperty("viewpoint", "chain.eviewpoint");
     p.setProperty("contributingModels",
-                  String.format("../../models/petstore-requirements.reqif,../../models/petstore-components.uml,../../models/%s,../../models/%s",
+                  String.format("req::../../models/petstore-requirements.csv,uml::../../models/petstore-components.uml,java%s::../../models/%s,trace::../../models/%s",
+                                javaFile.endsWith(".cdo") ? "cdo" : "",
                                 javaFile, modelFile));
-    p.setProperty("weavingModel", weavingModelFile);
+    p.setProperty("matchingModel", "chain.ecl");
     Writer w = new BufferedWriter(new FileWriter(file));
     p.store(w, null);
     w.close();
@@ -135,7 +136,7 @@ public class Creator {
   static void createTraceView(File file, String modelFile) throws IOException {
     Properties p = new Properties();
     p.setProperty("viewpoint", "trace.eviewpoint");
-    p.setProperty("contributingModels", String.format("../../models/%s", modelFile));
+    p.setProperty("contributingModels", String.format("trace::../../models/%s", modelFile));
     p.setProperty("weavingModel", "empty.xmi");
     Writer w = new BufferedWriter(new FileWriter(file));
     p.store(w, null);
@@ -188,13 +189,11 @@ public class Creator {
       // Views backed by an XMI weaving model
       createView(new File(String.format("views/java-trace/%d.eview", s)),
                  String.format("java-trace/%d.xmi", s),
-                 "petstore-java.xmi",
-                 String.format("weaving-%d.xmi", s));
+                 "petstore-java.xmi");
       // Views backed by a NeoEMF weaving model
       createView(new File(String.format("views/neoemf-trace/%d.eview", s)),
                  String.format("neoemf-trace/%d.graphdb", s),
-                 "petstore-java.cdo",
-                 String.format("weaving-%d.graphdb", s));
+                 "petstore-java.cdo");
 
       // Views aggregating only the Neoemf trace resource
       createTraceView(new File(String.format("views/neoemf-trace/trace-%d.eview", s)),

@@ -48,10 +48,10 @@
       upperBound="-1"
       opposite="//@virtualLinks.4"/>
   <contributingModels
-      URI="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd">
+      URI="csv">
     <concreteElements
         xsi:type="virtualLinks:ConcreteConcept"
-        path="SpecObject"/>
+        path="Row"/>
   </contributingModels>
   <contributingModels
       URI="http://trace-neoemf">

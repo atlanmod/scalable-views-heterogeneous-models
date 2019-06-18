@@ -1,7 +1,5 @@
 import java.util.Map;
 
-import org.atlanmod.emfviews.core.EmfViewsFactory;
-import org.atlanmod.emfviews.virtuallinks.VirtualLinksPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -9,15 +7,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
 import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.EcoreEnvironmentFactory;
 import org.eclipse.ocl.helper.OCLHelper;
-import org.eclipse.rmf.reqif10.ReqIF10Package;
-import org.eclipse.rmf.reqif10.serialization.ReqIF10ResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
+
+import org.atlanmod.emfviews.core.EmfViewsFactory;
+import org.atlanmod.emfviews.core.EpsilonResource;
+import org.atlanmod.emfviews.virtuallinks.VirtualLinksPackage;
 
 import fr.inria.atlanmod.neoemf.data.PersistenceBackendFactoryRegistry;
 import fr.inria.atlanmod.neoemf.data.blueprints.BlueprintsPersistenceBackendFactory;
@@ -37,12 +36,16 @@ public class OCLQuery {
       map.put("eview", new EmfViewsFactory());
       map.put("xmi", new XMIResourceFactoryImpl());
       map.put("ecore", new EcoreResourceFactoryImpl());
-      map.put("reqif", new ReqIF10ResourceFactoryImpl());
       map.put("uml", new UMLResourceFactoryImpl());
-      map.put("emftvm", new EMFTVMResourceFactoryImpl());
+      Resource.Factory epsRF = new Resource.Factory() {
+        @Override
+        public Resource createResource(URI uri) {
+          return new EpsilonResource(uri);
+        }
+      };
+      map.put("csv", epsRF);
 
       // Load metamodels
-      ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
       org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
       org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
@@ -112,15 +115,15 @@ public class OCLQuery {
 
     // Bench
     final String allInstances = "trace::Log.allInstances()->size()";
-    final String reqToTraces = "reqif10::SpecObject.allInstances()"
-        + "->any(r | r.values->selectByType(reqif10::AttributeValueString)->exists(v | v.theValue.startsWith('Controller')))"
+    final String reqToTraces = "csv::Row.allInstances()"
+        + "->any(r | r.desc.startsWith('Controller'))"
         + ".components->collect(c | c.javaPackages)->collect(p | p.ownedElements)"
         + "->selectByType(java::ClassDeclaration)"
         + "->collect(c | c.traces)"
         + "->size()";
     final String traceToReqs = "trace::Log.allInstances()"
-        + "->any(l | l.message.startsWith('CaptchaValidateFilter'))"
-        + ".javaClass._'package'.component.requirements->size()";
+      + "->any(l | l.message.startsWith('CaptchaValidateFilter'))"
+      + ".javaClass._'package'.component.requirements->size()";
 
     final int[] sizes = Util.parseIntArray(args[0]);
     final int warmups = Integer.parseInt(args[1]);
@@ -163,13 +166,13 @@ public class OCLQuery {
     }
 
     for (int s : sizes) {
-      Util.bench(String.format("OCL query for full view on XMI trace/ XMI weaving model of size %d", s), () -> {
+      Util.bench(String.format("OCL query for full view on XMI trace of size %d", s), () -> {
         benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), query, fastExtentsMap);
       }, warmups, measures);
     }
 
     for (int s : sizes) {
-      Util.bench(String.format("OCL query for full view on NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
+      Util.bench(String.format("OCL query for full view on NeoEMF trace of size %d", s), () -> {
         benchQuery(Util.resourceURI("/views/neoemf-trace/%d.eview", s), replaceTrace(query), fastExtentsMap);
       }, warmups, measures);
     }

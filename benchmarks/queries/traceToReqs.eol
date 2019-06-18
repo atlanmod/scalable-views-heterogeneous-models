@@ -1,0 +1,2 @@
+Log.all.select(l | l.message.startsWith('CaptchaValidateFilter')).first()
+   .javaClass.package.component.requirements.size().println();

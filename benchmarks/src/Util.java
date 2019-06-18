@@ -11,11 +11,13 @@ import java.util.Map;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.atlanmod.emfviews.core.View;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import org.atlanmod.emfviews.core.ViewResource;
+
 import cdobackend.CDOBackend;
 import fr.inria.atlanmod.neoemf.data.blueprints.neo4j.option.BlueprintsNeo4jOptionsBuilder;
 import fr.inria.atlanmod.neoemf.data.blueprints.util.BlueprintsURI;
@@ -124,8 +126,8 @@ public class Util {
   static void closeResource(Resource r) {
     if (r instanceof PersistentResource) {
       ((PersistentResource) r).close();
-    } else if (r instanceof View) {
-      ((View) r).close();
+    } else if (r instanceof ViewResource) {
+      ((ViewResource) r).close();
     }
   }
 

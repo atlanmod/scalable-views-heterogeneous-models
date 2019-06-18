@@ -1,0 +1,9 @@
+id,desc
+0,Controller extracts data
+1,Controller filter requests
+2,Controller invokes command to request
+3,Controller map requests to commands
+4,Controller validates captchas
+5,Model retrieves data from database
+6,View determines the page to display
+7,View formats the page to display

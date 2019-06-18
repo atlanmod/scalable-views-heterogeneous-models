@@ -14,8 +14,6 @@ import org.eclipse.m2m.atl.emftvm.Metamodel;
 import org.eclipse.m2m.atl.emftvm.Model;
 import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
 import org.eclipse.m2m.atl.emftvm.util.DefaultModuleResolver;
-import org.eclipse.rmf.reqif10.ReqIF10Package;
-import org.eclipse.rmf.reqif10.serialization.ReqIF10ResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 
@@ -105,12 +103,10 @@ public class ATLTransfo {
       map.put("eview", new EmfViewsFactory());
       map.put("xmi", new XMIResourceFactoryImpl());
       map.put("ecore", new EcoreResourceFactoryImpl());
-      map.put("reqif", new ReqIF10ResourceFactoryImpl());
       map.put("uml", new UMLResourceFactoryImpl());
       map.put("emftvm", new EMFTVMResourceFactoryImpl());
 
       // Load metamodels
-      ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
       org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
       org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();

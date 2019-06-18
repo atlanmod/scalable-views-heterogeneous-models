@@ -2,6 +2,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.atlanmod.emfviews.core.View;
 import org.eclipse.emf.ecore.EClass;
@@ -32,7 +33,7 @@ public class FastExtentMap implements Map<EClass, Set<EObject>> {
 
     if (r instanceof View) {
       EClass k = (EClass) key;
-      delegate.put(k, new HashSet<>(((View) r).getAllInstances(k)));
+      delegate.put(k, new HashSet<>(((View) r).getAllInstances(k.getName()).collect(Collectors.toList())));
     } else if (r instanceof PersistentResource) {
       EClass k = (EClass) key;
       delegate.put(k, new HashSet<>(((PersistentResource) r).getAllInstances(k)));

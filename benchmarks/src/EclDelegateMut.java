@@ -35,6 +35,7 @@ import org.eclipse.epsilon.ecl.execute.EclOperationFactory;
 import org.eclipse.epsilon.ecl.trace.Match;
 import org.eclipse.epsilon.ecl.trace.MatchTrace;
 import org.eclipse.epsilon.emc.emf.EmfModel;
+import org.eclipse.epsilon.emc.emf.InMemoryEmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 
 import fr.inria.atlanmod.neoemf.data.PersistenceBackendFactoryRegistry;
@@ -204,15 +205,7 @@ public class EclDelegateMut {
   protected EmfModel createEmfModelByURI(String name, Resource model, String metamodelURI,
                                          boolean readOnLoad,
                                          boolean storeOnDisposal) throws EolModelLoadingException {
-    EmfModel emfModel = new EmfModel();
-    StringProperties properties = new StringProperties();
-    properties.put(EmfModel.PROPERTY_NAME, name);
-    properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodelURI);
-    properties.put(EmfModel.PROPERTY_MODEL_URI, model.getURI().toString());
-    properties.put(EmfModel.PROPERTY_READONLOAD, false);
-    properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal);
-    emfModel.load(properties);
-    emfModel.setModelImpl(model);
+    EmfModel emfModel = new InMemoryEmfModel(name, model);
     return emfModel;
   }
 

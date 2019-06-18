@@ -8,6 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.atlanmod.emfviews.virtuallinks.CommonVirtualLinksFactory;
+import org.atlanmod.emfviews.core.EpsilonResource;
 import org.atlanmod.emfviews.virtuallinks.ConcreteConcept;
 import org.atlanmod.emfviews.virtuallinks.ContributingModel;
 import org.atlanmod.emfviews.virtuallinks.VirtualAssociation;
@@ -16,12 +17,12 @@ import org.atlanmod.emfviews.virtuallinks.VirtualLinksFactory;
 import org.atlanmod.emfviews.virtuallinks.WeavingModel;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.gmt.modisco.java.cdo.java.JavaPackage;
-import org.eclipse.rmf.reqif10.ReqIF10Package;
-import org.eclipse.rmf.reqif10.serialization.ReqIF10ResourceFactoryImpl;
 import org.eclipse.uml2.uml.Component;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
@@ -239,14 +240,20 @@ public class BuildWeavingModel {
     // Init EMF + NeoEMF
     {
       Map<String, Object> map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+      map.put("ecore", new EcoreResourceFactoryImpl());
       map.put("xmi", new XMIResourceFactoryImpl());
       map.put("uml", new UMLResourceFactoryImpl());
-      map.put("reqif", new ReqIF10ResourceFactoryImpl());
+      Resource.Factory epsRF = new Resource.Factory() {
+        @Override
+        public Resource createResource(URI uri) {
+          return new EpsilonResource(uri);
+        }
+      };
+      map.put("csv", epsRF);
 
       org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
       org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
       TracePackage.eINSTANCE.eClass();
-      ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
 
       PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
@@ -261,7 +268,7 @@ public class BuildWeavingModel {
       final URI javaXMIInput = Util.resourceURI("/models/petstore-java.xmi");
       final URI javaCDOInput = Util.resourceURI("/models/petstore-java.cdo");
       final URI umlInput = Util.resourceURI("/models/petstore-components.uml");
-      final URI reqInput = Util.resourceURI("/models/petstore-requirements.reqif");
+      final URI reqInput = Util.resourceURI("/models/petstore-requirements.csv");
 
       // For some reason, the delegation to a the default package registry does not work,
       // and ECL cannot find the packages above.  Have to force it by copying them to
@@ -277,7 +284,10 @@ public class BuildWeavingModel {
       umlResource.getResourceSet().getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 
       reqResource = new ResourceSetImpl().getResource(reqInput, true);
-      reqResource.getResourceSet().getPackageRegistry().put(ReqIF10Package.eNS_URI, ReqIF10Package.eINSTANCE);
+      EPackage CSVPack = (EPackage) new ResourceSetImpl().getResource(Util.resourceURI("/metamodels/CSV.ecore"), true)
+        .getContents().get(0);
+      EPackage.Registry.INSTANCE.put(CSVPack.getNsURI(), CSVPack);
+      reqResource.getResourceSet().getPackageRegistry().put("csv", CSVPack);
     });
 
     final int[] sizes = Util.parseIntArray(args[0]);

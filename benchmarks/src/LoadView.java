@@ -1,18 +1,17 @@
 import java.util.Map;
 
-import org.atlanmod.emfviews.core.EmfViewsFactory;
-import org.atlanmod.emfviews.virtuallinks.VirtualLinksPackage;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
-import org.eclipse.rmf.reqif10.ReqIF10Package;
-import org.eclipse.rmf.reqif10.serialization.ReqIF10ResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
+
+import org.atlanmod.emfviews.core.EmfViewsFactory;
+import org.atlanmod.emfviews.core.EpsilonResource;
+import org.atlanmod.emfviews.virtuallinks.VirtualLinksPackage;
 
 import fr.inria.atlanmod.neoemf.data.PersistenceBackendFactoryRegistry;
 import fr.inria.atlanmod.neoemf.data.blueprints.BlueprintsPersistenceBackendFactory;
@@ -62,12 +61,16 @@ public class LoadView {
       map.put("eview", new EmfViewsFactory());
       map.put("xmi", new XMIResourceFactoryImpl());
       map.put("ecore", new EcoreResourceFactoryImpl());
-      map.put("reqif", new ReqIF10ResourceFactoryImpl());
       map.put("uml", new UMLResourceFactoryImpl());
-      map.put("emftvm", new EMFTVMResourceFactoryImpl());
+      Resource.Factory epsRF = new Resource.Factory() {
+        @Override
+        public Resource createResource(URI uri) {
+          return new EpsilonResource(uri);
+        }
+      };
+      map.put("csv", epsRF);
 
       // Load metamodels
-      ReqIF10Package.eINSTANCE.eClass();
       UMLPackage.eINSTANCE.eClass();
       org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
       org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
@@ -93,9 +96,9 @@ public class LoadView {
       }, warmups, measures);
     }
 
-    // Test with XMI trace / XMI weaving model
+    // Test on view with XMI trace
     for (int s : sizes) {
-      Util.bench(String.format("Load view with XMI trace / XMI weaving model of size %d", s), () -> {
+      Util.bench(String.format("Load view with XMI trace of size %d", s), () -> {
         loadAndCount(Util.resourceURI("/views/java-trace/%d.eview", s));
       }, warmups, measures);
     }
@@ -107,9 +110,9 @@ public class LoadView {
       }, warmups, measures);
     }
 
-    // Test with NeoEMF trace / NeoEMF weaving model
+    // Test on view with NeoEMF trace
     for (int s : sizes) {
-      Util.bench(String.format("Load view with NeoEMF trace / NeoEMF weaving model of size %d", s), () -> {
+      Util.bench(String.format("Load view with NeoEMF trace of size %d", s), () -> {
         loadAndCount(Util.resourceURI("/views/neoemf-trace/%d.eview", s));
       }, warmups, measures);
     }

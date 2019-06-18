@@ -3,7 +3,7 @@
 
 rule javaClass
 match l : trace!Log
-with  c : java!ClassDeclaration
+with  c : javacdo!ClassDeclaration
 {
   compare
   {
@@ -15,7 +15,7 @@ with  c : java!ClassDeclaration
 // Java -> UML
 
 rule component
-match p : java!Package
+match p : javacdo!Package
 with  c : uml!Component
 {
   compare
