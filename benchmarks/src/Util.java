@@ -75,6 +75,11 @@ public class Util {
     }
 
     Resource r = new ResourceSetImpl().createResource(uri);
+
+    if (r instanceof ViewResource) {
+      ((ViewResource) r).customDelegator = new VirtualLinkMatcher();
+    }
+
     if (r instanceof PersistentResource) {
       r.load(loadOptions);
     } else {

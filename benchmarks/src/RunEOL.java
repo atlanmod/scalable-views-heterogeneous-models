@@ -65,6 +65,7 @@ public class RunEOL {
     m.setForceDefaultEMFDriver(forceEMFEMC);
     m.setName("VIEW");
     m.setModelFileUri(viewPath);
+    m.delegator = new VirtualLinkMatcher();
     time("Load view", () -> m.load());
     module.getContext().getModelRepository().addModel(m);
 
