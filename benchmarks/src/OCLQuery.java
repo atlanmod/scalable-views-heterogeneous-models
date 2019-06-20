@@ -105,78 +105,97 @@ public class OCLQuery {
     return query.replace("trace::", "traceneoemf::");
   }
 
-  public static void main(String[] args) throws Exception {
-    if (args.length != 5) {
-      System.err.println("Usage: OCLQuery SIZES WARMUPS MEASURES QUERY FAST_EXTENTS_MAP");
-      System.exit(1);
-    }
+  static final String allInstances = "trace::Log.allInstances()->size()";
+  static final String reqToTraces = "csv::Row.allInstances()"
+      + "->any(r | r.desc.startsWith('Controller'))"
+      + ".components->collect(c | c.javaPackages)->collect(p | p.ownedElements)"
+      + "->selectByType(java::ClassDeclaration)"
+      + "->collect(c | c.traces)"
+      + "->size()";
+  static final String traceToReqs = "trace::Log.allInstances()"
+    + "->any(l | l.message.startsWith('CaptchaValidateFilter'))"
+    + ".javaClass._'package'.component.requirements->size()";
 
-    setUp();
-
-    // Bench
-    final String allInstances = "trace::Log.allInstances()->size()";
-    final String reqToTraces = "csv::Row.allInstances()"
-        + "->any(r | r.desc.startsWith('Controller'))"
-        + ".components->collect(c | c.javaPackages)->collect(p | p.ownedElements)"
-        + "->selectByType(java::ClassDeclaration)"
-        + "->collect(c | c.traces)"
-        + "->size()";
-    final String traceToReqs = "trace::Log.allInstances()"
-      + "->any(l | l.message.startsWith('CaptchaValidateFilter'))"
-      + ".javaClass._'package'.component.requirements->size()";
-
-    final int[] sizes = Util.parseIntArray(args[0]);
-    final int warmups = Integer.parseInt(args[1]);
-    final int measures = Integer.parseInt(args[2]);
-    String query;
-    switch (args[3]) {
-    case "allInstances":
-      query = allInstances;
-      break;
-    case "reqToTraces":
-      query = reqToTraces;
-      break;
-    case "traceToReqs":
-      query = traceToReqs;
-      break;
-    default:
-      query = allInstances;
-    }
-    final boolean fastExtentsMap = Boolean.parseBoolean(args[3]);
+  static void benchQueryOnAllModels(String query, int queryId, boolean fastExtentsMap, int[] sizes, int warmups, int measures) throws Exception {
+    String fem = fastExtentsMap ? "with fast extents map" : "";
 
     // The other two queries can only run on views.
     if (query == allInstances) {
       for (int s : sizes) {
-        Util.bench(String.format("OCL allInstances query for XMI model of size %d", s), () -> {
+        Util.bench(String.format("OCL query %d for XMI model of size %d %s", queryId, s, fem), () -> {
           benchQuery(Util.resourceURI("/models/java-trace/%d.xmi", s), query, fastExtentsMap);
         }, warmups, measures);
       }
 
       for (int s : sizes) {
-        Util.bench(String.format("OCL allInstances query for NeoEMF model of size %d", s), () -> {
+        Util.bench(String.format("OCL query %d for NeoEMF model of size %d %s", queryId, s, fem), () -> {
           benchQuery(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s), replaceTrace(query), fastExtentsMap);
         }, warmups, measures);
       }
 
       for (int s : sizes) {
-        Util.bench(String.format("OCL query for simple view on NeoEMF model of size %d", s), () -> {
+        Util.bench(String.format("OCL query %d for simple view on NeoEMF model of size %d %s", queryId, s, fem), () -> {
           benchQuery(Util.resourceURI("/views/neoemf-trace/trace-%d.eview", s), replaceTrace(query), fastExtentsMap);
         }, warmups, measures);
       }
     }
 
     for (int s : sizes) {
-      Util.bench(String.format("OCL query for full view on XMI trace of size %d", s), () -> {
+      Util.bench(String.format("OCL query %d for full view on XMI trace of size %d %s", queryId, s, fem), () -> {
         benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), query, fastExtentsMap);
       }, warmups, measures);
     }
 
     for (int s : sizes) {
-      Util.bench(String.format("OCL query for full view on NeoEMF trace of size %d", s), () -> {
+      Util.bench(String.format("OCL query %d for full view on NeoEMF trace of size %d %s", queryId, s, fem), () -> {
         benchQuery(Util.resourceURI("/views/neoemf-trace/%d.eview", s), replaceTrace(query), fastExtentsMap);
       }, warmups, measures);
     }
+  }
 
+  static void benchAllQueries(int[] sizes, int warmups, int measures) throws Exception {
+    final String[] queries = {allInstances, reqToTraces, traceToReqs};
+
+    setUp();
+
+    for (int i=0; i < queries.length; ++i) {
+      benchQueryOnAllModels(queries[i], i, false, sizes, warmups, measures);
+      benchQueryOnAllModels(queries[i], i, true, sizes, warmups, measures);
+    }
+  }
+
+  public static void main(String[] args) throws Exception {
+    if (args.length != 5) {
+      System.err.println("Usage: OCLQuery SIZES WARMUPS MEASURES QUERY FAST_EXTENTS_MAP");
+      System.exit(1);
+    }
+
+    final int[] sizes = Util.parseIntArray(args[0]);
+    final int warmups = Integer.parseInt(args[1]);
+    final int measures = Integer.parseInt(args[2]);
+    String query;
+    int queryId;
+    switch (args[3]) {
+    case "allInstances":
+      query = allInstances;
+      queryId = 0;
+      break;
+    case "reqToTraces":
+      query = reqToTraces;
+      queryId = 1;
+      break;
+    case "traceToReqs":
+      query = traceToReqs;
+      queryId = 2;
+      break;
+    default:
+      query = allInstances;
+      queryId = 0;
+    }
+    final boolean fastExtentsMap = Boolean.parseBoolean(args[3]);
+
+    setUp();
+    benchQueryOnAllModels(query, queryId, fastExtentsMap, sizes, warmups, measures);
   }
 
 }

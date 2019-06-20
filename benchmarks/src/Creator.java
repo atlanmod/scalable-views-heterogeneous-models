@@ -143,12 +143,7 @@ public class Creator {
     w.close();
   }
 
-  public static void main(String args[]) throws Exception {
-    if (args.length != 1) {
-      System.err.println("Usage: Creator SIZES");
-      System.exit(1);
-    }
-
+  static void createModels(int[] sizes) throws Exception {
     // Init EMF + NeoEMF
     {
       PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
@@ -160,9 +155,9 @@ public class Creator {
            PersistentResourceFactory.getInstance());
     }
 
-    // Create trace models
-    final int[] sizes = Util.parseIntArray(args[0]);
+    System.out.println("\n### Create models\n");
 
+    // Create trace models
     for (int s : sizes) {
       Util.time(String.format("Create Java trace model of size %d", s), () -> {
         final Resource r = Util.createResource("/models/java-trace/%d.xmi", s);
@@ -199,5 +194,15 @@ public class Creator {
       createTraceView(new File(String.format("views/neoemf-trace/trace-%d.eview", s)),
                       String.format("neoemf-trace/%d.graphdb", s));
     }
+  }
+
+  public static void main(String args[]) throws Exception {
+    if (args.length != 1) {
+      System.err.println("Usage: Creator SIZES");
+      System.exit(1);
+    }
+
+    final int[] sizes = Util.parseIntArray(args[0]);
+    createModels(sizes);
   }
 }

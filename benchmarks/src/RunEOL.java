@@ -60,12 +60,12 @@ public class RunEOL {
     }
     module.getContext().setOperationFactory(new EolOperationFactory());
 
+    Resource view = Util.loadResource(viewPath);
+
     // Add view using the EMF Views EMC
-    EMFViewsModel m = new EMFViewsModel();
+    EMFViewsModel m = new EMFViewsModel(view);
     m.setForceDefaultEMFDriver(forceEMFEMC);
     m.setName("VIEW");
-    m.setModelFileUri(viewPath);
-    m.delegator = new VirtualLinkMatcher();
     time("Load view", () -> m.load());
     module.getContext().getModelRepository().addModel(m);
 
@@ -75,6 +75,61 @@ public class RunEOL {
     } finally {
       m.disposeModel();
     }
+  }
+
+  static void benchQueryOnAllModels(URI programPath, boolean forceEMFEMC, int[] sizes, int warmups, int measures) throws Exception {
+    String queryName = programPath.lastSegment();
+    String fee = forceEMFEMC ? "with EMF EMC" : "";
+
+    for (int s : sizes) {
+      Util.bench(String.format("EOL query %s for XMI view of size %d %s", queryName, s, fee), () -> {
+        benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), programPath, forceEMFEMC);
+      }, warmups, measures);
+
+      Util.bench(String.format("EOL query %s for NeoEMF view of size %d %s", queryName, s, fee), () -> {
+        benchQuery(Util.resourceURI("/views/neoemf-trace/%d.eview", s), programPath, forceEMFEMC);
+      }, warmups, measures);
+    }
+  }
+
+  static void benchAllQueries(int[] sizes, int warmups, int measures) throws Exception {
+    setup();
+    final URI[] queries = { pathURI("queries/allInstances.eol"),
+                            pathURI("queries/reqToTraces.eol"),
+                            pathURI("queries/traceToReqs.eol") };
+
+    for (URI q : queries) {
+      benchQueryOnAllModels(q, false, sizes, warmups, measures);
+      benchQueryOnAllModels(q, true, sizes, warmups, measures);
+    }
+
+  }
+
+  static void setup() {
+    // Init Ecore packages that may be used by viewpoints
+    UMLPackage.eINSTANCE.eClass();
+    org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
+    org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
+    TracePackage.eINSTANCE.eClass();
+    TraceneoemfPackage.eINSTANCE.eClass();
+    VirtualLinksPackage.eINSTANCE.eClass();
+    VirtuallinksneoemfPackage.eINSTANCE.eClass();
+
+    // Register model file extensions to be opened as EMF models
+    Map<String, Object> ext2Fact = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+
+    ext2Fact.put("ecore", new EcoreResourceFactoryImpl());
+    ext2Fact.put("xmi", new XMIResourceFactoryImpl());
+    Resource.Factory epsRF = new Resource.Factory() {
+      @Override
+      public Resource createResource(URI uri) {
+        return new EpsilonResource(uri);
+      }
+    };
+    ext2Fact.put("csv", epsRF);
+    ext2Fact.put("uml", new UMLResourceFactoryImpl());
+    ext2Fact.put("eview", new EmfViewsFactory());
+    ext2Fact.put("eviewpoint", new EmfViewsFactory());
   }
 
   public static void main(String[] args) throws Exception {
@@ -115,43 +170,7 @@ public class RunEOL {
       }
     }
 
-    // Init Ecore packages that may be used by viewpoints
-    UMLPackage.eINSTANCE.eClass();
-    org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
-    org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
-    TracePackage.eINSTANCE.eClass();
-    TraceneoemfPackage.eINSTANCE.eClass();
-    VirtualLinksPackage.eINSTANCE.eClass();
-    VirtuallinksneoemfPackage.eINSTANCE.eClass();
-
-    // Register model file extensions to be opened as EMF models
-    Map<String, Object> ext2Fact = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-
-    ext2Fact.put("ecore", new EcoreResourceFactoryImpl());
-    ext2Fact.put("xmi", new XMIResourceFactoryImpl());
-    Resource.Factory epsRF = new Resource.Factory() {
-      @Override
-      public Resource createResource(URI uri) {
-        return new EpsilonResource(uri);
-      }
-    };
-    ext2Fact.put("csv", epsRF);
-    ext2Fact.put("uml", new UMLResourceFactoryImpl());
-    ext2Fact.put("eview", new EmfViewsFactory());
-    ext2Fact.put("eviewpoint", new EmfViewsFactory());
-
-    // Dumb dance to have final args passed to lambda
-    final URI p = programPath;
-    final boolean f = forceEMFEMC;
-
-    for (int s : sizes) {
-      Util.bench(String.format("EOL query %s for XMI view of size %d", p, s), () -> {
-        benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), p, f);
-      }, warmups, measures);
-
-      Util.bench(String.format("EOL query %s for NeoEMF view of size %d", p, s), () -> {
-        benchQuery(Util.resourceURI("/views/neoemf-trace/%d.eview", s), p, f);
-      }, warmups, measures);
-    }
+    setup();
+    benchQueryOnAllModels(programPath, forceEMFEMC, sizes, warmups, measures);
   }
 }

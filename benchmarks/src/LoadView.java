@@ -48,46 +48,35 @@ public class LoadView {
     });
   }
 
-  public static void main(String[] args) throws Exception {
-    if (args.length != 3) {
-      System.err.println("Usage: LoadView SIZES WARMUPS MEASURES");
-      System.exit(1);
-    }
-
+  static void loadAll(int[] sizes, int warmups, int measures) throws Exception {
     // Initialize EMF
-    Util.time("Initialize EMF", () -> {
-      Map<String, Object> map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-      map.put("eviewpoint", new EmfViewsFactory());
-      map.put("eview", new EmfViewsFactory());
-      map.put("xmi", new XMIResourceFactoryImpl());
-      map.put("ecore", new EcoreResourceFactoryImpl());
-      map.put("uml", new UMLResourceFactoryImpl());
-      Resource.Factory epsRF = new Resource.Factory() {
-        @Override
-        public Resource createResource(URI uri) {
-          return new EpsilonResource(uri);
-        }
-      };
-      map.put("csv", epsRF);
+    Map<String, Object> map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+    map.put("eviewpoint", new EmfViewsFactory());
+    map.put("eview", new EmfViewsFactory());
+    map.put("xmi", new XMIResourceFactoryImpl());
+    map.put("ecore", new EcoreResourceFactoryImpl());
+    map.put("uml", new UMLResourceFactoryImpl());
+    Resource.Factory epsRF = new Resource.Factory() {
+      @Override
+      public Resource createResource(URI uri) {
+        return new EpsilonResource(uri);
+      }
+    };
+    map.put("csv", epsRF);
 
-      // Load metamodels
-      UMLPackage.eINSTANCE.eClass();
-      org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
-      org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
-      TracePackage.eINSTANCE.eClass();
-      TraceneoemfPackage.eINSTANCE.eClass();
-      VirtualLinksPackage.eINSTANCE.eClass();
-      VirtuallinksneoemfPackage.eINSTANCE.eClass();
+    // Load metamodels
+    UMLPackage.eINSTANCE.eClass();
+    org.eclipse.gmt.modisco.java.emf.JavaPackage.eINSTANCE.eClass();
+    org.eclipse.gmt.modisco.java.cdo.java.JavaPackage.eINSTANCE.eClass();
+    TracePackage.eINSTANCE.eClass();
+    TraceneoemfPackage.eINSTANCE.eClass();
+    VirtualLinksPackage.eINSTANCE.eClass();
+    VirtuallinksneoemfPackage.eINSTANCE.eClass();
 
-      PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
-                                                 BlueprintsPersistenceBackendFactory.getInstance());
-      Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap()
-      .put(BlueprintsURI.SCHEME, PersistentResourceFactory.getInstance());
-    });
-
-    final int[] sizes = Util.parseIntArray(args[0]);
-    final int warmups = Integer.parseInt(args[1]);
-    final int measures = Integer.parseInt(args[2]);
+    PersistenceBackendFactoryRegistry.register(BlueprintsURI.SCHEME,
+      BlueprintsPersistenceBackendFactory.getInstance());
+    Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap()
+    .put(BlueprintsURI.SCHEME, PersistentResourceFactory.getInstance());
 
     // Test on XMI trace
     for (int s : sizes) {
@@ -116,6 +105,18 @@ public class LoadView {
         loadAndCount(Util.resourceURI("/views/neoemf-trace/%d.eview", s));
       }, warmups, measures);
     }
+  }
 
+  public static void main(String[] args) throws Exception {
+    if (args.length != 3) {
+      System.err.println("Usage: LoadView SIZES WARMUPS MEASURES");
+      System.exit(1);
+    }
+
+    final int[] sizes = Util.parseIntArray(args[0]);
+    final int warmups = Integer.parseInt(args[1]);
+    final int measures = Integer.parseInt(args[2]);
+
+    loadAll(sizes, warmups, measures);
   }
 }

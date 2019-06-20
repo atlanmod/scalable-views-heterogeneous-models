@@ -153,7 +153,7 @@ public class Util {
 
   static void bench(String task, Thunk f,
                     int warmups, int measures) throws Exception {
-    System.out.printf("\nBenching %s... (%d warmups/%d measures)\n", task, warmups, measures);
+    System.out.printf("\n### Benching %s... (%d warmups/%d measures)\n", task, warmups, measures);
 
     for (int i=0; i < warmups; ++i) {
       System.out.printf("\n-- Warmup %d\n", i+1);
@@ -164,8 +164,6 @@ public class Util {
       System.out.printf("\n== Measure %d\n", i+1);
       time(String.format("== Measure %d", i+1), f);
     }
-
-    System.out.printf("Bench finished: %s\n", task);
   }
 
   static void bench(String task, Thunk f) throws Exception {
