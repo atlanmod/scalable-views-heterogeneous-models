@@ -48,7 +48,7 @@ public class LoadView {
     });
   }
 
-  static void loadAll(int[] sizes, int warmups, int measures) throws Exception {
+  static void setup() {
     // Initialize EMF
     Map<String, Object> map = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
     map.put("eviewpoint", new EmfViewsFactory());
@@ -77,6 +77,10 @@ public class LoadView {
       BlueprintsPersistenceBackendFactory.getInstance());
     Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap()
     .put(BlueprintsURI.SCHEME, PersistentResourceFactory.getInstance());
+  }
+
+  static void loadAll(int[] sizes, int warmups, int measures) throws Exception {
+    setup();
 
     // Test on XMI trace
     for (int s : sizes) {
@@ -96,6 +100,24 @@ public class LoadView {
     for (int s : sizes) {
       Util.bench(String.format("Load NeoEMF trace of size %d", s), () -> {
         loadAndCount(Util.resourceURI("/models/neoemf-trace/%d.graphdb", s));
+      }, warmups, measures);
+    }
+
+    // Test on view with NeoEMF trace
+    for (int s : sizes) {
+      Util.bench(String.format("Load view with NeoEMF trace of size %d", s), () -> {
+        loadAndCount(Util.resourceURI("/views/neoemf-trace/%d.eview", s));
+      }, warmups, measures);
+    }
+  }
+
+  static void loadViews(int[] sizes, int warmups, int measures) throws Exception {
+    setup();
+
+    // Test on view with XMI trace
+    for (int s : sizes) {
+      Util.bench(String.format("Load view with XMI trace of size %d", s), () -> {
+        loadAndCount(Util.resourceURI("/views/java-trace/%d.eview", s));
       }, warmups, measures);
     }
 

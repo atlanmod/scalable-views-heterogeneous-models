@@ -17,10 +17,11 @@ public class RunAll {
       System.exit(1);
     }
 
-    // Creation only need to run once... but isn't a bottleneck
-    //Creator.createModels(sizes);
-    //LoadView.loadAll(sizes, warmups, measures);
-    //OCLQuery.benchAllQueries(sizes, warmups, measures);
+    // Creation only need to run once... but for some reason the NeoEMF models
+    // can get corrupted. Better recreate fresh on each run.
+    Creator.createModels(sizes);
+    LoadView.loadViews(sizes, warmups, measures);
+    OCLQuery.benchAllQueries(sizes, warmups, measures);
     RunEOL.benchAllQueries(sizes, warmups, measures);
   }
 }

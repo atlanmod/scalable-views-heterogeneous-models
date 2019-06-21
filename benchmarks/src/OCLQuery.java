@@ -153,14 +153,30 @@ public class OCLQuery {
     }
   }
 
+  static void benchQueryOnViews(String query, int queryId, boolean fastExtentsMap, int[] sizes, int warmups, int measures) throws Exception {
+    String fem = fastExtentsMap ? "with fast extents map" : "";
+
+    for (int s : sizes) {
+      Util.bench(String.format("OCL query %d for full view on XMI trace of size %d %s", queryId, s, fem), () -> {
+        benchQuery(Util.resourceURI("/views/java-trace/%d.eview", s), query, fastExtentsMap);
+      }, warmups, measures);
+    }
+
+    for (int s : sizes) {
+      Util.bench(String.format("OCL query %d for full view on NeoEMF trace of size %d %s", queryId, s, fem), () -> {
+        benchQuery(Util.resourceURI("/views/neoemf-trace/%d.eview", s), replaceTrace(query), fastExtentsMap);
+      }, warmups, measures);
+    }
+  }
+
   static void benchAllQueries(int[] sizes, int warmups, int measures) throws Exception {
     final String[] queries = {allInstances, reqToTraces, traceToReqs};
 
     setUp();
 
     for (int i=0; i < queries.length; ++i) {
-      benchQueryOnAllModels(queries[i], i, false, sizes, warmups, measures);
-      benchQueryOnAllModels(queries[i], i, true, sizes, warmups, measures);
+      benchQueryOnViews(queries[i], i, false, sizes, warmups, measures);
+      benchQueryOnViews(queries[i], i, true, sizes, warmups, measures);
     }
   }
 

@@ -36,41 +36,48 @@ public class RunEOL {
     return URI.createFileURI(relativePath).resolve(here);
   }
 
-  public interface Thunk {
-    void apply() throws Exception;
+  // Cannot use java.util.Function because of the Exception
+  public interface Thunk<T> {
+    T apply() throws Exception;
   }
 
-  static void time(String task, Thunk f) throws Exception {
+  static <T> T time(String task, Thunk<T> f) throws Exception {
     Instant start = Instant.now();
-    f.apply();
+    T t = f.apply();
     Instant end = Instant.now();
     System.out.printf("%s [%dms]\n", task, ChronoUnit.MILLIS.between(start, end));
+    return t;
   }
 
   static void benchQuery(URI viewPath, URI programPath, boolean forceEMFEMC) throws Exception {
     // Parse EOL program
-    EolModule module = new EolModule();
-    module.parse(new File(programPath.toFileString()));
-    if (module.getParseProblems().size() > 0) {
-      System.err.println("Parse errors occured...");
-      for (ParseProblem problem : module.getParseProblems()) {
-        System.err.println(problem.toString());
+    EolModule module = time("Parse EOL", () -> {
+      EolModule m = new EolModule();
+      m.parse(new File(programPath.toFileString()));
+      if (m.getParseProblems().size() > 0) {
+        System.err.println("Parse errors occured...");
+        for (ParseProblem problem : m.getParseProblems()) {
+          System.err.println(problem.toString());
+        }
+        throw new Exception("Error in parsing ECL file.  See stderr for details");
       }
-      throw new Exception("Error in parsing ECL file.  See stderr for details");
-    }
-    module.getContext().setOperationFactory(new EolOperationFactory());
+      m.getContext().setOperationFactory(new EolOperationFactory());
+      return m;
+    });
 
-    Resource view = Util.loadResource(viewPath);
+    Resource view;
+    view = time("Load view", () -> Util.loadResource(viewPath));
 
     // Add view using the EMF Views EMC
     EMFViewsModel m = new EMFViewsModel(view);
     m.setForceDefaultEMFDriver(forceEMFEMC);
     m.setName("VIEW");
-    time("Load view", () -> m.load());
+    m.load();
     module.getContext().getModelRepository().addModel(m);
 
     // Execute EOL
     try {
+      System.out.print("Result: ");
       time("EOL execute query", () -> module.execute());
     } finally {
       m.disposeModel();
@@ -96,7 +103,8 @@ public class RunEOL {
     setup();
     final URI[] queries = { pathURI("queries/allInstances.eol"),
                             pathURI("queries/reqToTraces.eol"),
-                            pathURI("queries/traceToReqs.eol") };
+                            pathURI("queries/traceToReqs.eol")
+                            };
 
     for (URI q : queries) {
       benchQueryOnAllModels(q, false, sizes, warmups, measures);
