@@ -4,11 +4,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.atlanmod.emfviews.core.View;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.LazyExtentMap;
+
+import org.atlanmod.emfviews.core.ViewResource;
 
 import fr.inria.atlanmod.neoemf.resource.PersistentResource;
 
@@ -31,9 +32,9 @@ public class FastExtentMap implements Map<EClass, Set<EObject>> {
   public Set<EObject> get(Object key) {
     Resource r = root.eResource();
 
-    if (r instanceof View) {
+    if (r instanceof ViewResource) {
       EClass k = (EClass) key;
-      delegate.put(k, new HashSet<>(((View) r).getAllInstances(k.getName()).collect(Collectors.toList())));
+      delegate.put(k, new HashSet<>(((ViewResource) r).getView().getAllInstances(k.getName()).collect(Collectors.toList())));
     } else if (r instanceof PersistentResource) {
       EClass k = (EClass) key;
       delegate.put(k, new HashSet<>(((PersistentResource) r).getAllInstances(k)));
