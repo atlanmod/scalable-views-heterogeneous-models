@@ -23,15 +23,10 @@ import virtuallinksneoemf.VirtuallinksneoemfPackage;
 
 public class LoadView {
 
-  static Resource view;
   static void loadAndCount(URI uri) throws Exception {
-    Util.time("Load view", () -> {
-      view = Util.loadResource(uri);
-    });
+    Resource view = Util.time("Load view", () -> Util.loadResource(uri));
 
-    Util.time("Get first element", () -> {
-      view.getContents().get(0);
-    });
+    Util.time("Get first element", () -> view.getContents().get(0));
 
     Util.time("Get all elements", () -> {
       int count = 0;
@@ -41,10 +36,12 @@ public class LoadView {
         it.next();
       }
       System.out.printf("View has %d elements\n", count);
+      return 0;
     });
 
     Util.time("Unload view", () -> {
       Util.closeResource(view);
+      return 0;
     });
   }
 

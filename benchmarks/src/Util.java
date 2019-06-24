@@ -4,10 +4,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -136,33 +141,59 @@ public class Util {
     }
   }
 
+  public interface ThunkRet<T> {
+    T apply() throws Exception;
+  }
+
   public interface Thunk {
     void apply() throws Exception;
   }
 
-  static void time(String task, Thunk f) throws Exception {
+  static Map<String, Map<String, List<Long>>> results = new HashMap<>();
+  static Map<String, List<Long>> currentBench;
+  static boolean record = true;
+
+  static <T> T time(String task, ThunkRet<T> f) throws Exception {
     Instant start = Instant.now();
-    f.apply();
+    T ret = f.apply();
     Instant end = Instant.now();
     Runtime runtime = Runtime.getRuntime();
+    long dt = ChronoUnit.MILLIS.between(start, end);
     long endMemory = runtime.totalMemory() - runtime.freeMemory();
-    System.out.printf("%s [%dms] [%dMB]\n", task,
-                      ChronoUnit.MILLIS.between(start, end),
-                      endMemory / 1000000);
+    System.out.printf("%s [%dms] [%dMB]\n", task, dt, endMemory / 1000000);
+
+    if (currentBench != null && record)
+      currentBench.computeIfAbsent(task, (t) -> new ArrayList<>()).add(dt);
+
+    return ret;
   }
 
-  static void bench(String task, Thunk f,
-                    int warmups, int measures) throws Exception {
+  static void bench(String task, Thunk f, int warmups, int measures) throws Exception {
     System.out.printf("\n### Benching %s... (%d warmups/%d measures)\n", task, warmups, measures);
+
+    currentBench = results.computeIfAbsent(task, (t) -> new HashMap<>());
 
     for (int i=0; i < warmups; ++i) {
       System.out.printf("\n-- Warmup %d\n", i+1);
-      time(String.format("-- Warmup %d", i+1), f);
+      record = false;
+      f.apply();
+      record = true;
+      System.out.printf("-- Warmup %d\n", i+1);
     }
 
     for (int i=0; i < measures; ++i) {
       System.out.printf("\n== Measure %d\n", i+1);
-      time(String.format("== Measure %d", i+1), f);
+      f.apply();
+      System.out.printf("== Measure %d\n", i+1);
+    }
+
+    // Output results
+    System.out.printf("\n# Results for: %s\n", task);
+    for (Entry<String, List<Long>> kv : currentBench.entrySet()) {
+      String values = kv.getValue().stream()
+        .map(l -> l.toString())
+        .collect(Collectors.joining(",", "[", "]"));
+      System.out.printf("%s: %s\n", kv.getKey(), values);
     }
   }
 

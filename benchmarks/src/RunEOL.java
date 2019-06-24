@@ -36,22 +36,9 @@ public class RunEOL {
     return URI.createFileURI(relativePath).resolve(here);
   }
 
-  // Cannot use java.util.Function because of the Exception
-  public interface Thunk<T> {
-    T apply() throws Exception;
-  }
-
-  static <T> T time(String task, Thunk<T> f) throws Exception {
-    Instant start = Instant.now();
-    T t = f.apply();
-    Instant end = Instant.now();
-    System.out.printf("%s [%dms]\n", task, ChronoUnit.MILLIS.between(start, end));
-    return t;
-  }
-
   static void benchQuery(URI viewPath, URI programPath, boolean forceEMFEMC) throws Exception {
     // Parse EOL program
-    EolModule module = time("Parse EOL", () -> {
+    EolModule module = Util.time("Parse EOL", () -> {
       EolModule m = new EolModule();
       m.parse(new File(programPath.toFileString()));
       if (m.getParseProblems().size() > 0) {
@@ -66,7 +53,7 @@ public class RunEOL {
     });
 
     Resource view;
-    view = time("Load view", () -> Util.loadResource(viewPath));
+    view = Util.time("Load view", () -> Util.loadResource(viewPath));
 
     // Add view using the EMF Views EMC
     EMFViewsModel m = new EMFViewsModel(view);
@@ -78,7 +65,7 @@ public class RunEOL {
     // Execute EOL
     try {
       System.out.print("Result: ");
-      time("EOL execute query", () -> module.execute());
+      Util.time("EOL execute query", () -> module.execute());
     } finally {
       m.disposeModel();
     }

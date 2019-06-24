@@ -61,25 +61,16 @@ public class OCLQuery {
     }
   }
 
-  static Resource resource;
-  static Query<EClassifier, EClass, EObject> query;
-  static EObject root;
-
   static void benchQuery(URI uri, String queryString, boolean fastExtentsMap) throws Exception {
     // Need to recreate the query since otherwise it does not get re-evaluated for subsequent resources
     // Init OCL query
     OCL ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
     OCLHelper oclHelper = ocl.createOCLHelper();
 
-    Util.time("Load resource", () -> {
-      resource = Util.loadResource(uri);
-    });
+    Resource resource = Util.time("Load resource", () -> Util.loadResource(uri));
+    EObject root = Util.time("Get root element", () -> resource.getContents().get(0));
 
-    Util.time("Get root element", () -> {
-      root = resource.getContents().get(0);
-    });
-
-    Util.time("Create query", () -> {
+    Query<EClassifier, EClass, EObject> query = Util.time("Create query", () -> {
       // Fetch context from loaded resource since we need VirtualEClass instances here
       // for queries on views to work
       EObject context = root.eClass();
@@ -87,16 +78,18 @@ public class OCLQuery {
         ocl.setExtentMap(new FastExtentMap(root));
       }
       oclHelper.setContext(context);
-      query = ocl.createQuery(oclHelper.createQuery(queryString));
+      return ocl.createQuery(oclHelper.createQuery(queryString));
     });
 
     Util.time("Evaluate query", () -> {
       System.out.printf("Result: %s\n", query.evaluate(root));
+      return 0;
     });
 
     Util.time("Unload resource", () -> {
       ocl.dispose();
       Util.closeResource(resource);
+      return 0;
     });
   }
 

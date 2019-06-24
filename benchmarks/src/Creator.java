@@ -117,6 +117,7 @@ public class Creator {
           logs.add(log);
         }
       }
+      return 0;
     });
   }
 
@@ -163,6 +164,7 @@ public class Creator {
         final Resource r = Util.createResource("/models/java-trace/%d.xmi", s);
         createTrace(s, r, TraceFactory.eINSTANCE);
         r.save(null);
+        return 0;
       });
     }
 
@@ -176,6 +178,7 @@ public class Creator {
         createTrace(s, r, TraceneoemfFactory.eINSTANCE);
         r.save(graphOptions);
         ((PersistentResource) r).close();
+        return 0;
       });
     }
 
