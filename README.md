@@ -1,87 +1,48 @@
 # Scalable Views on Heterogeneous Models
 
-Benchmarks for combining EMF Views, NeoEMF and CDO on a MegaM@Rt2 use case.
+Benchmarks for combining EMF Views, NeoEMF, CDO and Epsilon models on a
+MegaM@Rt2 use case.
 
 ## Running the benchmarks
 
-The easiest option is to use our pre-built [Docker image][docker-image] which
-contains everything you need to run the benchmarks.
+First clone this repository and its dependencies, which come as git submodules:
 
-If you want to change the code of the benchmarks, or are using other versions of
-EMF Views or NeoEMF, then you'll need to follow the manual instructions.
+```
+git clone git@github.com:atlanmod/scalable-views-heterogeneous-models.git
+git submodule update --init
+```
 
-## Running the benchmarks with the Docker image
-With Docker installed, you only have to fetch the pre-built image.  In order to
-run the benchmarks, you first need to create the models.  Note: if you use the
-defaults settings, you will need around **21GB of free space** on disk in order
-to generate the models.
+**Warning**: the [SOM-Research/NeoEMF][som-neo] dependency weighs 3GB.
 
-**Note to Windows users**: the Docker image is at the moment not compatible with
-Windows due to filepath issues.  The image works fine on Linux.  On Windows, you
-still have the option of running the image inside a VM, but expect a degraded
-performance.
+Once the pull is complete, you should add all the projects in Eclipse (4.7 and
+up should work).  You may need additional dependencies, like Epsilon or CDO.
 
-0. First, create an empty directory that will hold the models and views:
-   ```
-   mkdir workspace
-   cd workspace
-   ```
+Once the build is complete, simply run `benchmarks/src/RunAll.java` as a Java
+program.  This will run all benchmarks using the default parameters:
 
-1. To create the models, simply run:
-   ```
-   docker run -v `pwd`:/root/workspace atlanmod/scalable-views create-models
-   ```
-   This will mount the current directory as a volume where the container expects
-   to write its files.
+```
+sizes = {10, 100, 1000, 10000, 100000, 1000000};
+warmups = 5;
+measures = 10;
+```
 
-   Creating the models can take up to 20 minutes with the default settings (see
-   the [Sizes](#sizes) parameter).
-
-2. Then, to create the weaving models used by the views:
-   ```
-   docker run -v `pwd`:/root/workspace atlanmod/scalable-views create-weaving-models
-   ```
-   This can take around 30 minutes with default sizes.
-
-After that, you can run the benchmarks:
-
-3. The load-view benchmark:
-   ```
-   docker run  -v `pwd`:/root/workspace atlanmod/scalable-views load-view
-   ```
-
-4. The ocl-query benchmark can run 3 different queries (see [Queries](#queries)):
-   ```
-   docker run  -v `pwd`:/root/workspace atlanmod/scalable-views ocl-query
-   ```
+To customize the parameters or run individual benchmarks, continue reading.
 
 ### Benchmark parameters
 ```
-Usage: [-s SIZES] create-models
-       [-s SIZES] create-weaving-models
-       [-s SIZES -w WARMUPS -m MEASURES] load-view
-       [-s SIZES -w WARMUPS -m MEASURES -q QUERY -f FAST_EXTENTS_MAP] ocl-query
-
-Additional options:
-  -j ARGS    Additional arguments to pass to the JVM
-
+Usage: RunAll SIZES WARMUPS MEASURES
 ```
 
 #### Sizes
 The `SIZES` parameters is an array of integers which specify which sizes of
-models should be generated or used.  E.g.:
+models should be generated and used.  E.g.:
 
 ```
-docker run ... -s '[10,20,30]' create-models
+RunAll [10,20,30]
 ```
-(the `...` stands for the volume argument and image name)
 
-This would create three models of size 10, 20, and 30.  You could then run the
-benchmarks on these sizes using the same argument:
-
-```
-docker run ... -s '[10,20,30]' load-view
-```
+This would create three trace models of size 10, 20, and 30 and run the
+benchmarks on them.
 
 The default value of SIZES is `[10,100,1000,10000,100000,1000000]`.  Larger
 models take considerably more time to generate, and will also take more time to
@@ -89,62 +50,66 @@ run in the benchmarks.
 
 #### Warmups and measures
 To get multiple data points for the benchmarks, you can ask for multiple
-measures with the `-m` option (an integer).  E.g.:
+measures.  E.g.:
 
 ```
-docker run ... -m 5 ocl-query
+RunAll [10] 1 5
 ```
 
-Will run the OCL query 5 times for each specified model size.
+Will run each benchmark 6 times (1 warmup round + 5 measures) for each specified
+model size.
 
-Additionally, To avoid noise in the data due to JIT optimizations, you may want
-to do some warmup rounds using the `-w` option (an integer).  Warmup rounds will
-execute the exact same benchmark, but you would usually discard their times when
-preparing the results.
-
-#### Queries and extents map
-There are 3 predefined OCL queries you can use for benchmarking.  Choose one
-with the `-q` option.
-
-1. `-q allInstances` is a simple query that only counts objects in the Trace
-   model (the largest model in the view).
-2. `-q reqToTraces` and `-q traceToReqs` are two queries that navigate the whole
-   views (and hence all contributing models).
-
-For the `ocl-query` benchmark, you can also choose between the fast extents map
-(`true`), or the default one (`false`):
-
-```
-docker run ... -f true -q allInstances ocl-query
-```
+Warmup wounds are useful to avoid noise in the data due to JIT optimizations.
+Warmup rounds will execute the exact same benchmark code, but their time will be
+discarded in the results.
 
 #### JVM Arguments
-You can tweak the arguments passed to the JVM.  By default, the concurrent mark
-and sweep garbage collector is used (`-XX:+UseConcMarkSweepGC`) and the max heap
-size is increased to 8G.  If you are running into out of memory exceptions, you
-want want to increase that further:
+You may need to tweak the arguments passed to the JVM.  For example, by using
+the concurrent mark and sweep garbage collector (`-XX:+UseConcMarkSweepGC`) or
+increasing the max heap size to 8G.  If you are running into out of memory
+exceptions, you want want to increase that even further.
 
 ```
-docker run ... -j "-XX:+UseConcMarkSweepGC -Xmx16g" load-view
+-XX:+UseConcMarkSweepGC -Xmx16g
 ```
 
-## Manual instructions
-The benchmarks are Eclipse projects.  You'll need the following dependencies:
+### Running individual benchmarks
+`RunAll` will, as the name implies, run all the benchmarks.  You can also run
+the 3 benchmarks individually by running them as Java programs:
 
-1. Install [EMF Views (integrate-neoemf branch)](https://github.com/atlanmod/emfviews/tree/integrate-neoemf)
-2. Install [NeoEMF (graph-long-list-support branch)](https://github.com/SOM-Research/NeoEMF/tree/graph-long-list-support)
-3. Install CDO 4.6 from the Eclipse repositories.
+```
+├── LoadView.java
+├── OCLQuery.java
+├── RunEOL.java
+```
 
-Once you are up and running, you need to generate the models.
+- `LoadView` loads all views and enumerate their elements.
+- `OCLQuery` runs 3 OCL queries on views.
+- `RunEOL` runs 3 EOL queries on views.
 
-1. Run `benchmarks.Creator` to create all the models.  This can take up to 20 minutes.
-2. Run `cdo-model.Importer` to create the Java CDO model.  This should take less than a minute.
-3. Run `benchmarks.BuildWeavingModel`.  This should take around 20 minutes.
+These program all understand the `sizes`, `warmups` and `measures` arguments,
+but may also have extra arguments (e.g., the RunEOL benchmark can take an EOL
+program to run).
 
-Then, you should be able to run the benchmarks:
+### What else is in there?
 
-- `benchmarks.LoadView` loads views and counts their elements
-- `benchmarks.OCLQuery` can run 3 different OCL queries on views
+
+```
+├── metamodels  # Metamodels used by views
+├── models      # Models used by views
+├── queries     # EOL queries
+├── src
+│   ├── Creator.java             # Create trace models for benchmarking
+│   ├── FastExtentMap.java       # Optimize the allInstances() OCL call
+│   ├── LoadView.java            # Bench loading the views
+│   ├── OCLQuery.java            # Bench running OCL queries on the views
+│   ├── RunAll.java              # Create trace models and run all benchmarks
+│   ├── RunEOL.java              # Bench running EOL queries on the views
+│   ├── Util.java                # Timing stuff, loading resources used by benchmarks
+│   ├── VirtualLinkMatcher.java  # Optimize loading of views with large traces
+│   └── log4j2.xml               # Log4j configuration (reduce NeoEMF verbosity)
+└── views            # View files and trace models generated by Creator
+```
 
 ## Copying
 You are free to redistribute and modify all the code and models under the terms
@@ -153,4 +118,5 @@ version 3 of the License, or (at your option) any later version.
 
 See [LICENSE](LICENSE).
 
-[docker-image]: https://hub.docker.com/r/atlanmod/scalable-views/
+
+[som-neo]: https://github.com/SOM-Research/NeoEMF/
