@@ -1,0 +1,14 @@
+[submodule "emfviews"]
+	path = emfviews
+	url = git@github.com:atlanmod/emfviews.git
+	branch = load-epsilon-models
+[submodule "NeoEMF"]
+	path = NeoEMF
+	url = git@github.com:SOM-Research/NeoEMF.git
+	branch = graph-long-list-support
+[submodule "EMC-EMFViews"]
+	path = EMC-EMFViews
+	url = git@github.com:SOM-Research/EMC-EMFViews.git
+[submodule "emc-neoemf"]
+	path = emc-neoemf
+	url = git@github.com:gdaniel/emc-neoemf.git
