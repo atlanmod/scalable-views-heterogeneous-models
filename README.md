@@ -8,7 +8,7 @@ MegaM@Rt2 use case.
 First clone this repository and its dependencies, which come as git submodules:
 
 ```
-git clone git@github.com:atlanmod/scalable-views-heterogeneous-models.git
+git clone https://github.com/atlanmod/scalable-views-heterogeneous-models.git
 git submodule update --init
 ```
 
