@@ -1,3 +1,5 @@
+import cdobackend.utils.Importer;
+
 public class RunAll {
   public static void main(String[] args) throws Exception {
     int[] sizes = {10, 100, 1000, 10000, 100000, 1000000};
@@ -19,6 +21,8 @@ public class RunAll {
 
     // Creation only need to run once... but for some reason the NeoEMF models
     // can get corrupted. Better recreate fresh on each run.
+    Importer.importCDO(Util.resourceURI("/../cdo-model/model/petstore-java.xmi"),
+                       Util.resourceURI("/models/petstore-java.cdo"));
     Creator.createModels(sizes);
     LoadView.loadViews(sizes, warmups, measures);
     OCLQuery.benchAllQueries(sizes, warmups, measures);

@@ -15,7 +15,16 @@ git submodule update --init
 **Warning**: the [SOM-Research/NeoEMF][som-neo] dependency weighs 3GB.
 
 Once the pull is complete, you should add all the projects in Eclipse (4.7 and
-up should work).  You may need additional dependencies, like Epsilon or CDO.
+up should work).  You may need additional dependencies:
+
+- Epsilon
+- CDO
+- UML
+- RMF
+- MoDisco
+
+You also need to build the NeoEMF update site, as they are Maven projects.  See
+the [build instructions](https://github.com/SOM-Research/NeoEMF#build).
 
 Once the build is complete, simply run `benchmarks/src/RunAll.java` as a Java
 program.  This will run all benchmarks using the default parameters:

@@ -12,4 +12,7 @@ Require-Bundle: org.eclipse.emf.cdo,
  org.eclipse.net4j.db.h2;bundle-version="4.3.100",
  org.eclipse.net4j.jvm;bundle-version="4.1.600",
  org.h2;bundle-version="1.3.168"
-Export-Package: cdobackend
+Export-Package: .,
+ cdobackend,
+ cdobackend.utils
+Import-Package: org.apache.commons.io
