@@ -35,15 +35,15 @@
 (((size . 10) (task . "Load view") (mean . "170.") (sdev . "4."))
  ((size . 100) (task . "Load view") (mean . "167.") (sdev . "4.")))
 
-(defun pp (results)
+(defun print-table (results)
   (insert (format "| Size | %s |\n" (alist-get 'task (car results))))
   (insert "|-\n")
   (dolist (r results)
     (insert (format "| %d | %s ± %s |\n" (log10 (alist-get 'size r))
                     (alist-get 'mean r) (alist-get 'sdev r)))))
 
-(pp (bench-task-mean-sdev "Load view with NeoEMF trace" "Load view"
-                          '(10 100 1000 10000 100000 1000000)))
+(print-table (bench-task-mean-sdev "Load view with NeoEMF trace" "Load view"
+                                   '(10 100 1000 10000 100000 1000000)))
 | Size | Load view |
 |-
 | 1 | 7982. ± 840. |
@@ -55,7 +55,7 @@
 
 (defun pp0 (bench task &optional suffix)
   (insert "\n\n" bench (or suffix "") "\n")
-  (pp (bench-task-mean-sdev bench task '(10 100 1000 10000 100000 1000000) suffix)))
+  (print-table (bench-task-mean-sdev bench task '(10 100 1000 10000 100000 1000000) suffix)))
 
 (pp0 "Load view with NeoEMF trace" "Load view")
 
