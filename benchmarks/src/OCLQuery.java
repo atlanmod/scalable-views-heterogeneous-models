@@ -201,7 +201,7 @@ public class OCLQuery {
       query = allInstances;
       queryId = 0;
     }
-    final boolean fastExtentsMap = Boolean.parseBoolean(args[3]);
+    final boolean fastExtentsMap = Boolean.parseBoolean(args[4]);
 
     setUp();
     benchQueryOnAllModels(query, queryId, fastExtentsMap, sizes, warmups, measures);
