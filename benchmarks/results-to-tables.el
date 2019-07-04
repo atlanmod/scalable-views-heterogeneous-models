@@ -67,22 +67,25 @@
 
 
 (defun print-table (results)
-  (insert (format "| Size | %s |\n" (alist-get 'task (car results))))
+  (insert (format "| Size | %s | sdev |\n" (alist-get 'task (car results))))
   (insert "|-\n")
   (dolist (r results)
-    (insert (format "| %d | %s ± %s |\n" (log10 (alist-get 'size r))
-                    (alist-get 'mean r) (alist-get 'sdev r)))))
+    (insert (format "| %d | %s | %s |\n"
+                    (log10 (alist-get 'size r))
+                    (alist-get 'mean r)
+                    (alist-get 'sdev r)))))
 
 (print-table (bench-task-mean-sdev "Load view with NeoEMF trace" "Load view"
                                    '(10 100 1000 10000 100000 1000000)))
-| Size | Load view |
+
+| Size | Load view | sdev |
 |-
-| 1 | 7982. ± 840. |
-| 2 | 6060. ± 101. |
-| 3 | 6013. ± 146. |
-| 4 | 7874. ± 159. |
-| 5 | 23138. ± 1323. |
-| 6 | 181645. ± 2779. |
+| 1 | 6942. | 637. |
+| 2 | 4975 | 93. |
+| 3 | 5030. | 102. |
+| 4 | 6290. | 95. |
+| 5 | 17885. | 127. |
+| 6 | 140492 | 1178. |
 
 (defun pp0 (bench task &optional suffix)
   (insert "\n\n" bench (or suffix "") "\n")
@@ -90,28 +93,29 @@
 
 (pp0 "Load view with NeoEMF trace" "Load view")
 
+
 Load view with NeoEMF trace
-| Size | Load view |
+| Size | Load view | sdev |
 |-
-| 1 | 7982. ± 840. |
-| 2 | 6060. ± 101. |
-| 3 | 6013. ± 146. |
-| 4 | 7874. ± 159. |
-| 5 | 23138. ± 1323. |
-| 6 | 181645. ± 2779. |
+| 1 | 6942. | 637. |
+| 2 | 4975 | 93. |
+| 3 | 5030. | 102. |
+| 4 | 6290. | 95. |
+| 5 | 17885. | 127. |
+| 6 | 140492 | 1178. |
 
 (pp0 "EOL query traceToReqs.eol for NeoEMF view" "Load view" " with EMF EMC")
 
-EOL query traceToReqs.eol for NeoEMF view with EMF EMC
-| Size | Load view |
-|-
-| 1 | 6126. ± 211. |
-| 2 | 6126 ± 102. |
-| 3 | 6197. ± 196. |
-| 4 | 7816. ± 158. |
-| 5 | 23494 ± 1086. |
-| 6 | 179842. ± 3111. |
 
+EOL query traceToReqs.eol for NeoEMF view with EMF EMC
+| Size | Load view | sdev |
+|-
+| 1 | 4985. | 66. |
+| 2 | 4969. | 56. |
+| 3 | 5166. | 80. |
+| 4 | 6276. | 105. |
+| 5 | 18116. | 234. |
+| 6 | 144896. | 2262. |
 
 ;; Outputting data to gnuplot to see if boxplots are worth it
 

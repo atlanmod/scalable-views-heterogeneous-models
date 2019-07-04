@@ -5,15 +5,19 @@ These are benchmarks made while integrating NeoEMF and EMF Views.  All times are
 in milliseconds, unless otherwise specified.  Sizes are in KB, as reported by
 ~ls--block-size=K~ for XMI files, and ~du~ for GraphDB folders.
 
-* Versions and parameters
-** EMF
+The 2019 benchmarks use a more up to date version of EMF Views which integrates
+Epsilon, and were run on more powerful hardware.
+
+* 2018 benchmarks
+** Versions and parameters
+*** EMF
 Standard EMF available in Eclipse.
 
 EMF version: 2.13.0.v20170609-0928
 
 Default loading and saving options (empty map) unless otherwise specified.
 
-** SOM-NeoEMF
+*** SOM-NeoEMF
 Basically NeoEMF 1.0.2 with a few patches.
 
 https://github.com/SOM-Research/NeoEMF
@@ -35,7 +39,7 @@ For loading:
 : BlueprintsNeo4jOptionsBuilder.newBuilder()
 :   .softCache().directWriteLongListSupport().asMap();
 
-** atlanmod-NeoEMF
+*** atlanmod-NeoEMF
 1100 commits beyond 1.0.2, with large refactorings.
 
 https://github.com/atlanmod/NeoEMF
@@ -47,7 +51,7 @@ Unless otherwise specified, saving options are:
 Loading options are:
 : BlueprintsNeo4jConfig.newConfig().toMap();
 
-* Create trace models
+** Create trace models
 Create trace models up to size 10^6, serialized as XMI, or in a database.
 
 Legend:
@@ -58,7 +62,7 @@ Legend:
 - XMI :: size of the XMI file on disk
 - GraphDB :: size of the GraphDB folder on disk
 
-** Using EMF
+*** Using EMF
 
 #+name: create-emf
 | size | populate | full |    XMI |
@@ -70,8 +74,8 @@ Legend:
 |    5 |      135 |  332 |  11778 |
 |    6 |      524 | 1485 | 117774 |
 
-** Using SOM-NeoEMF
-*** Using DirectWriteLongListSupport
+*** Using SOM-NeoEMF
+**** Using DirectWriteLongListSupport
 Using saving options:
 : BlueprintsNeo4jOptionsBuilder.newBuilder()
 :   .weakCache().directWriteLongListSupport().autocommit().asMap();
@@ -86,7 +90,7 @@ Using saving options:
 |    5 |    97795 |   99768 |       473992 |
 |    6 |  1122814 | 1123521 |      4755528 |
 
-*** Using DirectWrite
+**** Using DirectWrite
 Saving options:
 : BlueprintsNeo4jOptionsBuilder.newBuilder()
 :   .weakCache().autocommit().asMap();
@@ -101,7 +105,7 @@ Saving options:
 |    5 |  2537824 | 2539457 |       346072 |
 |    6 |        n |       n |            n |
 
-** Using atlanmod-NeoEMF
+*** Using atlanmod-NeoEMF
 
 #+name: create-atlanmod-neoemf
 | size |    full | GraphDB (KB) |
@@ -113,8 +117,8 @@ Saving options:
 |    5 | 3190291 |       171304 |
 |    6 |       n |            n |
 
-** Aggregate results and graphs
-*** Time for creating the trace model
+*** Aggregate results and graphs
+**** Time for creating the trace model
 
 #+name: agg-create
 | size |  EMF | SOM-NeoEMF-LL | SOM-NeoEMF | AtlanMod-NeoEMF |
@@ -148,7 +152,7 @@ plot data u (10**$1):2 w lp title 'EMF', \
 #+RESULTS:
 [[file:images/bench-all-create-trace.png]]
 
-*** Size of trace model on disk
+**** Size of trace model on disk
 #+name: agg-create-size
 | size |    EMF | SOM-NeoEMF-LL | SOM-NeoEMF | AtlanMod-NeoEMF |
 |------+--------+---------------+------------+-----------------|
@@ -181,7 +185,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+RESULTS:
 [[file:images/bench-all-create-trace-size.png]]
 
-* Create weaving models
+** Create weaving models
 Create a weaving model for a view aggregating the four models.  This
 construction by-passes the ECL for the javaClass rule, since the naive ECL
 algorithm is O(n*m).
@@ -198,8 +202,8 @@ Legend:
 - XMI :: size of the XMI weaving model on disk
 - GraphDB :: size of the GraphDB folder on disk
 
-** Using EMF trace
-*** XMI weaving model
+*** Using EMF trace
+**** XMI weaving model
 Average numbers after 5 warmups / 5 iterations.
 
 #+name: xmi-weaving-emf
@@ -212,7 +216,7 @@ Average numbers after 5 warmups / 5 iterations.
 |    5 |      1868 |  25 |   3821 |   5877 |  28112 |
 |    6 |    160090 |  21 | 345742 | 507584 | 282994 |
 
-*** NeoEMF weaving model
+**** NeoEMF weaving model
 
 #+name: neo-weaving-emf
 | Size | load | javaClass | ECL |  save |   full | GraphDB |
@@ -224,8 +228,8 @@ Average numbers after 5 warmups / 5 iterations.
 |    5 |  256 |    217313 | 351 | 28999 | 246919 |  638876 |
 |    6 |    n |         n |   n |     n |      n |       n |
 
-** Using SOM-NeoEMF trace
-*** XMI weaving model
+*** Using SOM-NeoEMF trace
+**** XMI weaving model
 
 #+name: xmi-weaving-som-neoemf
 | Size | load | javaClass | ECL | save |    full |   XMI |
@@ -237,8 +241,8 @@ Average numbers after 5 warmups / 5 iterations.
 |    5 |  205 |   2123328 |  38 | 1905 | 2125560 | 29099 |
 |    6 |    n |         n |   n |    n |       n |     n |
 
-*** NeoEMF weaving model
-**** DirectWrite
+**** NeoEMF weaving model
+***** DirectWrite
 
 #+name: neo-weaving-som-neoemf
 | Size | load | javaClass | ECL |  save |    full | GraphDB |
@@ -250,7 +254,7 @@ Average numbers after 5 warmups / 5 iterations.
 |    5 |   31 |   3049003 | 113 | 26780 | 3076031 |  649116 |
 |    6 |    n |         n |   n |     n |       n |       n |
 
-**** DirectWriteLongList
+***** DirectWriteLongList
 
 #+name: neo-weaving-som-neoemf-long-list
 | Size | load | javaClass | ECL | save |    full |  GraphDB |
@@ -262,8 +266,8 @@ Average numbers after 5 warmups / 5 iterations.
 |    5 |  333 |    105165 |  64 |  583 |  106681 |  1316776 |
 |    6 |  190 |   1340860 |  68 | 1551 | 1353340 | 13263500 |
 
-** Using atlanmod-NeoEMF trace
-*** XMI weaving model
+*** Using atlanmod-NeoEMF trace
+**** XMI weaving model
 
 #+name: xmi-weaving-atl-neoemf
 | size | load | populate | save |   full | GraphDB |
@@ -275,7 +279,7 @@ Average numbers after 5 warmups / 5 iterations.
 |    5 |  113 |   945415 | 2422 | 948163 |  638884 |
 |    6 |    n |        n |    n |      n |       n |
 
-*** NeoEMF weaving model
+**** NeoEMF weaving model
 
 #+name: neo-weaving-atl-neoemf
 | size | load | populate |    save |     full | GraphDB |
@@ -287,8 +291,8 @@ Average numbers after 5 warmups / 5 iterations.
 |    5 |  179 | 10056899 | 3853064 | 13912304 |  293236 |
 |    6 |    n |        n |       n |        n |       n |
 
-** Aggregate results and graphs
-*** Time to create weaving models
+*** Aggregate results and graphs
+**** Time to create weaving models
 #+name: agg-weaving
 | size | EMF (XMI) | EMF (DB) | SOM-NeoEMF (XMI) | SOM-NeoEMF (DB) | SOM-NeoEMF-LL (DB) | Atl-NeoEMF (XMI) | Atl-NeoEMF (DB) |
 |------+-----------+----------+------------------+-----------------+--------------------+------------------+-----------------|
@@ -324,7 +328,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+RESULTS:
 [[file:images/bench-all-create-weaving-time.png]]
 
-*** Size of weaving models on disk
+**** Size of weaving models on disk
 #+name: agg-weaving-size
 | size | EMF (XMI) | EMF (DB) | SOM-NeoEMF (XMI) | SOM-NeoEMF (DB) | SOM-NeoEMF-LL (DB) | Atl-NeoEMF (XMI) | Atl-NeoEMF (DB) |
 |------+-----------+----------+------------------+-----------------+--------------------+------------------+-----------------|
@@ -363,7 +367,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+RESULTS:
 [[file:images/bench-all-create-weaving-size.png]]
 
-* Run ATL transformation
+** Run ATL transformation
 Execute an ATL transformation on the view that touches all models (including all
 elements of the trace model).
 
@@ -373,10 +377,10 @@ Legend:
 - Transform :: time to run the transformation (execute ~ExecEnv.run~)
 - Full :: time to load the resources, init ATL, and execute the transformation
 
-** Using EMF trace
+*** Using EMF trace
 Average numbers after 5 warmups / 5 iterations
 
-*** XMI weaving model
+**** XMI weaving model
 
 #+name: xmi-atl-emf
 | Size | Load | Transform |   Full |
@@ -388,8 +392,8 @@ Average numbers after 5 warmups / 5 iterations
 |    5 | 3768 |    130397 | 134223 |
 |    6 |    n |         n |      n |
 
-** Using SOM-NeoEMF trace
-*** XMI weaving model
+*** Using SOM-NeoEMF trace
+**** XMI weaving model
 
 #+name: xmi-atl-som-neoemf
 | size | load | transform |    full |
@@ -401,7 +405,7 @@ Average numbers after 5 warmups / 5 iterations
 |    5 | 6786 |   5616109 | 5623177 |
 |    6 |    n |         n |       n |
 
-*** NeoEMF weaving model
+**** NeoEMF weaving model
 
 #+name: neo-atl-som-neoemf
 | size |    load | transform |    full |
@@ -413,8 +417,8 @@ Average numbers after 5 warmups / 5 iterations
 |    5 | 2157699 |   4944843 | 7102815 |
 |    6 |       n |         n |       n |
 
-** Using atlanmod-NeoEMF trace
-*** XMI weaving model
+*** Using atlanmod-NeoEMF trace
+**** XMI weaving model
 
 #+name: xmi-atl-atl-neoemf
 | Size | load | transform |    full |
@@ -426,7 +430,7 @@ Average numbers after 5 warmups / 5 iterations
 |    5 | 1069 |   3334126 | 3335569 |
 |    6 |    n |         n |       n |
 
-*** NeoEMF weaving model
+**** NeoEMF weaving model
 
 #+name: neo-atl-atl-neoemf
 | Size | load | transform |    full |
@@ -438,7 +442,7 @@ Average numbers after 5 warmups / 5 iterations
 |    5 |  323 |   4069452 | 4070129 |
 |    6 |    n |         n |       n |
 
-** Aggregate results and graphs
+*** Aggregate results and graphs
 
 #+name: agg-atl
 | size | EMF (XMI) | EMF (DB) | SOM-NeoEMF (XMI) | SOM-NeoEMF (DB) | Atl-NeoEMF (XMI) | Atl-NeoEMF (DB) |
@@ -473,7 +477,7 @@ plot data u (10**$1):2 w lp title 'EMF (XMI)', \
 #+RESULTS:
 [[file:images/bench-all-run-atl.png]]
 
-* Load view/model
+** Load view/model
 Do a ~resource.load~ on each view.  Mainly to show that there are no overheads
 to loading a view, even when backed with a DB resource.
 
@@ -484,8 +488,8 @@ Legend:
 - All :: time to enumerate all contents in the view
 - All0 :: time to go through the contents of the Trace model only
 
-** Using EMF trace
-*** No weaving model
+*** Using EMF trace
+**** No weaving model
 #+name: xmi-load
 | size | load | first | all |
 |------+------+-------+-----|
@@ -496,7 +500,7 @@ Legend:
 |    5 |  614 |     0 |  34 |
 |    6 | 2154 |     0 | 187 |
 
-*** View with XMI weaving model
+**** View with XMI weaving model
 #+name: xmi-view-load
 | size |  load | first |  all | all0 |
 |------+-------+-------+------+------|
@@ -507,9 +511,9 @@ Legend:
 |    5 |   921 |     0 |  948 |   58 |
 |    6 | 12214 |     0 | 1946 |  836 |
 
-** Using SOM-NeoEMF trace
-*** No weaving model
-**** DirectWrite
+*** Using SOM-NeoEMF trace
+**** No weaving model
+***** DirectWrite
 #+name: neoemf-load-direct-write
 | size | load | first |     all |
 |------+------+-------+---------|
@@ -520,7 +524,7 @@ Legend:
 |    5 |   32 |   150 | 1359528 |
 |    6 |    n |     n |       n |
 
-**** DirectWriteLongList
+***** DirectWriteLongList
 #+name: neoemf-load-long-list
 | size | load | first |   all |
 |------+------+-------+-------|
@@ -531,7 +535,7 @@ Legend:
 |    5 |   35 |   185 |  6645 |
 |    6 |   43 |  1046 | 76221 |
 
-*** View with NeoEMF weaving model
+**** View with NeoEMF weaving model
 #+name: neoemf-view-load-long-list
 | size | load | first |   all |  all0 |
 |------+------+-------+-------+-------|
@@ -542,7 +546,7 @@ Legend:
 |    5 | 2482 |     0 |  6795 |  2033 |
 |    6 | 3006 |     0 | 82323 | 32851 |
 
-** Aggregate results and graphs
+*** Aggregate results and graphs
 #+name: agg-load
 | size | XMI | XMI View |  NeoEMF | NeoEMF (LL) | NeoEMF View (LL) |
 |------+-----+----------+---------+-------------+------------------|
@@ -577,7 +581,7 @@ plot data u (10**$1):2 w lp title 'XMI', \
 #+RESULTS:
 [[file:images/bench-all-load-view.png]]
 
-* Running a simple OCL query
+** Running a simple OCL query
 OCL query: ~Log.allInstances()->size()~
 
 Legend:
@@ -587,9 +591,9 @@ Legend:
 - Full :: time for all of the above, plus creating the OCL query from a parsed
           expression
 
-** Using EMF trace
-*** No weaving model
-**** Default extent map
+*** Using EMF trace
+**** No weaving model
+***** Default extent map
 #+name: ocl-xmi
 | size | load | eval | full |
 |------+------+------+------|
@@ -600,7 +604,7 @@ Legend:
 |    5 |  944 |  115 | 1067 |
 |    6 | 3227 |  549 | 3778 |
 
-**** Fast extent map
+***** Fast extent map
 #+name: ocl-xmi-opt
 | size | load | eval | full |
 |------+------+------+------|
@@ -611,8 +615,8 @@ Legend:
 |    5 |  526 | 113  | 646  |
 |    6 | 2104 | 1375 | 3481 |
 
-*** XMI weaving model
-**** Default extent map
+**** XMI weaving model
+***** Default extent map
 #+name: ocl-xmi-full-view
 | size | load | eval |  full |
 |------+------+------+-------|
@@ -623,7 +627,7 @@ Legend:
 |    5 |  975 |  872 |  1848 |
 |    6 | 9141 | 5485 | 14627 |
 
-**** Fast extent map
+***** Fast extent map
 #+name: ocl-xmi-full-view-opt
 | size |  load | eval |  full |
 |------+-------+------+-------|
@@ -634,9 +638,9 @@ Legend:
 |    5 |  1315 |  576 |  1892 |
 |    6 | 10049 |  752 | 10802 |
 
-** Using SOM-NeoEMF trace
-*** No weaving model
-**** Default extent map
+*** Using SOM-NeoEMF trace
+**** No weaving model
+***** Default extent map
 #+name: ocl-neoemf
 | size | load |  eval |   full |
 |------+------+-------+--------|
@@ -647,7 +651,7 @@ Legend:
 |    5 |   27 |  6485 |   9025 |
 |    6 |   75 | 72481 | 114903 |
 
-**** Fast extent map
+***** Fast extent map
 #+name: ocl-neoemf-opt
 | size | load |  eval |  full |
 |------+------+-------+-------|
@@ -658,8 +662,8 @@ Legend:
 |    5 |   35 |  1568 |  1867 |
 |    6 |   41 | 16182 | 17584 |
 
-*** View on trace model
-**** Default extent map
+**** View on trace model
+***** Default extent map
 #+name: ocl-neoemf-simple-view
 | size | load |  eval |   full |
 |------+------+-------+--------|
@@ -670,7 +674,7 @@ Legend:
 |    5 |  148 |  5603 |   6984 |
 |    6 |  907 | 86565 | 136376 |
 
-**** Fast extent map
+***** Fast extent map
 #+name: ocl-neoemf-simple-view-opt
 | size | load |  eval |  full |
 |------+------+-------+-------|
@@ -681,8 +685,8 @@ Legend:
 |    5 |  156 |  1240 |  1506 |
 |    6 | 1094 | 15981 | 17331 |
 
-*** View on four models
-**** Default extent map
+**** View on four models
+***** Default extent map
 #+name: ocl-neoemf-full-view
 | size | load |  eval |   full |
 |------+------+-------+--------|
@@ -693,7 +697,7 @@ Legend:
 |    5 |  906 |  7777 |  10025 |
 |    6 | 3118 | 85030 | 128345 |
 
-**** Fast extent map
+***** Fast extent map
 #+name: ocl-neoemf-full-view-opt
 | size | load |  eval |  full |
 |------+------+-------+-------|
@@ -704,8 +708,8 @@ Legend:
 |    5 |  824 |  2309 |  3382 |
 |    6 | 2681 | 14544 | 17699 |
 
-** Aggregate results and graphs
-*** Default extents map
+*** Aggregate results and graphs
+**** Default extents map
 #+name: agg-ocl
 | size | XMI | XMI View | NeoEMF | NeoEMF View (Simple) | NeoEMF View (Full) |
 |------+-----+----------+--------+----------------------+--------------------|
@@ -740,7 +744,7 @@ plot data u (10**$1):2 w lp title 'XMI', \
 #+RESULTS:
 x[[file:images/bench-all-ocl-all-instances.png]]g
 
-*** Fast extents map
+**** Fast extents map
 #+name: agg-ocl-opt
 | size |  XMI | XMI View | NeoEMF | NeoEMF View (Simple) | NeoEMF View (Full) |
 |------+------+----------+--------+----------------------+--------------------|
@@ -775,7 +779,7 @@ plot data u (10**$1):2 w lp title 'XMI', \
 #+RESULTS:
 [[file:images/bench-all-ocl-all-instances-opt.png]]
 
-** Comparing extents maps on views
+*** Comparing extents maps on views
 | size |  XMI | XMI (Opt.) | NeoEMF | NeoEMF (Opt.) |
 |------+------+------------+--------+---------------|
 |    1 | 1083 |         49 |   5655 |          4722 |
@@ -789,7 +793,7 @@ plot data u (10**$1):2 w lp title 'XMI', \
 #+TBLFM: @2$4..@>$4=remote(ocl-neoemf-full-view,@@#$3)
 #+TBLFM: @2$5..@>$5=remote(ocl-neoemf-full-view-opt,@@#$3)
 
-* Running other OCL queries
+** Running other OCL queries
 Query ~traceToReqs~:
 #+BEGIN_SRC
 trace::Log.allInstances()
@@ -809,9 +813,9 @@ reqif10::SpecObject.allInstances()
 
 These queries can only be applied to views, so there are only two benches.
 
-** XMI view
-*** No extents map
-**** Query traceToReq
+*** XMI view
+**** No extents map
+***** Query traceToReq
 #+name: ocl-xmi-query2
 | size |  load | eval |  full |
 |------+-------+------+-------|
@@ -822,7 +826,7 @@ These queries can only be applied to views, so there are only two benches.
 |    5 |  1221 | 1050 |  2278 |
 |    6 | 11169 | 6294 | 17469 |
 
-**** Query reqToTraces
+***** Query reqToTraces
 #+name: ocl-xmi-query3
 | size |  load |  eval |  full |
 |------+-------+-------+-------|
@@ -833,8 +837,8 @@ These queries can only be applied to views, so there are only two benches.
 |    5 |   858 |  1757 |  2621 |
 |    6 | 12221 | 12722 | 24951 |
 
-*** Fast extents map
-**** Query traceToReq
+**** Fast extents map
+***** Query traceToReq
 #+name: ocl-xmi-query2-opt
 | size |  load | eval |  full |
 |------+-------+------+-------|
@@ -845,7 +849,7 @@ These queries can only be applied to views, so there are only two benches.
 |    5 |  1534 |  241 |  1780 |
 |    6 | 10804 | 4008 | 14817 |
 
-**** Query reqToTraces
+***** Query reqToTraces
 #+name: ocl-xmi-query3-opt
 | size |  load | eval |  full |
 |------+-------+------+-------|
@@ -856,9 +860,9 @@ These queries can only be applied to views, so there are only two benches.
 |    5 |  1351 |  857 |  2216 |
 |    6 | 11048 | 7647 | 18700 |
 
-** NeoEMF view
-*** No extents map
-**** Query traceToReq
+*** NeoEMF view
+**** No extents map
+***** Query traceToReq
 #+name: ocl-neoemf-query2
 | size |  load |   eval |   full |
 |------+-------+--------+--------|
@@ -869,7 +873,7 @@ These queries can only be applied to views, so there are only two benches.
 |    5 |  2937 |  16604 |  21810 |
 |    6 | 24342 | 178444 | 246010 |
 
-**** Query reqToTraces
+***** Query reqToTraces
 #+name: ocl-neoemf-query3
 | size | load |   eval |   full |
 |------+------+--------+--------|
@@ -880,8 +884,8 @@ These queries can only be applied to views, so there are only two benches.
 |    5 |  743 |  18518 |  21478 |
 |    6 | 2729 | 251451 | 289261 |
 
-*** Fast extends map
-**** Query traceToReq
+**** Fast extends map
+***** Query traceToReq
 #+name: ocl-neoemf-query2-opt
 | size | load |   eval |   full |
 |------+------+--------+--------|
@@ -892,7 +896,7 @@ These queries can only be applied to views, so there are only two benches.
 |    5 | 1047 |   9626 |  11005 |
 |    6 | 2971 | 114733 | 118656 |
 
-**** Query reqToTraces
+***** Query reqToTraces
 #+name: ocl-neoemf-query3-opt
 | size | load |   eval |   full |
 |------+------+--------+--------|
@@ -903,7 +907,7 @@ These queries can only be applied to views, so there are only two benches.
 |    5 | 1003 |  12843 |  14100 |
 |    6 | 2749 | 154621 | 158226 |
 
-** Aggregate results and graphs
+*** Aggregate results and graphs
 
 - Opt. :: using the fast extents map for OCL
 
@@ -934,3 +938,700 @@ These queries can only be applied to views, so there are only two benches.
 #+TBLFM: @2$3..@>$3=remote(ocl-xmi-query3-opt, @@#$3)
 #+TBLFM: @2$4..@>$4=remote(ocl-neoemf-query3,@@#$3)
 #+TBLFM: @2$5..@>$5=remote(ocl-neoemf-query3-opt,@@#$3)
+
+* 2019 benchmarks
+** Versions and parameters
+See the git submodules for exact branches and commits used.
+
+Run on an Intel HEDT with params:
+
+: java -Xmx28g -XX:MaxGCPauseMillis=550 -jar benchmarks.jar
+
+with default 5 warmups / 10 measures for each bench.
+
+Mitigations for Spectre/Meltdown were turned off.
+
+** Load view
+
+(pp0 "Load view with XMI trace" "Load view")
+
+Load view with XMI trace
+#+name: load-xmi-2019
+| Size | Load view | sdev |
+|------+-----------+------|
+|    1 |      161. |   6. |
+|    2 |      160. |   6. |
+|    3 |      191. |   6. |
+|    4 |      523. |   3. |
+|    5 |     3832. |  26. |
+|    6 |    36154. | 238. |
+
+(pp0 "Load view with NeoEMF trace" "Load view")
+
+Load view with NeoEMF trace
+#+name: load-neoemf-2019
+| Size | Load view |  sdev |
+|------+-----------+-------|
+|    1 |     6942. |  637. |
+|    2 |      4975 |   93. |
+|    3 |     5030. |  102. |
+|    4 |     6290. |   95. |
+|    5 |    17885. |  127. |
+|    6 |    140492 | 1178. |
+
+#+name: agg-load-2019
+| size |    XMI | NeoEMF |
+|------+--------+--------|
+|    1 |   161. |  6942. |
+|    2 |   160. |   4975 |
+|    3 |   191. |  5030. |
+|    4 |   523. |  6290. |
+|    5 |  3832. | 17885. |
+|    6 | 36154. | 140492 |
+#+TBLFM: @2$2..@>$2=remote(load-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(load-neoemf-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-load-2019 :file images/bench-all-load-view-2019.png
+set title 'Load view (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set logscale x
+set ylabel 'time (ms)'
+set logscale y
+
+plot data u (10**$1):2 w lp title 'XMI', \
+     data u (10**$1):3 w lp title 'NeoEMF'
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-all-load-view-2019.png]]
+
+** Iterate view contents
+
+(pp0 "Load view with XMI trace" "Get all")
+
+Load view with XMI trace
+#+name: get-all-xmi-2019
+| Size | Get all elements | sdev |
+|------+------------------+------|
+|    1 |             595. |   5. |
+|    2 |             592. |   5. |
+|    3 |             599. |   5. |
+|    4 |             650. |   3. |
+|    5 |            1125. |   4. |
+|    6 |            5989. |  52. |
+
+(pp0 "Load view with NeoEMF trace" "Get all")
+
+Load view with NeoEMF trace
+#+name: get-all-neoemf-2019
+| Size | Get all elements | sdev |
+|------+------------------+------|
+|    1 |             632. |   2. |
+|    2 |             641. |  27. |
+|    3 |             656. |  29. |
+|    4 |             832. |  39. |
+|    5 |            2439. |  55. |
+|    6 |           18537. | 218. |
+
+#+name: get-all-2019
+| size |   XMI | NeoEMF |
+|------+-------+--------|
+|    1 |  595. |   632. |
+|    2 |  592. |   641. |
+|    3 |  599. |   656. |
+|    4 |  650. |   832. |
+|    5 | 1125. |  2439. |
+|    6 | 5989. | 18537. |
+#+TBLFM: @2$2..@>$2=remote(get-all-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(get-all-neoemf-2019,@@#$2)
+
+#+begin_src gnuplot :var data=get-all-2019 :file images/bench-all-get-all-2019.png
+set title 'Iterate (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set logscale x
+set ylabel 'time (ms)'
+set logscale y
+
+plot data u (10**$1):2 w lp title 'XMI', \
+     data u (10**$1):3 w lp title 'NeoEMF'
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-all-get-all-2019.png]]
+
+** OCL allInstances
+
+(pp0 "OCL query 0 for full view on XMI trace" "Evaluate")
+
+OCL query 0 for full view on XMI trace
+#+name: query0-xmi-2019
+| Size | Evaluate query | sdev |
+|------+----------------+------|
+|    1 |           618. |  15. |
+|    2 |            614 |  12. |
+|    3 |           623. |  13. |
+|    4 |           675. |   9. |
+|    5 |          1235. |  20. |
+|    6 |          6643. |  57. |
+
+(pp0 "OCL query 0 for full view on NeoEMF trace" "Evaluate")
+
+OCL query 0 for full view on NeoEMF trace
+#+name: query0-neoemf-2019
+| Size | Evaluate query | sdev |
+|------+----------------+------|
+|    1 |           658. |  24. |
+|    2 |           661. |  26. |
+|    3 |           694. |  41. |
+|    4 |           859. |  21. |
+|    5 |           2729 | 286. |
+|    6 |         19875. | 484. |
+
+*** With fast extents map
+
+(pp0 "OCL query 0 for full view on XMI trace" "Evaluate" " with fast extents map")
+
+OCL query 0 for full view on XMI trace with fast extents map
+#+name: query0-xmi-fast-2019
+| Size | Evaluate query |             sdev |
+|------+----------------+------------------|
+|    1 |            10. | 4.83045891539e-1 |
+|    2 |             10 | 6.66666666666e-1 |
+|    3 |            10. | 9.71825315807e-1 |
+|    4 |            12. | 6.74948557711e-1 |
+|    5 |            63. |               4. |
+|    6 |           753. |              92. |
+
+(pp0 "OCL query 0 for full view on NeoEMF trace" "Evaluate" " with fast extents map")
+
+OCL query 0 for full view on NeoEMF trace with fast extents map
+#+name: query0-neoemf-fast-2019
+| Size | Evaluate query | sdev |
+|------+----------------+------|
+|    1 |            40. |   1. |
+|    2 |            41. |   2. |
+|    3 |            44. |   1. |
+|    4 |            57. |   4. |
+|    5 |           227. |  24. |
+|    6 |          2188. |  29. |
+
+*** Aggregate and graphs
+
+#+name: agg-query0-2019
+| size |   XMI | XMI fast | NeoEMF | NeoEMF fast |
+|------+-------+----------+--------+-------------|
+|    1 |  618. |      10. |   658. |         40. |
+|    2 |   614 |       10 |   661. |         41. |
+|    3 |  623. |      10. |   694. |         44. |
+|    4 |  675. |      12. |   859. |         57. |
+|    5 | 1235. |      63. |   2729 |        227. |
+|    6 | 6643. |     753. | 19875. |       2188. |
+#+TBLFM: @2$2..@>$2=remote(query0-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(query0-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(query0-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(query0-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-query0-2019 :file images/bench-query0-2019.png
+set title 'Query 0 (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set ylabel 'time (ms)'
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram cluster
+set style fill solid 0.3
+set boxwidth 0.8
+
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) ti 'XMI', '' u 3:xticlabels(1) ti 'XMI fast',\
+     newhistogram "NeoEMF",\
+       ''   u 4:xticlabels(1) ti 'NeoEMF', '' u 5:xticlabels(1) ti 'NeoEMF fast'
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-query0-2019.png]]
+
+
+** OCL reqToTraces
+
+(pp0 "OCL query 1 for full view on XMI trace" "Evaluate")
+
+OCL query 1 for full view on XMI trace
+#+name: query1-xmi-2019
+| Size | Evaluate query | sdev |
+|------+----------------+------|
+|    1 |           609. |   6. |
+|    2 |           610. |   5. |
+|    3 |           616. |   7. |
+|    4 |           668. |   6. |
+|    5 |          1167. |  13. |
+|    6 |          6277. |  97. |
+
+(pp0 "OCL query 1 for full view on NeoEMF trace" "Evaluate")
+
+OCL query 1 for full view on NeoEMF trace
+#+name: query1-neoemf-2019
+| Size | Evaluate query | sdev |
+|------+----------------+------|
+|    1 |           649. |   2. |
+|    2 |           652. |   4. |
+|    3 |           667. |   5. |
+|    4 |           853. |  36. |
+|    5 |          2587. | 129. |
+|    6 |          19789 | 377. |
+
+*** With fast extents map
+
+(pp0 "OCL query 1 for full view on XMI trace" "Evaluate" " with fast extents map")
+
+OCL query 1 for full view on XMI trace with fast extents map
+#+name: query1-xmi-fast-2019
+| Size | Evaluate query |             sdev |
+|------+----------------+------------------|
+|    1 |            11. | 5.67646212197e-1 |
+|    2 |            11. | 6.32455532034e-1 |
+|    3 |            11. | 5.67646212197e-1 |
+|    4 |            10. | 8.43274042712e-1 |
+|    5 |            35. |               2. |
+|    6 |           272. |               7. |
+
+(pp0 "OCL query 1 for full view on NeoEMF trace" "Evaluate" " with fast extents map")
+
+OCL query 1 for full view on NeoEMF trace with fast extents map
+#+name: query1-neoemf-fast-2019
+| Size | Evaluate query |             sdev |
+|------+----------------+------------------|
+|    1 |            41. |               1. |
+|    2 |             41 | 9.42809041582e-1 |
+|    3 |            41. |               2. |
+|    4 |            42. | 8.23272602349e-1 |
+|    5 |            42. |               2. |
+|    6 |            61. |               2. |
+
+*** Aggregate and graph
+
+#+name: agg-query1-2019
+| size |   XMI | XMI fast | NeoEMF | NeoEMF fast |
+|------+-------+----------+--------+-------------|
+|    1 |  609. |      11. |   649. |         41. |
+|    2 |  610. |      11. |   652. |          41 |
+|    3 |  616. |      11. |   667. |         41. |
+|    4 |  668. |      10. |   853. |         42. |
+|    5 | 1167. |      35. |  2587. |         42. |
+|    6 | 6277. |     272. |  19789 |         61. |
+#+TBLFM: @2$2..@>$2=remote(query1-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(query1-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(query1-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(query1-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-query1-2019 :file images/bench-query1-2019.png
+set title 'Query 1 (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set ylabel 'time (ms)'
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram cluster
+set style fill solid 0.3
+set boxwidth 0.8
+
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) ti 'XMI', '' u 3:xticlabels(1) ti 'XMI fast',\
+     newhistogram "NeoEMF",\
+       ''   u 4:xticlabels(1) ti 'NeoEMF', '' u 5:xticlabels(1) ti 'NeoEMF fast'
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-query1-2019.png]]
+
+** OCL traceToReqs
+
+(pp0 "OCL query 2 for full view on XMI trace" "Evaluate")
+
+OCL query 2 for full view on XMI trace
+#+name: query2-xmi-2019
+| Size | Evaluate query | sdev |
+|------+----------------+------|
+|    1 |            632 |  44. |
+|    2 |           626. |  34. |
+|    3 |            619 |   3. |
+|    4 |           672. |   5. |
+|    5 |          1212. |  24. |
+|    6 |          6744. |  76. |
+
+(pp0 "OCL query 2 for full view on NeoEMF trace" "Evaluate")
+
+OCL query 2 for full view on NeoEMF trace
+#+name: query2-neoemf-2019
+| Size | Evaluate query | sdev |
+|------+----------------+------|
+|    1 |           667. |  49. |
+|    2 |           673. |  42. |
+|    3 |           693. |  44. |
+|    4 |           875. |  35. |
+|    5 |          2635. |  87. |
+|    6 |         20653. | 728. |
+
+*** With fast extents map
+
+(pp0 "OCL query 2 for full view on XMI trace" "Evaluate" " with fast extents map")
+
+OCL query 2 for full view on XMI trace with fast extents map
+#+name: query2-xmi-fast-2019
+| Size | Evaluate query |             sdev |
+|------+----------------+------------------|
+|    1 |            10. |               1. |
+|    2 |            10. | 9.94428926012e-1 |
+|    3 |            11. | 9.71825315807e-1 |
+|    4 |            14. |               1. |
+|    5 |            66. |               4. |
+|    6 |            709 |              65. |
+
+(pp0 "OCL query 2 for full view on NeoEMF trace" "Evaluate" " with fast extents map")
+
+OCL query 2 for full view on NeoEMF trace with fast extents map
+#+name: query2-neoemf-fast-2019
+| Size | Evaluate query |             sdev |
+|------+----------------+------------------|
+|    1 |            41. | 8.75595035771e-1 |
+|    2 |             41 | 8.16496580928e-1 |
+|    3 |            43. | 8.49836585599e-1 |
+|    4 |            86. |              32. |
+|    5 |           268. |              29. |
+|    6 |           2651 |              56. |
+
+
+*** Aggregate and graph
+
+#+name: agg-query2-2019
+| size |   XMI | XMI fast | NeoEMF | NeoEMF fast |
+|------+-------+----------+--------+-------------|
+|    1 |   632 |      10. |   667. |         41. |
+|    2 |  626. |      10. |   673. |          41 |
+|    3 |   619 |      11. |   693. |         43. |
+|    4 |  672. |      14. |   875. |         86. |
+|    5 | 1212. |      66. |  2635. |        268. |
+|    6 | 6744. |      709 | 20653. |        2651 |
+#+TBLFM: @2$2..@>$2=remote(query2-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(query2-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(query2-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(query2-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-query2-2019 :file images/bench-query2-2019.png
+set title 'Query 2 (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set ylabel 'time (ms)'
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram cluster
+set style fill solid 0.3
+set boxwidth 0.8
+
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) ti 'XMI', '' u 3:xticlabels(1) ti 'XMI fast',\
+     newhistogram "NeoEMF",\
+       ''   u 4:xticlabels(1) ti 'NeoEMF', '' u 5:xticlabels(1) ti 'NeoEMF fast'
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-query2-2019.png]]
+
+** EOL allInstances
+
+(pp0 "EOL query allInstances.eol for XMI view" "EOL execute")
+
+EOL query allInstances.eol for XMI view
+#+name: eol0-xmi-fast-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |              5e-1 | 5.27046276695e-1 |
+|    2 |              7e-1 | 4.83045891539e-1 |
+|    3 |                1. | 5.16397779495e-1 |
+|    4 |                7. | 3.16227766017e-1 |
+|    5 |               81. |               2. |
+|    6 |              810. |              11. |
+
+(pp0 "EOL query allInstances.eol for NeoEMF view" "EOL execute")
+
+EOL query allInstances.eol for NeoEMF view
+#+name: eol0-neoemf-fast-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                2. | 5.27046276695e-1 |
+|    2 |                2. | 4.83045891539e-1 |
+|    3 |                4. | 4.83045891539e-1 |
+|    4 |               23. |               3. |
+|    5 |              203. |              47. |
+|    6 |             2231. |              87. |
+
+(pp0 "EOL query allInstances.eol for XMI view" "EOL execute" " with EMF EMC")
+
+EOL query allInstances.eol for XMI view with EMF EMC
+#+name: eol0-xmi-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |              4e-1 | 5.16397779495e-1 |
+|    2 |              5e-1 | 5.27046276695e-1 |
+|    3 |                 1 |                0 |
+|    4 |                7. | 4.83045891539e-1 |
+|    5 |                81 |               2. |
+|    6 |              812. |              13. |
+
+
+(pp0 "EOL query allInstances.eol for NeoEMF view" "EOL execute" " with EMF EMC")
+
+EOL query allInstances.eol for NeoEMF view with EMF EMC
+#+name: eol0-neoemf-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |              7e-1 | 4.83045891539e-1 |
+|    2 |                2. | 3.16227766017e-1 |
+|    3 |               15. |               1. |
+|    4 |              155. |              12. |
+|    5 |             1427. |              56. |
+|    6 |            15464. |             727. |
+
+*** Aggregate and graph
+
+#+name: agg-eol0-2019
+| size |  XMI | XMI fast | NeoEMF | NeoEMF fast |
+|------+------+----------+--------+-------------|
+|    1 |  0.4 |      0.5 |    0.7 |          2. |
+|    2 |  0.5 |      0.7 |     2. |          2. |
+|    3 |    1 |       1. |    15. |          4. |
+|    4 |   7. |       7. |   155. |         23. |
+|    5 |   81 |      81. |  1427. |        203. |
+|    6 | 812. |     810. | 15464. |       2231. |
+#+TBLFM: @2$2..@>$2=remote(eol0-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(eol0-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(eol0-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(eol0-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-eol0-2019 :file images/bench-eol0-2019.png
+set title 'EOL query 0 (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set ylabel 'time (ms)'
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram cluster
+set style fill solid 0.3
+set boxwidth 0.8
+
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) ti 'XMI', '' u 3:xticlabels(1) ti 'XMI fast',\
+     newhistogram "NeoEMF",\
+       ''   u 4:xticlabels(1) ti 'NeoEMF', '' u 5:xticlabels(1) ti 'NeoEMF fast'
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-eol0-2019.png]]
+
+** EOL reqToTraces
+
+(pp0 "EOL query reqToTraces.eol for XMI view" "EOL execute")
+
+EOL query reqToTraces.eol for XMI view
+#+name: eol1-xmi-fast-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                2. | 4.21637021356e-1 |
+|    2 |                2. | 3.16227766017e-1 |
+|    3 |                 2 |                0 |
+|    4 |                2. | 4.83045891539e-1 |
+|    5 |                4. | 9.94428926012e-1 |
+|    6 |               13. |               2. |
+
+(pp0 "EOL query reqToTraces.eol for NeoEMF view" "EOL execute")
+
+EOL query reqToTraces.eol for NeoEMF view
+#+name: eol1-neoemf-fast-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                2. | 3.16227766017e-1 |
+|    2 |                 2 |                0 |
+|    3 |                 2 |                0 |
+|    4 |                2. | 3.16227766017e-1 |
+|    5 |                3. | 9.94428926012e-1 |
+|    6 |               12. |               2. |
+
+(pp0 "EOL query reqToTraces.eol for XMI view" "EOL execute" " with EMF EMC")
+
+EOL query reqToTraces.eol for XMI view with EMF EMC
+#+name: eol1-xmi-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                2. | 4.21637021356e-1 |
+|    2 |                2. | 4.83045891539e-1 |
+|    3 |                2. | 4.83045891539e-1 |
+|    4 |                2. | 3.16227766017e-1 |
+|    5 |                4. | 9.71825315807e-1 |
+|    6 |               16. | 7.07106781187e-1 |
+
+(pp0 "EOL query reqToTraces.eol for NeoEMF view" "EOL execute" " with EMF EMC")
+
+EOL query reqToTraces.eol for NeoEMF view with EMF EMC
+#+name: eol1-neoemf-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                2. | 4.83045891539e-1 |
+|    2 |                2. | 4.21637021356e-1 |
+|    3 |                 2 |                0 |
+|    4 |                 2 | 4.71404520791e-1 |
+|    5 |                4. | 9.66091783079e-1 |
+|    6 |               13. |               3. |
+
+*** Aggregate and graph
+
+#+name: agg-eol1-2019
+| size | XMI | XMI fast | NeoEMF | NeoEMF fast |
+|------+-----+----------+--------+-------------|
+|    1 |  2. |       2. |     2. |          2. |
+|    2 |  2. |       2. |     2. |           2 |
+|    3 |  2. |        2 |      2 |           2 |
+|    4 |  2. |       2. |      2 |          2. |
+|    5 |  4. |       4. |     4. |          3. |
+|    6 | 16. |      13. |    13. |         12. |
+#+TBLFM: @2$2..@>$2=remote(eol1-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(eol1-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(eol1-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(eol1-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-eol1-2019 :file images/bench-eol1-2019.png
+set title 'EOL query 1 (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set ylabel 'time (ms)'
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram cluster
+set style fill solid 0.3
+set boxwidth 0.8
+
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) ti 'XMI', '' u 3:xticlabels(1) ti 'XMI fast',\
+     newhistogram "NeoEMF",\
+       ''   u 4:xticlabels(1) ti 'NeoEMF', '' u 5:xticlabels(1) ti 'NeoEMF fast'
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-eol1-2019.png]]
+
+** EOL traceToReqs
+
+(pp0 "EOL query traceToReqs.eol for XMI view" "EOL execute")
+
+EOL query traceToReqs.eol for XMI view
+#+name: eol2-xmi-fast-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                1. | 4.21637021356e-1 |
+|    2 |                3. | 6.32455532034e-1 |
+|    3 |               21. |               1. |
+|    4 |              173. |               9. |
+|    5 |             1687. |              25. |
+|    6 |             17088 |             104. |
+
+(pp0 "EOL query traceToReqs.eol for NeoEMF view" "EOL execute")
+
+EOL query traceToReqs.eol for NeoEMF view
+#+name: eol2-neoemf-fast-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                 2 |                0 |
+|    2 |                4. | 4.83045891539e-1 |
+|    3 |               23. | 4.83045891539e-1 |
+|    4 |               232 |               5. |
+|    5 |             2244. |              51. |
+|    6 |            22497. |             231. |
+
+(pp0 "EOL query traceToReqs.eol for XMI view" "EOL execute" " with EMF EMC")
+
+EOL query traceToReqs.eol for XMI view with EMF EMC
+#+name: eol2-xmi-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                 1 |                0 |
+|    2 |                3. | 4.21637021356e-1 |
+|    3 |               19. | 9.94428926012e-1 |
+|    4 |              178. |               8. |
+|    5 |             1723. |              53. |
+|    6 |            16896. |             170. |
+
+(pp0 "EOL query traceToReqs.eol for NeoEMF view" "EOL execute" " with EMF EMC")
+
+EOL query traceToReqs.eol for NeoEMF view with EMF EMC
+#+name: eol2-neoemf-2019
+| Size | EOL execute query |             sdev |
+|------+-------------------+------------------|
+|    1 |                1. | 4.83045891539e-1 |
+|    2 |                5. | 5.16397779495e-1 |
+|    3 |               37. |               3. |
+|    4 |              379. |              22. |
+|    5 |             3422. |              69. |
+|    6 |            36504. |             876. |
+
+*** Aggregate and graph
+
+#+name: agg-eol2-2019
+| size |    XMI | XMI fast | NeoEMF | NeoEMF fast |
+|------+--------+----------+--------+-------------|
+|    1 |      1 |       1. |     1. |           2 |
+|    2 |     3. |       3. |     5. |          4. |
+|    3 |    19. |      21. |    37. |         23. |
+|    4 |   178. |     173. |   379. |         232 |
+|    5 |  1723. |    1687. |  3422. |       2244. |
+|    6 | 16896. |    17088 | 36504. |      22497. |
+#+TBLFM: @2$2..@>$2=remote(eol2-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(eol2-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(eol2-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(eol2-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-eol2-2019 :file images/bench-eol2-2019.png
+set title 'EOL query 2 (time)'
+set key left font ",9"
+
+set xlabel 'model size (10^n)'
+set ylabel 'time (ms)'
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram cluster
+set style fill solid 0.3
+set boxwidth 0.8
+
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) ti 'XMI', '' u 3:xticlabels(1) ti 'XMI fast',\
+     newhistogram "NeoEMF",\
+       ''   u 4:xticlabels(1) ti 'NeoEMF', '' u 5:xticlabels(1) ti 'NeoEMF fast'
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-eol2-2019.png]]
