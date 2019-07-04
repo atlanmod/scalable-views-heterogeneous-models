@@ -1,7 +1,5 @@
 
 import java.io.File;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
 import org.apache.commons.cli.BasicParser;
@@ -88,10 +86,11 @@ public class RunEOL {
 
   static void benchAllQueries(int[] sizes, int warmups, int measures) throws Exception {
     setup();
-    final URI[] queries = { pathURI("queries/allInstances.eol"),
-                            pathURI("queries/reqToTraces.eol"),
-                            pathURI("queries/traceToReqs.eol")
-                            };
+    final URI[] queries = {
+      pathURI("queries/allInstances.eol"),
+      pathURI("queries/reqToTraces.eol"),
+      pathURI("queries/traceToReqs.eol")
+    };
 
     for (URI q : queries) {
       benchQueryOnAllModels(q, false, sizes, warmups, measures);
