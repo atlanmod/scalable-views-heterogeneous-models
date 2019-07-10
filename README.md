@@ -135,4 +135,4 @@ See [LICENSE](LICENSE).
 
 [som-neo]: https://github.com/SOM-Research/NeoEMF/
 [models2018-paper]: https://hal.archives-ouvertes.fr/hal-01845976
-[models2018-branch]: tree/models2018
+[models2018-branch]: https://github.com/atlanmod/scalable-views-heterogeneous-models/tree/models2018
