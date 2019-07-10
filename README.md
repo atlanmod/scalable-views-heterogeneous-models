@@ -3,6 +3,11 @@
 Benchmarks for combining EMF Views, NeoEMF, CDO and Epsilon models on a
 MegaM@Rt2 use case.
 
+*Note*: if you are looking for the source for the benchmarks of our MODELS 2018
+paper [*Towards Scalable Model Views on Heterogeneous Model
+Resources*][models2018-paper], they are in the [models2018
+branch][models2018-branch].
+
 ## Running the benchmarks
 
 First clone this repository and its dependencies, which come as git submodules:
@@ -129,3 +134,5 @@ See [LICENSE](LICENSE).
 
 
 [som-neo]: https://github.com/SOM-Research/NeoEMF/
+[models2018-paper]: https://hal.archives-ouvertes.fr/hal-01845976
+[models2018-branch]: tree/models2018
