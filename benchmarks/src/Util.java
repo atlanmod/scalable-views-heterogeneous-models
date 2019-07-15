@@ -66,9 +66,9 @@ public class Util {
   }
 
   static Map<String,Object> loadOptions = BlueprintsNeo4jOptionsBuilder.newBuilder()
-      .softCache().directWriteLongListSupport().asMap();
+    .softCache().directWriteLongListSupport().asMap();
   static Map<String,Object> saveOptions = BlueprintsNeo4jOptionsBuilder.newBuilder()
-      .weakCache().directWriteLongListSupport().autocommit().asMap();
+    .weakCache().directWriteLongListSupport().autocommit().asMap();
 
   static CDOBackend cdoBackend = new CDOBackend();
 

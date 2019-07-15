@@ -1,2 +1,2 @@
-Log.all.select(l | l.message.startsWith('CaptchaValidateFilter')).first()
+Log.all.selectOne(l | l.message.startsWith('CaptchaValidateFilter'))
    .javaClass.package.component.requirements.size().println();
