@@ -5,7 +5,7 @@
     (re-search-forward (format "^%s" task))
     (buffer-substring (line-beginning-position) (line-end-position))))
 
-(task-line "all-xeon" "Load view with XMI trace of size 10" "Load view")
+(task-line "all-ryzen" "Load view with XMI trace of size 10" "Load view")
 "Load view: [169,168,155,163,165,153,164,163,151,163]"
 
 (defun parse-task-line (line)
@@ -27,12 +27,12 @@
 
 (task-mean-sdev
  (parse-task-line
-  (task-line "all-xeon" "Load view with XMI trace of size 10" "Load view")))
+  (task-line "all-ryzen" "Load view with XMI trace of size 10" "Load view")))
 ((task . "Load view") (mean . "161.") (sdev . "6."))
 
 (task-mean-sdev
  (parse-task-line
-  (task-line "all-xeon" "Load view with XMI trace of size 10" "Get all")))
+  (task-line "all-ryzen" "Load view with XMI trace of size 10" "Get all")))
 ((task . "Get all elements") (mean . "595.") (sdev . "5."))
 
 (defun bench-tasks (buffer bench task sizes &optional suffix)
@@ -43,19 +43,19 @@
             (task-line buffer (format "%s of size %d%s" bench s (or suffix "")) task))))
    sizes))
 
-(bench-tasks "all-xeon" "Load view with XMI trace" "Load view" '(10 100))
+(bench-tasks "all-ryzen" "Load view with XMI trace" "Load view" '(10 100))
 (((size . 10) "Load view" "[169,168,155,163,165,153,164,163,151,163]")
  ((size . 100) "Load view" "[163,153,165,164,155,164,163,154,165,152]"))
 
 (defun bench-task-mean-sdev (bench task sizes &optional suffix)
   (mapcar
    (lambda (tsk) (cons (car tsk) (task-mean-sdev (cdr tsk))))
-   (bench-tasks "all-xeon" bench task sizes suffix)))
+   (bench-tasks "all-ryzen" bench task sizes suffix)))
 
 (mapcar
  (lambda (tsk) (cons (car tsk)
                      (task-mean-sdev (cdr tsk))))
- (bench-tasks "all-xeon" "Load view with XMI trace" "Load view" '(10 100 1000)))
+ (bench-tasks "all-ryzen" "Load view with XMI trace" "Load view" '(10 100 1000)))
 (((size . 10)   (task . "Load view") (mean . "161.") (sdev . "6."))
  ((size . 100)  (task . "Load view") (mean . "160.") (sdev . "6."))
  ((size . 1000) (task . "Load view") (mean . "191.") (sdev . "6.")))
@@ -119,17 +119,17 @@ EOL query traceToReqs.eol for NeoEMF view with EMF EMC
 
 ;; Outputting data to gnuplot to see if boxplots are worth it
 
-(task-line "all-xeon" "Load view with XMI trace of size 10" "Load view")
+(task-line "all-ryzen" "Load view with XMI trace of size 10" "Load view")
 "Load view: [169,168,155,163,165,153,164,163,151,163]"
 
 (defun vector-string-to-list (str)
   (cdr (calc-eval str 'raw)))
 
 (vector-string-to-list
- (cdr (parse-task-line (task-line "all-xeon" "Load view with XMI trace of size 10" "Load view"))))
+ (cdr (parse-task-line (task-line "all-ryzen" "Load view with XMI trace of size 10" "Load view"))))
 (169 168 155 163 165 153 164 163 151 163)
 
-(bench-tasks "all-xeon" "OCL query 0 for full view on XMI trace" "Evaluate query" '(10 100 1000))
+(bench-tasks "all-ryzen" "OCL query 0 for full view on XMI trace" "Evaluate query" '(10 100 1000))
 (((size . 10) "Evaluate query" "[612,614,610,647,609,606,613,607,615,642]")
  ((size . 100) "Evaluate query" "[604,609,612,612,611,647,611,613,611,610]")
  ((size . 1000) "Evaluate query" "[619,623,647,614,612,614,620,622,646,615]"))
@@ -141,7 +141,7 @@ EOL query traceToReqs.eol for NeoEMF view with EMF EMC
            (cons 'task (nth 1 tsk))
            (nth 0 tsk)
            (cons 'values (vector-string-to-list (nth 2 tsk)))))
-   (bench-tasks "all-xeon" bench task sizes suffix)))
+   (bench-tasks "all-ryzen" bench task sizes suffix)))
 
 (bench-task-raw "OCL query 0 for full view on XMI trace" "xmi" "Evaluate query" '(10 100 1000))
 (((bench . "xmi") (task . "Evaluate query") (size . 10) (values 612 614 610 647 609 606 613 607 615 642))

@@ -109,7 +109,7 @@ program to run).
 
 
 ```
-├── all-xeon                  # Raw results for a full run
+├── all-ryzen                 # Raw results for a full run
 ├── benchmarks.org            # Compiled results with additional graphs
 └── benchmarks
      ├── metamodels           # Metamodels used by views
