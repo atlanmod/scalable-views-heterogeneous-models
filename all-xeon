@@ -17399,2690 +17399,2690 @@ Load view: [141281,140070,142924,139635,142375,141564,141410,141017,143285,14097
 Parse EOL: [1,1,1,1,1,0,1,1,1,1]
 EOL execute query: [10,13,14,12,12,12,17,14,7,16]
 
-### Benching EOL query traceToReqs.eol for XMI view of size 10 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [10ms] [6402MB]
-Load view [159ms] [6447MB]
-Result: 5
-EOL execute query [1ms] [7118MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [0ms] [7118MB]
-Load view [144ms] [7160MB]
-Result: 5
-EOL execute query [1ms] [7831MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [7831MB]
-Load view [143ms] [7873MB]
-Result: 5
-EOL execute query [1ms] [8544MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [8546MB]
-Load view [143ms] [8588MB]
-Result: 5
-EOL execute query [1ms] [9259MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [0ms] [9259MB]
-Load view [143ms] [9301MB]
-Result: 5
-EOL execute query [1ms] [9972MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [0ms] [9972MB]
-Load view [144ms] [10016MB]
-Result: 5
-EOL execute query [1ms] [10687MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [0ms] [10687MB]
-Load view [144ms] [10729MB]
-Result: 5
-EOL execute query [1ms] [11400MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [0ms] [11400MB]
-Load view [143ms] [11442MB]
-Result: 5
-EOL execute query [1ms] [5507MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [0ms] [5507MB]
-Load view [156ms] [5551MB]
-Result: 5
-EOL execute query [1ms] [4123MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [1ms] [4123MB]
-Load view [156ms] [4167MB]
-Result: 5
-EOL execute query [1ms] [3065MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [0ms] [3065MB]
-Load view [160ms] [3109MB]
-Result: 5
-EOL execute query [1ms] [3780MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [0ms] [3780MB]
-Load view [144ms] [3824MB]
-Result: 5
-EOL execute query [1ms] [4495MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [0ms] [4495MB]
-Load view [144ms] [4537MB]
-Result: 5
-EOL execute query [1ms] [5208MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [0ms] [5208MB]
-Load view [143ms] [5250MB]
-Result: 5
-EOL execute query [2ms] [5923MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [0ms] [5923MB]
-Load view [144ms] [5965MB]
-Result: 5
-EOL execute query [2ms] [6636MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for XMI view of size 10
-Load view: [144,144,143,156,156,160,144,144,143,144]
-Parse EOL: [0,0,0,0,1,0,0,0,0,0]
-EOL execute query: [1,1,1,1,1,1,1,1,2,2]
-
-### Benching EOL query traceToReqs.eol for NeoEMF view of size 10 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [0ms] [6636MB]
-Load view [5034ms] [7060MB]
-Result: 5
-EOL execute query [3ms] [7733MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [0ms] [7735MB]
-Load view [5133ms] [8156MB]
-Result: 5
-EOL execute query [2ms] [8828MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [8832MB]
-Load view [4821ms] [9249MB]
-Result: 5
-EOL execute query [2ms] [9920MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [1ms] [9922MB]
-Load view [5037ms] [10346MB]
-Result: 5
-EOL execute query [2ms] [11017MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [1ms] [11019MB]
-Load view [4968ms] [11441MB]
-Result: 5
-EOL execute query [2ms] [3294MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [1ms] [3306MB]
-Load view [5002ms] [3732MB]
-Result: 5
-EOL execute query [2ms] [4405MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [0ms] [4407MB]
-Load view [4878ms] [4829MB]
-Result: 5
-EOL execute query [2ms] [5500MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [1ms] [5504MB]
-Load view [4928ms] [5924MB]
-Result: 5
-EOL execute query [2ms] [6597MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [0ms] [6599MB]
-Load view [5021ms] [7018MB]
-Result: 5
-EOL execute query [2ms] [7689MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [0ms] [7694MB]
-Load view [4869ms] [8113MB]
-Result: 5
-EOL execute query [2ms] [8784MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [1ms] [8786MB]
-Load view [5075ms] [9212MB]
-Result: 5
-EOL execute query [2ms] [9883MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [1ms] [9886MB]
-Load view [5023ms] [10305MB]
-Result: 5
-EOL execute query [2ms] [10976MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [1ms] [10978MB]
-Load view [4878ms] [11401MB]
-Result: 5
-EOL execute query [2ms] [3260MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [0ms] [3273MB]
-Load view [4972ms] [3692MB]
-Result: 5
-EOL execute query [2ms] [4363MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [0ms] [4365MB]
-Load view [5256ms] [4791MB]
-Result: 5
-EOL execute query [2ms] [5462MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for NeoEMF view of size 10
-Load view: [5002,4878,4928,5021,4869,5075,5023,4878,4972,5256]
-Parse EOL: [1,0,1,0,0,1,1,1,0,0]
-EOL execute query: [2,2,2,2,2,2,2,2,2,2]
-
-### Benching EOL query traceToReqs.eol for XMI view of size 100 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [1ms] [5466MB]
-Load view [161ms] [5513MB]
-Result: 5
-EOL execute query [3ms] [6186MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [0ms] [6188MB]
-Load view [146ms] [6232MB]
-Result: 5
-EOL execute query [3ms] [6907MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [6907MB]
-Load view [147ms] [6951MB]
-Result: 5
-EOL execute query [3ms] [7627MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [7627MB]
-Load view [148ms] [7673MB]
-Result: 5
-EOL execute query [3ms] [8346MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [1ms] [8346MB]
-Load view [147ms] [8392MB]
-Result: 5
-EOL execute query [3ms] [9065MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [0ms] [9065MB]
-Load view [147ms] [9111MB]
-Result: 5
-EOL execute query [2ms] [9784MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [0ms] [9784MB]
-Load view [147ms] [9831MB]
-Result: 5
-EOL execute query [2ms] [10504MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [1ms] [10504MB]
-Load view [147ms] [10550MB]
-Result: 5
-EOL execute query [3ms] [11225MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [1ms] [11225MB]
-Load view [148ms] [11269MB]
-Result: 5
-EOL execute query [3ms] [3103MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [0ms] [3103MB]
-Load view [157ms] [3149MB]
-Result: 5
-EOL execute query [3ms] [3824MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [0ms] [3824MB]
-Load view [148ms] [3870MB]
-Result: 5
-EOL execute query [4ms] [4544MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [0ms] [4544MB]
-Load view [152ms] [4590MB]
-Result: 5
-EOL execute query [3ms] [5263MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [0ms] [5263MB]
-Load view [147ms] [5309MB]
-Result: 5
-EOL execute query [3ms] [5982MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [0ms] [5982MB]
-Load view [148ms] [6028MB]
-Result: 5
-EOL execute query [3ms] [6702MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [1ms] [6702MB]
-Load view [145ms] [6748MB]
-Result: 5
-EOL execute query [2ms] [7423MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for XMI view of size 100
-Load view: [147,147,147,148,157,148,152,147,148,145]
-Parse EOL: [0,0,1,1,0,0,0,0,0,1]
-EOL execute query: [2,2,3,3,3,4,3,3,3,2]
-
-### Benching EOL query traceToReqs.eol for NeoEMF view of size 100 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [1ms] [7423MB]
-Load view [5019ms] [7853MB]
-Result: 5
-EOL execute query [5ms] [8528MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [0ms] [8530MB]
-Load view [5051ms] [8958MB]
-Result: 5
-EOL execute query [4ms] [9633MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [1ms] [9638MB]
-Load view [4934ms] [10065MB]
-Result: 5
-EOL execute query [4ms] [10741MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [10743MB]
-Load view [4970ms] [11173MB]
-Result: 5
-EOL execute query [4ms] [3034MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [1ms] [3049MB]
-Load view [4901ms] [3474MB]
-Result: 5
-EOL execute query [3ms] [4150MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [1ms] [4154MB]
-Load view [4928ms] [4580MB]
-Result: 5
-EOL execute query [4ms] [5255MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [0ms] [5257MB]
-Load view [5030ms] [5687MB]
-Result: 5
-EOL execute query [5ms] [6362MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [0ms] [6364MB]
-Load view [5004ms] [6792MB]
-Result: 5
-EOL execute query [4ms] [7465MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [1ms] [7469MB]
-Load view [5260ms] [7899MB]
-Result: 5
-EOL execute query [4ms] [8575MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [1ms] [8579MB]
-Load view [5024ms] [9002MB]
-Result: 5
-EOL execute query [4ms] [9678MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [0ms] [9682MB]
-Load view [5291ms] [10106MB]
-Result: 5
-EOL execute query [5ms] [10781MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [0ms] [10785MB]
-Load view [5061ms] [11211MB]
-Result: 5
-EOL execute query [4ms] [3076MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [1ms] [3090MB]
-Load view [4951ms] [3526MB]
-Result: 5
-EOL execute query [5ms] [4200MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [1ms] [4204MB]
-Load view [5301ms] [4632MB]
-Result: 5
-EOL execute query [4ms] [5307MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [1ms] [5311MB]
-Load view [4841ms] [5741MB]
-Result: 5
-EOL execute query [4ms] [6416MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for NeoEMF view of size 100
-Load view: [4928,5030,5004,5260,5024,5291,5061,4951,5301,4841]
-Parse EOL: [1,0,0,1,1,0,0,1,1,1]
-EOL execute query: [4,5,4,4,4,5,4,5,4,4]
-
-### Benching EOL query traceToReqs.eol for XMI view of size 1000 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [1ms] [6420MB]
-Load view [196ms] [6500MB]
-Result: 5
-EOL execute query [17ms] [7199MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [0ms] [7199MB]
-Load view [181ms] [7276MB]
-Result: 5
-EOL execute query [20ms] [7977MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [7977MB]
-Load view [180ms] [8054MB]
-Result: 5
-EOL execute query [20ms] [8753MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [1ms] [8753MB]
-Load view [182ms] [8832MB]
-Result: 5
-EOL execute query [20ms] [9531MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [1ms] [9531MB]
-Load view [180ms] [9608MB]
-Result: 5
-EOL execute query [17ms] [10307MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [1ms] [10309MB]
-Load view [179ms] [10386MB]
-Result: 5
-EOL execute query [20ms] [11085MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [1ms] [11085MB]
-Load view [180ms] [11162MB]
-Result: 5
-EOL execute query [20ms] [3024MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [1ms] [3024MB]
-Load view [190ms] [3104MB]
-Result: 5
-EOL execute query [20ms] [3802MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [0ms] [3802MB]
-Load view [181ms] [3880MB]
-Result: 5
-EOL execute query [21ms] [4580MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [1ms] [4580MB]
-Load view [179ms] [4658MB]
-Result: 5
-EOL execute query [24ms] [5356MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [0ms] [5356MB]
-Load view [184ms] [5436MB]
-Result: 5
-EOL execute query [20ms] [6134MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [1ms] [6134MB]
-Load view [177ms] [6212MB]
-Result: 5
-EOL execute query [19ms] [6912MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [0ms] [6912MB]
-Load view [180ms] [6990MB]
-Result: 5
-EOL execute query [21ms] [7688MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [0ms] [7688MB]
-Load view [178ms] [7766MB]
-Result: 5
-EOL execute query [20ms] [8466MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [0ms] [8466MB]
-Load view [180ms] [8544MB]
-Result: 5
-EOL execute query [20ms] [9242MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for XMI view of size 1000
-Load view: [179,180,190,181,179,184,177,180,178,180]
-Parse EOL: [1,1,1,0,1,0,1,0,0,0]
-EOL execute query: [20,20,20,21,24,20,19,21,20,20]
-
-### Benching EOL query traceToReqs.eol for NeoEMF view of size 1000 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [0ms] [9242MB]
-Load view [5169ms] [9739MB]
-Result: 5
-EOL execute query [23ms] [10446MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [0ms] [10457MB]
-Load view [4994ms] [10947MB]
-Result: 5
-EOL execute query [23ms] [11654MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [11663MB]
-Load view [5137ms] [3326MB]
-Result: 5
-EOL execute query [22ms] [4032MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [4041MB]
-Load view [5150ms] [4538MB]
-Result: 5
-EOL execute query [23ms] [5244MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [1ms] [5253MB]
-Load view [5155ms] [5746MB]
-Result: 5
-EOL execute query [21ms] [6452MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [0ms] [6461MB]
-Load view [5135ms] [6954MB]
-Result: 5
-EOL execute query [24ms] [7660MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [0ms] [7669MB]
-Load view [5233ms] [8164MB]
-Result: 5
-EOL execute query [23ms] [8870MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [1ms] [8879MB]
-Load view [5224ms] [9374MB]
-Result: 5
-EOL execute query [23ms] [10080MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [0ms] [10089MB]
-Load view [5144ms] [10590MB]
-Result: 5
-EOL execute query [23ms] [11297MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [0ms] [11304MB]
-Load view [5062ms] [11798MB]
-Result: 5
-EOL execute query [23ms] [3703MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [1ms] [3719MB]
-Load view [5024ms] [4219MB]
-Result: 5
-EOL execute query [23ms] [4925MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [1ms] [4932MB]
-Load view [5374ms] [5424MB]
-Result: 5
-EOL execute query [23ms] [6131MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [0ms] [6140MB]
-Load view [5034ms] [6634MB]
-Result: 5
-EOL execute query [23ms] [7341MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [1ms] [7347MB]
-Load view [5001ms] [7849MB]
-Result: 5
-EOL execute query [24ms] [8555MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [0ms] [8563MB]
-Load view [5186ms] [9055MB]
-Result: 5
-EOL execute query [24ms] [9761MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for NeoEMF view of size 1000
-Load view: [5135,5233,5224,5144,5062,5024,5374,5034,5001,5186]
-Parse EOL: [0,0,1,0,0,1,1,0,1,0]
-EOL execute query: [24,23,23,23,23,23,23,23,24,24]
-
-### Benching EOL query traceToReqs.eol for XMI view of size 10000 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [0ms] [9768MB]
-Load view [507ms] [10172MB]
-Result: 5
-EOL execute query [165ms] [11124MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [1ms] [11124MB]
-Load view [491ms] [11527MB]
-Result: 5
-EOL execute query [165ms] [3654MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [3654MB]
-Load view [508ms] [4058MB]
-Result: 5
-EOL execute query [179ms] [5008MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [5008MB]
-Load view [497ms] [5411MB]
-Result: 5
-EOL execute query [179ms] [6361MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [0ms] [6361MB]
-Load view [492ms] [6764MB]
-Result: 5
-EOL execute query [178ms] [7716MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [1ms] [7716MB]
-Load view [493ms] [8118MB]
-Result: 5
-EOL execute query [184ms] [9068MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [0ms] [9068MB]
-Load view [496ms] [9471MB]
-Result: 5
-EOL execute query [161ms] [10421MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [1ms] [10421MB]
-Load view [488ms] [10824MB]
-Result: 5
-EOL execute query [166ms] [11774MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [0ms] [11776MB]
-Load view [491ms] [3334MB]
-Result: 5
-EOL execute query [177ms] [4286MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [0ms] [4286MB]
-Load view [497ms] [4691MB]
-Result: 5
-EOL execute query [169ms] [5641MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [1ms] [5641MB]
-Load view [495ms] [6043MB]
-Result: 5
-EOL execute query [174ms] [6993MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [0ms] [6993MB]
-Load view [493ms] [7396MB]
-Result: 5
-EOL execute query [191ms] [8346MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [1ms] [8348MB]
-Load view [493ms] [8751MB]
-Result: 5
-EOL execute query [171ms] [9701MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [0ms] [9701MB]
-Load view [493ms] [10104MB]
-Result: 5
-EOL execute query [166ms] [11054MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [1ms] [11054MB]
-Load view [493ms] [11456MB]
-Result: 5
-EOL execute query [167ms] [3574MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for XMI view of size 10000
-Load view: [493,496,488,491,497,495,493,493,493,493]
-Parse EOL: [1,0,1,0,0,1,0,1,0,1]
-EOL execute query: [184,161,166,177,169,174,191,171,166,167]
-
-### Benching EOL query traceToReqs.eol for NeoEMF view of size 10000 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [0ms] [3574MB]
-Load view [6196ms] [4778MB]
-Result: 5
-EOL execute query [327ms] [5812MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [1ms] [5867MB]
-Load view [6329ms] [7064MB]
-Result: 5
-EOL execute query [233ms] [8100MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [8154MB]
-Load view [6176ms] [9358MB]
-Result: 5
-EOL execute query [229ms] [10392MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [10447MB]
-Load view [6150ms] [11640MB]
-Result: 5
-EOL execute query [226ms] [3977MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [1ms] [4040MB]
-Load view [6194ms] [5242MB]
-Result: 5
-EOL execute query [236ms] [6276MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [0ms] [6330MB]
-Load view [6194ms] [7526MB]
-Result: 5
-EOL execute query [233ms] [8559MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [0ms] [8614MB]
-Load view [6354ms] [9807MB]
-Result: 5
-EOL execute query [235ms] [10843MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [1ms] [10898MB]
-Load view [6344ms] [3404MB]
-Result: 5
-EOL execute query [221ms] [4438MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [1ms] [4501MB]
-Load view [6341ms] [5701MB]
-Result: 5
-EOL execute query [234ms] [6734MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [0ms] [6790MB]
-Load view [6328ms] [7982MB]
-Result: 5
-EOL execute query [235ms] [9018MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [1ms] [9073MB]
-Load view [6227ms] [10274MB]
-Result: 5
-EOL execute query [232ms] [11308MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [1ms] [11363MB]
-Load view [6300ms] [3853MB]
-Result: 5
-EOL execute query [225ms] [4889MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [0ms] [4946MB]
-Load view [6358ms] [6141MB]
-Result: 5
-EOL execute query [236ms] [7175MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [0ms] [7232MB]
-Load view [6246ms] [8425MB]
-Result: 5
-EOL execute query [234ms] [9461MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [1ms] [9516MB]
-Load view [6427ms] [10705MB]
-Result: 5
-EOL execute query [235ms] [11739MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for NeoEMF view of size 10000
-Load view: [6194,6354,6344,6341,6328,6227,6300,6358,6246,6427]
-Parse EOL: [0,0,1,1,0,1,1,0,0,1]
-EOL execute query: [233,235,221,234,235,232,225,236,234,235]
-
-### Benching EOL query traceToReqs.eol for XMI view of size 100000 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [1ms] [11793MB]
-Load view [3838ms] [6671MB]
-Result: 5
-EOL execute query [1711ms] [10135MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [0ms] [10135MB]
-Load view [3762ms] [4985MB]
-Result: 5
-EOL execute query [1702ms] [8448MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [1ms] [8450MB]
-Load view [3720ms] [3310MB]
-Result: 5
-EOL execute query [1667ms] [6775MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [6775MB]
-Load view [3736ms] [10424MB]
-Result: 5
-EOL execute query [1729ms] [5151MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [0ms] [5151MB]
-Load view [3774ms] [8800MB]
-Result: 5
-EOL execute query [1713ms] [3528MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [0ms] [3528MB]
-Load view [3757ms] [7177MB]
-Result: 5
-EOL execute query [1677ms] [10641MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [1ms] [10641MB]
-Load view [3722ms] [5494MB]
-Result: 5
-EOL execute query [1670ms] [8958MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [0ms] [8958MB]
-Load view [3736ms] [3817MB]
-Result: 5
-EOL execute query [1661ms] [7281MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [1ms] [7281MB]
-Load view [3743ms] [10930MB]
-Result: 5
-EOL execute query [1658ms] [5647MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [0ms] [5647MB]
-Load view [3777ms] [9296MB]
-Result: 5
-EOL execute query [1725ms] [4025MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [0ms] [4025MB]
-Load view [3755ms] [7676MB]
-Result: 5
-EOL execute query [1724ms] [11139MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [1ms] [11141MB]
-Load view [3647ms] [5984MB]
-Result: 5
-EOL execute query [1663ms] [9449MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [1ms] [9449MB]
-Load view [3725ms] [4302MB]
-Result: 5
-EOL execute query [1695ms] [7766MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [0ms] [7766MB]
-Load view [3783ms] [11415MB]
-Result: 5
-EOL execute query [1686ms] [6122MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [0ms] [6122MB]
-Load view [3753ms] [9771MB]
-Result: 5
-EOL execute query [1707ms] [4497MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for XMI view of size 100000
-Load view: [3757,3722,3736,3743,3777,3755,3647,3725,3783,3753]
-Parse EOL: [0,1,0,1,0,0,1,1,0,0]
-EOL execute query: [1677,1670,1661,1658,1725,1724,1663,1695,1686,1707]
-
-### Benching EOL query traceToReqs.eol for NeoEMF view of size 100000 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [1ms] [4497MB]
-Load view [17996ms] [4439MB]
-Result: 5
-EOL execute query [3470ms] [8719MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [3ms] [9399MB]
-Load view [17856ms] [9192MB]
-Result: 5
-EOL execute query [2356ms] [5241MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [2ms] [5920MB]
-Load view [17795ms] [5949MB]
-Result: 5
-EOL execute query [2173ms] [10227MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [1ms] [10906MB]
-Load view [17941ms] [10548MB]
-Result: 5
-EOL execute query [2200ms] [6635MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [1ms] [7315MB]
-Load view [18522ms] [7383MB]
-Result: 5
-EOL execute query [2189ms] [11661MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [0ms] [4375MB]
-Load view [18383ms] [4974MB]
-Result: 5
-EOL execute query [2190ms] [9252MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [1ms] [9933MB]
-Load view [17846ms] [10452MB]
-Result: 5
-EOL execute query [2208ms] [7347MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [0ms] [8027MB]
-Load view [17963ms] [8803MB]
-Result: 5
-EOL execute query [2291ms] [5824MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [1ms] [6505MB]
-Load view [18375ms] [7841MB]
-Result: 5
-EOL execute query [2299ms] [5381MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [1ms] [6064MB]
-Load view [18450ms] [7902MB]
-Result: 5
-EOL execute query [2293ms] [5989MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [1ms] [6672MB]
-Load view [17970ms] [9053MB]
-Result: 5
-EOL execute query [2281ms] [7655MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [1ms] [8337MB]
-Load view [17660ms] [11239MB]
-Result: 5
-EOL execute query [2151ms] [10377MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [1ms] [11057MB]
-Load view [18101ms] [9414MB]
-Result: 5
-EOL execute query [2275ms] [9017MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [1ms] [9696MB]
-Load view [17922ms] [9340MB]
-Result: 5
-EOL execute query [2226ms] [9440MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [1ms] [10119MB]
-Load view [17866ms] [10572MB]
-Result: 5
-EOL execute query [2230ms] [11126MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for NeoEMF view of size 100000
-Load view: [18383,17846,17963,18375,18450,17970,17660,18101,17922,17866]
-Parse EOL: [0,1,0,1,1,1,1,1,1,1]
-EOL execute query: [2190,2208,2291,2299,2293,2281,2151,2275,2226,2230]
-
-### Benching EOL query traceToReqs.eol for XMI view of size 1000000 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [0ms] [11806MB]
-Load view [36166ms] [11860MB]
-Result: 5
-EOL execute query [17619ms] [8164MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [1ms] [8164MB]
-Load view [36000ms] [5940MB]
-Result: 5
-EOL execute query [17134ms] [11648MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [11648MB]
-Load view [35778ms] [11470MB]
-Result: 5
-EOL execute query [16862ms] [12797MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [12797MB]
-Load view [36358ms] [5988MB]
-Result: 5
-EOL execute query [16797ms] [2001MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [0ms] [2001MB]
-Load view [35826ms] [5097MB]
-Result: 5
-EOL execute query [17170ms] [9248MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [0ms] [9248MB]
-Load view [35956ms] [4465MB]
-Result: 5
-EOL execute query [17122ms] [8707MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [0ms] [8707MB]
-Load view [36335ms] [5062MB]
-Result: 5
-EOL execute query [17063ms] [11260MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [0ms] [11260MB]
-Load view [36398ms] [12511MB]
-Result: 5
-EOL execute query [17215ms] [8246MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [1ms] [8246MB]
-Load view [36469ms] [8728MB]
-Result: 5
-EOL execute query [16904ms] [10027MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [1ms] [10027MB]
-Load view [35709ms] [11293MB]
-Result: 5
-EOL execute query [17179ms] [9084MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [0ms] [9084MB]
-Load view [35856ms] [3926MB]
-Result: 5
-EOL execute query [16971ms] [7665MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [0ms] [7667MB]
-Load view [36272ms] [2955MB]
-Result: 5
-EOL execute query [17146ms] [7185MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [0ms] [7185MB]
-Load view [36438ms] [10800MB]
-Result: 5
-EOL execute query [17158ms] [6856MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [0ms] [6856MB]
-Load view [35985ms] [11250MB]
-Result: 5
-EOL execute query [16979ms] [9808MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [0ms] [9808MB]
-Load view [35684ms] [11258MB]
-Result: 5
-EOL execute query [17143ms] [7267MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for XMI view of size 1000000
-Load view: [35956,36335,36398,36469,35709,35856,36272,36438,35985,35684]
-Parse EOL: [0,0,0,1,1,0,0,0,0,0]
-EOL execute query: [17122,17063,17215,16904,17179,16971,17146,17158,16979,17143]
-
-### Benching EOL query traceToReqs.eol for NeoEMF view of size 1000000 ... (5 warmups/10 measures)
-
--- Warmup 1
-Parse EOL [0ms] [7267MB]
-Load view [143534ms] [10667MB]
-Result: 5
-EOL execute query [36928ms] [9743MB]
--- Warmup 1
-
--- Warmup 2
-Parse EOL [1ms] [9888MB]
-Load view [141203ms] [10624MB]
-Result: 5
-EOL execute query [22317ms] [7691MB]
--- Warmup 2
-
--- Warmup 3
-Parse EOL [0ms] [9632MB]
-Load view [141427ms] [8824MB]
-Result: 5
-EOL execute query [22472ms] [9159MB]
--- Warmup 3
-
--- Warmup 4
-Parse EOL [0ms] [11513MB]
-Load view [141685ms] [7881MB]
-Result: 5
-EOL execute query [22634ms] [7716MB]
--- Warmup 4
-
--- Warmup 5
-Parse EOL [0ms] [10712MB]
-Load view [141947ms] [11687MB]
-Result: 5
-EOL execute query [22305ms] [10649MB]
--- Warmup 5
-
-== Measure 1
-Parse EOL [0ms] [12727MB]
-Load view [140225ms] [12399MB]
-Result: 5
-EOL execute query [22558ms] [10530MB]
-== Measure 1
-
-== Measure 2
-Parse EOL [1ms] [12737MB]
-Load view [141632ms] [11274MB]
-Result: 5
-EOL execute query [22554ms] [9660MB]
-== Measure 2
-
-== Measure 3
-Parse EOL [1ms] [11602MB]
-Load view [140271ms] [11192MB]
-Result: 5
-EOL execute query [22452ms] [8877MB]
-== Measure 3
-
-== Measure 4
-Parse EOL [1ms] [10981MB]
-Load view [141670ms] [9057MB]
-Result: 5
-EOL execute query [22560ms] [12895MB]
-== Measure 4
-
-== Measure 5
-Parse EOL [0ms] [9367MB]
-Load view [141024ms] [7058MB]
-Result: 5
-EOL execute query [22539ms] [6748MB]
-== Measure 5
-
-== Measure 6
-Parse EOL [0ms] [6956MB]
-Load view [141165ms] [7736MB]
-Result: 5
-EOL execute query [22308ms] [10661MB]
-== Measure 6
-
-== Measure 7
-Parse EOL [1ms] [8383MB]
-Load view [139749ms] [11752MB]
-Result: 5
-EOL execute query [22563ms] [12235MB]
-== Measure 7
-
-== Measure 8
-Parse EOL [0ms] [10373MB]
-Load view [141508ms] [11362MB]
-Result: 5
-EOL execute query [22621ms] [9697MB]
-== Measure 8
-
-== Measure 9
-Parse EOL [1ms] [11298MB]
-Load view [140459ms] [9242MB]
-Result: 5
-EOL execute query [22852ms] [11834MB]
-== Measure 9
-
-== Measure 10
-Parse EOL [0ms] [11297MB]
-Load view [141302ms] [11908MB]
-Result: 5
-EOL execute query [21965ms] [11812MB]
-== Measure 10
-
-# Results for: EOL query traceToReqs.eol for NeoEMF view of size 1000000
-Load view: [140225,141632,140271,141670,141024,141165,139749,141508,140459,141302]
-Parse EOL: [0,1,1,1,0,0,1,0,1,0]
-EOL execute query: [22558,22554,22452,22560,22539,22308,22563,22621,22852,21965]
-
 ### Benching EOL query traceToReqs.eol for XMI view of size 10 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [0ms] [9549MB]
-Load view [157ms] [9593MB]
+Parse EOL [83ms] [55MB]
+Load view [734ms] [120MB]
 Result: 5
-EOL execute query [1ms] [10264MB]
+EOL execute query [13ms] [47MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [1ms] [10264MB]
-Load view [144ms] [10306MB]
+Parse EOL [3ms] [47MB]
+Load view [303ms] [95MB]
 Result: 5
-EOL execute query [1ms] [10979MB]
+EOL execute query [4ms] [95MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [1ms] [10979MB]
-Load view [145ms] [11021MB]
+Parse EOL [2ms] [95MB]
+Load view [209ms] [137MB]
 Result: 5
-EOL execute query [1ms] [11692MB]
+EOL execute query [3ms] [139MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [0ms] [11692MB]
-Load view [144ms] [11734MB]
+Parse EOL [2ms] [139MB]
+Load view [186ms] [39MB]
 Result: 5
-EOL execute query [1ms] [12405MB]
+EOL execute query [3ms] [40MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [1ms] [12405MB]
-Load view [145ms] [12449MB]
+Parse EOL [2ms] [41MB]
+Load view [178ms] [85MB]
 Result: 5
-EOL execute query [1ms] [8406MB]
+EOL execute query [3ms] [85MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [0ms] [8406MB]
-Load view [156ms] [8450MB]
+Parse EOL [1ms] [85MB]
+Load view [154ms] [127MB]
 Result: 5
-EOL execute query [1ms] [9121MB]
+EOL execute query [2ms] [129MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [0ms] [9121MB]
-Load view [144ms] [9163MB]
+Parse EOL [2ms] [129MB]
+Load view [155ms] [171MB]
 Result: 5
-EOL execute query [1ms] [9834MB]
+EOL execute query [2ms] [171MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [9836MB]
-Load view [143ms] [9878MB]
+Parse EOL [1ms] [171MB]
+Load view [155ms] [215MB]
 Result: 5
-EOL execute query [1ms] [10549MB]
+EOL execute query [2ms] [215MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [1ms] [10549MB]
-Load view [143ms] [10591MB]
+Parse EOL [2ms] [215MB]
+Load view [171ms] [46MB]
 Result: 5
-EOL execute query [1ms] [11262MB]
+EOL execute query [2ms] [48MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [0ms] [11262MB]
-Load view [144ms] [11306MB]
+Parse EOL [1ms] [48MB]
+Load view [161ms] [92MB]
 Result: 5
-EOL execute query [1ms] [11977MB]
+EOL execute query [2ms] [92MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [0ms] [11977MB]
-Load view [145ms] [12019MB]
+Parse EOL [1ms] [92MB]
+Load view [147ms] [136MB]
 Result: 5
-EOL execute query [1ms] [12690MB]
+EOL execute query [2ms] [136MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [0ms] [12690MB]
-Load view [148ms] [12732MB]
+Parse EOL [1ms] [136MB]
+Load view [148ms] [178MB]
 Result: 5
-EOL execute query [1ms] [8664MB]
+EOL execute query [2ms] [180MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [1ms] [8664MB]
-Load view [155ms] [8708MB]
+Parse EOL [1ms] [180MB]
+Load view [150ms] [222MB]
 Result: 5
-EOL execute query [1ms] [9379MB]
+EOL execute query [2ms] [222MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [0ms] [9379MB]
-Load view [145ms] [9421MB]
+Parse EOL [1ms] [222MB]
+Load view [155ms] [266MB]
 Result: 5
-EOL execute query [1ms] [10092MB]
+EOL execute query [2ms] [266MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [0ms] [10092MB]
-Load view [145ms] [10136MB]
+Parse EOL [1ms] [266MB]
+Load view [167ms] [308MB]
 Result: 5
-EOL execute query [1ms] [10807MB]
+EOL execute query [2ms] [308MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for XMI view of size 10 with EMF EMC
-Load view: [156,144,143,143,144,145,148,155,145,145]
-Parse EOL: [0,0,0,1,0,0,0,1,0,0]
-EOL execute query: [1,1,1,1,1,1,1,1,1,1]
+Load view: [154,155,155,171,161,147,148,150,155,167]
+Parse EOL: [1,2,1,2,1,1,1,1,1,1]
+EOL execute query: [2,2,2,2,2,2,2,2,2,2]
 
 ### Benching EOL query traceToReqs.eol for NeoEMF view of size 10 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [1ms] [10807MB]
-Load view [4905ms] [11231MB]
+Parse EOL [2ms] [310MB]
+Load view [8940ms] [175MB]
 Result: 5
-EOL execute query [2ms] [11904MB]
+EOL execute query [10ms] [176MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [0ms] [11906MB]
-Load view [4972ms] [12323MB]
+Parse EOL [1ms] [180MB]
+Load view [7315ms] [305MB]
 Result: 5
-EOL execute query [2ms] [8289MB]
+EOL execute query [5ms] [308MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [1ms] [8303MB]
-Load view [4957ms] [8725MB]
+Parse EOL [1ms] [311MB]
+Load view [7410ms] [145MB]
 Result: 5
-EOL execute query [1ms] [9396MB]
+EOL execute query [3ms] [145MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [1ms] [9400MB]
-Load view [5072ms] [9819MB]
+Parse EOL [1ms] [149MB]
+Load view [7296ms] [269MB]
 Result: 5
-EOL execute query [2ms] [10490MB]
+EOL execute query [3ms] [269MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [0ms] [10495MB]
-Load view [5032ms] [10914MB]
+Parse EOL [1ms] [273MB]
+Load view [7562ms] [96MB]
 Result: 5
-EOL execute query [2ms] [11587MB]
+EOL execute query [4ms] [97MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [0ms] [11589MB]
-Load view [4991ms] [12007MB]
+Parse EOL [2ms] [99MB]
+Load view [5111ms] [217MB]
 Result: 5
-EOL execute query [1ms] [12678MB]
+EOL execute query [3ms] [217MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [0ms] [12682MB]
-Load view [4959ms] [8425MB]
+Parse EOL [1ms] [221MB]
+Load view [5051ms] [329MB]
 Result: 5
-EOL execute query [1ms] [9097MB]
+EOL execute query [3ms] [330MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [9102MB]
-Load view [5139ms] [9520MB]
+Parse EOL [1ms] [332MB]
+Load view [4925ms] [148MB]
 Result: 5
-EOL execute query [1ms] [10191MB]
+EOL execute query [4ms] [150MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [10195MB]
-Load view [5006ms] [10621MB]
+Parse EOL [2ms] [154MB]
+Load view [4976ms] [260MB]
 Result: 5
-EOL execute query [1ms] [11292MB]
+EOL execute query [3ms] [262MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [0ms] [11296MB]
-Load view [4938ms] [11726MB]
+Parse EOL [1ms] [264MB]
+Load view [4987ms] [84MB]
 Result: 5
-EOL execute query [1ms] [12399MB]
+EOL execute query [3ms] [84MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [1ms] [12402MB]
-Load view [4994ms] [12823MB]
+Parse EOL [1ms] [90MB]
+Load view [4838ms] [202MB]
 Result: 5
-EOL execute query [2ms] [8631MB]
+EOL execute query [3ms] [205MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [0ms] [8643MB]
-Load view [5004ms] [9067MB]
+Parse EOL [1ms] [207MB]
+Load view [4887ms] [315MB]
 Result: 5
-EOL execute query [2ms] [9740MB]
+EOL execute query [3ms] [315MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [0ms] [9742MB]
-Load view [5002ms] [10162MB]
+Parse EOL [1ms] [319MB]
+Load view [4903ms] [133MB]
 Result: 5
-EOL execute query [2ms] [10833MB]
+EOL execute query [2ms] [133MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [0ms] [10837MB]
-Load view [4911ms] [11256MB]
+Parse EOL [1ms] [135MB]
+Load view [5064ms] [249MB]
 Result: 5
-EOL execute query [1ms] [11930MB]
+EOL execute query [2ms] [252MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [1ms] [11932MB]
-Load view [4910ms] [12351MB]
+Parse EOL [1ms] [254MB]
+Load view [5043ms] [356MB]
 Result: 5
-EOL execute query [1ms] [13022MB]
+EOL execute query [4ms] [358MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for NeoEMF view of size 10 with EMF EMC
-Load view: [4991,4959,5139,5006,4938,4994,5004,5002,4911,4910]
-Parse EOL: [0,0,0,0,0,1,0,0,0,1]
-EOL execute query: [1,1,1,1,1,2,2,2,1,1]
+Load view: [5111,5051,4925,4976,4987,4838,4887,4903,5064,5043]
+Parse EOL: [2,1,1,2,1,1,1,1,1,1]
+EOL execute query: [3,3,4,3,3,3,3,2,2,4]
 
 ### Benching EOL query traceToReqs.eol for XMI view of size 100 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [0ms] [13026MB]
-Load view [162ms] [13075MB]
+Parse EOL [1ms] [83MB]
+Load view [176ms] [130MB]
 Result: 5
-EOL execute query [3ms] [8842MB]
+EOL execute query [4ms] [135MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [1ms] [8842MB]
-Load view [162ms] [8890MB]
+Parse EOL [1ms] [135MB]
+Load view [157ms] [179MB]
 Result: 5
-EOL execute query [3ms] [9563MB]
+EOL execute query [4ms] [183MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [1ms] [9563MB]
-Load view [148ms] [9610MB]
+Parse EOL [1ms] [183MB]
+Load view [156ms] [229MB]
 Result: 5
-EOL execute query [3ms] [10283MB]
+EOL execute query [3ms] [231MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [0ms] [10283MB]
-Load view [148ms] [10329MB]
+Parse EOL [1ms] [231MB]
+Load view [156ms] [277MB]
 Result: 5
-EOL execute query [3ms] [11002MB]
+EOL execute query [3ms] [279MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [1ms] [11002MB]
-Load view [151ms] [11048MB]
+Parse EOL [1ms] [279MB]
+Load view [155ms] [325MB]
 Result: 5
-EOL execute query [3ms] [11723MB]
+EOL execute query [3ms] [328MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [0ms] [11723MB]
-Load view [148ms] [11768MB]
+Parse EOL [1ms] [328MB]
+Load view [158ms] [66MB]
 Result: 5
-EOL execute query [2ms] [12443MB]
+EOL execute query [3ms] [71MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [0ms] [12443MB]
-Load view [147ms] [12489MB]
+Parse EOL [1ms] [71MB]
+Load view [161ms] [117MB]
 Result: 5
-EOL execute query [3ms] [8230MB]
+EOL execute query [2ms] [121MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [8230MB]
-Load view [160ms] [8278MB]
+Parse EOL [1ms] [121MB]
+Load view [149ms] [165MB]
 Result: 5
-EOL execute query [3ms] [8951MB]
+EOL execute query [3ms] [169MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [8951MB]
-Load view [148ms] [8997MB]
+Parse EOL [1ms] [169MB]
+Load view [148ms] [215MB]
 Result: 5
-EOL execute query [3ms] [9671MB]
+EOL execute query [2ms] [217MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [0ms] [9671MB]
-Load view [147ms] [9717MB]
+Parse EOL [1ms] [217MB]
+Load view [148ms] [263MB]
 Result: 5
-EOL execute query [3ms] [10390MB]
+EOL execute query [3ms] [266MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [0ms] [10390MB]
-Load view [147ms] [10436MB]
+Parse EOL [1ms] [266MB]
+Load view [149ms] [312MB]
 Result: 5
-EOL execute query [3ms] [11109MB]
+EOL execute query [3ms] [314MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [1ms] [11109MB]
-Load view [147ms] [11155MB]
+Parse EOL [1ms] [314MB]
+Load view [155ms] [53MB]
 Result: 5
-EOL execute query [2ms] [11831MB]
+EOL execute query [3ms] [58MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [1ms] [11831MB]
-Load view [148ms] [11875MB]
+Parse EOL [1ms] [58MB]
+Load view [163ms] [104MB]
 Result: 5
-EOL execute query [3ms] [12550MB]
+EOL execute query [3ms] [108MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [1ms] [12550MB]
-Load view [146ms] [12596MB]
+Parse EOL [1ms] [108MB]
+Load view [148ms] [152MB]
 Result: 5
-EOL execute query [3ms] [8316MB]
+EOL execute query [2ms] [156MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [1ms] [8316MB]
-Load view [160ms] [8364MB]
+Parse EOL [1ms] [156MB]
+Load view [147ms] [202MB]
 Result: 5
-EOL execute query [3ms] [9037MB]
+EOL execute query [3ms] [204MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for XMI view of size 100 with EMF EMC
-Load view: [148,147,160,148,147,147,147,148,146,160]
-Parse EOL: [0,0,0,0,0,0,1,1,1,1]
-EOL execute query: [2,3,3,3,3,3,2,3,3,3]
+Load view: [158,161,149,148,148,149,155,163,148,147]
+Parse EOL: [1,1,1,1,1,1,1,1,1,1]
+EOL execute query: [3,2,3,2,3,3,3,3,2,3]
 
 ### Benching EOL query traceToReqs.eol for NeoEMF view of size 100 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [0ms] [9037MB]
-Load view [4895ms] [9465MB]
+Parse EOL [1ms] [204MB]
+Load view [4956ms] [322MB]
 Result: 5
-EOL execute query [5ms] [10140MB]
+EOL execute query [11ms] [326MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [0ms] [10144MB]
-Load view [4853ms] [10574MB]
+Parse EOL [1ms] [331MB]
+Load view [5082ms] [154MB]
 Result: 5
-EOL execute query [4ms] [11250MB]
+EOL execute query [8ms] [158MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [0ms] [11254MB]
-Load view [5072ms] [11677MB]
+Parse EOL [1ms] [162MB]
+Load view [5088ms] [274MB]
 Result: 5
-EOL execute query [4ms] [12353MB]
+EOL execute query [6ms] [278MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [1ms] [12357MB]
-Load view [5023ms] [12785MB]
+Parse EOL [1ms] [280MB]
+Load view [4923ms] [106MB]
 Result: 5
-EOL execute query [3ms] [8513MB]
+EOL execute query [5ms] [108MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [1ms] [8528MB]
-Load view [4986ms] [8956MB]
+Parse EOL [0ms] [113MB]
+Load view [4768ms] [234MB]
 Result: 5
-EOL execute query [4ms] [9631MB]
+EOL execute query [6ms] [238MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [1ms] [9635MB]
-Load view [5005ms] [10061MB]
+Parse EOL [1ms] [240MB]
+Load view [4930ms] [349MB]
 Result: 5
-EOL execute query [5ms] [10736MB]
+EOL execute query [6ms] [351MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [0ms] [10740MB]
-Load view [5010ms] [11166MB]
+Parse EOL [1ms] [356MB]
+Load view [5044ms] [167MB]
 Result: 5
-EOL execute query [4ms] [11841MB]
+EOL execute query [6ms] [170MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [11846MB]
-Load view [4990ms] [12273MB]
+Parse EOL [1ms] [176MB]
+Load view [4943ms] [288MB]
 Result: 5
-EOL execute query [5ms] [12949MB]
+EOL execute query [5ms] [292MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [12953MB]
-Load view [4921ms] [8417MB]
+Parse EOL [0ms] [294MB]
+Load view [5104ms] [115MB]
 Result: 5
-EOL execute query [4ms] [9092MB]
+EOL execute query [6ms] [120MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [0ms] [9098MB]
-Load view [4987ms] [9526MB]
+Parse EOL [0ms] [122MB]
+Load view [4771ms] [240MB]
 Result: 5
-EOL execute query [5ms] [10201MB]
+EOL execute query [6ms] [244MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [0ms] [10203MB]
-Load view [4971ms] [10631MB]
+Parse EOL [1ms] [246MB]
+Load view [4962ms] [354MB]
 Result: 5
-EOL execute query [5ms] [11306MB]
+EOL execute query [5ms] [358MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [1ms] [11313MB]
-Load view [4886ms] [11738MB]
+Parse EOL [1ms] [360MB]
+Load view [4926ms] [174MB]
 Result: 5
-EOL execute query [4ms] [12414MB]
+EOL execute query [6ms] [178MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [1ms] [12418MB]
-Load view [5001ms] [12846MB]
+Parse EOL [1ms] [180MB]
+Load view [4754ms] [295MB]
 Result: 5
-EOL execute query [4ms] [8574MB]
+EOL execute query [8ms] [299MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [1ms] [8589MB]
-Load view [4876ms] [9017MB]
+Parse EOL [1ms] [302MB]
+Load view [4748ms] [122MB]
 Result: 5
-EOL execute query [5ms] [9692MB]
+EOL execute query [5ms] [126MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [1ms] [9694MB]
-Load view [5041ms] [10124MB]
+Parse EOL [1ms] [128MB]
+Load view [4988ms] [244MB]
 Result: 5
-EOL execute query [5ms] [10797MB]
+EOL execute query [5ms] [248MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for NeoEMF view of size 100 with EMF EMC
-Load view: [5005,5010,4990,4921,4987,4971,4886,5001,4876,5041]
-Parse EOL: [1,0,0,0,0,0,1,1,1,1]
-EOL execute query: [5,4,5,4,5,5,4,4,5,5]
+Load view: [4930,5044,4943,5104,4771,4962,4926,4754,4748,4988]
+Parse EOL: [1,1,1,0,0,1,1,1,1,1]
+EOL execute query: [6,6,5,6,6,5,6,8,5,5]
 
 ### Benching EOL query traceToReqs.eol for XMI view of size 1000 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [0ms] [10801MB]
-Load view [192ms] [10881MB]
+Parse EOL [1ms] [251MB]
+Load view [196ms] [330MB]
 Result: 5
-EOL execute query [18ms] [11579MB]
+EOL execute query [19ms] [353MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [0ms] [11579MB]
-Load view [181ms] [11657MB]
+Parse EOL [0ms] [353MB]
+Load view [197ms] [124MB]
 Result: 5
-EOL execute query [20ms] [12357MB]
+EOL execute query [18ms] [147MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [0ms] [12357MB]
-Load view [180ms] [12435MB]
+Parse EOL [1ms] [147MB]
+Load view [190ms] [224MB]
 Result: 5
-EOL execute query [20ms] [13133MB]
+EOL execute query [15ms] [247MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [1ms] [13133MB]
-Load view [196ms] [8227MB]
+Parse EOL [1ms] [247MB]
+Load view [178ms] [325MB]
 Result: 5
-EOL execute query [21ms] [8926MB]
+EOL execute query [17ms] [348MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [0ms] [8926MB]
-Load view [194ms] [9005MB]
+Parse EOL [1ms] [350MB]
+Load view [186ms] [117MB]
 Result: 5
-EOL execute query [21ms] [9704MB]
+EOL execute query [13ms] [140MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [0ms] [9704MB]
-Load view [188ms] [9783MB]
+Parse EOL [1ms] [140MB]
+Load view [176ms] [218MB]
 Result: 5
-EOL execute query [20ms] [10482MB]
+EOL execute query [13ms] [241MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [0ms] [10482MB]
-Load view [180ms] [10559MB]
+Parse EOL [1ms] [243MB]
+Load view [175ms] [319MB]
 Result: 5
-EOL execute query [20ms] [11258MB]
+EOL execute query [13ms] [344MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [11260MB]
-Load view [180ms] [11337MB]
+Parse EOL [0ms] [344MB]
+Load view [185ms] [112MB]
 Result: 5
-EOL execute query [17ms] [12036MB]
+EOL execute query [13ms] [135MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [1ms] [12036MB]
-Load view [179ms] [12113MB]
+Parse EOL [0ms] [135MB]
+Load view [180ms] [214MB]
 Result: 5
-EOL execute query [20ms] [12814MB]
+EOL execute query [13ms] [238MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [0ms] [12814MB]
-Load view [180ms] [12891MB]
+Parse EOL [1ms] [238MB]
+Load view [173ms] [315MB]
 Result: 5
-EOL execute query [19ms] [8603MB]
+EOL execute query [13ms] [338MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [0ms] [8603MB]
-Load view [192ms] [8682MB]
+Parse EOL [1ms] [338MB]
+Load view [187ms] [110MB]
 Result: 5
-EOL execute query [18ms] [9383MB]
+EOL execute query [13ms] [133MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [0ms] [9383MB]
-Load view [180ms] [9460MB]
+Parse EOL [1ms] [133MB]
+Load view [182ms] [212MB]
 Result: 5
-EOL execute query [20ms] [10159MB]
+EOL execute query [12ms] [235MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [0ms] [10159MB]
-Load view [180ms] [10238MB]
+Parse EOL [0ms] [235MB]
+Load view [174ms] [313MB]
 Result: 5
-EOL execute query [19ms] [10937MB]
+EOL execute query [13ms] [336MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [0ms] [10937MB]
-Load view [181ms] [11014MB]
+Parse EOL [0ms] [336MB]
+Load view [190ms] [108MB]
 Result: 5
-EOL execute query [19ms] [11715MB]
+EOL execute query [12ms] [133MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [1ms] [11715MB]
-Load view [179ms] [11792MB]
+Parse EOL [1ms] [133MB]
+Load view [184ms] [210MB]
 Result: 5
-EOL execute query [19ms] [12491MB]
+EOL execute query [13ms] [233MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for XMI view of size 1000 with EMF EMC
-Load view: [188,180,180,179,180,192,180,180,181,179]
-Parse EOL: [0,0,0,1,0,0,0,0,0,1]
-EOL execute query: [20,20,17,20,19,18,20,19,19,19]
+Load view: [176,175,185,180,173,187,182,174,190,184]
+Parse EOL: [1,1,0,0,1,1,1,0,0,1]
+EOL execute query: [13,13,13,13,13,13,12,13,12,13]
 
 ### Benching EOL query traceToReqs.eol for NeoEMF view of size 1000 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [1ms] [12491MB]
-Load view [5045ms] [12988MB]
+Parse EOL [0ms] [233MB]
+Load view [5028ms] [147MB]
 Result: 5
-EOL execute query [32ms] [8732MB]
+EOL execute query [37ms] [176MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [0ms] [8749MB]
-Load view [5092ms] [9248MB]
+Parse EOL [1ms] [186MB]
+Load view [4923ms] [95MB]
 Result: 5
-EOL execute query [35ms] [9959MB]
+EOL execute query [44ms] [124MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [1ms] [9970MB]
-Load view [5182ms] [10460MB]
+Parse EOL [1ms] [134MB]
+Load view [4916ms] [322MB]
 Result: 5
-EOL execute query [39ms] [11171MB]
+EOL execute query [33ms] [352MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [0ms] [11182MB]
-Load view [5079ms] [11673MB]
+Parse EOL [1ms] [360MB]
+Load view [5122ms] [246MB]
 Result: 5
-EOL execute query [34ms] [12384MB]
+EOL execute query [31ms] [275MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [1ms] [12394MB]
-Load view [5254ms] [12885MB]
+Parse EOL [1ms] [282MB]
+Load view [4991ms] [180MB]
 Result: 5
-EOL execute query [31ms] [8640MB]
+EOL execute query [31ms] [210MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [1ms] [8659MB]
-Load view [5208ms] [9162MB]
+Parse EOL [1ms] [219MB]
+Load view [5076ms] [122MB]
 Result: 5
-EOL execute query [38ms] [9873MB]
+EOL execute query [31ms] [151MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [1ms] [9880MB]
-Load view [5106ms] [10377MB]
+Parse EOL [1ms] [163MB]
+Load view [5159ms] [346MB]
 Result: 5
-EOL execute query [38ms] [11088MB]
+EOL execute query [44ms] [98MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [11096MB]
-Load view [5183ms] [11587MB]
+Parse EOL [1ms] [110MB]
+Load view [5181ms] [299MB]
 Result: 5
-EOL execute query [33ms] [12298MB]
+EOL execute query [32ms] [329MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [12308MB]
-Load view [5082ms] [12801MB]
+Parse EOL [0ms] [335MB]
+Load view [5131ms] [228MB]
 Result: 5
-EOL execute query [35ms] [8569MB]
+EOL execute query [31ms] [257MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [1ms] [8589MB]
-Load view [5199ms] [9080MB]
+Parse EOL [1ms] [265MB]
+Load view [4969ms] [163MB]
 Result: 5
-EOL execute query [43ms] [9791MB]
+EOL execute query [32ms] [192MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [0ms] [9798MB]
-Load view [5253ms] [10295MB]
+Parse EOL [1ms] [201MB]
+Load view [5113ms] [108MB]
 Result: 5
-EOL execute query [34ms] [11006MB]
+EOL execute query [30ms] [137MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [1ms] [11012MB]
-Load view [5167ms] [11507MB]
+Parse EOL [1ms] [148MB]
+Load view [5083ms] [333MB]
 Result: 5
-EOL execute query [38ms] [12218MB]
+EOL execute query [30ms] [362MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [0ms] [12225MB]
-Load view [5193ms] [12719MB]
+Parse EOL [1ms] [93MB]
+Load view [5091ms] [283MB]
 Result: 5
-EOL execute query [33ms] [8500MB]
+EOL execute query [30ms] [312MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [0ms] [8516MB]
-Load view [5264ms] [9011MB]
+Parse EOL [1ms] [319MB]
+Load view [4999ms] [210MB]
 Result: 5
-EOL execute query [38ms] [9722MB]
+EOL execute query [29ms] [239MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [1ms] [9729MB]
-Load view [5004ms] [10230MB]
+Parse EOL [1ms] [247MB]
+Load view [4914ms] [150MB]
 Result: 5
-EOL execute query [36ms] [10941MB]
+EOL execute query [32ms] [180MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for NeoEMF view of size 1000 with EMF EMC
-Load view: [5208,5106,5183,5082,5199,5253,5167,5193,5264,5004]
-Parse EOL: [1,1,0,0,1,0,1,0,0,1]
-EOL execute query: [38,38,33,35,43,34,38,33,38,36]
+Load view: [5076,5159,5181,5131,4969,5113,5083,5091,4999,4914]
+Parse EOL: [1,1,1,0,1,1,1,1,1,1]
+EOL execute query: [31,44,32,31,32,30,30,30,29,32]
 
 ### Benching EOL query traceToReqs.eol for XMI view of size 10000 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [0ms] [10947MB]
-Load view [511ms] [11352MB]
+Parse EOL [1ms] [189MB]
+Load view [529ms] [285MB]
 Result: 5
-EOL execute query [189ms] [12302MB]
+EOL execute query [135ms] [212MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [1ms] [12302MB]
-Load view [510ms] [12704MB]
+Parse EOL [1ms] [212MB]
+Load view [506ms] [306MB]
 Result: 5
-EOL execute query [191ms] [8715MB]
+EOL execute query [131ms] [234MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [0ms] [8715MB]
-Load view [524ms] [9119MB]
+Parse EOL [0ms] [234MB]
+Load view [492ms] [327MB]
 Result: 5
-EOL execute query [196ms] [10069MB]
+EOL execute query [130ms] [255MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [1ms] [10069MB]
-Load view [504ms] [10472MB]
+Parse EOL [0ms] [255MB]
+Load view [490ms] [350MB]
 Result: 5
-EOL execute query [164ms] [11422MB]
+EOL execute query [125ms] [278MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [0ms] [11422MB]
-Load view [495ms] [11825MB]
+Parse EOL [1ms] [278MB]
+Load view [489ms] [371MB]
 Result: 5
-EOL execute query [185ms] [12775MB]
+EOL execute query [124ms] [295MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [1ms] [12775MB]
-Load view [503ms] [8205MB]
+Parse EOL [1ms] [295MB]
+Load view [497ms] [83MB]
 Result: 5
-EOL execute query [192ms] [9157MB]
+EOL execute query [118ms] [311MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [0ms] [9157MB]
-Load view [514ms] [9562MB]
+Parse EOL [0ms] [313MB]
+Load view [493ms] [101MB]
 Result: 5
-EOL execute query [175ms] [10512MB]
+EOL execute query [117ms] [330MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [1ms] [10512MB]
-Load view [500ms] [10915MB]
+Parse EOL [1ms] [330MB]
+Load view [511ms] [421MB]
 Result: 5
-EOL execute query [169ms] [11865MB]
+EOL execute query [128ms] [280MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [11865MB]
-Load view [495ms] [12267MB]
+Parse EOL [1ms] [282MB]
+Load view [480ms] [308MB]
 Result: 5
-EOL execute query [182ms] [8240MB]
+EOL execute query [129ms] [169MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [1ms] [8240MB]
-Load view [510ms] [8645MB]
+Parse EOL [1ms] [169MB]
+Load view [517ms] [196MB]
 Result: 5
-EOL execute query [177ms] [9597MB]
+EOL execute query [130ms] [425MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [1ms] [9597MB]
-Load view [488ms] [10000MB]
+Parse EOL [1ms] [427MB]
+Load view [469ms] [373MB]
 Result: 5
-EOL execute query [169ms] [10950MB]
+EOL execute query [135ms] [150MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [0ms] [10950MB]
-Load view [496ms] [11353MB]
+Parse EOL [1ms] [150MB]
+Load view [470ms] [100MB]
 Result: 5
-EOL execute query [175ms] [12303MB]
+EOL execute query [131ms] [329MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [0ms] [12303MB]
-Load view [501ms] [12705MB]
+Parse EOL [0ms] [329MB]
+Load view [530ms] [275MB]
 Result: 5
-EOL execute query [190ms] [8670MB]
+EOL execute query [116ms] [504MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [1ms] [8670MB]
-Load view [508ms] [9075MB]
+Parse EOL [1ms] [504MB]
+Load view [474ms] [360MB]
 Result: 5
-EOL execute query [174ms] [10027MB]
+EOL execute query [132ms] [589MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [0ms] [10027MB]
-Load view [493ms] [10430MB]
+Parse EOL [0ms] [589MB]
+Load view [467ms] [437MB]
 Result: 5
-EOL execute query [172ms] [11380MB]
+EOL execute query [140ms] [125MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for XMI view of size 10000 with EMF EMC
-Load view: [503,514,500,495,510,488,496,501,508,493]
-Parse EOL: [1,0,1,0,1,1,0,0,1,0]
-EOL execute query: [192,175,169,182,177,169,175,190,174,172]
+Load view: [497,493,511,480,517,469,470,530,474,467]
+Parse EOL: [1,0,1,1,1,1,1,0,1,0]
+EOL execute query: [118,117,128,129,130,135,131,116,132,140]
 
 ### Benching EOL query traceToReqs.eol for NeoEMF view of size 10000 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [1ms] [11380MB]
-Load view [6196ms] [12577MB]
+Parse EOL [0ms] [127MB]
+Load view [6195ms] [368MB]
 Result: 5
-EOL execute query [320ms] [8749MB]
+EOL execute query [312ms] [147MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [0ms] [8814MB]
-Load view [6186ms] [10016MB]
+Parse EOL [1ms] [212MB]
+Load view [6046ms] [273MB]
 Result: 5
-EOL execute query [386ms] [11096MB]
+EOL execute query [296ms] [569MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [1ms] [11150MB]
-Load view [6314ms] [12348MB]
+Parse EOL [0ms] [633MB]
+Load view [6293ms] [681MB]
 Result: 5
-EOL execute query [336ms] [8634MB]
+EOL execute query [316ms] [423MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [1ms] [8699MB]
-Load view [6296ms] [9897MB]
+Parse EOL [1ms] [480MB]
+Load view [5961ms] [658MB]
 Result: 5
-EOL execute query [369ms] [10975MB]
+EOL execute query [297ms] [464MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [1ms] [11031MB]
-Load view [6291ms] [12227MB]
+Parse EOL [1ms] [520MB]
+Load view [6290ms] [842MB]
 Result: 5
-EOL execute query [397ms] [8576MB]
+EOL execute query [287ms] [732MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [1ms] [8643MB]
-Load view [6347ms] [9842MB]
+Parse EOL [0ms] [790MB]
+Load view [6054ms] [822MB]
 Result: 5
-EOL execute query [366ms] [10920MB]
+EOL execute query [301ms] [579MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [1ms] [10977MB]
-Load view [6315ms] [12179MB]
+Parse EOL [1ms] [637MB]
+Load view [5893ms] [796MB]
 Result: 5
-EOL execute query [396ms] [8560MB]
+EOL execute query [315ms] [597MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [1ms] [8629MB]
-Load view [6242ms] [9823MB]
+Parse EOL [1ms] [654MB]
+Load view [6173ms] [898MB]
 Result: 5
-EOL execute query [368ms] [10903MB]
+EOL execute query [303ms] [764MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [10959MB]
-Load view [6337ms] [12153MB]
+Parse EOL [0ms] [821MB]
+Load view [6101ms] [820MB]
 Result: 5
-EOL execute query [406ms] [8559MB]
+EOL execute query [300ms] [678MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [1ms] [8625MB]
-Load view [6357ms] [9823MB]
+Parse EOL [0ms] [735MB]
+Load view [6194ms] [699MB]
 Result: 5
-EOL execute query [393ms] [10901MB]
+EOL execute query [304ms] [481MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [1ms] [10958MB]
-Load view [6330ms] [12151MB]
+Parse EOL [0ms] [538MB]
+Load view [6110ms] [749MB]
 Result: 5
-EOL execute query [399ms] [8571MB]
+EOL execute query [300ms] [565MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [1ms] [8636MB]
-Load view [6397ms] [9840MB]
+Parse EOL [1ms] [622MB]
+Load view [5928ms] [480MB]
 Result: 5
-EOL execute query [370ms] [10918MB]
+EOL execute query [279ms] [775MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [0ms] [10975MB]
-Load view [6067ms] [12170MB]
+Parse EOL [0ms] [832MB]
+Load view [6230ms] [853MB]
 Result: 5
-EOL execute query [391ms] [8599MB]
+EOL execute query [306ms] [724MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [1ms] [8666MB]
-Load view [6220ms] [9859MB]
+Parse EOL [1ms] [782MB]
+Load view [6181ms] [723MB]
 Result: 5
-EOL execute query [367ms] [10937MB]
+EOL execute query [321ms] [507MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [0ms] [10996MB]
-Load view [6149ms] [12193MB]
+Parse EOL [1ms] [564MB]
+Load view [6307ms] [760MB]
 Result: 5
-EOL execute query [335ms] [8622MB]
+EOL execute query [312ms] [578MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for NeoEMF view of size 10000 with EMF EMC
-Load view: [6347,6315,6242,6337,6357,6330,6397,6067,6220,6149]
-Parse EOL: [1,1,1,0,1,1,1,0,1,0]
-EOL execute query: [366,396,368,406,393,399,370,391,367,335]
+Load view: [6054,5893,6173,6101,6194,6110,5928,6230,6181,6307]
+Parse EOL: [0,1,1,0,0,0,1,0,1,1]
+EOL execute query: [301,315,303,300,304,300,279,306,321,312]
 
 ### Benching EOL query traceToReqs.eol for XMI view of size 100000 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [0ms] [8688MB]
-Load view [3757ms] [12338MB]
+Parse EOL [1ms] [635MB]
+Load view [3403ms] [884MB]
 Result: 5
-EOL execute query [1653ms] [11129MB]
+EOL execute query [1276ms] [662MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [1ms] [11129MB]
-Load view [3707ms] [10074MB]
+Parse EOL [0ms] [662MB]
+Load view [3555ms] [865MB]
 Result: 5
-EOL execute query [1667ms] [8848MB]
+EOL execute query [1193ms] [1137MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [0ms] [8850MB]
-Load view [3684ms] [12499MB]
+Parse EOL [1ms] [1137MB]
+Load view [3493ms] [1380MB]
 Result: 5
-EOL execute query [1709ms] [11252MB]
+EOL execute query [1352ms] [1253MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [1ms] [11252MB]
-Load view [3704ms] [10163MB]
+Parse EOL [0ms] [1253MB]
+Load view [3361ms] [1849MB]
 Result: 5
-EOL execute query [1703ms] [8915MB]
+EOL execute query [1352ms] [1176MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [0ms] [8915MB]
-Load view [3702ms] [12564MB]
+Parse EOL [1ms] [1176MB]
+Load view [3294ms] [1152MB]
 Result: 5
-EOL execute query [1689ms] [11291MB]
+EOL execute query [1177ms] [1643MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [0ms] [11291MB]
-Load view [3687ms] [10176MB]
+Parse EOL [1ms] [1643MB]
+Load view [3368ms] [1597MB]
 Result: 5
-EOL execute query [1711ms] [8908MB]
+EOL execute query [1177ms] [2066MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [0ms] [8908MB]
-Load view [3711ms] [12559MB]
+Parse EOL [1ms] [2066MB]
+Load view [3465ms] [1991MB]
 Result: 5
-EOL execute query [1676ms] [11269MB]
+EOL execute query [1202ms] [650MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [11269MB]
-Load view [3742ms] [10140MB]
+Parse EOL [0ms] [650MB]
+Load view [3386ms] [601MB]
 Result: 5
-EOL execute query [1728ms] [8867MB]
+EOL execute query [1163ms] [1074MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [1ms] [8867MB]
-Load view [3696ms] [12516MB]
+Parse EOL [1ms] [1074MB]
+Load view [3367ms] [1016MB]
 Result: 5
-EOL execute query [1677ms] [11220MB]
+EOL execute query [1183ms] [1490MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [0ms] [11220MB]
-Load view [3735ms] [10091MB]
+Parse EOL [0ms] [1490MB]
+Load view [3423ms] [1424MB]
 Result: 5
-EOL execute query [1833ms] [8809MB]
+EOL execute query [1190ms] [1895MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [0ms] [8809MB]
-Load view [3681ms] [12460MB]
+Parse EOL [0ms] [1895MB]
+Load view [3355ms] [1827MB]
 Result: 5
-EOL execute query [1660ms] [11162MB]
+EOL execute query [1173ms] [2295MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [0ms] [11164MB]
-Load view [3687ms] [10035MB]
+Parse EOL [1ms] [2295MB]
+Load view [3358ms] [2213MB]
 Result: 5
-EOL execute query [1724ms] [8756MB]
+EOL execute query [1204ms] [870MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [0ms] [8756MB]
-Load view [3691ms] [12406MB]
+Parse EOL [0ms] [870MB]
+Load view [3397ms] [815MB]
 Result: 5
-EOL execute query [1711ms] [11112MB]
+EOL execute query [1180ms] [1287MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [0ms] [11112MB]
-Load view [3699ms] [9985MB]
+Parse EOL [1ms] [1287MB]
+Load view [3450ms] [1228MB]
 Result: 5
-EOL execute query [1721ms] [8711MB]
+EOL execute query [1184ms] [1698MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [0ms] [8711MB]
-Load view [3695ms] [12361MB]
+Parse EOL [0ms] [1698MB]
+Load view [3427ms] [1632MB]
 Result: 5
-EOL execute query [1787ms] [11071MB]
+EOL execute query [1182ms] [2104MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for XMI view of size 100000 with EMF EMC
-Load view: [3687,3711,3742,3696,3735,3681,3687,3691,3699,3695]
-Parse EOL: [0,0,0,1,0,0,0,0,0,0]
-EOL execute query: [1711,1676,1728,1677,1833,1660,1724,1711,1721,1787]
+Load view: [3368,3465,3386,3367,3423,3355,3358,3397,3450,3427]
+Parse EOL: [1,1,0,1,0,0,1,0,1,0]
+EOL execute query: [1177,1202,1163,1183,1190,1173,1204,1180,1184,1182]
 
 ### Benching EOL query traceToReqs.eol for NeoEMF view of size 100000 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [0ms] [11071MB]
-Load view [18049ms] [10634MB]
+Parse EOL [0ms] [2104MB]
+Load view [16922ms] [1228MB]
 Result: 5
-EOL execute query [3624ms] [11439MB]
+EOL execute query [2926ms] [1214MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [1ms] [12136MB]
-Load view [18497ms] [9773MB]
+Parse EOL [0ms] [1890MB]
+Load view [17415ms] [2357MB]
 Result: 5
-EOL execute query [3393ms] [11280MB]
+EOL execute query [2868ms] [2294MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [0ms] [11972MB]
-Load view [18044ms] [11643MB]
+Parse EOL [0ms] [2966MB]
+Load view [17663ms] [3637MB]
 Result: 5
-EOL execute query [3477ms] [11148MB]
+EOL execute query [2853ms] [3648MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [0ms] [11842MB]
-Load view [18093ms] [11370MB]
+Parse EOL [1ms] [2833MB]
+Load view [16733ms] [3429MB]
 Result: 5
-EOL execute query [3374ms] [12037MB]
+EOL execute query [2733ms] [3210MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [0ms] [12732MB]
-Load view [17829ms] [12891MB]
+Parse EOL [0ms] [3881MB]
+Load view [17123ms] [3846MB]
 Result: 5
-EOL execute query [3513ms] [11776MB]
+EOL execute query [2917ms] [3807MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [1ms] [12470MB]
-Load view [18117ms] [12781MB]
+Parse EOL [1ms] [4011MB]
+Load view [18137ms] [4287MB]
 Result: 5
-EOL execute query [3478ms] [13118MB]
+EOL execute query [2847ms] [4491MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [1ms] [12932MB]
-Load view [18496ms] [3011MB]
+Parse EOL [0ms] [5175MB]
+Load view [16935ms] [5731MB]
 Result: 5
-EOL execute query [3364ms] [7740MB]
+EOL execute query [2844ms] [5114MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [1ms] [8447MB]
-Load view [17869ms] [8995MB]
+Parse EOL [1ms] [5787MB]
+Load view [17253ms] [5705MB]
 Result: 5
-EOL execute query [3529ms] [6084MB]
+EOL execute query [3126ms] [6170MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [6779MB]
-Load view [18220ms] [7119MB]
+Parse EOL [0ms] [6039MB]
+Load view [17716ms] [6422MB]
 Result: 5
-EOL execute query [3483ms] [3978MB]
+EOL execute query [2945ms] [7079MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [1ms] [4674MB]
-Load view [17969ms] [5297MB]
+Parse EOL [0ms] [6601MB]
+Load view [16934ms] [6770MB]
 Result: 5
-EOL execute query [3345ms] [10024MB]
+EOL execute query [2872ms] [6984MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [1ms] [10723MB]
-Load view [17881ms] [10960MB]
+Parse EOL [1ms] [7025MB]
+Load view [16971ms] [7596MB]
 Result: 5
-EOL execute query [3400ms] [8051MB]
+EOL execute query [2952ms] [7474MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [1ms] [8748MB]
-Load view [17790ms] [9180MB]
+Parse EOL [1ms] [7785MB]
+Load view [18563ms] [2208MB]
 Result: 5
-EOL execute query [3496ms] [6339MB]
+EOL execute query [2857ms] [5132MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [1ms] [7037MB]
-Load view [18150ms] [7582MB]
+Parse EOL [0ms] [5815MB]
+Load view [16977ms] [3448MB]
 Result: 5
-EOL execute query [3415ms] [4782MB]
+EOL execute query [2735ms] [6371MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [1ms] [5482MB]
-Load view [18326ms] [6529MB]
+Parse EOL [0ms] [7044MB]
+Load view [17432ms] [4432MB]
 Result: 5
-EOL execute query [3335ms] [11256MB]
+EOL execute query [2773ms] [7355MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [0ms] [11953MB]
-Load view [18339ms] [5526MB]
+Parse EOL [0ms] [2832MB]
+Load view [17198ms] [6122MB]
 Result: 5
-EOL execute query [3379ms] [10253MB]
+EOL execute query [2822ms] [4285MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for NeoEMF view of size 100000 with EMF EMC
-Load view: [18117,18496,17869,18220,17969,17881,17790,18150,18326,18339]
-Parse EOL: [1,1,1,0,1,1,1,1,1,0]
-EOL execute query: [3478,3364,3529,3483,3345,3400,3496,3415,3335,3379]
+Load view: [18137,16935,17253,17716,16934,16971,18563,16977,17432,17198]
+Parse EOL: [1,0,1,0,0,1,1,0,0,0]
+EOL execute query: [2847,2844,3126,2945,2872,2952,2857,2735,2773,2822]
 
 ### Benching EOL query traceToReqs.eol for XMI view of size 1000000 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [0ms] [10949MB]
-Load view [35694ms] [10980MB]
+Parse EOL [1ms] [4962MB]
+Load view [31486ms] [7801MB]
 Result: 5
-EOL execute query [16899ms] [11197MB]
+EOL execute query [11561ms] [6535MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [0ms] [11197MB]
-Load view [36134ms] [8000MB]
+Parse EOL [1ms] [6535MB]
+Load view [32116ms] [7814MB]
 Result: 5
-EOL execute query [16879ms] [12343MB]
+EOL execute query [11676ms] [6100MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [0ms] [12346MB]
-Load view [35927ms] [9668MB]
+Parse EOL [0ms] [6100MB]
+Load view [32084ms] [6198MB]
 Result: 5
-EOL execute query [16931ms] [8340MB]
+EOL execute query [11647ms] [8642MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [0ms] [8340MB]
-Load view [35938ms] [12691MB]
+Parse EOL [1ms] [8642MB]
+Load view [31831ms] [6120MB]
 Result: 5
-EOL execute query [17483ms] [4588MB]
+EOL execute query [11796ms] [7210MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [0ms] [4588MB]
-Load view [35225ms] [7333MB]
+Parse EOL [0ms] [7210MB]
+Load view [32056ms] [7677MB]
 Result: 5
-EOL execute query [16672ms] [11891MB]
+EOL execute query [11740ms] [8132MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [0ms] [11891MB]
-Load view [36311ms] [7396MB]
+Parse EOL [1ms] [8132MB]
+Load view [32729ms] [8667MB]
 Result: 5
-EOL execute query [16749ms] [12646MB]
+EOL execute query [11696ms] [8277MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [1ms] [12646MB]
-Load view [35457ms] [11641MB]
+Parse EOL [1ms] [8277MB]
+Load view [32232ms] [8356MB]
 Result: 5
-EOL execute query [16965ms] [6082MB]
+EOL execute query [11726ms] [8733MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [6082MB]
-Load view [35755ms] [10811MB]
+Parse EOL [1ms] [8733MB]
+Load view [32933ms] [5597MB]
 Result: 5
-EOL execute query [16775ms] [9938MB]
+EOL execute query [11631ms] [7091MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [9938MB]
-Load view [35959ms] [8669MB]
+Parse EOL [1ms] [7091MB]
+Load view [32009ms] [3268MB]
 Result: 5
-EOL execute query [16798ms] [8687MB]
+EOL execute query [11660ms] [3216MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [0ms] [8687MB]
-Load view [36214ms] [10531MB]
+Parse EOL [0ms] [3216MB]
+Load view [32508ms] [5359MB]
 Result: 5
-EOL execute query [16939ms] [9596MB]
+EOL execute query [11624ms] [5480MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [0ms] [9596MB]
-Load view [35822ms] [10842MB]
+Parse EOL [0ms] [5480MB]
+Load view [31686ms] [5483MB]
 Result: 5
-EOL execute query [16765ms] [12810MB]
+EOL execute query [11667ms] [8597MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [0ms] [12812MB]
-Load view [35592ms] [12575MB]
+Parse EOL [1ms] [8597MB]
+Load view [32335ms] [8277MB]
 Result: 5
-EOL execute query [17101ms] [12524MB]
+EOL execute query [11802ms] [5796MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [0ms] [12524MB]
-Load view [35651ms] [12865MB]
+Parse EOL [1ms] [5796MB]
+Load view [32349ms] [8422MB]
 Result: 5
-EOL execute query [16655ms] [8295MB]
+EOL execute query [11758ms] [6800MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [0ms] [8297MB]
-Load view [36401ms] [3023MB]
+Parse EOL [1ms] [6800MB]
+Load view [32478ms] [6771MB]
 Result: 5
-EOL execute query [17096ms] [7302MB]
+EOL execute query [11780ms] [7127MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [0ms] [7302MB]
-Load view [35888ms] [10911MB]
+Parse EOL [0ms] [7127MB]
+Load view [32167ms] [8319MB]
 Result: 5
-EOL execute query [17118ms] [6944MB]
+EOL execute query [11689ms] [7621MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for XMI view of size 1000000 with EMF EMC
-Load view: [36311,35457,35755,35959,36214,35822,35592,35651,36401,35888]
-Parse EOL: [0,1,0,0,0,0,0,0,0,0]
-EOL execute query: [16749,16965,16775,16798,16939,16765,17101,16655,17096,17118]
+Load view: [32729,32232,32933,32009,32508,31686,32335,32349,32478,32167]
+Parse EOL: [1,1,1,1,0,0,1,1,1,0]
+EOL execute query: [11696,11726,11631,11660,11624,11667,11802,11758,11780,11689]
 
 ### Benching EOL query traceToReqs.eol for NeoEMF view of size 1000000 with EMF EMC... (5 warmups/10 measures)
 
 -- Warmup 1
-Parse EOL [1ms] [6944MB]
-Load view [141638ms] [11278MB]
+Parse EOL [0ms] [7621MB]
+Load view [130651ms] [8395MB]
 Result: 5
-EOL execute query [34477ms] [10766MB]
+EOL execute query [28259ms] [6969MB]
 -- Warmup 1
 
 -- Warmup 2
-Parse EOL [0ms] [11174MB]
-Load view [143032ms] [7847MB]
+Parse EOL [1ms] [8966MB]
+Load view [129605ms] [8700MB]
 Result: 5
-EOL execute query [35061ms] [8607MB]
+EOL execute query [28022ms] [10905MB]
 -- Warmup 2
 
 -- Warmup 3
-Parse EOL [0ms] [11981MB]
-Load view [139224ms] [9168MB]
+Parse EOL [1ms] [9292MB]
+Load view [132985ms] [8997MB]
 Result: 5
-EOL execute query [34601ms] [11256MB]
+EOL execute query [28405ms] [7712MB]
 -- Warmup 3
 
 -- Warmup 4
-Parse EOL [1ms] [9410MB]
-Load view [142636ms] [12446MB]
+Parse EOL [0ms] [8106MB]
+Load view [132410ms] [9621MB]
 Result: 5
-EOL execute query [35100ms] [10251MB]
+EOL execute query [28644ms] [8797MB]
 -- Warmup 4
 
 -- Warmup 5
-Parse EOL [0ms] [12747MB]
-Load view [140594ms] [12568MB]
+Parse EOL [0ms] [7558MB]
+Load view [132797ms] [9551MB]
 Result: 5
-EOL execute query [34296ms] [10335MB]
+EOL execute query [28312ms] [8540MB]
 -- Warmup 5
 
 == Measure 1
-Parse EOL [0ms] [8489MB]
-Load view [142535ms] [10045MB]
+Parse EOL [0ms] [11173MB]
+Load view [130447ms] [6865MB]
 Result: 5
-EOL execute query [34982ms] [8758MB]
+EOL execute query [28496ms] [7016MB]
 == Measure 1
 
 == Measure 2
-Parse EOL [1ms] [11595MB]
-Load view [139383ms] [12459MB]
+Parse EOL [1ms] [10065MB]
+Load view [131770ms] [8704MB]
 Result: 5
-EOL execute query [34893ms] [10289MB]
+EOL execute query [28584ms] [7252MB]
 == Measure 2
 
 == Measure 3
-Parse EOL [0ms] [10602MB]
-Load view [145255ms] [7401MB]
+Parse EOL [1ms] [9926MB]
+Load view [133242ms] [9201MB]
 Result: 5
-EOL execute query [37447ms] [9122MB]
+EOL execute query [29421ms] [7713MB]
 == Measure 3
 
 == Measure 4
-Parse EOL [0ms] [12366MB]
-Load view [145632ms] [6991MB]
+Parse EOL [1ms] [10605MB]
+Load view [135075ms] [7391MB]
 Result: 5
-EOL execute query [36915ms] [11081MB]
+EOL execute query [28966ms] [11501MB]
 == Measure 4
 
 == Measure 5
-Parse EOL [1ms] [12095MB]
-Load view [147006ms] [6755MB]
+Parse EOL [0ms] [9404MB]
+Load view [133068ms] [8173MB]
 Result: 5
-EOL execute query [36539ms] [7063MB]
+EOL execute query [28703ms] [7462MB]
 == Measure 5
 
 == Measure 6
-Parse EOL [1ms] [12400MB]
-Load view [145258ms] [7517MB]
+Parse EOL [1ms] [10507MB]
+Load view [132978ms] [8624MB]
 Result: 5
-EOL execute query [36783ms] [10812MB]
+EOL execute query [28954ms] [7891MB]
 == Measure 6
 
 == Measure 7
-Parse EOL [0ms] [7253MB]
-Load view [146075ms] [7537MB]
+Parse EOL [0ms] [10595MB]
+Load view [133999ms] [8662MB]
 Result: 5
-EOL execute query [36736ms] [11455MB]
+EOL execute query [30183ms] [6148MB]
 == Measure 7
 
 == Measure 8
-Parse EOL [0ms] [12164MB]
-Load view [146253ms] [6967MB]
+Parse EOL [1ms] [8453MB]
+Load view [135288ms] [9450MB]
 Result: 5
-EOL execute query [37365ms] [10940MB]
+EOL execute query [29676ms] [11503MB]
 == Measure 8
 
 == Measure 9
-Parse EOL [1ms] [12068MB]
-Load view [145891ms] [7357MB]
+Parse EOL [0ms] [9968MB]
+Load view [135014ms] [7431MB]
 Result: 5
-EOL execute query [36659ms] [11846MB]
+EOL execute query [30227ms] [7126MB]
 == Measure 9
 
 == Measure 10
-Parse EOL [1ms] [12220MB]
-Load view [145669ms] [8746MB]
+Parse EOL [0ms] [11163MB]
+Load view [137281ms] [7770MB]
 Result: 5
-EOL execute query [36718ms] [12237MB]
+EOL execute query [30246ms] [11027MB]
 == Measure 10
 
 # Results for: EOL query traceToReqs.eol for NeoEMF view of size 1000000 with EMF EMC
-Load view: [142535,139383,145255,145632,147006,145258,146075,146253,145891,145669]
-Parse EOL: [0,1,0,0,1,1,0,0,1,1]
-EOL execute query: [34982,34893,37447,36915,36539,36783,36736,37365,36659,36718]
+Load view: [130447,131770,133242,135075,133068,132978,133999,135288,135014,137281]
+Parse EOL: [0,1,1,1,0,1,0,1,0,0]
+EOL execute query: [28496,28584,29421,28966,28703,28954,30183,29676,30227,30246]
+
+### Benching EOL query traceToReqs.eol for XMI view of size 10 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [81ms] [51MB]
+Load view [759ms] [120MB]
+Result: 5
+EOL execute query [15ms] [47MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [3ms] [47MB]
+Load view [337ms] [92MB]
+Result: 5
+EOL execute query [5ms] [92MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [2ms] [92MB]
+Load view [208ms] [134MB]
+Result: 5
+EOL execute query [3ms] [136MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [2ms] [136MB]
+Load view [179ms] [178MB]
+Result: 5
+EOL execute query [13ms] [39MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [2ms] [39MB]
+Load view [177ms] [83MB]
+Result: 5
+EOL execute query [2ms] [85MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [1ms] [85MB]
+Load view [155ms] [130MB]
+Result: 5
+EOL execute query [1ms] [130MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [130MB]
+Load view [156ms] [171MB]
+Result: 5
+EOL execute query [2ms] [174MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [2ms] [174MB]
+Load view [156ms] [216MB]
+Result: 5
+EOL execute query [2ms] [216MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [2ms] [216MB]
+Load view [167ms] [48MB]
+Result: 5
+EOL execute query [2ms] [48MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [1ms] [48MB]
+Load view [161ms] [92MB]
+Result: 5
+EOL execute query [3ms] [94MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [94MB]
+Load view [147ms] [136MB]
+Result: 5
+EOL execute query [1ms] [136MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [136MB]
+Load view [147ms] [180MB]
+Result: 5
+EOL execute query [2ms] [180MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [2ms] [180MB]
+Load view [148ms] [222MB]
+Result: 5
+EOL execute query [1ms] [224MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [1ms] [224MB]
+Load view [153ms] [266MB]
+Result: 5
+EOL execute query [2ms] [266MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [2ms] [266MB]
+Load view [166ms] [310MB]
+Result: 5
+EOL execute query [2ms] [310MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for XMI view of size 10
+Load view: [155,156,156,167,161,147,147,148,153,166]
+Parse EOL: [1,1,2,2,1,1,1,2,1,2]
+EOL execute query: [1,2,2,2,3,1,2,1,2,2]
+
+### Benching EOL query traceToReqs.eol for NeoEMF view of size 10 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [2ms] [310MB]
+Load view [7336ms] [171MB]
+Result: 5
+EOL execute query [104ms] [175MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [2ms] [182MB]
+Load view [5443ms] [312MB]
+Result: 5
+EOL execute query [4ms] [313MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [316MB]
+Load view [5130ms] [364MB]
+Result: 5
+EOL execute query [5ms] [366MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [2ms] [370MB]
+Load view [5054ms] [410MB]
+Result: 5
+EOL execute query [5ms] [410MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [2ms] [412MB]
+Load view [4982ms] [112MB]
+Result: 5
+EOL execute query [4ms] [112MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [2ms] [115MB]
+Load view [4877ms] [178MB]
+Result: 5
+EOL execute query [4ms] [178MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [2ms] [182MB]
+Load view [5016ms] [230MB]
+Result: 5
+EOL execute query [3ms] [232MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [234MB]
+Load view [4927ms] [276MB]
+Result: 5
+EOL execute query [4ms] [276MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [280MB]
+Load view [4734ms] [317MB]
+Result: 5
+EOL execute query [4ms] [317MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [1ms] [320MB]
+Load view [4829ms] [357MB]
+Result: 5
+EOL execute query [4ms] [359MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [361MB]
+Load view [4686ms] [396MB]
+Result: 5
+EOL execute query [4ms] [396MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [400MB]
+Load view [4960ms] [81MB]
+Result: 5
+EOL execute query [4ms] [83MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [89MB]
+Load view [4903ms] [144MB]
+Result: 5
+EOL execute query [3ms] [146MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [1ms] [148MB]
+Load view [5078ms] [200MB]
+Result: 5
+EOL execute query [3ms] [202MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [1ms] [205MB]
+Load view [4925ms] [251MB]
+Result: 5
+EOL execute query [3ms] [251MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for NeoEMF view of size 10
+Load view: [4877,5016,4927,4734,4829,4686,4960,4903,5078,4925]
+Parse EOL: [2,2,1,1,1,1,1,1,1,1]
+EOL execute query: [4,3,4,4,4,4,4,3,3,3]
+
+### Benching EOL query traceToReqs.eol for XMI view of size 100 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [1ms] [255MB]
+Load view [186ms] [301MB]
+Result: 5
+EOL execute query [4ms] [305MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [1ms] [305MB]
+Load view [157ms] [352MB]
+Result: 5
+EOL execute query [3ms] [354MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [354MB]
+Load view [156ms] [400MB]
+Result: 5
+EOL execute query [3ms] [402MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [1ms] [402MB]
+Load view [160ms] [78MB]
+Result: 5
+EOL execute query [3ms] [80MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [1ms] [80MB]
+Load view [161ms] [126MB]
+Result: 5
+EOL execute query [4ms] [130MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [1ms] [130MB]
+Load view [156ms] [177MB]
+Result: 5
+EOL execute query [3ms] [179MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [179MB]
+Load view [156ms] [225MB]
+Result: 5
+EOL execute query [3ms] [227MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [227MB]
+Load view [152ms] [273MB]
+Result: 5
+EOL execute query [3ms] [275MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [277MB]
+Load view [149ms] [321MB]
+Result: 5
+EOL execute query [3ms] [325MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [1ms] [325MB]
+Load view [150ms] [372MB]
+Result: 5
+EOL execute query [3ms] [374MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [374MB]
+Load view [156ms] [420MB]
+Result: 5
+EOL execute query [3ms] [422MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [422MB]
+Load view [163ms] [92MB]
+Result: 5
+EOL execute query [3ms] [94MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [0ms] [94MB]
+Load view [152ms] [141MB]
+Result: 5
+EOL execute query [3ms] [143MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [0ms] [145MB]
+Load view [150ms] [189MB]
+Result: 5
+EOL execute query [3ms] [193MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [1ms] [193MB]
+Load view [149ms] [239MB]
+Result: 5
+EOL execute query [3ms] [241MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for XMI view of size 100
+Load view: [156,156,152,149,150,156,163,152,150,149]
+Parse EOL: [1,1,1,1,1,1,1,0,0,1]
+EOL execute query: [3,3,3,3,3,3,3,3,3,3]
+
+### Benching EOL query traceToReqs.eol for NeoEMF view of size 100 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [1ms] [241MB]
+Load view [5017ms] [292MB]
+Result: 5
+EOL execute query [7ms] [296MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [1ms] [300MB]
+Load view [4882ms] [347MB]
+Result: 5
+EOL execute query [6ms] [349MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [353MB]
+Load view [4962ms] [391MB]
+Result: 5
+EOL execute query [6ms] [395MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [0ms] [397MB]
+Load view [4933ms] [82MB]
+Result: 5
+EOL execute query [5ms] [86MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [1ms] [94MB]
+Load view [4621ms] [153MB]
+Result: 5
+EOL execute query [5ms] [157MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [1ms] [160MB]
+Load view [4998ms] [216MB]
+Result: 5
+EOL execute query [5ms] [218MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [223MB]
+Load view [4997ms] [274MB]
+Result: 5
+EOL execute query [5ms] [276MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [278MB]
+Load view [5101ms] [326MB]
+Result: 5
+EOL execute query [7ms] [330MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [332MB]
+Load view [4840ms] [374MB]
+Result: 5
+EOL execute query [5ms] [378MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [0ms] [382MB]
+Load view [4829ms] [418MB]
+Result: 5
+EOL execute query [5ms] [420MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [422MB]
+Load view [5181ms] [109MB]
+Result: 5
+EOL execute query [5ms] [112MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [117MB]
+Load view [4909ms] [173MB]
+Result: 5
+EOL execute query [4ms] [175MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [180MB]
+Load view [4888ms] [233MB]
+Result: 5
+EOL execute query [5ms] [237MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [1ms] [239MB]
+Load view [5011ms] [288MB]
+Result: 5
+EOL execute query [5ms] [290MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [0ms] [293MB]
+Load view [4867ms] [338MB]
+Result: 5
+EOL execute query [5ms] [342MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for NeoEMF view of size 100
+Load view: [4998,4997,5101,4840,4829,5181,4909,4888,5011,4867]
+Parse EOL: [1,1,1,1,0,1,1,1,1,0]
+EOL execute query: [5,5,7,5,5,5,4,5,5,5]
+
+### Benching EOL query traceToReqs.eol for XMI view of size 1000 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [1ms] [344MB]
+Load view [200ms] [424MB]
+Result: 5
+EOL execute query [24ms] [72MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [0ms] [72MB]
+Load view [197ms] [152MB]
+Result: 5
+EOL execute query [18ms] [175MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [177MB]
+Load view [187ms] [254MB]
+Result: 5
+EOL execute query [18ms] [277MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [1ms] [277MB]
+Load view [185ms] [355MB]
+Result: 5
+EOL execute query [18ms] [378MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [1ms] [380MB]
+Load view [182ms] [83MB]
+Result: 5
+EOL execute query [16ms] [106MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [0ms] [106MB]
+Load view [185ms] [186MB]
+Result: 5
+EOL execute query [13ms] [209MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [209MB]
+Load view [175ms] [287MB]
+Result: 5
+EOL execute query [13ms] [310MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [0ms] [312MB]
+Load view [177ms] [389MB]
+Result: 5
+EOL execute query [16ms] [413MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [0ms] [413MB]
+Load view [186ms] [118MB]
+Result: 5
+EOL execute query [17ms] [141MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [1ms] [141MB]
+Load view [177ms] [219MB]
+Result: 5
+EOL execute query [13ms] [242MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [242MB]
+Load view [176ms] [321MB]
+Result: 5
+EOL execute query [13ms] [344MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [0ms] [344MB]
+Load view [180ms] [422MB]
+Result: 5
+EOL execute query [22ms] [69MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [69MB]
+Load view [183ms] [148MB]
+Result: 5
+EOL execute query [14ms] [171MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [0ms] [171MB]
+Load view [175ms] [249MB]
+Result: 5
+EOL execute query [13ms] [274MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [0ms] [274MB]
+Load view [177ms] [352MB]
+Result: 5
+EOL execute query [16ms] [375MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for XMI view of size 1000
+Load view: [185,175,177,186,177,176,180,183,175,177]
+Parse EOL: [0,1,0,0,1,1,0,1,0,0]
+EOL execute query: [13,13,16,17,13,13,22,14,13,16]
+
+### Benching EOL query traceToReqs.eol for NeoEMF view of size 1000 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [1ms] [375MB]
+Load view [4928ms] [147MB]
+Result: 5
+EOL execute query [24ms] [170MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [1ms] [180MB]
+Load view [5274ms] [306MB]
+Result: 5
+EOL execute query [29ms] [331MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [0ms] [340MB]
+Load view [5052ms] [110MB]
+Result: 5
+EOL execute query [23ms] [135MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [1ms] [145MB]
+Load view [4950ms] [270MB]
+Result: 5
+EOL execute query [22ms] [295MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [1ms] [301MB]
+Load view [5020ms] [419MB]
+Result: 5
+EOL execute query [35ms] [98MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [1ms] [110MB]
+Load view [5151ms] [237MB]
+Result: 5
+EOL execute query [22ms] [262MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [270MB]
+Load view [5016ms] [388MB]
+Result: 5
+EOL execute query [23ms] [414MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [422MB]
+Load view [4944ms] [182MB]
+Result: 5
+EOL execute query [22ms] [208MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [215MB]
+Load view [4971ms] [338MB]
+Result: 5
+EOL execute query [22ms] [364MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [1ms] [370MB]
+Load view [5061ms] [132MB]
+Result: 5
+EOL execute query [23ms] [157MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [164MB]
+Load view [4978ms] [289MB]
+Result: 5
+EOL execute query [22ms] [314MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [323MB]
+Load view [5053ms] [91MB]
+Result: 5
+EOL execute query [22ms] [116MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [126MB]
+Load view [5150ms] [253MB]
+Result: 5
+EOL execute query [22ms] [276MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [1ms] [285MB]
+Load view [5048ms] [400MB]
+Result: 5
+EOL execute query [23ms] [425MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [1ms] [90MB]
+Load view [5118ms] [217MB]
+Result: 5
+EOL execute query [21ms] [243MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for NeoEMF view of size 1000
+Load view: [5151,5016,4944,4971,5061,4978,5053,5150,5048,5118]
+Parse EOL: [1,1,1,1,1,1,1,1,1,1]
+EOL execute query: [22,23,22,22,23,22,22,22,23,21]
+
+### Benching EOL query traceToReqs.eol for XMI view of size 10000 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [1ms] [251MB]
+Load view [544ms] [285MB]
+Result: 5
+EOL execute query [137ms] [144MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [1ms] [144MB]
+Load view [486ms] [177MB]
+Result: 5
+EOL execute query [137ms] [406MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [406MB]
+Load view [478ms] [435MB]
+Result: 5
+EOL execute query [142ms] [296MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [1ms] [296MB]
+Load view [476ms] [327MB]
+Result: 5
+EOL execute query [138ms] [187MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [0ms] [187MB]
+Load view [484ms] [220MB]
+Result: 5
+EOL execute query [135ms] [80MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [0ms] [80MB]
+Load view [482ms] [114MB]
+Result: 5
+EOL execute query [129ms] [343MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [343MB]
+Load view [477ms] [372MB]
+Result: 5
+EOL execute query [135ms] [231MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [231MB]
+Load view [482ms] [262MB]
+Result: 5
+EOL execute query [133ms] [122MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [122MB]
+Load view [474ms] [156MB]
+Result: 5
+EOL execute query [128ms] [384MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [0ms] [384MB]
+Load view [509ms] [416MB]
+Result: 5
+EOL execute query [125ms] [193MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [193MB]
+Load view [473ms] [148MB]
+Result: 5
+EOL execute query [133ms] [377MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [377MB]
+Load view [471ms] [329MB]
+Result: 5
+EOL execute query [154ms] [110MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [110MB]
+Load view [513ms] [512MB]
+Result: 5
+EOL execute query [137ms] [201MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [1ms] [201MB]
+Load view [466ms] [601MB]
+Result: 5
+EOL execute query [135ms] [289MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [1ms] [291MB]
+Load view [474ms] [150MB]
+Result: 5
+EOL execute query [131ms] [379MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for XMI view of size 10000
+Load view: [482,477,482,474,509,473,471,513,466,474]
+Parse EOL: [0,1,1,1,0,1,1,1,1,1]
+EOL execute query: [129,135,133,128,125,133,154,137,135,131]
+
+### Benching EOL query traceToReqs.eol for NeoEMF view of size 10000 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [1ms] [379MB]
+Load view [6090ms] [585MB]
+Result: 5
+EOL execute query [211ms] [368MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [1ms] [424MB]
+Load view [6092ms] [533MB]
+Result: 5
+EOL execute query [201ms] [783MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [260MB]
+Load view [6049ms] [853MB]
+Result: 5
+EOL execute query [227ms] [535MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [1ms] [590MB]
+Load view [6020ms] [714MB]
+Result: 5
+EOL execute query [207ms] [468MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [1ms] [522MB]
+Load view [6050ms] [804MB]
+Result: 5
+EOL execute query [190ms] [621MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [1ms] [676MB]
+Load view [6038ms] [695MB]
+Result: 5
+EOL execute query [175ms] [579MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [563MB]
+Load view [6292ms] [529MB]
+Result: 5
+EOL execute query [202ms] [779MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [834MB]
+Load view [6251ms] [488MB]
+Result: 5
+EOL execute query [191ms] [737MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [792MB]
+Load view [5796ms] [658MB]
+Result: 5
+EOL execute query [177ms] [908MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [1ms] [547MB]
+Load view [6042ms] [805MB]
+Result: 5
+EOL execute query [184ms] [1056MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [0ms] [633MB]
+Load view [6062ms] [976MB]
+Result: 5
+EOL execute query [202ms] [714MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [769MB]
+Load view [6125ms] [459MB]
+Result: 5
+EOL execute query [197ms] [709MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [765MB]
+Load view [6088ms] [736MB]
+Result: 5
+EOL execute query [191ms] [988MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [1ms] [423MB]
+Load view [6235ms] [1017MB]
+Result: 5
+EOL execute query [222ms] [691MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [0ms] [745MB]
+Load view [6134ms] [855MB]
+Result: 5
+EOL execute query [203ms] [579MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for NeoEMF view of size 10000
+Load view: [6038,6292,6251,5796,6042,6062,6125,6088,6235,6134]
+Parse EOL: [1,1,1,1,1,0,1,1,1,0]
+EOL execute query: [175,202,191,177,184,202,197,191,222,203]
+
+### Benching EOL query traceToReqs.eol for XMI view of size 100000 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [1ms] [634MB]
+Load view [3354ms] [637MB]
+Result: 5
+EOL execute query [1218ms] [746MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [0ms] [746MB]
+Load view [3774ms] [1212MB]
+Result: 5
+EOL execute query [1207ms] [1435MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [1435MB]
+Load view [3486ms] [1512MB]
+Result: 5
+EOL execute query [1265ms] [914MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [1ms] [914MB]
+Load view [3499ms] [1311MB]
+Result: 5
+EOL execute query [1197ms] [1826MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [1ms] [1828MB]
+Load view [3484ms] [1895MB]
+Result: 5
+EOL execute query [1194ms] [2038MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [1ms] [2038MB]
+Load view [3276ms] [1351MB]
+Result: 5
+EOL execute query [1200ms] [1478MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [1478MB]
+Load view [3265ms] [767MB]
+Result: 5
+EOL execute query [1195ms] [889MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [889MB]
+Load view [3311ms] [2345MB]
+Result: 5
+EOL execute query [1207ms] [2461MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [2464MB]
+Load view [3294ms] [1734MB]
+Result: 5
+EOL execute query [1216ms] [1853MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [0ms] [1853MB]
+Load view [3334ms] [1132MB]
+Result: 5
+EOL execute query [1196ms] [1253MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [1253MB]
+Load view [3317ms] [2705MB]
+Result: 5
+EOL execute query [1207ms] [2822MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [2822MB]
+Load view [3290ms] [2076MB]
+Result: 5
+EOL execute query [1209ms] [2195MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [0ms] [2195MB]
+Load view [3325ms] [1474MB]
+Result: 5
+EOL execute query [1203ms] [1589MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [0ms] [1589MB]
+Load view [3343ms] [878MB]
+Result: 5
+EOL execute query [1207ms] [996MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [0ms] [996MB]
+Load view [3303ms] [2453MB]
+Result: 5
+EOL execute query [1194ms] [2571MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for XMI view of size 100000
+Load view: [3276,3265,3311,3294,3334,3317,3290,3325,3343,3303]
+Parse EOL: [1,1,1,1,0,1,1,0,0,0]
+EOL execute query: [1200,1195,1207,1216,1196,1207,1209,1203,1207,1194]
+
+### Benching EOL query traceToReqs.eol for NeoEMF view of size 100000 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [0ms] [2571MB]
+Load view [16524ms] [1515MB]
+Result: 5
+EOL execute query [1675ms] [2200MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [1ms] [2848MB]
+Load view [17078ms] [1997MB]
+Result: 5
+EOL execute query [1689ms] [2728MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [3387MB]
+Load view [16751ms] [2418MB]
+Result: 5
+EOL execute query [1681ms] [2649MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [0ms] [3310MB]
+Load view [16958ms] [3190MB]
+Result: 5
+EOL execute query [1673ms] [3212MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [1ms] [3873MB]
+Load view [16604ms] [3013MB]
+Result: 5
+EOL execute query [1703ms] [3800MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [0ms] [2655MB]
+Load view [16768ms] [2154MB]
+Result: 5
+EOL execute query [1684ms] [1572MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [2233MB]
+Load view [16744ms] [2340MB]
+Result: 5
+EOL execute query [1661ms] [2131MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [2787MB]
+Load view [16708ms] [4086MB]
+Result: 5
+EOL execute query [1674ms] [4356MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [2744MB]
+Load view [16629ms] [1376MB]
+Result: 5
+EOL execute query [1635ms] [3855MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [0ms] [1347MB]
+Load view [16689ms] [4144MB]
+Result: 5
+EOL execute query [1674ms] [3995MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [1972MB]
+Load view [16560ms] [3313MB]
+Result: 5
+EOL execute query [1658ms] [3538MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [4195MB]
+Load view [16445ms] [3102MB]
+Result: 5
+EOL execute query [1683ms] [3816MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [4472MB]
+Load view [16657ms] [4624MB]
+Result: 5
+EOL execute query [1700ms] [4644MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [0ms] [4048MB]
+Load view [16851ms] [4398MB]
+Result: 5
+EOL execute query [1738ms] [4616MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [0ms] [4525MB]
+Load view [16863ms] [4812MB]
+Result: 5
+EOL execute query [1703ms] [5416MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for NeoEMF view of size 100000
+Load view: [16768,16744,16708,16629,16689,16560,16445,16657,16851,16863]
+Parse EOL: [0,1,1,1,0,1,1,1,0,0]
+EOL execute query: [1684,1661,1674,1635,1674,1658,1683,1700,1738,1703]
+
+### Benching EOL query traceToReqs.eol for XMI view of size 1000000 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [0ms] [5127MB]
+Load view [32363ms] [5405MB]
+Result: 5
+EOL execute query [12032ms] [5692MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [1ms] [5692MB]
+Load view [32238ms] [6569MB]
+Result: 5
+EOL execute query [12022ms] [6211MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [6213MB]
+Load view [33213ms] [6201MB]
+Result: 5
+EOL execute query [11761ms] [2851MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [0ms] [2851MB]
+Load view [31912ms] [7142MB]
+Result: 5
+EOL execute query [11916ms] [3590MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [0ms] [3590MB]
+Load view [31557ms] [7831MB]
+Result: 5
+EOL execute query [11887ms] [4273MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [0ms] [4273MB]
+Load view [31359ms] [1387MB]
+Result: 5
+EOL execute query [11839ms] [4427MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [4429MB]
+Load view [31132ms] [2051MB]
+Result: 5
+EOL execute query [11873ms] [5147MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [0ms] [5149MB]
+Load view [31498ms] [2802MB]
+Result: 5
+EOL execute query [11827ms] [5905MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [0ms] [5905MB]
+Load view [31403ms] [3548MB]
+Result: 5
+EOL execute query [11767ms] [6637MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [1ms] [6637MB]
+Load view [31946ms] [6154MB]
+Result: 5
+EOL execute query [11796ms] [4897MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [4897MB]
+Load view [31740ms] [8497MB]
+Result: 5
+EOL execute query [11964ms] [4814MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [4814MB]
+Load view [31427ms] [7450MB]
+Result: 5
+EOL execute query [11917ms] [7416MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [7416MB]
+Load view [32097ms] [7267MB]
+Result: 5
+EOL execute query [12081ms] [7183MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [0ms] [7183MB]
+Load view [31927ms] [7107MB]
+Result: 5
+EOL execute query [12183ms] [7985MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [1ms] [7985MB]
+Load view [31547ms] [7588MB]
+Result: 5
+EOL execute query [12024ms] [8275MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for XMI view of size 1000000
+Load view: [31359,31132,31498,31403,31946,31740,31427,32097,31927,31547]
+Parse EOL: [0,1,0,0,1,1,1,1,0,1]
+EOL execute query: [11839,11873,11827,11767,11796,11964,11917,12081,12183,12024]
+
+### Benching EOL query traceToReqs.eol for NeoEMF view of size 1000000 ... (5 warmups/10 measures)
+
+-- Warmup 1
+Parse EOL [0ms] [8275MB]
+Load view [128388ms] [7611MB]
+Result: 5
+EOL execute query [17083ms] [8420MB]
+-- Warmup 1
+
+-- Warmup 2
+Parse EOL [1ms] [8975MB]
+Load view [129038ms] [9698MB]
+Result: 5
+EOL execute query [16979ms] [8623MB]
+-- Warmup 2
+
+-- Warmup 3
+Parse EOL [1ms] [10165MB]
+Load view [127832ms] [9364MB]
+Result: 5
+EOL execute query [17083ms] [10043MB]
+-- Warmup 3
+
+-- Warmup 4
+Parse EOL [0ms] [9336MB]
+Load view [129460ms] [8520MB]
+Result: 5
+EOL execute query [17006ms] [9679MB]
+-- Warmup 4
+
+-- Warmup 5
+Parse EOL [0ms] [10621MB]
+Load view [128419ms] [10491MB]
+Result: 5
+EOL execute query [16603ms] [10786MB]
+-- Warmup 5
+
+== Measure 1
+Parse EOL [1ms] [9269MB]
+Load view [127215ms] [7791MB]
+Result: 5
+EOL execute query [17131ms] [9777MB]
+== Measure 1
+
+== Measure 2
+Parse EOL [1ms] [9901MB]
+Load view [129399ms] [11934MB]
+Result: 5
+EOL execute query [17565ms] [12011MB]
+== Measure 2
+
+== Measure 3
+Parse EOL [1ms] [7340MB]
+Load view [130182ms] [8768MB]
+Result: 5
+EOL execute query [17042ms] [8197MB]
+== Measure 3
+
+== Measure 4
+Parse EOL [1ms] [7330MB]
+Load view [129208ms] [7750MB]
+Result: 5
+EOL execute query [17000ms] [7460MB]
+== Measure 4
+
+== Measure 5
+Parse EOL [1ms] [10502MB]
+Load view [128495ms] [11013MB]
+Result: 5
+EOL execute query [17199ms] [7394MB]
+== Measure 5
+
+== Measure 6
+Parse EOL [1ms] [8869MB]
+Load view [128500ms] [7441MB]
+Result: 5
+EOL execute query [16928ms] [8872MB]
+== Measure 6
+
+== Measure 7
+Parse EOL [1ms] [8928MB]
+Load view [130840ms] [11647MB]
+Result: 5
+EOL execute query [17109ms] [8707MB]
+== Measure 7
+
+== Measure 8
+Parse EOL [1ms] [8246MB]
+Load view [129594ms] [7613MB]
+Result: 5
+EOL execute query [17117ms] [9918MB]
+== Measure 8
+
+== Measure 9
+Parse EOL [1ms] [8504MB]
+Load view [130298ms] [9188MB]
+Result: 5
+EOL execute query [17173ms] [10627MB]
+== Measure 9
+
+== Measure 10
+Parse EOL [1ms] [9440MB]
+Load view [130023ms] [8009MB]
+Result: 5
+EOL execute query [17128ms] [5824MB]
+== Measure 10
+
+# Results for: EOL query traceToReqs.eol for NeoEMF view of size 1000000
+Load view: [127215,129399,130182,129208,128495,128500,130840,129594,130298,130023]
+Parse EOL: [1,1,1,1,1,1,1,1,1,1]
+EOL execute query: [17131,17565,17042,17000,17199,16928,17109,17117,17173,17128]
