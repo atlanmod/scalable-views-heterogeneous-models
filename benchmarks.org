@@ -1161,7 +1161,6 @@ plot newhistogram "XMI",\
 #+RESULTS:
 [[file:images/bench-query0-2019.png]]
 
-
 ** OCL reqToTraces
 
 (pp0 "OCL query 1 for full view on XMI trace" "Evaluate")
@@ -1636,3 +1635,164 @@ plot newhistogram "XMI",\
 
 #+RESULTS:
 [[file:images/bench-eol2-2019.png]]
+** OCL + EOL allInstances
+#+name: agg-query0-both-2019
+| size |   XMI | XMI fast | NeoEMF | NeoEMF fast | XMI (EOL) | XMI fast (EOL) | NeoEMF (EOL) | NeoEMF fast (EOL) |
+|------+-------+----------+--------+-------------+-----------+----------------+--------------+-------------------|
+|    1 |  618. |      10. |   658. |         40. |       0.9 |            0.5 |           3. |                3. |
+|    2 |   614 |       10 |   661. |         41. |       0.7 |            0.5 |           3. |                 2 |
+|    3 |  623. |      10. |   694. |         44. |         1 |              1 |          13. |                3. |
+|    4 |  675. |      12. |   859. |         57. |        6. |             6. |         131. |               17. |
+|    5 | 1235. |      63. |   2729 |        227. |       70. |            70. |        1330. |              176. |
+|    6 | 6643. |     753. | 19875. |       2188. |      700. |           693. |       12986. |             1851. |
+#+TBLFM: @2$2..@>$2=remote(query0-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(query0-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(query0-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(query0-neoemf-fast-2019,@@#$2)
+#+TBLFM: @2$6..@>$6=remote(eol0-xmi-2019, @@#$2)
+#+TBLFM: @2$7..@>$7=remote(eol0-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$8..@>$8=remote(eol0-neoemf-2019,@@#$2)
+#+TBLFM: @2$9..@>$9=remote(eol0-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-query0-both-2019 :file images/bench-query0-both-2019.png
+set terminal png size 800,400 font "serif,9"
+
+set title 'Query allInstances'
+set key left
+
+set xlabel 'model size (10^n)'
+set xtics scale 0
+set ylabel 'time (ms)'
+#set ytics ("-1" 0.1, 1, "2" 10, "3" 100, "4" 1000, "5" 10000, "6" 100000)
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram clustered gap 1
+# set style fill solid 0.6
+set boxwidth 0.8
+
+# Colorblind-safe palette
+set linetype 1 lc rgb "#d55e00"
+set linetype 2 lc rgb "#e69f00"
+set linetype 3 lc rgb "#56b4e9"
+set linetype 4 lc rgb "#0072b2"
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
+       data u 6:xticlabels(1) notitle fs pattern 5,\
+     newhistogram "Heterogeneous" lt 1,\
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-query0-both-2019.png]]
+
+** OCL + EOL reqToTraces
+#+name: agg-query1-both-2019
+| size |   XMI | XMI fast | NeoEMF | NeoEMF fast | XMI (EOL) | XMI fast (EOL) | NeoEMF (EOL) | NeoEMF fast (EOL) |
+|------+-------+----------+--------+-------------+-----------+----------------+--------------+-------------------|
+|    1 |  609. |      11. |   649. |         41. |        3. |             3. |           2. |                2. |
+|    2 |  610. |      11. |   652. |          41 |        2. |             2. |           2. |                2. |
+|    3 |  616. |      11. |   667. |         41. |        1. |             1. |           2. |                3. |
+|    4 |  668. |      10. |   853. |         42. |        2. |             2. |            2 |                2. |
+|    5 | 1167. |      35. |  2587. |         42. |        2. |             2. |           2. |                3. |
+|    6 | 6277. |     272. |  19789 |         61. |       15. |            16. |          14. |               14. |
+#+TBLFM: @2$2..@>$2=remote(query1-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(query1-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(query1-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(query1-neoemf-fast-2019,@@#$2)
+#+TBLFM: @2$6..@>$6=remote(eol1-xmi-2019, @@#$2)
+#+TBLFM: @2$7..@>$7=remote(eol1-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$8..@>$8=remote(eol1-neoemf-2019,@@#$2)
+#+TBLFM: @2$9..@>$9=remote(eol1-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-query1-both-2019 :file images/bench-query1-both-2019.png
+set terminal png size 800,400 font "serif,9"
+
+set title 'Query reqToTraces'
+set key left
+
+set xlabel 'model size (10^n)'
+set xtics scale 0
+set ylabel 'time (ms)'
+#set ytics ("-1" 0.1, 1, "2" 10, "3" 100, "4" 1000, "5" 10000, "6" 100000)
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram clustered gap 1
+# set style fill solid 0.6
+set boxwidth 0.8
+
+# Colorblind-safe palette
+set linetype 1 lc rgb "#d55e00"
+set linetype 2 lc rgb "#e69f00"
+set linetype 3 lc rgb "#56b4e9"
+set linetype 4 lc rgb "#0072b2"
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
+       data u 6:xticlabels(1) notitle fs pattern 5,\
+     newhistogram "Heterogeneous" lt 1,\
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-query1-both-2019.png]]
+
+** OCL + EOL traceToReqs
+#+name: agg-query2-both-2019
+| size |   XMI | XMI fast | NeoEMF | NeoEMF fast | XMI (EOL) | XMI fast (EOL) | NeoEMF (EOL) | NeoEMF fast (EOL) |
+|------+-------+----------+--------+-------------+-----------+----------------+--------------+-------------------|
+|    1 |   632 |      10. |   667. |         41. |        1. |             1. |           2. |                4. |
+|    2 |  626. |      10. |   673. |          41 |         1 |             1. |           3. |                3. |
+|    3 |   619 |      11. |   693. |         43. |        2. |             1. |          14. |                4. |
+|    4 |  672. |      14. |   875. |         86. |        6. |             6. |         139. |                18 |
+|    5 | 1212. |      66. |  2635. |        268. |       70. |            71. |        1371. |              177. |
+|    6 | 6744. |      709 | 20653. |        2651 |      702. |           689. |       13244. |             1822. |
+#+TBLFM: @2$2..@>$2=remote(query2-xmi-2019, @@#$2)
+#+TBLFM: @2$3..@>$3=remote(query2-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$4..@>$4=remote(query2-neoemf-2019,@@#$2)
+#+TBLFM: @2$5..@>$5=remote(query2-neoemf-fast-2019,@@#$2)
+#+TBLFM: @2$6..@>$6=remote(eol2-xmi-2019, @@#$2)
+#+TBLFM: @2$7..@>$7=remote(eol2-xmi-fast-2019,@@#$2)
+#+TBLFM: @2$8..@>$8=remote(eol2-neoemf-2019,@@#$2)
+#+TBLFM: @2$9..@>$9=remote(eol2-neoemf-fast-2019,@@#$2)
+
+#+begin_src gnuplot :var data=agg-query2-both-2019 :file images/bench-query2-both-2019.png
+set terminal png size 800,400 font "serif,9"
+
+set title 'Query traceToReqs'
+set key left
+
+set xlabel 'model size (10^n)'
+set xtics scale 0
+set ylabel 'time (ms)'
+#set ytics ("-1" 0.1, 1, "2" 10, "3" 100, "4" 1000, "5" 10000, "6" 100000)
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram clustered gap 1
+# set style fill solid 0.6
+set boxwidth 0.8
+
+# Colorblind-safe palette
+set linetype 1 lc rgb "#d55e00"
+set linetype 2 lc rgb "#e69f00"
+set linetype 3 lc rgb "#56b4e9"
+set linetype 4 lc rgb "#0072b2"
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
+       data u 6:xticlabels(1) notitle fs pattern 5,\
+     newhistogram "Heterogeneous" lt 1,\
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-query2-both-2019.png]]
