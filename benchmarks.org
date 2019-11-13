@@ -1654,22 +1654,24 @@ plot newhistogram "XMI",\
 #+TBLFM: @2$8..@>$8=remote(eol0-neoemf-2019,@@#$2)
 #+TBLFM: @2$9..@>$9=remote(eol0-neoemf-fast-2019,@@#$2)
 
-#+begin_src gnuplot :var data=agg-query0-both-2019 :file images/bench-query0-both-2019.png
-set terminal png size 800,400 font "serif,9"
+#+begin_src gnuplot :var data=agg-query0-both-2019 :file images/bench-query0-both-2019.pdf
+set terminal pdf enhanced size 12cm,6.5cm font "serif,11"
 
-set title 'Query allInstances'
+#set title 'Query allInstances'
+unset title
 set key left
 
 set xlabel 'model size (10^n)'
-set xtics scale 0
+set xtics scale 0 offset 0,0.3,0
 set ylabel 'time (ms)'
 #set ytics ("-1" 0.1, 1, "2" 10, "3" 100, "4" 1000, "5" 10000, "6" 100000)
+set yrange [0.5:100000]
 set logscale y
 set grid y
 
 set style data histograms
 set style histogram clustered gap 1
-# set style fill solid 0.6
+#set style fill solid 0.6
 set boxwidth 0.8
 
 # Colorblind-safe palette
@@ -1687,7 +1689,7 @@ plot newhistogram "XMI",\
 #+end_src
 
 #+RESULTS:
-[[file:images/bench-query0-both-2019.png]]
+[[file:images/bench-query0-both-2019.pdf]]
 
 ** OCL + EOL reqToTraces
 #+name: agg-query1-both-2019
@@ -1708,16 +1710,18 @@ plot newhistogram "XMI",\
 #+TBLFM: @2$8..@>$8=remote(eol1-neoemf-2019,@@#$2)
 #+TBLFM: @2$9..@>$9=remote(eol1-neoemf-fast-2019,@@#$2)
 
-#+begin_src gnuplot :var data=agg-query1-both-2019 :file images/bench-query1-both-2019.png
-set terminal png size 800,400 font "serif,9"
+#+begin_src gnuplot :var data=agg-query1-both-2019 :file images/bench-query1-both-2019.pdf
+set terminal pdf enhanced size 12cm,6.5cm font "serif,11"
 
-set title 'Query reqToTraces'
+# set title 'Query reqToTraces'
+unset title
 set key left
 
 set xlabel 'model size (10^n)'
-set xtics scale 0
+set xtics scale 0 offset 0,0.3,0
 set ylabel 'time (ms)'
 #set ytics ("-1" 0.1, 1, "2" 10, "3" 100, "4" 1000, "5" 10000, "6" 100000)
+set yrange [0.5:100000]
 set logscale y
 set grid y
 
@@ -1741,7 +1745,7 @@ plot newhistogram "XMI",\
 #+end_src
 
 #+RESULTS:
-[[file:images/bench-query1-both-2019.png]]
+[[file:images/bench-query1-both-2019.pdf]]
 
 ** OCL + EOL traceToReqs
 #+name: agg-query2-both-2019
@@ -1762,16 +1766,18 @@ plot newhistogram "XMI",\
 #+TBLFM: @2$8..@>$8=remote(eol2-neoemf-2019,@@#$2)
 #+TBLFM: @2$9..@>$9=remote(eol2-neoemf-fast-2019,@@#$2)
 
-#+begin_src gnuplot :var data=agg-query2-both-2019 :file images/bench-query2-both-2019.png
-set terminal png size 800,400 font "serif,9"
+#+begin_src gnuplot :var data=agg-query2-both-2019 :file images/bench-query2-both-2019.pdf
+set terminal pdf enhanced size 12cm,6.5cm font "serif,11"
 
-set title 'Query traceToReqs'
+# set title 'Query traceToReqs'
+unset title
 set key left
 
 set xlabel 'model size (10^n)'
-set xtics scale 0
+set xtics scale 0 offset 0,0.3,0
 set ylabel 'time (ms)'
 #set ytics ("-1" 0.1, 1, "2" 10, "3" 100, "4" 1000, "5" 10000, "6" 100000)
+set yrange [0.5:100000]
 set logscale y
 set grid y
 
@@ -1795,4 +1801,78 @@ plot newhistogram "XMI",\
 #+end_src
 
 #+RESULTS:
-[[file:images/bench-query2-both-2019.png]]
+[[file:images/bench-query2-both-2019.pdf]]
+
+** OCL + EOL all
+#+begin_src gnuplot :var data=agg-query2-both-2019 :file images/bench-query-all-both-2019.pdf
+set terminal pdf enhanced size 12cm,15cm font "serif,11"
+
+unset title
+set key left
+
+set xtics scale 0 offset 0,0.3,0
+set ylabel 'time (ms)'
+set yrange [0.5:80000]
+set logscale y
+set grid y
+
+set style data histograms
+set style histogram clustered gap 1
+set boxwidth 0.8
+
+# Colorblind-safe palette
+set linetype 1 lc rgb "#d55e00"
+set linetype 2 lc rgb "#e69f00"
+set linetype 3 lc rgb "#56b4e9"
+set linetype 4 lc rgb "#0072b2"
+
+set multiplot layout 3,1
+
+unset xlabel
+set lmargin at screen 0.12
+set rmargin at screen 0.98
+
+set tmargin at screen 0.98
+set bmargin at screen 0.68
+
+set label 1 "Query 1" at graph 0.46,0.88
+
+plot newhistogram "",\
+       data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
+       data u 6:xticlabels(1) notitle fs pattern 5,\
+     newhistogram "" lt 1,\
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+
+unset key
+unset ylabel
+
+set label 1 "Query 2" at graph 0.46,0.88
+set tmargin at screen 0.68
+set bmargin at screen 0.38
+
+plot newhistogram "",\
+       data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
+       data u 6:xticlabels(1) notitle fs pattern 5,\
+     newhistogram "" lt 1,\
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+
+set label 1 "Query 3" at graph 0.46,0.88
+set tmargin at screen 0.38
+set bmargin at screen 0.08
+
+set xlabel 'model size (10^n)'
+
+plot newhistogram "XMI",\
+       data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
+       data u 6:xticlabels(1) notitle fs pattern 5,\
+     newhistogram "Heterogeneous" lt 1,\
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+
+unset multiplot
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-query-all-both-2019.pdf]]
