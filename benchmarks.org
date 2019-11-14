@@ -1841,8 +1841,8 @@ plot newhistogram "",\
        data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
        data u 6:xticlabels(1) notitle fs pattern 5,\
      newhistogram "" lt 1,\
-       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
-       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL (Opt.)' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL (Opt.)' fs pattern 7
 
 unset key
 unset ylabel
@@ -1855,8 +1855,8 @@ plot newhistogram "",\
        data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
        data u 6:xticlabels(1) notitle fs pattern 5,\
      newhistogram "" lt 1,\
-       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
-       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL (Opt.)' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL (Opt.)' fs pattern 7
 
 set label 1 "Query 3" at graph 0.46,0.88
 set tmargin at screen 0.38
@@ -1868,8 +1868,8 @@ plot newhistogram "XMI",\
        data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
        data u 6:xticlabels(1) notitle fs pattern 5,\
      newhistogram "Heterogeneous" lt 1,\
-       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL Optimized' fs pattern 6,\
-       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL Optimized' fs pattern 7
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL (Opt.)' fs pattern 6,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL (Opt.)' fs pattern 7
 
 unset multiplot
 #+end_src
