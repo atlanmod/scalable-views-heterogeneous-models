@@ -1834,10 +1834,10 @@ set style histogram clustered gap 1
 set boxwidth 0.8
 
 # Colorblind-safe palette
-set linetype 1 lc rgb "#d55e00"
-set linetype 2 lc rgb "#e69f00"
-set linetype 3 lc rgb "#56b4e9"
-set linetype 4 lc rgb "#0072b2"
+set style line 1 lc rgb "#d55e00"
+set style line 2 lc rgb "#e69f00"
+set style line 3 lc rgb "#56b4e9"
+set style line 4 lc rgb "#0072b2"
 
 set multiplot layout 3,1
 
@@ -1851,11 +1851,11 @@ set bmargin at screen 0.68
 set label 1 "Query 1" at graph 0.46,0.88
 
 plot newhistogram "",\
-       data u 2:xticlabels(1) notitle fs pattern 4, '' u 3:xticlabels(1) notitle fs pattern 6,\
-       data u 6:xticlabels(1) notitle fs pattern 5,\
+       data u 2:xticlabels(1) notitle fs pattern 0, '' u 3:xticlabels(1) notitle fs pattern 4,\
+       data u 6:xticlabels(1) notitle fs pattern 2,\
      newhistogram "" lt 1,\
-       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 4, '' u 5:xticlabels(1) ti 'OCL (Opt.)' fs pattern 6,\
-       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 5, '' u 9:xticlabels(1) ti 'EOL (Opt.)' fs pattern 7
+       ''   u 4:xticlabels(1) ti 'OCL' fs pattern 0, '' u 5:xticlabels(1) ti 'OCL (Opt.)' fs pattern 4,\
+       ''   u 8:xticlabels(1) ti 'EOL' fs pattern 2, '' u 9:xticlabels(1) ti 'EOL (Opt.)' fs solid 0.2
 
 unset key
 unset ylabel
@@ -1865,11 +1865,11 @@ set tmargin at screen 0.68
 set bmargin at screen 0.38
 
 plot newhistogram "",\
-       data u 10:xticlabels(1) notitle fs pattern 4, '' u 11:xticlabels(1) notitle fs pattern 6,\
-       data u 14:xticlabels(1) notitle fs pattern 5,\
+       data u 10:xticlabels(1) notitle fs pattern 0, '' u 11:xticlabels(1) notitle fs pattern 4,\
+       data u 14:xticlabels(1) notitle fs pattern 2,\
      newhistogram "" lt 1,\
-       ''   u 12:xticlabels(1) ti 'OCL' fs pattern 4, '' u 13:xticlabels(1) ti 'OCL (Opt.)' fs pattern 6,\
-       ''   u 16:xticlabels(1) ti 'EOL' fs pattern 5, '' u 17:xticlabels(1) ti 'EOL (Opt.)' fs pattern 7
+       ''   u 12:xticlabels(1) ti 'OCL' fs pattern 0, '' u 13:xticlabels(1) ti 'OCL (Opt.)' fs pattern 4,\
+       ''   u 16:xticlabels(1) ti 'EOL' fs pattern 2, '' u 17:xticlabels(1) ti 'EOL (Opt.)' fs solid 0.2
 
 set label 1 "Query 3" at graph 0.46,0.88
 set tmargin at screen 0.38
@@ -1878,14 +1878,89 @@ set bmargin at screen 0.08
 set xlabel 'model size (10^n)'
 
 plot newhistogram "XMI",\
-       data u 18:xticlabels(1) notitle fs pattern 4, '' u 19:xticlabels(1) notitle fs pattern 6,\
-       data u 22:xticlabels(1) notitle fs pattern 5,\
+       data u 18:xticlabels(1) notitle fs pattern 0, '' u 19:xticlabels(1) notitle fs pattern 4,\
+       data u 22:xticlabels(1) notitle fs pattern 2,\
      newhistogram "Heterogeneous" lt 1,\
-       ''   u 20:xticlabels(1) ti 'OCL' fs pattern 4, '' u 21:xticlabels(1) ti 'OCL (Opt.)' fs pattern 6,\
-       ''   u 24:xticlabels(1) ti 'EOL' fs pattern 5, '' u 25:xticlabels(1) ti 'EOL (Opt.)' fs pattern 7
+       ''   u 20:xticlabels(1) ti 'OCL' fs pattern 0, '' u 21:xticlabels(1) ti 'OCL (Opt.)' fs pattern 4,\
+       ''   u 24:xticlabels(1) ti 'EOL' fs pattern 2, '' u 25:xticlabels(1) ti 'EOL (Opt.)' fs solid 0.2
 
 unset multiplot
 #+end_src
 
 #+RESULTS:
 [[file:images/bench-query-all-both-2019.pdf]]
+
+#+begin_src gnuplot :var data=agg-query-all-both-2019 :file images/bench-query-all-both-lines-2019.pdf
+set terminal pdf enhanced size 12cm,15cm font "serif,11" color
+
+unset title
+set key outside at screen 0.30,0.88
+
+set xtics scale 0 offset 0,0.3,0
+set ylabel 'time (ms)' offset 0,-13,0
+set xrange [0.5:6.5]
+set yrange [0.5:80000]
+set logscale y
+set grid y
+
+set style line 1 lc rgb '#d7191c' pt 8
+set style line 2 lc rgb '#d7191c' pt 9
+set style line 3 lc rgb '#fd8e41' pt 2
+set style line 4 lc rgb '#9bdd94' pt 4
+set style line 5 lc rgb '#9bdd94' pt 5
+set style line 6 lc rgb '#2b83ba' pt 6
+set style line 7 lc rgb '#2b83ba' pt 7
+
+set multiplot layout 3,1
+
+unset xlabel
+set lmargin at screen 0.40
+set rmargin at screen 0.98
+
+set tmargin at screen 0.98
+set bmargin at screen 0.68
+
+set label 1 "Query 1" at graph 0.46,0.88
+
+plot data u 1:2 ti 'XMI OCL           '     w lp ls 1,\
+       '' u 1:3 ti 'XMI OCL (Opt.)'         w lp ls 2,\
+       '' u 1:6 ti 'XMI EOL           '     w lp ls 3,\
+       '' u 1:4 ti 'Hetero. OCL           ' w lp ls 4,\
+       '' u 1:5 ti 'Hetero. OCL (Opt.)'     w lp ls 5,\
+       '' u 1:8 ti 'Hetero. EOL           ' w lp ls 6,\
+       '' u 1:9 ti 'Hetero. EOL (Opt.)'     w lp ls 7
+
+unset key
+unset ylabel
+
+set label 1 "Query 2" at graph 0.46,0.88
+set tmargin at screen 0.68
+set bmargin at screen 0.38
+
+plot data u 1:10 ti 'XMI OCL'           w lp ls 1,\
+       '' u 1:11 ti 'XMI OCL (Opt.)'    w lp ls 2,\
+       '' u 1:14 ti 'XMI EOL'           w lp ls 3,\
+       '' u 1:12 ti 'Hetero OCL'        w lp ls 4,\
+       '' u 1:13 ti 'Hetero OCL (Opt.)' w lp ls 5,\
+       '' u 1:16 ti 'Hetero EOL'        w lp ls 6,\
+       '' u 1:17 ti 'Hetero EOL (Opt.)' w lp ls 7
+
+set label 1 "Query 3" at graph 0.46,0.88
+set tmargin at screen 0.38
+set bmargin at screen 0.08
+
+set xlabel 'model size (10^n)'
+
+plot data u 1:18 ti 'XMI OCL'           w lp ls 1,\
+       '' u 1:19 ti 'XMI OCL (Opt.)'    w lp ls 2,\
+       '' u 1:22 ti 'XMI EOL'           w lp ls 3,\
+       '' u 1:20 ti 'Hetero OCL'        w lp ls 4,\
+       '' u 1:21 ti 'Hetero OCL (Opt.)' w lp ls 5,\
+       '' u 1:24 ti 'Hetero EOL'        w lp ls 6,\
+       '' u 1:25 ti 'Hetero EOL (Opt.)' w lp ls 7
+
+unset multiplot
+#+end_src
+
+#+RESULTS:
+[[file:images/bench-query-all-both-lines-2019.pdf]]
